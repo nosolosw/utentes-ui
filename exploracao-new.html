@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Nova exploraçao</title>
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="vendor/font-awesome/font-awesome.min.css">
+  <link rel="stylesheet" href="exploracao-new.css" />
+</head>
+<body>
+
+  <div class="container-fluid">
+
+    <div class="col-md-offset-2 col-md-8">
+
+      <div class="row text-center">
+        <h1>Nova Exploracao
+          <button type="button" class="btn btn-primary disabled col-md-1 pull-right">Crear</button>
+        </h1>
+        <hr>
+      </div>
+
+      <div class="row">
+        <form  class="col-md-12">
+
+          <div id="wizard-exp" >
+
+            <ul class="hide">
+              <li><a href="#info" data-toggle="tab">Info</a></li>
+              <li><a href="#utentes" data-toggle="tab">Utentes</a></li>
+              <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
+              <li><a href="#actividade" data-toggle="tab">Actividade</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+              <div class="tab-pane" id="info">
+
+                <div class="row">
+                  <h3 class="col-md-1"><i class="fa fa-info"></i></h3>
+                  <h3 class="col-md-11">Información</h3>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-offset-1 col-md-3">
+                    <label for="exp-id">Nro de explotación</label>
+                    <input type="text" class="form-control" id="exp-id" placeholder="">
+                  </div>
+                  <div class="form-group col-md-8 form-group">
+                    <label for="exp-name">Nome da explotación</label>
+                    <input type="text" class="form-control" id="exp-name" placeholder="">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-11">
+                    <label for="observa">Observaçoes sobre linha de água e localizaçao</label>
+                    <textarea name="observa" class="form-control" placeholder="" rows="2"></textarea>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                  <h3 class="col-md-1"><i class="fa fa-map-marker"></i></h3>
+                  <h3 class="col-md-11">Localización</h3>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-4 form-group">
+                    <label for="exampleInputEmail3">Provincia</label>
+                    <select class="form-control" id="provincia">
+                      <option>-</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                  <div class="col-md-offset-3 col-md-4 form-group">
+                    <label for="bacia">Bacia</label>
+                    <select class="form-control" id="bacia">
+                      <option>-</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-4 form-group">
+                    <label for="distrito">Distrito</label>
+                    <select class="form-control" id="distrito">
+                      <option>-</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                  <div class="col-md-offset-3 col-md-4 form-group">
+                    <label for="rio">Río</label>
+                    <select class="form-control" id="rio">
+                      <option>-</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-4 form-group">
+                    <label for="posto">Posto</label>
+                    <input type="text" class="form-control" id="posto" placeholder="">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-4 form-group">
+                    <label for="nucleo">Núcleo</label>
+                    <input type="text" class="form-control" id="nucleo" placeholder="">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="tab-pane" id="utentes">
+
+                <div class="row">
+                  <h3 class="col-md-1"><i class="fa fa-user"></i></h3>
+                  <h3 class="col-md-11 text-uppercase">Utente</h3>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-11 form-group">
+                    <select class="form-control" id="rio">
+                      <option>- Novo utente -</option>
+                      <option selected>Anadarco Mozambique</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-3 form-group">
+                    <label for="nuit">NUIT</label>
+                    <input type="text" class="form-control" id="nuit" placeholder="" value="N9284040328" disabled>
+                  </div>
+                  <div class="col-md-8 form-group">
+                    <label for="utente">Nome do utente</label>
+                    <input type="text" class="form-control" id="utente" placeholder="" value="Anadarco Mozambique" disabled>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-3 form-group">
+                    <label for="registro">Nº registro</label>
+                    <input type="text" class="form-control" id="registro" placeholder="" value="123987" disabled>
+                  </div>
+                  <div class="col-md-8 form-group">
+                    <label for="registro-em">Registrado em</label>
+                    <input type="text" class="form-control" id="registro-em" placeholder="" value="Provincia" disabled>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="tab-pane" id="licencia">
+
+                <div class="row">
+                  <h3 class="col-md-1"><i class="fa fa-tint"></i></h3>
+                  <h3 class="col-md-11">Licencias</h3>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-11">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <fieldset>
+                          <span>SUBTERRÁNEA</span>
+                          <div class="form-group">
+                            <label for="nro">Nro licencia</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Cadastro</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Data solicitude</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Estado</label>
+                            <select class="form-control" id="nro">
+                              <option>-</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Consumo requerido</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+
+                      <div class="col-md-offset-2 col-md-5">
+                        <fieldset>
+                          <span>SUPERFICIAL</span>
+                          <div class="form-group">
+                            <label for="nro">Nro licencia</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Cadastro</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Data solicitude</label>
+                            <input type="datetime" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Estado</label>
+                            <select class="form-control" id="provincia">
+                              <option>-</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Consumo requerido</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="tab-pane" id="actividade">
+
+                <div class="row">
+                  <h3 class="col-md-1"><i class="fa fa-wrench"></i></h3>
+                  <h3 class="col-md-11">Actividade</h3>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-11">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <fieldset>
+                          <span>ABASTECEMENTO</span>
+                          <div class="form-group">
+                            <label for="nro">Nro habitantes</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="col-md-offset-2 col-md-5">
+                        <fieldset>
+                          <span>SANEAMENTO</span>
+                          <div class="form-group">
+                            <label for="nro">Nro habitantes</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <fieldset>
+                          <span>INDUSTRIA</span>
+                          <div class="form-group">
+                            <label for="nro">Tipo de actividade</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Instalações</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Efluente producido</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Medios tratamento água</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Evaluação impacto ambiental</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="col-md-offset-2 col-md-5">
+                        <fieldset>
+                          <span>PRODUCÇAO ENERGIA</span>
+                          <div class="form-group">
+                            <label for="nro">Tipo de actividade</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Altura de água</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Potência a instalar</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Tipo de equipamento</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group">
+                            <label for="nro">Evaluação impacto ambiental</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <fieldset class="row">
+                          <span>PISCICULTURA</span>
+                          <div class="form-group col-md-5">
+                            <label for="nro">Área de exploraçao</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                          <div class="form-group col-md-offset-2 col-md-5">
+                            <label for="nro">Volume reservas água</label>
+                            <input type="text" name="nro" class="form-control" value="">
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <fieldset class="row">
+                          <span>AGRICULTURA</span>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Tipo de cultivo</th>
+                                <th>Tipo de riego</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><i class="fa fa-caret-down"></i></td>
+                                <td>Tomate</td>
+                                <td>-</td>
+                              </tr>
+                              <tr>
+                                <td><i class="fa fa-caret-down"></i></td>
+                                <td>Patata</td>
+                                <td>-</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <fieldset class="row">
+                          <span>PECUÁRIA</span>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Tipo de reses</th>
+                                <th>Nº de reses</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><i class="fa fa-caret-down"></i></td>
+                                <td>Bovino</td>
+                                <td>4</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <div class="row">
+            <ul class="pager wizard">
+              <li class="previous"><a href="#">Anterior</a></li>
+              <li class="next"><a href="#">Seguinte</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+</div>
+</div>
+
+<script src="vendor/jquery/jquery-1.12.0.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $('#wizard-exp').bootstrapWizard({
+    'withVisible': false
+  });
+});
+</script>
+
+</body>
+</html>
