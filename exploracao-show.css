@@ -1,0 +1,65 @@
+/* UNCOMMENT THIS FOR DEBUG MODE*/
+/*.row{
+border: 1px solid red;
+}*/
+
+
+/* ---- STRUCTURE ---- */
+
+/* height system to let map fill all vertical space */
+
+html,
+body,
+main,
+#info-section,
+#map-section,
+#map-section > .row,
+#map{
+  height: 100%;
+}
+
+#intro-section{
+  height: 50%;
+}
+
+/* typography */
+
+@font-face {
+  font-family: "Circular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("https://a1.muscache.com/airbnb/static/o2.1/build/fonts/Circular_Air-Book-22799398756cc42454a77735013a3378.eot?#") format("eot"), url("https://a1.muscache.com/airbnb/static/o2.1/build/fonts/Circular_Air-Book-030dcebde359eb3be354ab21c34a89ce.woff") format("woff"), url("https://a1.muscache.com/airbnb/static/o2.1/build/fonts/Circular_Air-Book-287e910a06039c130e488343a7564c39.svg") format("svg");
+}
+
+body{
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 15px;
+  color:     #565A5C;
+}
+
+label{ /*override bootstrap settings*/
+  font-weight: inherit !important;
+}
+
+small{ /*override bootstrap settings*/
+  color: #bbb !important;
+}
+
+/* blocks: colors, margins, paddings */
+
+#title{
+  border-bottom: 1px solid #ddd;
+}
+
+#map{
+  background-color: #eee;
+}
+
+.volume-summary{
+  background-color: #eee;
+}
+
+.volume-license,
+.volume-activity{
+  margin: 0 .1em 0 .1em
+}
