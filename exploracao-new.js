@@ -11,6 +11,11 @@ new iCarto.Views.Widgets({
   model: exploracao
 });
 
+new iCarto.Views.Widgets({
+  el: $('#utente'),
+  model: exploracao.get('utente')
+});
+
 new SIXHIARA.Views.SaveButton({
   el: $('#save-button'),
   model: exploracao

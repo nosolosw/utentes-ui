@@ -9,7 +9,8 @@ SIXHIARA.Models.Exploracao = Backbone.Model.extend({
     'loc_posto':  '',
     'loc_nucleo': '',
     'loc_bacia':  '',
-    'loc_rio':    ''
+    'loc_rio':    '',
+    'utente': new SIXHIARA.Models.Utente(),
   }
 
 });
