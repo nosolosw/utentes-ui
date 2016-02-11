@@ -4,24 +4,24 @@
   <meta charset="utf-8">
   <title>Nova exploraçao</title>
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="vendor/font-awesome/font-awesome.min.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="exploracao-new.css" />
 </head>
 <body>
 
   <div class="container-fluid">
 
-    <div class="col-md-offset-2 col-md-8">
+    <div class="col-xs-offset-2 col-xs-8">
 
       <div class="row text-center">
         <h1>Nova Exploracao
-          <button type="button" class="btn btn-primary disabled col-md-1 pull-right">Crear</button>
+          <button id="save-button" type="button" class="btn btn-primary col-xs-1 pull-right">Crear</button>
         </h1>
         <hr>
       </div>
 
       <div class="row">
-        <form  class="col-md-12">
+        <form  class="col-xs-12">
 
           <div id="wizard-exp" >
 
@@ -37,93 +37,83 @@
               <div class="tab-pane" id="info">
 
                 <div class="row">
-                  <h3 class="col-md-1"><i class="fa fa-info"></i></h3>
-                  <h3 class="col-md-11">Información</h3>
+                  <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
+                  <h3 class="col-xs-11">Información</h3>
                 </div>
 
                 <div class="row">
-                  <div class="form-group col-md-offset-1 col-md-3">
-                    <label for="exp-id">Nro de explotación</label>
-                    <input type="text" class="form-control" id="exp-id" placeholder="">
+                  <div class="form-group col-xs-offset-1 col-xs-3">
+                    <label for="exp_id">Nro de explotación</label>
+                    <input type="text" class="form-control widget" id="exp_id">
                   </div>
-                  <div class="form-group col-md-8 form-group">
-                    <label for="exp-name">Nome da explotación</label>
-                    <input type="text" class="form-control" id="exp-name" placeholder="">
+                  <div class="form-group col-xs-8">
+                    <label for="exp_name">Nome da explotación</label>
+                    <input type="text" class="form-control widget" id="exp_name">
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-11">
-                    <label for="observa">Observaçoes sobre linha de água e localizaçao</label>
-                    <textarea name="observa" class="form-control" placeholder="" rows="2"></textarea>
+                  <div class="form-group col-xs-offset-1 col-xs-11">
+                    <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
+                    <textarea class="form-control widget" id="observacio" rows="2"></textarea>
                   </div>
                 </div>
 
                 <br>
 
                 <div class="row">
-                  <h3 class="col-md-1"><i class="fa fa-map-marker"></i></h3>
-                  <h3 class="col-md-11">Localización</h3>
+                  <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
+                  <h3 class="col-xs-11">Localización</h3>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-4 form-group">
-                    <label for="exampleInputEmail3">Provincia</label>
-                    <select class="form-control" id="provincia">
-                      <option>-</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                  <div class="form-group col-xs-offset-1 col-xs-4">
+                    <label for="loc_provin">Provincia</label>
+                    <select class="form-control widget" id="loc_provin">
+                      <option></option>
+                      <option>Cabo Delgado</option>
+                      <option>Niassa</option>
                     </select>
                   </div>
-                  <div class="col-md-offset-3 col-md-4 form-group">
-                    <label for="bacia">Bacia</label>
-                    <select class="form-control" id="bacia">
-                      <option>-</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-                </div>
-
-
-                <div class="row">
-                  <div class="col-md-offset-1 col-md-4 form-group">
-                    <label for="distrito">Distrito</label>
-                    <select class="form-control" id="distrito">
-                      <option>-</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-                  <div class="col-md-offset-3 col-md-4 form-group">
-                    <label for="rio">Río</label>
-                    <select class="form-control" id="rio">
-                      <option>-</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                  <div class="form-group col-xs-offset-3 col-xs-4">
+                    <label for="loc_bacia">Bacia</label>
+                    <select class="form-control widget" id="loc_bacia">
+                      <option></option>
+                      <option>Rovuma</option>
+                      <option>Messalo</option>
+                      <option>Montepuez</option>
+                      <option>Megaruma</option>
+                      <option>Orla marítima</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-4 form-group">
-                    <label for="posto">Posto</label>
-                    <input type="text" class="form-control" id="posto" placeholder="">
+                  <div class="form-group col-xs-offset-1 col-xs-4">
+                    <label for="loc_distri">Distrito</label>
+                    <select class="form-control widget" id="loc_distri">
+                      <option></option>
+                      <option>Ancuabe</option>
+                      <option>Balama</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-offset-3 col-xs-4">
+                    <label for="loc_rio">Río</label>
+                    <input type="text" class="form-control widget" id="loc_rio">
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-4 form-group">
-                    <label for="nucleo">Núcleo</label>
-                    <input type="text" class="form-control" id="nucleo" placeholder="">
+                  <div class="form-group col-xs-offset-1 col-xs-4">
+                    <label for="loc_posto">Posto</label>
+                    <input type="text" class="form-control widget" id="loc_posto">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-offset-1 col-xs-4">
+                    <label for="loc_nucleo">Núcleo</label>
+                    <input type="text" class="form-control widget" id="loc_nucleo">
                   </div>
                 </div>
 
@@ -132,12 +122,12 @@
               <div class="tab-pane" id="utentes">
 
                 <div class="row">
-                  <h3 class="col-md-1"><i class="fa fa-user"></i></h3>
-                  <h3 class="col-md-11 text-uppercase">Utente</h3>
+                  <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
+                  <h3 class="col-xs-11 text-uppercase">Utente</h3>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-11 form-group">
+                  <div class="col-xs-offset-1 col-xs-11 form-group">
                     <select class="form-control" id="rio">
                       <option>- Novo utente -</option>
                       <option selected>Anadarco Mozambique</option>
@@ -146,22 +136,22 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-3 form-group">
+                  <div class="col-xs-offset-1 col-xs-3 form-group">
                     <label for="nuit">NUIT</label>
                     <input type="text" class="form-control" id="nuit" placeholder="" value="N9284040328" disabled>
                   </div>
-                  <div class="col-md-8 form-group">
+                  <div class="col-xs-8 form-group">
                     <label for="utente">Nome do utente</label>
                     <input type="text" class="form-control" id="utente" placeholder="" value="Anadarco Mozambique" disabled>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-3 form-group">
+                  <div class="col-xs-offset-1 col-xs-3 form-group">
                     <label for="registro">Nº registro</label>
                     <input type="text" class="form-control" id="registro" placeholder="" value="123987" disabled>
                   </div>
-                  <div class="col-md-8 form-group">
+                  <div class="col-xs-8 form-group">
                     <label for="registro-em">Registrado em</label>
                     <input type="text" class="form-control" id="registro-em" placeholder="" value="Provincia" disabled>
                   </div>
@@ -172,14 +162,14 @@
               <div class="tab-pane" id="licencia">
 
                 <div class="row">
-                  <h3 class="col-md-1"><i class="fa fa-tint"></i></h3>
-                  <h3 class="col-md-11">Licencias</h3>
+                  <h3 class="col-xs-1"><i class="fa fa-tint"></i></h3>
+                  <h3 class="col-xs-11">Licencias</h3>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-11">
+                  <div class="col-xs-offset-1 col-xs-11">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-xs-5">
                         <fieldset>
                           <span>SUBTERRÁNEA</span>
                           <div class="form-group">
@@ -211,7 +201,7 @@
                         </fieldset>
                       </div>
 
-                      <div class="col-md-offset-2 col-md-5">
+                      <div class="col-xs-offset-2 col-xs-5">
                         <fieldset>
                           <span>SUPERFICIAL</span>
                           <div class="form-group">
@@ -252,14 +242,14 @@
               <div class="tab-pane" id="actividade">
 
                 <div class="row">
-                  <h3 class="col-md-1"><i class="fa fa-wrench"></i></h3>
-                  <h3 class="col-md-11">Actividade</h3>
+                  <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
+                  <h3 class="col-xs-11">Actividade</h3>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-11">
+                  <div class="col-xs-offset-1 col-xs-11">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-xs-5">
                         <fieldset>
                           <span>ABASTECEMENTO</span>
                           <div class="form-group">
@@ -268,7 +258,7 @@
                           </div>
                         </fieldset>
                       </div>
-                      <div class="col-md-offset-2 col-md-5">
+                      <div class="col-xs-offset-2 col-xs-5">
                         <fieldset>
                           <span>SANEAMENTO</span>
                           <div class="form-group">
@@ -279,7 +269,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-xs-5">
                         <fieldset>
                           <span>INDUSTRIA</span>
                           <div class="form-group">
@@ -304,7 +294,7 @@
                           </div>
                         </fieldset>
                       </div>
-                      <div class="col-md-offset-2 col-md-5">
+                      <div class="col-xs-offset-2 col-xs-5">
                         <fieldset>
                           <span>PRODUCÇAO ENERGIA</span>
                           <div class="form-group">
@@ -332,14 +322,14 @@
                     </div>
 
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-xs-12">
                         <fieldset class="row">
                           <span>PISCICULTURA</span>
-                          <div class="form-group col-md-5">
+                          <div class="form-group col-xs-5">
                             <label for="nro">Área de exploraçao</label>
                             <input type="text" name="nro" class="form-control" value="">
                           </div>
-                          <div class="form-group col-md-offset-2 col-md-5">
+                          <div class="form-group col-xs-offset-2 col-xs-5">
                             <label for="nro">Volume reservas água</label>
                             <input type="text" name="nro" class="form-control" value="">
                           </div>
@@ -348,7 +338,7 @@
                     </div>
 
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-xs-12">
                         <fieldset class="row">
                           <span>AGRICULTURA</span>
                           <table class="table">
@@ -377,7 +367,7 @@
                     </div>
 
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-xs-12">
                         <fieldset class="row">
                           <span>PECUÁRIA</span>
                           <table class="table">
@@ -428,14 +418,16 @@
 <script src="vendor/jquery/jquery-1.12.0.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-<script type="text/javascript">
 
-$(document).ready(function() {
-  $('#wizard-exp').bootstrapWizard({
-    'withVisible': false
-  });
-});
-</script>
+<script src="vendor/json2.js" charset="utf-8"></script>
+<script src="vendor/underscore/underscore-min.js" charset="utf-8"></script>
+<script src="vendor/backbone/backbone-min.js" charset="utf-8"></script>
+
+<script src="config.js" charset="utf-8"></script>
+<script src="views/SaveButton.js" charset="utf-8"></script>
+<script src="views/Widgets.js" charset="utf-8"></script>
+<script src="models/Exploracao.js" charset="utf-8"></script>
+<script src="exploracao-new.js" charset="utf-8"></script>
 
 </body>
 </html>
