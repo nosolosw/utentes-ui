@@ -1,9 +1,11 @@
 SIXHIARA = {
   Views: {},
   Models: {},
-  Collections: {}
+  Collections: {},
 };
 
 iCarto = {
-  Views: {}
+  Views: {},
+  Models: {},
+  Collections: {},
 }

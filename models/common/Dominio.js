@@ -1,4 +1,4 @@
-SIXHIARA.Models.Dominio = Backbone.Model.extend({
+iCarto.Models.Dominio = Backbone.Model.extend({
 
   defaults: {
     'alias': '',
