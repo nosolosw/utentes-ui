@@ -17,10 +17,10 @@
 
     <section id="intro-section" class="row">
 
-      <div id="info-section" class="col-md-6">
+      <div id="info-section" class="col-xs-6">
 
         <div id="title" class="row">
-          <div class="col-md-12">
+          <div class="col-xs-12">
             <h1>Exploração
               <span class="pull-right">
                 <button type="button" class="btn btn-default btn-sm">Documentos</button>
@@ -32,47 +32,51 @@
           </div>
         </div>
 
-        <div class="row">
-          <h3 class="col-md-1"><i class="fa fa-info"></i></h3>
-          <h3 class="col-md-10">N201405 Planta de abastecimento <small>Editar</small></h3>
-        </div>
-        <div class="row">
-          <span class="col-md-offset-1 col-md-11">
-            Observações sobre linha de água e outras notas sobre localização e modo de acesso. Observações sobre linha de água e outras notas sobre localização e modo de acesso.
-          </span>
-        </div>
-        <div class="row">
-          <div class="col-md-offset-1 col-md-12">
-            <span class="label label-success">LICENCIA ATIVA</span>
-            <span class="label label-default">CONSUMO APROPRIADO</span>
-            <span class="label label-danger">PAGAMENTOS PENDENTES</span>
+        <section id="info">
+          <div class="row">
+            <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
+            <h3 class="col-xs-10"><span class="widget" id="exp_id"></span> <span class="widget" id="exp_name"></span> <small>Editar</small></h3>
           </div>
-        </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              Observações sobre linha de água e outras notas sobre localização e modo de acesso. Observações sobre linha de água e outras notas sobre localização e modo de acesso.
+            </span>
+          </div>
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-12">
+              <span class="label label-success">LICENCIA ATIVA</span>
+              <span class="label label-default">CONSUMO APROPRIADO</span>
+              <span class="label label-danger">PAGAMENTOS PENDENTES</span>
+            </div>
+          </div>
 
-        <div class="row">
-          <h3 class="col-md-1"><i class="fa fa-map-marker"></i></h3>
-          <h3 class="col-md-11">Cabo-Delgado / Mandimba <small>Editar</small></h3>
-        </div>
-        <div class="row">
-          <span class="col-md-offset-1 col-md-11">Nihuge,posto Administrativo de mieze-Cabo Delgado</span>
-        </div>
-        <div class="row">
-          <span class="col-md-offset-1 col-md-11">Bacia do Rovuma, río Chiulezi</span>
-        </div>
+          <div class="row">
+            <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
+            <h3 class="col-xs-11"><span class="widget" id="loc_provin"></span> / <span class="widget" id="loc_distri"></span> <small>Editar</small></h3>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">Posto: <span class="widget" id="loc_posto"></span> / Núcleo: <span class="widget" id="loc_nucleo"></span></span>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">Bacia: <span class="widget" id="loc_bacia"></span> / Río: <span class="widget" id="loc_rio"></span></span>
+          </div>
+        </section>
 
-        <div class="row">
-          <h3 class="col-md-1"><i class="fa fa-user"></i></h3>
-          <h3 class="col-md-11">Anadarco Mozambique <small>Editar</small></h3>
-        </div>
-        <div class="row">
-          <span class="col-md-offset-1 col-md-11">NUIT: 12345678R9 / Registrado em 10/10/2001</span>
-        </div>
+        <section id="utente">
+          <div class="row">
+            <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
+            <h3 class="col-xs-11"><span class="widget" id="nome"></span> <small>Editar</small></h3>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">NUIT: <span class="widget" id="nuit"></span> / Registro: <span class="widget" id="reg_comerc"></span> / <span class="widget" id="reg_zona"></span></span>
+          </div>
+        </section>
 
       </div>
 
-      <div id="map-section" class="col-md-6">
+      <div id="map-section" class="col-xs-6">
         <div class="row">
-          <div id="map" class="col-md-12"></div>
+          <div id="map" class="col-xs-12"></div>
         </div>
       </div>
 
@@ -80,22 +84,22 @@
 
     <section id="consumos" class="row volume-summary text-center">
 
-      <div class="col-md-3">
+      <div class="col-xs-3">
         <h3>90 m<sup>3</sup></h3>
         <span>LICENCIADOS</span>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-xs-3">
         <h3>82 m<sup>3</sup></h3>
         <span>REQUERIDOS</span>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-xs-3">
         <h3>78 m<sup>3</sup></h3>
         <span>REAIS</span>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-xs-3">
         <h3>82 m<sup>3</sup></h3>
         <span>ESTIMADOS</span>
       </div>
@@ -106,76 +110,61 @@
 
     <section class="row">
 
-      <div class="col-md-6">
+      <div class="col-xs-6" id="licencia-superficial">
         <div class="row">
-          <h3 class="col-md-1"><i class="fa fa-tint"></i></h3>
-          <h3 class="col-md-11">Licencia superficial: 2015-1 <small>Editar</small></h3>
+          <h3 class="col-xs-1"><i class="fa fa-tint"></i></h3>
+          <h3 class="col-xs-11">Licencia superficial: <span class="widget" id="lic_nro"></span> <small>Editar</small></h3>
         </div>
-      </div>
-
-      <div class="col-md-6">
         <div class="row">
-          <h3 class="col-md-1"><i class="fa fa-tint"></i></h3>
-          <h3 class="col-md-11">Licencia subterránea: - <small>Engadir</small></h3>
+          <span class="col-xs-offset-1 col-xs-11">Cadastro: <span class="widget" id="cadastro"></span>
         </div>
-      </div>
-
-    </section>
-
-    <section class="row">
-
-      <div class="col-md-6">
-
         <div class="row">
-          <span class="col-md-offset-1 col-md-11">Cadastro: N78999</span>
-        </div>
-
-        <div class="row">
-          <span class="col-md-offset-1 col-md-11">
-            <span class="label label-default">REQUERIMENTO: 01/02/1999</span>
-            <span class="label label-default">EMISSÃO: 01/02/1999</span>
-            <span class="label label-default">VALIDADE: 01/02/1999</span>
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="label label-default">REQUERIMENTO: -</span>
+            <span class="label label-default">EMISSÃO: -</span>
+            <span class="label label-default">VALIDADE: -</span>
           </span>
         </div>
-
         <br>
-
         <div class="row">
-          <div class="col-md-offset-1 col-md-3 text-center volume-summary">
+          <div class="col-xs-offset-1 col-xs-3 text-center volume-summary">
             <h4>90 m<sup>3</sup></h4>
             <span>licenciados</span>
           </div>
-          <div class="col-md-3 text-center volume-summary">
+          <div class="col-xs-3 text-center volume-summary">
             <h4>82 m<sup>3</sup></h4>
             <span>requeridos</span>
           </div>
-          <div class="col-md-3 text-center volume-summary">
+          <div class="col-xs-3 text-center volume-summary">
             <h4>78 m<sup>3</sup></h4>
             <span>reais</span>
           </div>
         </div>
-
       </div>
 
-      <div class="col-md-6">
+      <div class="col-xs-6" id="licencia-subterranea">
+        <div class="row">
+          <h3 class="col-xs-1"><i class="fa fa-tint"></i></h3>
+          <h3 class="col-xs-11">Licencia subterránea: - <small>Engadir</small></h3>
+        </div>
 
         <div class="row">
-          <span class="col-md-offset-1 col-md-11" style="color: white">-</span>
-          <span class="col-md-offset-1 col-md-11" style="color: white">-</span>
+          <span class="col-xs-offset-1 col-xs-11" style="color: white">-</span>
+          <span class="col-xs-offset-1 col-xs-11" style="color: white">-</span>
         </div>
 
         <br>
 
         <div class="row ">
-          <div class="col-md-offset-1 col-md-3 text-center volume-summary">
+          <div class="col-xs-offset-1 col-xs-3 text-center volume-summary">
             <h4>-</h4>
             <span>licenciados</span>
           </div>
-          <div class="col-md-3 text-center volume-summary">
+          <div class="col-xs-3 text-center volume-summary">
             <h4>-</h4>
             <span>requeridos</span>
           </div>
-          <div class="col-md-3 text-center volume-summary">
+          <div class="col-xs-3 text-center volume-summary">
             <h4>-</h4>
             <span>reais</span>
           </div>
@@ -189,7 +178,7 @@
 
     <section class="row">
 
-      <div class="col-md-12">
+      <div class="col-xs-12">
 
         <table class="table">
           <thead>
@@ -247,11 +236,11 @@
         </table>
 
         <div class="row">
-          <div class="form-group col-md-offset-6 col-md-3">
+          <div class="form-group col-xs-offset-6 col-xs-3">
             <label class="text">V. superficial intermédio</label>
             <input class="form-control" type="text" name="nome" value="5">
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-xs-3">
             <label class="text">V. subterráneo intermédio</label>
             <input class="form-control" type="text" name="nome" value="5">
           </div>
@@ -264,10 +253,10 @@
 
   <section class="row">
 
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <div class="row">
-        <h3 class="col-md-1"><i class="fa fa-wrench"></i></h3>
-        <h3 class="col-md-11">Atividade e estimação</h3>
+        <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
+        <h3 class="col-xs-11">Atividade e estimação</h3>
       </div>
     </div>
 
@@ -276,38 +265,38 @@
 
   <section class="row volume-summary volume-activity">
 
-    <div class="col-md-5">
-      <div class="col-md-4 text-center">
+    <div class="col-xs-5">
+      <div class="col-xs-4 text-center">
         <h4>41 m<sup>3</sup></h4>
         <span>abastecimento</span>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-xs-4 text-center">
         <h4>-</h4>
         <span>saneamento</span>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-xs-4 text-center">
         <h4>-</h4>
         <span>indústria</span>
       </div>
     </div>
 
-    <div class="col-md-5">
-      <div class="col-md-4 text-center">
+    <div class="col-xs-5">
+      <div class="col-xs-4 text-center">
         <h4>41 m<sup>3</sup></h4>
         <span>agricultura</span>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-xs-4 text-center">
         <h4>-</h4>
         <span>pecuária</span>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-xs-4 text-center">
         <h4>-</h4>
         <span>piscicultura</span>
       </div>
     </div>
 
-    <div class="col-md-2">
-      <div class="col-md-12 text-center">
+    <div class="col-xs-2">
+      <div class="col-xs-12 text-center">
         <h4>-</h4>
         <span>producção energia</span>
       </div>
@@ -317,9 +306,9 @@
 
   <section class="row">
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Abastecimento
             <small>Editar</small>
@@ -327,13 +316,13 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">Nº habitantes: 5.000</span>
+        <span class="col-xs-offset-1 col-xs-11">Nº habitantes: 5.000</span>
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Agricultura
             <small>Editar</small>
@@ -341,13 +330,13 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">Tomates, rego, 20 m<sup>2</sup></span>
+        <span class="col-xs-offset-1 col-xs-11">Tomates, rego, 20 m<sup>2</sup></span>
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Piscicultura
             <small>Editar</small>
@@ -355,7 +344,7 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">Área exploração: 25 km <sup>2</sup>, Reserva água: 25 m<sup>3</sup></span>
+        <span class="col-xs-offset-1 col-xs-11">Área exploração: 25 km <sup>2</sup>, Reserva água: 25 m<sup>3</sup></span>
       </div>
     </div>
 
@@ -363,9 +352,9 @@
 
   <section class="row">
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Saneamento
             <small>Editar</small>
@@ -373,13 +362,13 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">Nº habitantes: 5.000</span>
+        <span class="col-xs-offset-1 col-xs-11">Nº habitantes: 5.000</span>
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Pecuária
             <small>Editar</small>
@@ -387,13 +376,13 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">23 ovelhas, 5 vacas</span>
+        <span class="col-xs-offset-1 col-xs-11">23 ovelhas, 5 vacas</span>
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Producção Energia
             <small>Editar</small>
@@ -401,7 +390,7 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">Tipo de atividade</span>
+        <span class="col-xs-offset-1 col-xs-11">Tipo de atividade</span>
       </div>
     </div>
 
@@ -409,9 +398,9 @@
 
   <section class="row">
 
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-xs-offset-1 col-xs-11">
           <label class="checkbox">
             <input type="checkbox">Indústria
             <small>Editar</small>
@@ -419,13 +408,26 @@
         </div>
       </div>
       <div class="row">
-        <span class="col-md-offset-1 col-md-11">Nº habitantes: 5.000</span>
+        <span class="col-xs-offset-1 col-xs-11">Nº habitantes: 5.000</span>
       </div>
     </div>
 
   </section>
 
 </main>
+
+<script src="vendor/jquery/jquery-1.12.0.min.js"></script>
+<script src="vendor/json2.js" charset="utf-8"></script>
+<script src="vendor/underscore/underscore-min.js" charset="utf-8"></script>
+<script src="vendor/backbone/backbone-min.js" charset="utf-8"></script>
+
+<script src="config.js" charset="utf-8"></script>
+<script src="models/Licencia.js" charset="utf-8"></script>
+<script src="models/Licencias.js" charset="utf-8"></script>
+<script src="models/Utente.js" charset="utf-8"></script>
+<script src="models/Exploracao.js" charset="utf-8"></script>
+<script src="views/common/Widgets.js" charset="utf-8"></script>
+<script src="exploracao-show.js" charset="utf-8"></script>
 
 <script src="vendor/leaflet/leaflet.js"></script>
 

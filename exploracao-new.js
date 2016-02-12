@@ -54,7 +54,7 @@ new SIXHIARA.Views.SelectUtente({
 new iCarto.Views.Widgets({
     el: $('#licencia-superficial'),
     model: licenciaSuperficial
-});
+}).render();
 
 new SIXHIARA.Views.SelectEstadoLicencia({
   el: $('.estado-superficial'),
@@ -64,7 +64,7 @@ new SIXHIARA.Views.SelectEstadoLicencia({
 new iCarto.Views.Widgets({
     el: $('#licencia-subterranea'),
     model: licenciaSubterranea
-});
+}).render();
 
 new SIXHIARA.Views.SelectEstadoLicencia({
   el: $('.estado-subterranea'),
