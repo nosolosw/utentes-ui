@@ -1,12 +1,15 @@
 var exploracao = new SIXHIARA.Models.Exploracao({
   'exp_id':     '2016-001',
   'exp_name':   'Planta de abastecimento',
-  'observacio': 'Observações sobre linha de água e outras notas sobre localização e modo de acesso. Observações sobre linha de água e outras notas sobre localização e modo de acesso.Observações sobre linha de água e outras notas sobre localização e modo de acesso. Observações sobre linha de água e outras notas sobre localização e modo de acesso.',
+  'd_solici':   '10/07/2015',
+  'observacio': 'Observações sobre linha de água e outras notas sobre localização e modo de acesso.',
   'loc_provin': 'Cabo-Delgado',
   'loc_distri': 'Mandimba',
   'loc_posto':  'Posto',
   'loc_nucleo': 'núcleo',
+  'loc_endere': 'enderezo',
   'loc_bacia':  'Rovuma',
+  'loc_subaci': 'sub',
   'loc_rio':    'Chiulezi'
 });
 exploracao.set('utente', new SIXHIARA.Models.Utente({
