@@ -11,6 +11,10 @@ iCarto.Views.Widgets = Backbone.View.extend({
 
     var app = this;
 
+    this.$('span.widget').each(function(index, widget){
+      widget.innerText = app.model.get(widget.id);
+    });
+
     this.$('input:checkbox.widget').each(function(index, widget){
       widget.removeAttribute('checked');
       if (app.model.get(widget.id)){
