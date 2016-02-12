@@ -169,68 +169,55 @@
                   <div class="col-xs-offset-1 col-xs-11">
                     <div class="row">
                       <div class="col-xs-5">
-                        <fieldset>
+                        <fieldset id="licencia-subterranea">
                           <span>SUBTERRÁNEA</span>
+                          <input type="hidden" id="lic_tipo">
                           <div class="form-group">
-                            <label for="nro">Nro licencia</label>
-                            <input type="text" name="nro" class="form-control" value="">
+                            <label for="lic_nro">Nro licencia</label>
+                            <input type="text" class="form-control widget" id="lic_nro">
                           </div>
                           <div class="form-group">
-                            <label for="nro">Cadastro</label>
-                            <input type="text" name="nro" class="form-control" value="">
+                            <label for="cadastro">Cadastro</label>
+                            <input type="text" class="form-control widget" id="cadastro">
                           </div>
                           <div class="form-group">
-                            <label for="nro">Data solicitude</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Estado</label>
-                            <select class="form-control" id="nro">
-                              <option>-</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <label for="estado">Estado</label>
+                            <select class="form-control widget estado-subterranea" id="estado">
+                              <option selected>-</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <label for="nro">Consumo requerido</label>
-                            <input type="text" name="nro" class="form-control" value="">
+                            <label for="c_requerid">Consumo requerido</label>
+                            <input type="text" class="form-control widget" id="c_requerid">
                           </div>
                         </fieldset>
                       </div>
 
                       <div class="col-xs-offset-2 col-xs-5">
-                        <fieldset>
+                        <fieldset id="licencia-superficial">
                           <span>SUPERFICIAL</span>
+                          <input type="hidden" class="widget" id="lic_tipo">
                           <div class="form-group">
-                            <label for="nro">Nro licencia</label>
-                            <input type="text" name="nro" class="form-control" value="">
+                            <label for="lic_nro">Nro licencia</label>
+                            <input type="text" class="form-control widget" id="lic_nro">
                           </div>
                           <div class="form-group">
-                            <label for="nro">Cadastro</label>
-                            <input type="text" name="nro" class="form-control" value="">
+                            <label for="cadastro">Cadastro</label>
+                            <input type="text" class="form-control widget" id="cadastro">
                           </div>
                           <div class="form-group">
-                            <label for="nro">Data solicitude</label>
-                            <input type="datetime" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Estado</label>
-                            <select class="form-control" id="provincia">
-                              <option>-</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <label for="estado">Estado</label>
+                            <select class="form-control widget estado-superficial" id="estado">
+                              <option selected>-</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <label for="nro">Consumo requerido</label>
-                            <input type="text" name="nro" class="form-control" value="">
+                            <label for="c_requerid">Consumo requerido</label>
+                            <input type="text" class="form-control widget" id="c_requerid">
                           </div>
                         </fieldset>
                       </div>
+
                     </div>
 
                   </div>
@@ -389,29 +376,29 @@
                       </div>
                     </div>
 
+                  </div>
                 </div>
+
+
               </div>
 
+            </div>
 
+            <div class="row">
+              <ul class="pager wizard">
+                <li class="previous"><a href="#">Anterior</a></li>
+                <li class="next"><a href="#">Seguinte</a></li>
+              </ul>
             </div>
 
           </div>
 
-          <div class="row">
-            <ul class="pager wizard">
-              <li class="previous"><a href="#">Anterior</a></li>
-              <li class="next"><a href="#">Seguinte</a></li>
-            </ul>
-          </div>
-
         </div>
 
-      </div>
+      </form>
+    </div>
 
-    </form>
   </div>
-
-</div>
 </div>
 
 <script src="vendor/jquery/jquery-1.12.0.min.js"></script>
@@ -423,6 +410,10 @@
 <script src="vendor/backbone/backbone-min.js" charset="utf-8"></script>
 
 <script src="config.js" charset="utf-8"></script>
+<script src="models/common/Dominio.js" charset="utf-8"></script>
+<script src="models/EstadosLicencia.js" charset="utf-8"></script>
+<script src="models/Licencia.js" charset="utf-8"></script>
+<script src="models/Licencias.js" charset="utf-8"></script>
 <script src="models/Utente.js" charset="utf-8"></script>
 <script src="models/Utentes.js" charset="utf-8"></script>
 <script src="models/Exploracao.js" charset="utf-8"></script>
@@ -430,6 +421,7 @@
 <script src="views/common/Widgets.js" charset="utf-8"></script>
 <script src="views/SaveButton.js" charset="utf-8"></script>
 <script src="views/SelectUtente.js" charset="utf-8"></script>
+<script src="views/SelectEstadoLicencia.js" charset="utf-8"></script>
 <script src="exploracao-new.js" charset="utf-8"></script>
 
 </body>
