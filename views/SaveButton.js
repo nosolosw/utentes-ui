@@ -4,6 +4,9 @@ SIXHIARA.Views.SaveButton = Backbone.View.extend({
     "click": "save"
   },
 
+  // render: function(){
+  // },
+
   save: function(){
     // TODO: save to API
     // make API configurable through config.js

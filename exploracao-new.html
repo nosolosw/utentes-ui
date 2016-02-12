@@ -128,9 +128,8 @@
 
                 <div class="row">
                   <div class="form-group col-xs-offset-1 col-xs-11">
-                    <select class="form-control">
-                      <option selected> - Novo utente - </option>
-                      <option>Anadarco Mozambique</option>
+                    <select id="select-utente" class="form-control">
+                      <option selected value="novo"> - Novo utente - </option>
                     </select>
                   </div>
                 </div>
@@ -424,10 +423,13 @@
 <script src="vendor/backbone/backbone-min.js" charset="utf-8"></script>
 
 <script src="config.js" charset="utf-8"></script>
-<script src="views/SaveButton.js" charset="utf-8"></script>
-<script src="views/Widgets.js" charset="utf-8"></script>
 <script src="models/Utente.js" charset="utf-8"></script>
+<script src="models/Utentes.js" charset="utf-8"></script>
 <script src="models/Exploracao.js" charset="utf-8"></script>
+<script src="views/common/Option.js" charset="utf-8"></script>
+<script src="views/common/Widgets.js" charset="utf-8"></script>
+<script src="views/SaveButton.js" charset="utf-8"></script>
+<script src="views/SelectUtente.js" charset="utf-8"></script>
 <script src="exploracao-new.js" charset="utf-8"></script>
 
 </body>

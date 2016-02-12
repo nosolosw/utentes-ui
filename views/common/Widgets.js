@@ -8,6 +8,7 @@ iCarto.Views.Widgets = Backbone.View.extend({
   },
 
   render: function(){
+
     var app = this;
 
     this.$('input:checkbox.widget').each(function(index, widget){
