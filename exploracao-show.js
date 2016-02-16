@@ -47,6 +47,7 @@ new iCarto.Views.Widgets({
   el: $('#licencia-superficial'),
   model: licenciaSuperficial
 }).render();
+
 new iCarto.Views.Widgets({
   el: $('#licencia-subterranea'),
   model: licenciaSubterranea
