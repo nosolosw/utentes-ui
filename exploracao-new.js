@@ -33,13 +33,13 @@ var provincias = new iCarto.Collections.Dominios([
 ]);
 
 var distritos = new iCarto.Collections.Dominios([
-  {'text': 'Ancuabe'},
-  {'text': 'Balama'},
+  {'text': 'Ancuabe', 'parent': 'Niassa'},
+  {'text': 'Balama', 'parent': 'Niassa'},
 ]);
 
 var postos = new iCarto.Collections.Dominios([
-  {'text': 'Mesa'},
-  {'text': 'Metoro'},
+  {'text': 'Mesa', 'parent': 'Ancuabe'},
+  {'text': 'Metoro', 'parent': 'Balama'},
 ]);
 
 var bacias = new iCarto.Collections.Dominios([
@@ -48,8 +48,8 @@ var bacias = new iCarto.Collections.Dominios([
 ]);
 
 var subacias = new iCarto.Collections.Dominios([
-  {'text': 'Miruco'},
-  {'text': 'Muaguide'},
+  {'text': 'Miruco', 'parent': 'Megaruma'},
+  {'text': 'Muaguide', 'parent': 'Messalo'},
 ]);
 
 // TODO: review how to garbage-collect views after this window is closed
@@ -70,25 +70,32 @@ new iCarto.Views.SelectFiller({
   model: provincias
 }).render();
 
-new iCarto.Views.SelectFiller({
+var selectDistritos = new iCarto.Views.SelectFiller({
   el: $('#loc_distri'),
-  model: distritos
+  model: distritos,
+  init: []
 }).render();
+selectDistritos.listenTo(exploracao, 'change:loc_provin', selectDistritos.showFilteredOptions);
 
-new iCarto.Views.SelectFiller({
+var selectPostos = new iCarto.Views.SelectFiller({
   el: $('#loc_posto'),
-  model: postos
+  model: postos,
+  init: []
 }).render();
+selectPostos.listenTo(exploracao, 'change:loc_distri', selectPostos.showFilteredOptions);
 
 new iCarto.Views.SelectFiller({
   el: $('#loc_bacia'),
   model: bacias
 }).render();
 
-new iCarto.Views.SelectFiller({
+var selectSubacias = new iCarto.Views.SelectFiller({
   el: $('#loc_subaci'),
-  model: subacias
+  model: subacias,
+  init: [],
 }).render();
+// exploracao.on('change:loc_bacia', selectSubacias.showFilteredOptions, selectSubacias);
+selectSubacias.listenTo(exploracao, 'change:loc_bacia', selectSubacias.showFilteredOptions);
 
 // block utente
 new iCarto.Views.Widgets({
