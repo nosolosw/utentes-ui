@@ -41,22 +41,21 @@ var EXPS = [
   },
 ];
 
-var exploracaos = new SIXHIARA.Collections.ExploracaosSummary(EXPS);
-var listView = new iCarto.Views.ListView({
-  el: $('#project_list'),
-  collection: exploracaos,
-  subviewTemplate: _.template($('#exploracao-li-tmpl').html())
-}).render();
-
 var where = new SIXHIARA.Models.ExploracaoSummary();
 var filtersView = new SIXHIARA.Views.FiltersView({
   el: $('#filters'),
   model: where,
 }).render();
 
-where.on('change', function(e){
-  var filters = _.omit(where.toJSON(), function(value, key, object){
+var exploracaos = new SIXHIARA.Collections.ExploracaosSummary(EXPS);
+var listView = new iCarto.Views.ListView({
+  el: $('#project_list'),
+  collection: exploracaos,
+  subviewTemplate: _.template($('#exploracao-li-tmpl').html())
+}).render();
+listView.listenTo(where, 'change', function(model, options){
+  var filters = _.omit(model.toJSON(), function(value, key, object){
     return value === ''; // do not take into account void values
   });
-  listView.update(new SIXHIARA.Collections.ExploracaosSummary(exploracaos.where(filters)));
+  this.update(exploracaos.where(filters));
 });
