@@ -53,9 +53,10 @@ var filtersView = new SIXHIARA.Views.FiltersView({
   el: $('#filters'),
   model: where,
 }).render();
+
 where.on('change', function(e){
   var filters = _.omit(where.toJSON(), function(value, key, object){
-    return value === '';
+    return value === ''; // do not take into account void values
   });
   listView.update(new SIXHIARA.Collections.ExploracaosSummary(exploracaos.where(filters)));
 });
