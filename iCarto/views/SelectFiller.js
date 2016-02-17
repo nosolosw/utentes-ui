@@ -1,47 +1,56 @@
 iCarto.Views.SelectFiller = Backbone.View.extend({
 
-  initialize: function(options){
-    this.options = options || {};
+  initialize: function(){
+    this._subviews = [];
   },
 
   render: function(){
-    if(this.options.init){
-      this.populateWith(this.options.init);
-    } else{
-      this.populateWith(this.model.models);
+    var subviews = [];
+    var content = document.createDocumentFragment();
+
+    this.collection.forEach(function(model){
+      var alias = model.get('alias');
+      var option = new iCarto.Views.Option({
+        model: model,
+        text:  'text',
+        attributes: alias ? {'value': model.get('alias')} : null
+      });
+      content.appendChild(option.render().el);
+      subviews.push(option);
+    }, this);
+
+    // Update DOM and _subviews array at once.
+    // This would minimize reflows to only 1 instead of one per subview.
+    if(this.collection.length === 0) {
+      this.$el.prop('disabled', true);
+      this.$el.empty();
+    } else {
+      this.$el.prop('disabled', false);
+      this.$el.html(content);
     }
+    _.invoke(this._subviews, 'remove');
+    this._subviews = subviews;
+
+    // Trigger a change event on this component.
+    // Some views, as Widgets.js, are listening to this event
+    // to update the model.
+    this.$el.trigger('change');
+
     return this;
   },
 
-  populateWith: function(options){
-    if(options.length === 0){
-      this.$el.prop('disabled', true);
-    } else{
-      this.$el.prop('disabled', false);
-      options.forEach(this.appendOption, this);
-    }
-    // this would make the model to be updated
-    // if it's listening to change events in view component
-    // usually, this is done by Widgets.js
-    this.$el.trigger('change');
+  // Free old collection to be garbage collected after subviews are removed,
+  // as each one has a reference to a model in the collection.
+  update: function(newCollection){
+    this.collection = newCollection;
+    this.render();
   },
 
-  appendOption: function(optionModel){
-    var alias = optionModel.get('alias');
-    var option = new iCarto.Views.Option({
-      model: optionModel,
-      text:  'text',
-      attributes: alias ? {'value': optionModel.get('alias')} : null
-    });
-    this.$el.append(option.render().$el);
-  },
-
-  // callback to use if you want to re-render this component children
-  // the values would be filtered from the model property 'parent'
-  showFilteredOptions: function(model, value, options){
-    this.$el.empty();
-    var options = this.model.where({'parent': value});
-    this.populateWith(options);
+  // Remove the container element and then clean up its managed subviews
+  // as to minimize document reflows.
+  remove: function(){
+    Backbone.View.prototype.remove.call(this);
+    _.invoke(this._subviews, 'remove');
   },
 
 });

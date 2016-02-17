@@ -4,17 +4,13 @@ iCarto.Views.Option = Backbone.View.extend({
 
   initialize: function(options){
     this.options = options || {};
+    if(!this.options.text) throw {message: 'no key provided'};
   },
 
   render: function(){
     this.$el.html(this.model.get(this.options.text));
+
     return this;
   }
-
-  // TODO review
-  // destroy: function(){
-  //   this.$el.remove();
-  //   this.model.destroy();
-  // }
 
 });

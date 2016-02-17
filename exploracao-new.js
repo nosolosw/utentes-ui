@@ -21,34 +21,42 @@ var utentes = new SIXHIARA.Collections.Utentes([
 ]);
 
 var estadosLicencia = new iCarto.Collections.Dominios([
-  {'text': 'Irregular', 'alias': 'irregular', 'order': 0},
-  {'text': 'Licenciada', 'order': 3},
-  {'text': 'Pdte Solicitaçao utente', 'order': 1},
-  {'text': 'Pdte Emisao', 'order': 2},
+  {'text': '', 'alias': '', 'order': 0},
+  {'text': 'Irregular', 'alias': 'irregular', 'order': 1},
+  {'text': 'Licenciada', 'order': 4},
+  {'text': 'Pdte Solicitaçao utente', 'order': 2},
+  {'text': 'Pdte Emisao', 'order': 3},
 ]);
 
 var provincias = new iCarto.Collections.Dominios([
+  {'text': ''},
   {'text': 'Cabo Delgado'},
   {'text': 'Niassa'},
 ]);
 
 var distritos = new iCarto.Collections.Dominios([
+  {'text': '', 'parent': 'Niassa'},
   {'text': 'Ancuabe', 'parent': 'Niassa'},
   {'text': 'Balama', 'parent': 'Niassa'},
 ]);
 
 var postos = new iCarto.Collections.Dominios([
+  {'text': '', 'parent': 'Ancuabe'},
   {'text': 'Mesa', 'parent': 'Ancuabe'},
+  {'text': '', 'parent': 'Balama'},
   {'text': 'Metoro', 'parent': 'Balama'},
 ]);
 
 var bacias = new iCarto.Collections.Dominios([
+  {'text': ''},
   {'text': 'Megaruma'},
   {'text': 'Messalo'},
 ]);
 
 var subacias = new iCarto.Collections.Dominios([
+  {'text': '', 'parent': 'Megaruma'},
   {'text': 'Miruco', 'parent': 'Megaruma'},
+  {'text': '', 'parent': 'Messalo'},
   {'text': 'Muaguide', 'parent': 'Messalo'},
 ]);
 
@@ -67,35 +75,37 @@ new iCarto.Views.Widgets({
 
 new iCarto.Views.SelectFiller({
   el: $('#loc_provin'),
-  model: provincias
+  collection: provincias
 }).render();
 
 var selectDistritos = new iCarto.Views.SelectFiller({
   el: $('#loc_distri'),
-  model: distritos,
-  init: []
+  collection: [],
 }).render();
-selectDistritos.listenTo(exploracao, 'change:loc_provin', selectDistritos.showFilteredOptions);
+selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value, options){
+  this.update(distritos.where({'parent': model.get('loc_provin')}));
+});
 
 var selectPostos = new iCarto.Views.SelectFiller({
   el: $('#loc_posto'),
-  model: postos,
-  init: []
+  collection: [],
 }).render();
-selectPostos.listenTo(exploracao, 'change:loc_distri', selectPostos.showFilteredOptions);
+selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, options){
+  this.update(postos.where({'parent': model.get('loc_distri')}));
+});
 
 new iCarto.Views.SelectFiller({
   el: $('#loc_bacia'),
-  model: bacias
+  collection: bacias
 }).render();
 
 var selectSubacias = new iCarto.Views.SelectFiller({
   el: $('#loc_subaci'),
-  model: subacias,
-  init: [],
+  collection: [],
 }).render();
-// exploracao.on('change:loc_bacia', selectSubacias.showFilteredOptions, selectSubacias);
-selectSubacias.listenTo(exploracao, 'change:loc_bacia', selectSubacias.showFilteredOptions);
+selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, options){
+  this.update(subacias.where({'parent': model.get('loc_bacia')}));
+});
 
 // block utente
 new iCarto.Views.Widgets({
@@ -116,7 +126,7 @@ new iCarto.Views.Widgets({
 
 new iCarto.Views.SelectFiller({
   el: $('.estado-superficial'),
-  model: estadosLicencia
+  collection: estadosLicencia
 }).render();
 
 new iCarto.Views.Widgets({
@@ -126,5 +136,5 @@ new iCarto.Views.Widgets({
 
 new iCarto.Views.SelectFiller({
   el: $('.estado-subterranea'),
-  model: estadosLicencia
+  collection: estadosLicencia
 }).render();
