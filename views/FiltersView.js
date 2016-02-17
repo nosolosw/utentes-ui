@@ -5,7 +5,7 @@ SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
 
     // this view updates the model where
     this.addView(new iCarto.Views.Widgets({
-      el: $('#filters'),
+      el: this.$el,
       model: this.model
     }));
 
