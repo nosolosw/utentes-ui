@@ -1,69 +1,27 @@
 //data
 var exploracaos = new SIXHIARA.Collections.Exploracaos([
   {
-    'exp_id':     '2016-01',
-    'exp_name':   'Exploracao de Anadarco',
-    'd_solici':   '',
-    'observacio': '',
-    'loc_provin': 'Niassa',
-    'loc_distri': 'Ancuabe',
-    'loc_posto':  'Mesa',
-    'loc_nucleo': '',
-    'loc_endere': '',
-    'loc_bacia':  'Megaruma',
-    'loc_subaci':  'Miruco',
-    'loc_rio':    '',
-    'utente': new SIXHIARA.Models.Utente({'nome': 'Anadarco Mozambique', 'nuit': '456', 'reg_comerc': '', 'reg_zona': ''}),
-    'licencias': new SIXHIARA.Collections.Licencias([{'lic_tipo': 'subterranea'}]),
+    'exploracao_id':   '2016-01',
+    'exploracao_name': 'Exploracao de Anadarco',
+    'utente_name':     'Anadarco Mozambique',
+    'estado':          'L',
+    'consumo':         'C',
+    'pagos':           'P'
   },
   {
-    'exp_id':     '2016-02',
-    'exp_name':   'Mirucos',
-    'd_solici':   '',
-    'observacio': '',
-    'loc_provin': 'Niassa',
-    'loc_distri': 'Ancuabe',
-    'loc_posto':  'Mesa',
-    'loc_nucleo': '',
-    'loc_endere': '',
-    'loc_bacia':  'Megaruma',
-    'loc_subaci':  'Miruco',
-    'loc_rio':    '',
-    'utente': new SIXHIARA.Models.Utente({'nome': 'Banco Mundial', 'nuit': '456', 'reg_comerc': '', 'reg_zona': ''}),
-    'licencias': new SIXHIARA.Collections.Licencias([{'lic_tipo': 'subterranea'}]),
-  },
+    'exploracao_id':   '2016-02',
+    'exploracao_name': 'Abastecemento Pemba',
+    'utente_name':     'Municipio de Pemba',
+    'estado':          'L',
+    'consumo':         'C',
+    'pagos':           'P'  },
   {
-    'exp_id':     '2016-03',
-    'exp_name':   'Planta de abastecemento',
-    'd_solici':   '',
-    'observacio': '',
-    'loc_provin': 'Niassa',
-    'loc_distri': 'Ancuabe',
-    'loc_posto':  'Mesa',
-    'loc_nucleo': '',
-    'loc_endere': '',
-    'loc_bacia':  'Megaruma',
-    'loc_subaci':  'Miruco',
-    'loc_rio':    '',
-    'utente': new SIXHIARA.Models.Utente({'nome': 'Municipio de Pemba', 'nuit': '456', 'reg_comerc': '', 'reg_zona': ''}),
-    'licencias': new SIXHIARA.Collections.Licencias([{'lic_tipo': 'subterranea'}]),
-  },
-  {
-    'exp_id':     '2016-04',
-    'exp_name':   'Saneamento en Pemba',
-    'd_solici':   '',
-    'observacio': '',
-    'loc_provin': 'Niassa',
-    'loc_distri': 'Ancuabe',
-    'loc_posto':  'Mesa',
-    'loc_nucleo': '',
-    'loc_endere': '',
-    'loc_bacia':  'Megaruma',
-    'loc_subaci':  'Miruco',
-    'loc_rio':    '',
-    'utente': new SIXHIARA.Models.Utente({'nome': 'Municipio de Pemba', 'nuit': '456', 'reg_comerc': '', 'reg_zona': ''}),
-    'licencias': new SIXHIARA.Collections.Licencias([{'lic_tipo': 'subterranea'}]),
-  },
+    'exploracao_id':   '2016-03',
+    'exploracao_name': 'Saneamento porto',
+    'utente_name':     'Porto de Pemba',
+    'estado':          'L',
+    'consumo':         'C',
+    'pagos':           'P'  },
 ]);
 
 var utentes = new iCarto.Collections.Dominios([
@@ -164,7 +122,8 @@ new iCarto.Views.SelectFiller({
 
 // exploracao list
 
-new SIXHIARA.Views.ExploracaosList({
+var listView = new iCarto.Views.ListView({
   el: $('#project_list'),
-  model: exploracaos
+  collection: exploracaos,
+  subviewTemplate: _.template($('#exploracao-li-tmpl').html())
 }).render();
