@@ -18,7 +18,7 @@
             <h4 class="col-md-12">Utentes</h4>
           </div>
           <div class="row">
-            <select class="form-control col-md-6" id="utentes">
+            <select class="form-control col-md-6 widget" id="utente">
             </select>
           </div>
         </div>
@@ -76,7 +76,7 @@
             <h4 class="col-md-12">Actividade</h4>
           </div>
           <div class="row">
-            <select class="col-md-6 form-control widget" id="actividades">
+            <select class="col-md-6 form-control widget" id="actividade">
             </select>
           </div>
         </div>
@@ -107,12 +107,12 @@
 
 <script type="text/template" id="exploracao-li-tmpl">
   <li class="row exploracao">
-    <a class="col-md-12 pull-left" href="#"><%- exploracao_id %> <%- exploracao_name %></a>
+    <a class="col-md-12 pull-left" href="#"><%- exp_id %> <%- exp_name %></a>
     <span class="col-md-12 ">
       <small class="label label-success"><%- estado %></small>
       <small class="label label-default"><%- consumo %></small>
       <small class="label label-danger"><%- pagos %></small>
-      <small style="color: grey; font-size: 75%"><%- utente_name %></small>
+      <small style="color: grey; font-size: 75%"><%- utente %></small>
     </span>
   </li>
 </script>
@@ -126,12 +126,8 @@
 <script src="vendor/backbone/backbone-min.js" charset="utf-8"></script>
 
 <script src="config.js" charset="utf-8"></script>
-<script src="models/Licencia.js"></script>
-<script src="models/Licencias.js"></script>
-<script src="models/Utente.js"></script>
-<script src="models/Utentes.js"></script>
-<script src="models/Exploracao.js"></script>
-<script src="models/Exploracaos.js"></script>
+<script src="models/ExploracaoSummary.js"></script>
+<script src="models/ExploracaosSummary.js"></script>
 <script src="iCarto/models/Dominio.js"></script>
 <script src="iCarto/models/Dominios.js"></script>
 <script src="iCarto/views/Option.js"></script>
@@ -139,6 +135,8 @@
 <script src="iCarto/views/Widgets.js"></script>
 <script src="iCarto/views/ItemView.js"></script>
 <script src="iCarto/views/ListView.js"></script>
+<script src="iCarto/views/BaseView.js"></script>
+<script src="views/FiltersView.js"></script>
 <script src="exploracao-search.js"></script>
 
 </body>

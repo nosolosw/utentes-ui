@@ -1,129 +1,61 @@
 //data
-var exploracaos = new SIXHIARA.Collections.Exploracaos([
+var EXPS = [
   {
-    'exploracao_id':   '2016-01',
-    'exploracao_name': 'Exploracao de Anadarco',
-    'utente_name':     'Anadarco Mozambique',
-    'estado':          'L',
-    'consumo':         'C',
-    'pagos':           'P'
+    'exp_id':     '2016-01',
+    'exp_name':   'Exploracao de Anadarco',
+    'loc_provin': 'Niassa',
+    'loc_distri': '',
+    'loc_posto':  '',
+    'utente':     'Anadarco Mozambique',
+    'lic_tipo':   'Subterránea',
+    'estado':     'L',
+    'consumo':    'C',
+    'pagos':      'P',
+    'actividade': 'Saneamento',
   },
   {
-    'exploracao_id':   '2016-02',
-    'exploracao_name': 'Abastecemento Pemba',
-    'utente_name':     'Municipio de Pemba',
-    'estado':          'L',
-    'consumo':         'C',
-    'pagos':           'P'  },
+    'exp_id':     '2016-02',
+    'exp_name':   'Abastecemento Pemba',
+    'loc_provin': 'Niassa',
+    'loc_distri': '',
+    'loc_posto':  '',
+    'utente':     'Municipio de Pemba',
+    'lic_tipo':   'Subterránea',
+    'estado':     'L',
+    'consumo':    'C',
+    'pagos':      'P',
+    'actividade': 'Saneamento',
+  },
   {
-    'exploracao_id':   '2016-03',
-    'exploracao_name': 'Saneamento porto',
-    'utente_name':     'Porto de Pemba',
-    'estado':          'L',
-    'consumo':         'C',
-    'pagos':           'P'  },
-]);
+    'exp_id':     '2016-03',
+    'exp_name':   'Saneamento porto',
+    'loc_provin': 'Cabo Delgado',
+    'loc_distri': '',
+    'loc_posto':  '',
+    'utente':     'Porto de Pemba',
+    'lic_tipo':   'Superficial',
+    'estado':     'L',
+    'consumo':    'C',
+    'pagos':      'P',
+    'actividade': 'Abastecemento',
+  },
+];
 
-var utentes = new iCarto.Collections.Dominios([
-  {'text': 'Anadarco Mozambique'},
-  {'text': 'Municipio de Pemba'},
-  {'text': 'Banco Mundial'}
-]);
-
-var provincias = new iCarto.Collections.Dominios([
-  {'text': 'Cabo Delgado'},
-  {'text': 'Niassa'},
-]);
-
-var distritos = new iCarto.Collections.Dominios([
-  {'text': 'Ancuabe', 'parent': 'Niassa'},
-  {'text': 'Balama', 'parent': 'Niassa'},
-]);
-
-var postos = new iCarto.Collections.Dominios([
-  {'text': 'Mesa', 'parent': 'Ancuabe'},
-  {'text': 'Metoro', 'parent': 'Balama'},
-]);
-
-var licenciaTipos = new iCarto.Collections.Dominios([
-  {'text': 'Superficial'},
-  {'text': 'Subterránea'},
-]);
-
-var licenciaEstados = new iCarto.Collections.Dominios([
-  {'text': 'Irregular'},
-  {'text': 'Licenciada'}
-]);
-
-var exploracaoPagamento = new iCarto.Collections.Dominios([
-  {'text': 'Pagada'},
-  {'text': 'Non pagada'}
-]);
-
-var actividades = new iCarto.Collections.Dominios([
-  {'text': 'Abastecemento'},
-  {'text': 'Saneamento'},
-  {'text': 'Industria'},
-]);
-
-// filters block
-
-var where = new SIXHIARA.Models.Exploracao();
-
-new iCarto.Views.Widgets({
-  el: $('#filters'),
-  model: where
-}).render();
-
-new iCarto.Views.SelectFiller({
-  el: $('#utentes'),
-  model: utentes
-}).render();
-
-new iCarto.Views.SelectFiller({
-  el: $('#loc_provin'),
-  model: provincias
-}).render();
-
-var selectDistritos = new iCarto.Views.SelectFiller({
-  el: $('#loc_distri'),
-  model: distritos,
-  init: []
-}).render();
-selectDistritos.listenTo(where, 'change:loc_provin', selectDistritos.showFilteredOptions);
-
-var selectPostos = new iCarto.Views.SelectFiller({
-  el: $('#loc_posto'),
-  model: postos,
-  init: []
-}).render();
-selectPostos.listenTo(where, 'change:loc_distri', selectPostos.showFilteredOptions);
-
-new iCarto.Views.SelectFiller({
-  el: $('#lic_tipo'),
-  model: licenciaTipos
-}).render();
-
-new iCarto.Views.SelectFiller({
-  el: $('#estado'),
-  model: licenciaEstados
-}).render();
-
-new iCarto.Views.SelectFiller({
-  el: $('#pagos'),
-  model: exploracaoPagamento
-}).render();
-
-new iCarto.Views.SelectFiller({
-  el: $('#actividades'),
-  model: actividades
-}).render();
-
-
-// exploracao list
-
+var exploracaos = new SIXHIARA.Collections.ExploracaosSummary(EXPS);
 var listView = new iCarto.Views.ListView({
   el: $('#project_list'),
   collection: exploracaos,
   subviewTemplate: _.template($('#exploracao-li-tmpl').html())
 }).render();
+
+var where = new SIXHIARA.Models.ExploracaoSummary();
+var filtersView = new SIXHIARA.Views.FiltersView({
+  el: $('#filters'),
+  model: where,
+}).render();
+where.on('change', function(e){
+  var filters = _.omit(where.toJSON(), function(value, key, object){
+    return value === '';
+  });
+  listView.update(new SIXHIARA.Collections.ExploracaosSummary(exploracaos.where(filters)));
+});
