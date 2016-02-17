@@ -4,6 +4,16 @@ $(document).ready(function() {
   });
 });
 
+var domains = DOMAINS_REPO; // TODO: take from API
+var provincias = domains.byCategory('provincia');
+var distritos = domains.byCategory('distrito');
+var postos = domains.byCategory('posto');
+var bacias = domains.byCategory('bacia');
+var subacias = domains.byCategory('subacia');
+var estadosLicencia = domains.byCategory('estado-licencia');
+
+var utentes = UTENTES_REPO; // TODO: take from API
+
 var exploracao = new SIXHIARA.Models.Exploracao();
 var licenciaSubterranea = new SIXHIARA.Models.Licencia({
   'lic_tipo': 'subterranea'
@@ -13,52 +23,6 @@ var licenciaSuperficial = new SIXHIARA.Models.Licencia({
 });
 exploracao.get('licencias').add(licenciaSuperficial);
 exploracao.get('licencias').add(licenciaSubterranea);
-
-// TODO: DOMINIOS move to a configurable file endpoint
-var utentes = new SIXHIARA.Collections.Utentes([
-  {'nome': 'Anadarco Mozambique', 'nuit': '456', 'reg_comerc': '', 'reg_zona': ''},
-  {'nome': 'iCarto', 'nuit': '123', 'reg_comerc': '', 'reg_zona': ''},
-]);
-
-var estadosLicencia = new iCarto.Collections.Dominios([
-  {'text': '', 'alias': '', 'order': 0},
-  {'text': 'Irregular', 'alias': 'irregular', 'order': 1},
-  {'text': 'Licenciada', 'order': 4},
-  {'text': 'Pdte Solicitaçao utente', 'order': 2},
-  {'text': 'Pdte Emisao', 'order': 3},
-]);
-
-var provincias = new iCarto.Collections.Dominios([
-  {'text': ''},
-  {'text': 'Cabo Delgado'},
-  {'text': 'Niassa'},
-]);
-
-var distritos = new iCarto.Collections.Dominios([
-  {'text': '', 'parent': 'Niassa'},
-  {'text': 'Ancuabe', 'parent': 'Niassa'},
-  {'text': 'Balama', 'parent': 'Niassa'},
-]);
-
-var postos = new iCarto.Collections.Dominios([
-  {'text': '', 'parent': 'Ancuabe'},
-  {'text': 'Mesa', 'parent': 'Ancuabe'},
-  {'text': '', 'parent': 'Balama'},
-  {'text': 'Metoro', 'parent': 'Balama'},
-]);
-
-var bacias = new iCarto.Collections.Dominios([
-  {'text': ''},
-  {'text': 'Megaruma'},
-  {'text': 'Messalo'},
-]);
-
-var subacias = new iCarto.Collections.Dominios([
-  {'text': '', 'parent': 'Megaruma'},
-  {'text': 'Miruco', 'parent': 'Megaruma'},
-  {'text': '', 'parent': 'Messalo'},
-  {'text': 'Muaguide', 'parent': 'Messalo'},
-]);
 
 // TODO: review how to garbage-collect views after this window is closed
 

@@ -1,59 +1,21 @@
 SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
 
-  initialize: function(){
+  initialize: function(options){
     iCarto.Views.BaseView.prototype.initialize.call(this);
 
+    this.options = options || {};
+    var domains = new iCarto.Collections.Dominios();
+    if(this.options.domains) domains = this.options.domains;
+
     // properties
-    var utentes = new iCarto.Collections.Dominios([
-      {'text': ''},
-      {'text': 'Anadarco Mozambique'},
-      {'text': 'Municipio de Pemba'},
-      {'text': 'Porto de Pemba'}
-    ]);
-
-    var provincias = new iCarto.Collections.Dominios([
-      {'text': ''},
-      {'text': 'Cabo Delgado'},
-      {'text': 'Niassa'},
-    ]);
-
-    var distritos = new iCarto.Collections.Dominios([
-      {'text': '', 'parent': 'Niassa'},
-      {'text': 'Ancuabe', 'parent': 'Niassa'},
-      {'text': 'Balama', 'parent': 'Niassa'},
-    ]);
-
-    var postos = new iCarto.Collections.Dominios([
-      {'text': '', 'parent': 'Ancuabe'},
-      {'text': 'Mesa', 'parent': 'Ancuabe'},
-      {'text': '', 'parent': 'Balama'},
-      {'text': 'Metoro', 'parent': 'Balama'},
-    ]);
-
-    var licenciaTipos = new iCarto.Collections.Dominios([
-      {'text': ''},
-      {'text': 'Superficial'},
-      {'text': 'Subterránea'},
-    ]);
-
-    var licenciaEstados = new iCarto.Collections.Dominios([
-      {'text': ''},
-      {'text': 'Irregular'},
-      {'text': 'Licenciada'}
-    ]);
-
-    var exploracaoPagamento = new iCarto.Collections.Dominios([
-      {'text': ''},
-      {'text': 'Pagada'},
-      {'text': 'Non pagada'}
-    ]);
-
-    var actividades = new iCarto.Collections.Dominios([
-      {'text': ''},
-      {'text': 'Abastecemento'},
-      {'text': 'Saneamento'},
-      {'text': 'Industria'},
-    ]);
+    var utentes = domains.byCategory('utente');
+    var provincias = domains.byCategory('provincia');
+    var distritos = domains.byCategory('distrito');
+    var postos = domains.byCategory('posto');
+    var licenciaTipos = domains.byCategory('tipo-licencia');
+    var licenciaEstados = domains.byCategory('estado-licencia');
+    var exploracaoPagamento = domains.byCategory('pagamento');
+    var actividades = domains.byCategory('actividade');
 
     // updates the model
     this.addView(new iCarto.Views.Widgets({
@@ -74,7 +36,7 @@ SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
 
     var selectDistritos = new iCarto.Views.SelectFiller({
       el: this.$('#loc_distri'),
-      collection: new iCarto.Collections.Dominios(),
+      collection: [],
     });
     selectDistritos.listenTo(this.model, 'change:loc_provin', function(model, value, options){
       this.update(distritos.where({'parent': model.get('loc_provin')}));
@@ -83,7 +45,7 @@ SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
 
     var selectPostos = new iCarto.Views.SelectFiller({
       el: this.$('#loc_posto'),
-      collection: new iCarto.Collections.Dominios(),
+      collection: [],
     });
     selectPostos.listenTo(this.model, 'change:loc_distri', function(model, value, options){
       this.update(postos.where({'parent': model.get('loc_distri')}));
