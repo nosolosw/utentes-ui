@@ -13,6 +13,7 @@ SIXHIARA.Models.Exploracao = Backbone.Model.extend({
     'loc_bacia':  '',
     'loc_subaci':  '',
     'loc_rio':    '',
+    'pagos':  '',
     'utente': new SIXHIARA.Models.Utente(),
     'licencias': new SIXHIARA.Collections.Licencias(),
   }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Buscar exploraçao</title>
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="exploracao-search.css" />
+</head>
+<body class="container-fluid">
+
+  <main class="main-content row">
+
+    <section id="filters" class="col-md-3">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <h4 class="col-md-12">Utentes</h4>
+          </div>
+          <div class="row">
+            <select class="form-control col-md-6" id="utentes">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <h4 class="col-md-12">Localizaçao</h4>
+          </div>
+          <div class="row">
+            <label for="loc_provin" class="col-md-4">Provincia</label>
+            <select class="form-control col-md-6 widget" id="loc_provin">
+            </select>
+          </div>
+          <div class="row">
+            <label for="loc_distri" class="col-md-4">Distrito</label>
+            <select class="col-md-6 form-control widget" id="loc_distri">
+            </select>
+          </div>
+          <div class="row">
+            <label for="loc_posto" class="col-md-4">Posto</label>
+            <select class="col-md-6 form-control widget" id="loc_posto">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <h4 class="col-md-12">Licencia</h4>
+          </div>
+          <div class="row">
+            <label for="lic_tipo" class="col-md-4">Tipo</label>
+            <select class="col-md-6 form-control widget" id="lic_tipo">
+            </select>
+          </div>
+          <div class="row">
+            <label for="estado" class="col-md-4">Estado</label>
+            <select class="col-md-6 form-control widget" id="estado">
+            </select>
+          </div>
+          <div class="row">
+            <label for="pagos" class="col-md-4">Pagamentos</label>
+            <select class="col-md-6 form-control widget" id="pagos">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <h4 class="col-md-12">Actividade</h4>
+          </div>
+          <div class="row">
+            <select class="col-md-6 form-control widget" id="actividades">
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <section id="projects" class="col-md-3">
+
+    <h1 class="text-center">Exploraçaos</h1>
+    <br />
+
+    <ul id="project_list" class="list-unstyled">
+    </ul>
+
+  </section>
+
+  <section id="map-container" class="col-md-6">
+    <div id="map" class="row"></div>
+  </section>
+
+</main>
+
+<!-- templates -->
+
+<script type="text/template" id="exploracao-li-tmpl">
+  <li class="row exploracao">
+    <a class="col-md-12 pull-left" href="#"><%- exploracao_id %> <%- exploracao_name %></a>
+    <span class="col-md-12 ">
+      <small class="label label-success"><%- estado_licencia %></small>
+      <small class="label label-default"><%- consumos %></small>
+      <small class="label label-danger"><%- pagos %></small>
+      <small style="color: grey; font-size: 75%"><%- utente_name %></small>
+    </span>
+  </li>
+</script>
+
+<!-- javascript -->
+
+<script src="vendor/jquery/jquery-1.12.0.min.js" charset="utf-8"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+<script src="vendor/json2.js" charset="utf-8"></script>
+<script src="vendor/underscore/underscore-min.js" charset="utf-8"></script>
+<script src="vendor/backbone/backbone-min.js" charset="utf-8"></script>
+
+<script src="config.js" charset="utf-8"></script>
+<script src="models/Licencia.js"></script>
+<script src="models/Licencias.js"></script>
+<script src="models/Utente.js"></script>
+<script src="models/Utentes.js"></script>
+<script src="models/Exploracao.js"></script>
+<script src="models/Exploracaos.js"></script>
+<script src="iCarto/models/Dominio.js"></script>
+<script src="iCarto/models/Dominios.js"></script>
+<script src="iCarto/views/Option.js"></script>
+<script src="iCarto/views/SelectFiller.js"></script>
+<script src="iCarto/views/Widgets.js"></script>
+<script src="views/ExploracaosList.js"></script>
+<script src="exploracao-search.js"></script>
+
+</body>
+</html>
