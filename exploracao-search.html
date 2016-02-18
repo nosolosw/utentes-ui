@@ -10,73 +10,73 @@
 
   <main class="main-content row">
 
-    <section id="filters" class="col-md-3">
+    <section id="filters" class="col-xs-3">
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <div class="row">
-            <h4 class="col-md-12">Utentes</h4>
+            <h4 class="col-xs-12">Utentes</h4>
           </div>
           <div class="row">
-            <select class="form-control col-md-6 widget" id="utente">
+            <select class="form-control col-xs-6 widget" id="utente">
             </select>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <div class="row">
-            <h4 class="col-md-12">Localizaçao</h4>
+            <h4 class="col-xs-12">Localizaçao</h4>
           </div>
           <div class="row">
-            <label for="loc_provin" class="col-md-4">Provincia</label>
-            <select class="form-control col-md-6 widget" id="loc_provin">
+            <label for="loc_provin" class="col-xs-4">Provincia</label>
+            <select class="form-control col-xs-6 widget" id="loc_provin">
             </select>
           </div>
           <div class="row">
-            <label for="loc_distri" class="col-md-4">Distrito</label>
-            <select class="col-md-6 form-control widget" id="loc_distri">
+            <label for="loc_distri" class="col-xs-4">Distrito</label>
+            <select class="col-xs-6 form-control widget" id="loc_distri">
             </select>
           </div>
           <div class="row">
-            <label for="loc_posto" class="col-md-4">Posto</label>
-            <select class="col-md-6 form-control widget" id="loc_posto">
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <h4 class="col-md-12">Licencia</h4>
-          </div>
-          <div class="row">
-            <label for="lic_tipo" class="col-md-4">Tipo</label>
-            <select class="col-md-6 form-control widget" id="lic_tipo">
-            </select>
-          </div>
-          <div class="row">
-            <label for="estado" class="col-md-4">Estado</label>
-            <select class="col-md-6 form-control widget" id="estado">
-            </select>
-          </div>
-          <div class="row">
-            <label for="pagos" class="col-md-4">Pagamentos</label>
-            <select class="col-md-6 form-control widget" id="pagos">
+            <label for="loc_posto" class="col-xs-4">Posto</label>
+            <select class="col-xs-6 form-control widget" id="loc_posto">
             </select>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <div class="row">
-            <h4 class="col-md-12">Actividade</h4>
+            <h4 class="col-xs-12">Licencia</h4>
           </div>
           <div class="row">
-            <select class="col-md-6 form-control widget" id="actividade">
+            <label for="lic_tipo" class="col-xs-4">Tipo</label>
+            <select class="col-xs-6 form-control widget" id="lic_tipo">
+            </select>
+          </div>
+          <div class="row">
+            <label for="estado" class="col-xs-4">Estado</label>
+            <select class="col-xs-6 form-control widget" id="estado">
+            </select>
+          </div>
+          <div class="row">
+            <label for="pagos" class="col-xs-4">Pagamentos</label>
+            <select class="col-xs-6 form-control widget" id="pagos">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <h4 class="col-xs-12">Actividade</h4>
+          </div>
+          <div class="row">
+            <select class="col-xs-6 form-control widget" id="actividade">
             </select>
           </div>
         </div>
@@ -87,7 +87,7 @@
   </section>
 
 
-  <section id="projects" class="col-md-3">
+  <section id="projects" class="col-xs-3">
 
     <h1 class="text-center">Exploraçaos</h1>
     <br />
@@ -97,7 +97,7 @@
 
   </section>
 
-  <section id="map-container" class="col-md-6">
+  <section id="map-container" class="col-xs-6">
     <div id="map" class="row"></div>
   </section>
 
@@ -107,8 +107,8 @@
 
 <script type="text/template" id="exploracao-li-tmpl">
   <li class="row exploracao">
-    <a class="col-md-12 pull-left" href="#"><%- exp_id %> <%- exp_name %></a>
-    <span class="col-md-12 ">
+    <a class="col-xs-12 pull-left" href="#"><%- exp_id %> <%- exp_name %></a>
+    <span class="col-xs-12 ">
       <small class="label label-success"><%- estado %></small>
       <small class="label label-default"><%- consumo %></small>
       <small class="label label-danger"><%- pagos %></small>
