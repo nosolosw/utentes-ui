@@ -6,4 +6,11 @@ iCarto.Collections.FeatureCollection = Backbone.Collection.extend({
     return response.features;
   },
 
+  filterBy: function(where){
+    return new iCarto.Collections.FeatureCollection(this.filter(function(element){
+      var properties = _.pick(element.get('properties'), _.keys(where));
+      return _.isEqual(properties, where);
+    }));
+  },
+
 });

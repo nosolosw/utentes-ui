@@ -5,7 +5,7 @@ var exploracaosGeoJson = EXPLORACAOS_GEO;
 // TODO: exploracaos & exploracaosGeoJson might be consolidated
 // to use the same collection. It requires some thought.
 
-var where = new SIXHIARA.Models.ExploracaoSummary();
+var where = new SIXHIARA.Models.Where();
 var filtersView = new SIXHIARA.Views.FiltersView({
   el: $('#filters'),
   model: where,
@@ -18,10 +18,7 @@ var listView = new iCarto.Views.ListView({
   subviewTemplate: _.template($('#exploracao-li-tmpl').html())
 }).render();
 listView.listenTo(where, 'change', function(model, options){
-  var filters = _.omit(model.toJSON(), function(value, key, object){
-    return value === ''; // do not take into account void values
-  });
-  this.update(exploracaos.where(filters));
+  this.update(exploracaos.where(where.values()));
 });
 
 var mapView = new SIXHIARA.Views.MapView({
@@ -29,12 +26,5 @@ var mapView = new SIXHIARA.Views.MapView({
   collection: exploracaosGeoJson
 });
 mapView.listenTo(where, 'change', function(model, options){
-  var filters = _.omit(model.toJSON(), function(value, key, object){
-    return value === ''; // do not take into accoutn void values
-  });
-  var newCollection = new iCarto.Collections.FeatureCollection(exploracaosGeoJson.filter(function(element){
-    var properties = _.pick(element.get('properties'), _.keys(filters));
-    return _.isEqual(filters, properties);
-  }));
-  this.update(newCollection);
+  this.update(exploracaosGeoJson.filterBy(where.values()));
 });
