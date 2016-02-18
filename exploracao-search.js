@@ -1,9 +1,6 @@
 // TODO: take from API
 var domains = DOMAINS_REPO;
 var exploracaos = EXPLORACAOS_REPO;
-var exploracaosGeoJson = EXPLORACAOS_GEO;
-// TODO: exploracaos & exploracaosGeoJson might be consolidated
-// to use the same collection. It requires some thought.
 
 var where = new SIXHIARA.Models.Where();
 var filtersView = new SIXHIARA.Views.FiltersView({
@@ -23,8 +20,8 @@ listView.listenTo(where, 'change', function(model, options){
 
 var mapView = new SIXHIARA.Views.MapView({
   el: $('#map'),
-  collection: exploracaosGeoJson
+  collection: exploracaos
 });
 mapView.listenTo(where, 'change', function(model, options){
-  this.update(exploracaosGeoJson.filterBy(where.values()));
+  this.update(new iCarto.Collections.FeatureCollection(exploracaos.where(where.values())));
 });

@@ -5,7 +5,7 @@ SIXHIARA.Views.MapView = Backbone.View.extend({
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     });
 
-    this.geoJSONLayer = L.geoJson(this.collection.toJSON());
+    this.geoJSONLayer = L.geoJson(this.collection.toGeoJSON());
 
     this.map = L.map(this.el.id, {
       center: [-13, 39.25],
@@ -21,7 +21,7 @@ SIXHIARA.Views.MapView = Backbone.View.extend({
     this.collection = newCollection;
     this.geoJSONLayer.clearLayers();
     if(this.collection.length > 0){
-      this.geoJSONLayer.addData(this.collection.toJSON());
+      this.geoJSONLayer.addData(this.collection.toGeoJSON());
       this.map.fitBounds(this.geoJSONLayer.getBounds())
       .setMaxBounds(this.geoJSONLayer.getBounds().pad(0.5));
     } else{

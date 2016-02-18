@@ -1,4 +1,15 @@
-SIXHIARA.Models.Where = SIXHIARA.Models.ExploracaoSummary.extend({
+SIXHIARA.Models.Where = Backbone.Model.extend({
+
+  defaults: {
+    'loc_provin': '',
+    'loc_distri': '',
+    'loc_posto':  '',
+    'utente':     '',
+    'lic_tipo':     '',
+    'estado':     '',
+    'pagos':      '',
+    'actividade': '',
+  },
 
   values: function(){
     // only return those pairs that are not void
