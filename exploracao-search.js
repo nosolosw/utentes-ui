@@ -20,3 +20,5 @@ listView.listenTo(where, 'change', function(model, options){
   });
   this.update(exploracaos.where(filters));
 });
+
+var mapView = new SIXHIARA.Views.MapView();
