@@ -29,10 +29,12 @@ Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
         // enable widgets and clear values
         widget.removeAttribute('disabled');
         widget.value = '';
+        $(widget).trigger('input');
       } else {
         // disable widgets and set values from model
         widget.setAttribute('disabled', true);
         widget.value = utente.get(widget.id);
+        $(widget).trigger('input');
       }
     });
   }
