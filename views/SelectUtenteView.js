@@ -1,4 +1,5 @@
-SIXHIARA.Views.SelectUtente = Backbone.View.extend({
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
 
   events: {
     'change #select-utente': "fillInputs"

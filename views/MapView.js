@@ -1,4 +1,5 @@
-SIXHIARA.Views.MapView = Backbone.View.extend({
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.MapView = Backbone.View.extend({
 
   initialize: function(){
     var base = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

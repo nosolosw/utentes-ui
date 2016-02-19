@@ -1,4 +1,4 @@
-var exploracao = new SIXHIARA.Models.Exploracao({
+var exploracao = new Backbone.SIXHIARA.Exploracao({
   'exp_id':     '2016-001',
   'exp_name':   'Planta de abastecimento',
   'd_solici':   '10/07/2015',
@@ -12,16 +12,16 @@ var exploracao = new SIXHIARA.Models.Exploracao({
   'loc_subaci': 'sub',
   'loc_rio':    'Chiulezi'
 });
-exploracao.set('utente', new SIXHIARA.Models.Utente({
+exploracao.set('utente', new Backbone.SIXHIARA.Utente({
   'nome': 'Anadarco Mozambique',
   'nuit': 'N3459',
   'reg_comerc': '',
   'reg_zona': ''
 }));
-var licenciaSubterranea = new SIXHIARA.Models.Licencia({
+var licenciaSubterranea = new Backbone.SIXHIARA.Licencia({
   'lic_tipo': 'subterranea'
 });
-var licenciaSuperficial = new SIXHIARA.Models.Licencia({
+var licenciaSuperficial = new Backbone.SIXHIARA.Licencia({
   'lic_tipo':   'superficial',
   'lic_nro':    '2016-001-01',
   'cadastro':   'N78999',

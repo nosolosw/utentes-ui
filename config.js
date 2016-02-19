@@ -1,5 +1,0 @@
-SIXHIARA = {
-  Views: {},
-  Models: {},
-  Collections: {},
-};

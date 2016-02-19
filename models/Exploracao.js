@@ -1,4 +1,5 @@
-SIXHIARA.Models.Exploracao = Backbone.Model.extend({
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.Exploracao = Backbone.Model.extend({
 
   defaults: {
     'exp_id':     '',
@@ -14,8 +15,8 @@ SIXHIARA.Models.Exploracao = Backbone.Model.extend({
     'loc_subaci':  '',
     'loc_rio':    '',
     'pagos':  '',
-    'utente': new SIXHIARA.Models.Utente(),
-    'licencias': new SIXHIARA.Collections.Licencias(),
+    'utente': new Backbone.SIXHIARA.Utente(),
+    'licencias': new Backbone.SIXHIARA.LicenciaCollection(),
   }
 
 });

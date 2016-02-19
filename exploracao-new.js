@@ -14,11 +14,11 @@ var estadosLicencia = domains.byCategory('estado-licencia');
 
 var utentes = UTENTES_REPO; // TODO: take from API
 
-var exploracao = new SIXHIARA.Models.Exploracao();
-var licenciaSubterranea = new SIXHIARA.Models.Licencia({
+var exploracao = new Backbone.SIXHIARA.Exploracao();
+var licenciaSubterranea = new Backbone.SIXHIARA.Licencia({
   'lic_tipo': 'subterranea'
 });
-var licenciaSuperficial = new SIXHIARA.Models.Licencia({
+var licenciaSuperficial = new Backbone.SIXHIARA.Licencia({
   'lic_tipo': 'superficial'
 });
 exploracao.get('licencias').add(licenciaSuperficial);
@@ -26,7 +26,7 @@ exploracao.get('licencias').add(licenciaSubterranea);
 
 // TODO: review how to garbage-collect views after this window is closed
 
-new SIXHIARA.Views.SaveButton({
+new Backbone.SIXHIARA.ButtonSaveView({
   el: $('#save-button'),
   model: exploracao
 }).render();
@@ -77,7 +77,7 @@ new Backbone.UILib.WidgetsView({
   model: exploracao.get('utente')
 }).render();
 
-new SIXHIARA.Views.SelectUtente({
+new Backbone.SIXHIARA.SelectUtenteView({
   el: $('#utente'),
   model: utentes
 }).render();

@@ -1,4 +1,5 @@
-SIXHIARA.Views.SaveButton = Backbone.View.extend({
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
 
   events: {
     "click": "save"

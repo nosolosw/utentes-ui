@@ -2,8 +2,8 @@
 var domains = DOMAINS_REPO;
 var exploracaos = EXPLORACAOS_REPO;
 
-var where = new SIXHIARA.Models.Where();
-var filtersView = new SIXHIARA.Views.FiltersView({
+var where = new Backbone.SIXHIARA.Where();
+var filtersView = new Backbone.SIXHIARA.FiltersView({
   el: $('#filters'),
   model: where,
   domains: domains,
@@ -18,7 +18,7 @@ listView.listenTo(where, 'change', function(model, options){
   this.update(exploracaos.where(where.values()));
 });
 
-var mapView = new SIXHIARA.Views.MapView({
+var mapView = new Backbone.SIXHIARA.MapView({
   el: $('#map'),
   collection: exploracaos
 });

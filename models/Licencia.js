@@ -1,4 +1,5 @@
-SIXHIARA.Models.Licencia = Backbone.Model.extend({
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
 
   defaults: {
     'lic_nro':    '',

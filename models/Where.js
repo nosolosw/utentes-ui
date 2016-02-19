@@ -1,4 +1,5 @@
-SIXHIARA.Models.Where = Backbone.Model.extend({
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.Where = Backbone.Model.extend({
 
   defaults: {
     'loc_provin': '',
