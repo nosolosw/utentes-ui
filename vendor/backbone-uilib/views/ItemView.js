@@ -1,8 +1,9 @@
-iCarto.Views.ItemView = Backbone.View.extend({
+Backbone.UILib = Backbone.UILib || {};
+Backbone.UILib.ItemView = Backbone.View.extend({
 
   // how to instantiate this view
   //
-  // var itemView = new iCarto.Views.ItemView({
+  // var itemView = new Backbone.UILib.ItemView({
   //   model: model,
   //   template: template
   // });

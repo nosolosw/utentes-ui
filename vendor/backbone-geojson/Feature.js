@@ -1,4 +1,5 @@
-iCarto.Models.Feature = Backbone.Model.extend({
+Backbone.GeoJson = Backbone.GeoJson || {};
+Backbone.GeoJson.Feature = Backbone.Model.extend({
 
   parse: function(response){
     var newResponse = {};

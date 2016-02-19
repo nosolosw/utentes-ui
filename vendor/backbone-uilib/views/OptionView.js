@@ -1,4 +1,5 @@
-iCarto.Views.Option = Backbone.View.extend({
+Backbone.UILib = Backbone.UILib || {};
+Backbone.UILib.OptionView = Backbone.View.extend({
 
   tagName: 'option',
 

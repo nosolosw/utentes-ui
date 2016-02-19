@@ -32,17 +32,17 @@ new SIXHIARA.Views.SaveButton({
 }).render();
 
 // block info
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#info'),
   model: exploracao
 }).render();
 
-new iCarto.Views.SelectFiller({
+new Backbone.UILib.SelectView({
   el: $('#loc_provin'),
   collection: provincias
 }).render();
 
-var selectDistritos = new iCarto.Views.SelectFiller({
+var selectDistritos = new Backbone.UILib.SelectView({
   el: $('#loc_distri'),
   collection: [],
 }).render();
@@ -50,7 +50,7 @@ selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value,
   this.update(distritos.where({'parent': model.get('loc_provin')}));
 });
 
-var selectPostos = new iCarto.Views.SelectFiller({
+var selectPostos = new Backbone.UILib.SelectView({
   el: $('#loc_posto'),
   collection: [],
 }).render();
@@ -58,12 +58,12 @@ selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, op
   this.update(postos.where({'parent': model.get('loc_distri')}));
 });
 
-new iCarto.Views.SelectFiller({
+new Backbone.UILib.SelectView({
   el: $('#loc_bacia'),
   collection: bacias
 }).render();
 
-var selectSubacias = new iCarto.Views.SelectFiller({
+var selectSubacias = new Backbone.UILib.SelectView({
   el: $('#loc_subaci'),
   collection: [],
 }).render();
@@ -72,7 +72,7 @@ selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, o
 });
 
 // block utente
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#utente'),
   model: exploracao.get('utente')
 }).render();
@@ -83,22 +83,22 @@ new SIXHIARA.Views.SelectUtente({
 }).render();
 
 // block licencias
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#licencia-superficial'),
   model: licenciaSuperficial
 }).render();
 
-new iCarto.Views.SelectFiller({
+new Backbone.UILib.SelectView({
   el: $('.estado-superficial'),
   collection: estadosLicencia
 }).render();
 
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#licencia-subterranea'),
   model: licenciaSubterranea
 }).render();
 
-new iCarto.Views.SelectFiller({
+new Backbone.UILib.SelectView({
   el: $('.estado-subterranea'),
   collection: estadosLicencia
 }).render();

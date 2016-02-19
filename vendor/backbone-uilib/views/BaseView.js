@@ -1,4 +1,5 @@
-iCarto.Views.BaseView = Backbone.View.extend({
+Backbone.UILib = Backbone.UILib || {};
+Backbone.UILib.BaseView = Backbone.View.extend({
 
   initialize: function(options){
     this.options = options || {};

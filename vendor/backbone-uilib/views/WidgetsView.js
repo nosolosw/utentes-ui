@@ -1,4 +1,5 @@
-iCarto.Views.Widgets = Backbone.View.extend({
+Backbone.UILib = Backbone.UILib || {};
+Backbone.UILib.WidgetsView = Backbone.View.extend({
 
   // events to update model when widget value changes
   events: {

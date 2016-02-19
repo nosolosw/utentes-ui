@@ -31,24 +31,24 @@ exploracao.get('licencias').add(licenciaSuperficial);
 exploracao.get('licencias').add(licenciaSubterranea);
 
 // block info
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#info'),
   model: exploracao
 }).render();
 
 // block utente
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#utente'),
   model: exploracao.get('utente')
 }).render();
 
 // block Licencias
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#licencia-superficial'),
   model: licenciaSuperficial
 }).render();
 
-new iCarto.Views.Widgets({
+new Backbone.UILib.WidgetsView({
   el: $('#licencia-subterranea'),
   model: licenciaSubterranea
 }).render();

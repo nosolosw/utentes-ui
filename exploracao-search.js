@@ -9,7 +9,7 @@ var filtersView = new SIXHIARA.Views.FiltersView({
   domains: domains,
 }).render();
 
-var listView = new iCarto.Views.ListView({
+var listView = new Backbone.UILib.ListView({
   el: $('#project_list'),
   collection: exploracaos,
   subviewTemplate: _.template($('#exploracao-li-tmpl').html())
@@ -23,5 +23,5 @@ var mapView = new SIXHIARA.Views.MapView({
   collection: exploracaos
 });
 mapView.listenTo(where, 'change', function(model, options){
-  this.update(new iCarto.Collections.FeatureCollection(exploracaos.where(where.values())));
+  this.update(new Backbone.GeoJson.FeatureCollection(exploracaos.where(where.values())));
 });

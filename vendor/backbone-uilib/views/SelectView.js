@@ -1,22 +1,7 @@
-iCarto.Views.ListView = Backbone.View.extend({
+Backbone.UILib = Backbone.UILib || {};
+Backbone.UILib.SelectView = Backbone.View.extend({
 
-  // how to instantiate this view
-  // it needs iCarto.Views.ItemView on its scope
-  //
-  // var listView = new iCarto.Views.ListView({
-  //   collection: collection,
-  //   el: el,
-  //   subviewTemplate: subviewTemplate
-  // });
-
-  initialize: function(options){
-    this.options = options || {};
-    if(this.options.subviewTemplate){
-      this.subviewTemplate = this.options.subviewTemplate;
-    } else {
-      throw {message: 'no subview template provided'};
-    }
-
+  initialize: function(){
     this._subviews = [];
   },
 
@@ -25,19 +10,32 @@ iCarto.Views.ListView = Backbone.View.extend({
     var content = document.createDocumentFragment();
 
     this.collection.forEach(function(model){
-      var item = new iCarto.Views.ItemView({
+      var alias = model.get('alias');
+      var option = new Backbone.UILib.OptionView({
         model: model,
-        template: this.subviewTemplate
+        text:  'text',
+        attributes: alias ? {'value': model.get('alias')} : null
       });
-      content.appendChild(item.render().el);
-      subviews.push(item);
+      content.appendChild(option.render().el);
+      subviews.push(option);
     }, this);
 
     // Update DOM and _subviews array at once.
     // This would minimize reflows to only 1 instead of one per subview.
-    this.$el.html(content);
+    if(this.collection.length === 0) {
+      this.$el.prop('disabled', true);
+      this.$el.empty();
+    } else {
+      this.$el.prop('disabled', false);
+      this.$el.html(content);
+    }
     _.invoke(this._subviews, 'remove');
     this._subviews = subviews;
+
+    // Trigger a change event on this component.
+    // Some views, as Widgets.js, are listening to this event
+    // to update the model.
+    this.$el.trigger('change');
 
     return this;
   },
@@ -54,6 +52,6 @@ iCarto.Views.ListView = Backbone.View.extend({
   remove: function(){
     Backbone.View.prototype.remove.call(this);
     _.invoke(this._subviews, 'remove');
-  }
+  },
 
 });

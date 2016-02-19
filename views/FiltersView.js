@@ -1,10 +1,10 @@
-SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
+SIXHIARA.Views.FiltersView = Backbone.UILib.BaseView.extend({
 
   initialize: function(options){
-    iCarto.Views.BaseView.prototype.initialize.call(this);
+    Backbone.UILib.BaseView.prototype.initialize.call(this);
 
     this.options = options || {};
-    var domains = new iCarto.Collections.Dominios();
+    var domains = new Backbone.UILib.DomainCollection();
     if(this.options.domains) domains = this.options.domains;
 
     // properties
@@ -18,23 +18,23 @@ SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
     var actividades = domains.byCategory('actividade');
 
     // updates the model
-    this.addView(new iCarto.Views.Widgets({
+    this.addView(new Backbone.UILib.WidgetsView({
       el: this.$el,
       model: this.model
     }));
 
     // select views
-    this.addView(new iCarto.Views.SelectFiller({
+    this.addView(new Backbone.UILib.SelectView({
       el: this.$('#utente'),
       collection: utentes
     }));
 
-    this.addView(new iCarto.Views.SelectFiller({
+    this.addView(new Backbone.UILib.SelectView({
       el: this.$('#loc_provin'),
       collection: provincias
     }));
 
-    var selectDistritos = new iCarto.Views.SelectFiller({
+    var selectDistritos = new Backbone.UILib.SelectView({
       el: this.$('#loc_distri'),
       collection: [],
     });
@@ -43,7 +43,7 @@ SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
     });
     this.addView(selectDistritos);
 
-    var selectPostos = new iCarto.Views.SelectFiller({
+    var selectPostos = new Backbone.UILib.SelectView({
       el: this.$('#loc_posto'),
       collection: [],
     });
@@ -52,22 +52,22 @@ SIXHIARA.Views.FiltersView = iCarto.Views.BaseView.extend({
     });
     this.addView(selectPostos);
 
-    this.addView(new iCarto.Views.SelectFiller({
+    this.addView(new Backbone.UILib.SelectView({
       el: this.$('#lic_tipo'),
       collection: licenciaTipos
     }));
 
-    this.addView(new iCarto.Views.SelectFiller({
+    this.addView(new Backbone.UILib.SelectView({
       el: this.$('#estado'),
       collection: licenciaEstados
     }));
 
-    this.addView(new iCarto.Views.SelectFiller({
+    this.addView(new Backbone.UILib.SelectView({
       el: this.$('#pagos'),
       collection: exploracaoPagamento
     }));
 
-    this.addView(new iCarto.Views.SelectFiller({
+    this.addView(new Backbone.UILib.SelectView({
       el: this.$('#actividade'),
       collection: actividades
     }));

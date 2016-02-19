@@ -11,7 +11,7 @@ SIXHIARA.Views.SelectUtente = Backbone.View.extend({
   },
 
   appendOption: function(utente){
-    var option = new iCarto.Views.Option({
+    var option = new Backbone.UILib.OptionView({
       model: utente,
       text:  'nome',
       attributes: {'value': utente.get('nome')}

@@ -3,9 +3,3 @@ SIXHIARA = {
   Models: {},
   Collections: {},
 };
-
-iCarto = {
-  Views: {},
-  Models: {},
-  Collections: {},
-}
