@@ -1,0 +1,47 @@
+body{
+  color: white;
+  /*background-color: #fff7fb;*/
+}
+
+a,
+a:hover,
+a:visited,
+a:link,
+a:active{
+  color: white;
+  text-decoration: none;
+}
+
+main{
+  margin-top: 25%;
+}
+
+#search,
+#new,
+#gps{
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: #023858;
+  border-radius: 5px;
+}
+
+/*#new:hover,
+#search:hover,
+#gps:hover{*/
+#search:hover,
+#new:hover{
+  background-color: #045a8d;
+  color: white;
+}
+
+/*#search{
+background-color: red;
+}
+
+#new{
+background-color: blue;
+}
+
+#gps{
+background-color: green;
+}*/
