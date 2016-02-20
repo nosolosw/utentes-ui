@@ -11,9 +11,22 @@
   <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
   <link rel="stylesheet" href="lib/leaflet-draw/dist/leaflet.draw.css" />
   <link rel="stylesheet" href="exploracao-show.css" />
+  <link rel="stylesheet" href="base.css" />
 </head>
 <body class="container-fluid">
   <main>
+
+    <menu class="row text-center">
+      <a href="exploracao-search.html" class="col-xs-1">
+        <strong id="search">BUSCAR</strong>
+      </a>
+      <a href="exploracao-new.html" class="col-xs-1">
+        <strong id="new">ALTA</strong>
+      </a>
+      <a href="#" class="col-xs-1">
+        <strong id="gps">GPS</strong>
+      </a>
+    </menu>
 
     <section id="intro-section" class="row">
 
@@ -21,14 +34,14 @@
 
         <div id="title" class="row">
           <div class="col-xs-12">
-            <h1>Exploração
+            <h3>EXPLORAÇAO
               <span class="pull-right">
                 <button type="button" class="btn btn-default btn-sm">Documentos</button>
                 <button type="button" class="btn btn-primary btn-sm">Guardar</button>
                 <button type="button" class="btn btn-default btn-sm">Restaurar</button>
                 <button type="button" class="btn btn-default btn-sm">Eliminar</button>
               </span>
-            </h1>
+            </h3>
           </div>
         </div>
 

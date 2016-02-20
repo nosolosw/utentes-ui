@@ -6,8 +6,21 @@
   <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
   <link rel="stylesheet" href="exploracao-search.css" />
+  <link rel="stylesheet" href="base.css" />
 </head>
 <body class="container-fluid">
+
+  <menu class="row text-center">
+    <a href="exploracao-search.html" class="col-xs-1">
+      <strong id="search">BUSCAR</strong>
+    </a>
+    <a href="exploracao-new.html" class="col-xs-1">
+      <strong id="new">ALTA</strong>
+    </a>
+    <a href="#" class="col-xs-1">
+      <strong id="gps">GPS</strong>
+    </a>
+  </menu>
 
   <main class="main-content row">
 
@@ -108,7 +121,7 @@
 
 <script type="text/template" id="exploracao-li-tmpl">
   <li class="row exploracao">
-    <a class="col-xs-12 pull-left" href="#"><%- exp_id %> <%- exp_name %></a>
+    <a class="col-xs-12 pull-left" href="exploracao-show.html"><%- exp_id %> <%- exp_name %></a>
     <span class="col-xs-12 ">
       <small class="label label-success"><%- estado %></small>
       <small class="label label-default"><%- consumo %></small>

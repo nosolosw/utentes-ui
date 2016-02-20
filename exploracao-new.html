@@ -6,410 +6,426 @@
   <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="exploracao-new.css" />
+  <link rel="stylesheet" href="base.css" />
 </head>
 <body>
 
   <div class="container-fluid">
 
-    <div class="col-xs-offset-2 col-xs-8">
+    <menu class="row text-center">
+      <a href="exploracao-search.html" class="col-xs-1">
+        <strong id="search">BUSCAR</strong>
+      </a>
+      <a href="exploracao-new.html" class="col-xs-1">
+        <strong id="new">ALTA</strong>
+      </a>
+      <a href="#" class="col-xs-1">
+        <strong id="gps">GPS</strong>
+      </a>
+    </menu>
 
-      <div class="row text-center">
-        <h1>Nova Exploracao
-          <button id="save-button" type="button" class="btn btn-primary col-xs-1 pull-right">Crear</button>
-        </h1>
-        <hr>
-      </div>
+    <div class="row">
 
-      <div class="row">
-        <form  class="col-xs-12">
+      <div class="col-xs-offset-2 col-xs-8">
 
-          <div id="wizard-exp" >
+        <div class="row text-center">
+          <h1>Nova Exploracao
+            <button id="save-button" type="button" class="btn btn-primary col-xs-1 pull-right">Crear</button>
+          </h1>
+          <hr>
+        </div>
 
-            <ul class="hide">
-              <li><a href="#info" data-toggle="tab">Info</a></li>
-              <li><a href="#utente" data-toggle="tab">Utente</a></li>
-              <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
-              <!-- <li><a href="#actividade" data-toggle="tab">Actividade</a></li> -->
-            </ul>
+        <div class="row">
+          <form  class="col-xs-12">
 
-            <div class="tab-content">
+            <div id="wizard-exp" >
 
-              <div class="tab-pane" id="info">
-
-                <div class="row">
-                  <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
-                  <h3 class="col-xs-11">Información</h3>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-2">
-                    <label for="exp_id">Nro</label>
-                    <input type="text" class="form-control widget" id="exp_id">
-                  </div>
-                  <div class="form-group col-xs-7">
-                    <label for="exp_name">Nome da explotación</label>
-                    <input type="text" class="form-control widget" id="exp_name">
-                  </div>
-                  <div class="form-group col-xs-2">
-                    <label for="d_solici">Data solicitude</label>
-                    <input type="text" class="form-control widget" id="d_solici">
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-11">
-                    <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
-                    <textarea class="form-control widget" id="observacio" rows="2"></textarea>
-                  </div>
-                </div>
-
-                <br>
-
-                <div class="row">
-                  <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
-                  <h3 class="col-xs-11">Localización</h3>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-4">
-                    <label for="loc_provin">Provincia</label>
-                    <select class="form-control widget" id="loc_provin">
-                      <option></option>
-                    </select>
-                  </div>
-                  <div class="form-group col-xs-offset-3 col-xs-4">
-                    <label for="loc_bacia">Bacia</label>
-                    <select class="form-control widget" id="loc_bacia">
-                      <option></option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-4">
-                    <label for="loc_distri">Distrito</label>
-                    <select class="form-control widget" id="loc_distri">
-                      <option></option>
-                    </select>
-                  </div>
-                  <div class="form-group col-xs-offset-3 col-xs-4">
-                    <label for="loc_subaci">Sub-bacia</label>
-                    <select class="form-control widget" id="loc_subaci">
-                      <option></option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-4">
-                    <label for="loc_posto">Posto</label>
-                    <select class="form-control widget" id="loc_posto">
-                      <option></option>
-                    </select>
-                  </div>
-                  <div class="form-group col-xs-offset-3 col-xs-4">
-                    <label for="loc_rio">Río</label>
-                    <input type="text" class="form-control widget" id="loc_rio">
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-4">
-                    <label for="loc_nucleo">Núcleo</label>
-                    <input type="text" class="form-control widget" id="loc_nucleo">
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-11">
-                    <label for="loc_endere">Enderezo</label>
-                    <input type="text" class="form-control widget" id="loc_endere">
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="tab-pane" id="utente">
-
-                <div class="row">
-                  <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
-                  <h3 class="col-xs-11">UTENTE</h3>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-11">
-                    <select id="select-utente" class="form-control">
-                      <option selected value="novo"> - Novo utente - </option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-3">
-                    <label for="nuit">NUIT</label>
-                    <input type="text" class="form-control widget" id="nuit">
-                  </div>
-                  <div class="form-group col-xs-8">
-                    <label for="nome">Nome do utente</label>
-                    <input type="text" class="form-control widget" id="nome">
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-xs-offset-1 col-xs-3">
-                    <label for="reg_comerc">Nº registro</label>
-                    <input type="text" class="form-control widget" id="reg_comerc">
-                  </div>
-                  <div class="form-group col-xs-8">
-                    <label for="reg_zona">Registrado em</label>
-                    <input type="text" class="form-control widget" id="reg_zona">
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="tab-pane" id="licencia">
-
-                <div class="row">
-                  <h3 class="col-xs-1"><i class="fa fa-tint"></i></h3>
-                  <h3 class="col-xs-11">Licencias</h3>
-                  <!-- TODO: use name instead of id for Widgets.js -->
-                  <!-- in a form like this may be several fields with the same name -->
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-offset-1 col-xs-11">
-                    <div class="row">
-                      <div class="col-xs-5">
-                        <fieldset id="licencia-subterranea">
-                          <span>SUBTERRÁNEA</span>
-                          <input type="hidden" id="lic_tipo">
-                          <div class="form-group">
-                            <label for="lic_nro">Nro licencia</label>
-                            <input type="text" class="form-control widget" id="lic_nro">
-                          </div>
-                          <div class="form-group">
-                            <label for="cadastro">Cadastro</label>
-                            <input type="text" class="form-control widget" id="cadastro">
-                          </div>
-                          <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <select class="form-control widget estado-subterranea" id="estado">
-                              <option selected>-</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="c_requerid">Consumo requerido</label>
-                            <input type="text" class="form-control widget" id="c_requerid">
-                          </div>
-                        </fieldset>
-                      </div>
-
-                      <div class="col-xs-offset-2 col-xs-5">
-                        <fieldset id="licencia-superficial">
-                          <span>SUPERFICIAL</span>
-                          <input type="hidden" class="widget" id="lic_tipo">
-                          <div class="form-group">
-                            <label for="lic_nro">Nro licencia</label>
-                            <input type="text" class="form-control widget" id="lic_nro">
-                          </div>
-                          <div class="form-group">
-                            <label for="cadastro">Cadastro</label>
-                            <input type="text" class="form-control widget" id="cadastro">
-                          </div>
-                          <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <select class="form-control widget estado-superficial" id="estado">
-                              <option selected>-</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="c_requerid">Consumo requerido</label>
-                            <input type="text" class="form-control widget" id="c_requerid">
-                          </div>
-                        </fieldset>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="tab-pane" id="actividade">
-
-                <div class="row">
-                  <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
-                  <h3 class="col-xs-11">Actividade</h3>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-offset-1 col-xs-11">
-                    <div class="row">
-                      <div class="col-xs-5">
-                        <fieldset>
-                          <span>ABASTECEMENTO</span>
-                          <div class="form-group">
-                            <label for="nro">Nro habitantes</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                        </fieldset>
-                      </div>
-                      <div class="col-xs-offset-2 col-xs-5">
-                        <fieldset>
-                          <span>SANEAMENTO</span>
-                          <div class="form-group">
-                            <label for="nro">Nro habitantes</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                        </fieldset>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-5">
-                        <fieldset>
-                          <span>INDUSTRIA</span>
-                          <div class="form-group">
-                            <label for="nro">Tipo de actividade</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Instalações</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Efluente producido</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Medios tratamento água</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Evaluação impacto ambiental</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                        </fieldset>
-                      </div>
-                      <div class="col-xs-offset-2 col-xs-5">
-                        <fieldset>
-                          <span>PRODUCÇAO ENERGIA</span>
-                          <div class="form-group">
-                            <label for="nro">Tipo de actividade</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Altura de água</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Potência a instalar</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Tipo de equipamento</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="nro">Evaluação impacto ambiental</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                        </fieldset>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <fieldset class="row">
-                          <span>PISCICULTURA</span>
-                          <div class="form-group col-xs-5">
-                            <label for="nro">Área de exploraçao</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                          <div class="form-group col-xs-offset-2 col-xs-5">
-                            <label for="nro">Volume reservas água</label>
-                            <input type="text" name="nro" class="form-control" value="">
-                          </div>
-                        </fieldset>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <fieldset class="row">
-                          <span>AGRICULTURA</span>
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th></th>
-                                <th>Tipo de cultivo</th>
-                                <th>Tipo de riego</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td><i class="fa fa-caret-down"></i></td>
-                                <td>Tomate</td>
-                                <td>-</td>
-                              </tr>
-                              <tr>
-                                <td><i class="fa fa-caret-down"></i></td>
-                                <td>Patata</td>
-                                <td>-</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </fieldset>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <fieldset class="row">
-                          <span>PECUÁRIA</span>
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th></th>
-                                <th>Tipo de reses</th>
-                                <th>Nº de reses</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td><i class="fa fa-caret-down"></i></td>
-                                <td>Bovino</td>
-                                <td>4</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </fieldset>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-
-              </div>
-
-            </div>
-
-            <div class="row">
-              <ul class="pager wizard">
-                <li class="previous"><a href="#">Anterior</a></li>
-                <li class="next"><a href="#">Seguinte</a></li>
+              <ul class="hide">
+                <li><a href="#info" data-toggle="tab">Info</a></li>
+                <li><a href="#utente" data-toggle="tab">Utente</a></li>
+                <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
+                <!-- <li><a href="#actividade" data-toggle="tab">Actividade</a></li> -->
               </ul>
+
+              <div class="tab-content">
+
+                <div class="tab-pane" id="info">
+
+                  <div class="row">
+                    <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
+                    <h3 class="col-xs-11">Información</h3>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-2">
+                      <label for="exp_id">Nro</label>
+                      <input type="text" class="form-control widget" id="exp_id">
+                    </div>
+                    <div class="form-group col-xs-7">
+                      <label for="exp_name">Nome da explotación</label>
+                      <input type="text" class="form-control widget" id="exp_name">
+                    </div>
+                    <div class="form-group col-xs-2">
+                      <label for="d_solici">Data solicitude</label>
+                      <input type="text" class="form-control widget" id="d_solici">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-11">
+                      <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
+                      <textarea class="form-control widget" id="observacio" rows="2"></textarea>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row">
+                    <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
+                    <h3 class="col-xs-11">Localización</h3>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_provin">Provincia</label>
+                      <select class="form-control widget" id="loc_provin">
+                        <option></option>
+                      </select>
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
+                      <label for="loc_bacia">Bacia</label>
+                      <select class="form-control widget" id="loc_bacia">
+                        <option></option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_distri">Distrito</label>
+                      <select class="form-control widget" id="loc_distri">
+                        <option></option>
+                      </select>
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
+                      <label for="loc_subaci">Sub-bacia</label>
+                      <select class="form-control widget" id="loc_subaci">
+                        <option></option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_posto">Posto</label>
+                      <select class="form-control widget" id="loc_posto">
+                        <option></option>
+                      </select>
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
+                      <label for="loc_rio">Río</label>
+                      <input type="text" class="form-control widget" id="loc_rio">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_nucleo">Núcleo</label>
+                      <input type="text" class="form-control widget" id="loc_nucleo">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-11">
+                      <label for="loc_endere">Enderezo</label>
+                      <input type="text" class="form-control widget" id="loc_endere">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane" id="utente">
+
+                  <div class="row">
+                    <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
+                    <h3 class="col-xs-11">UTENTE</h3>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-11">
+                      <select id="select-utente" class="form-control">
+                        <option selected value="novo"> - Novo utente - </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-3">
+                      <label for="nuit">NUIT</label>
+                      <input type="text" class="form-control widget" id="nuit">
+                    </div>
+                    <div class="form-group col-xs-8">
+                      <label for="nome">Nome do utente</label>
+                      <input type="text" class="form-control widget" id="nome">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-3">
+                      <label for="reg_comerc">Nº registro</label>
+                      <input type="text" class="form-control widget" id="reg_comerc">
+                    </div>
+                    <div class="form-group col-xs-8">
+                      <label for="reg_zona">Registrado em</label>
+                      <input type="text" class="form-control widget" id="reg_zona">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane" id="licencia">
+
+                  <div class="row">
+                    <h3 class="col-xs-1"><i class="fa fa-tint"></i></h3>
+                    <h3 class="col-xs-11">Licencias</h3>
+                    <!-- TODO: use name instead of id for Widgets.js -->
+                    <!-- in a form like this may be several fields with the same name -->
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-offset-1 col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-5">
+                          <fieldset id="licencia-subterranea">
+                            <span>SUBTERRÁNEA</span>
+                            <input type="hidden" id="lic_tipo">
+                            <div class="form-group">
+                              <label for="lic_nro">Nro licencia</label>
+                              <input type="text" class="form-control widget" id="lic_nro">
+                            </div>
+                            <div class="form-group">
+                              <label for="cadastro">Cadastro</label>
+                              <input type="text" class="form-control widget" id="cadastro">
+                            </div>
+                            <div class="form-group">
+                              <label for="estado">Estado</label>
+                              <select class="form-control widget estado-subterranea" id="estado">
+                                <option selected>-</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="c_requerid">Consumo requerido</label>
+                              <input type="text" class="form-control widget" id="c_requerid">
+                            </div>
+                          </fieldset>
+                        </div>
+
+                        <div class="col-xs-offset-2 col-xs-5">
+                          <fieldset id="licencia-superficial">
+                            <span>SUPERFICIAL</span>
+                            <input type="hidden" class="widget" id="lic_tipo">
+                            <div class="form-group">
+                              <label for="lic_nro">Nro licencia</label>
+                              <input type="text" class="form-control widget" id="lic_nro">
+                            </div>
+                            <div class="form-group">
+                              <label for="cadastro">Cadastro</label>
+                              <input type="text" class="form-control widget" id="cadastro">
+                            </div>
+                            <div class="form-group">
+                              <label for="estado">Estado</label>
+                              <select class="form-control widget estado-superficial" id="estado">
+                                <option selected>-</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="c_requerid">Consumo requerido</label>
+                              <input type="text" class="form-control widget" id="c_requerid">
+                            </div>
+                          </fieldset>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane" id="actividade">
+
+                  <div class="row">
+                    <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
+                    <h3 class="col-xs-11">Actividade</h3>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-offset-1 col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-5">
+                          <fieldset>
+                            <span>ABASTECEMENTO</span>
+                            <div class="form-group">
+                              <label for="nro">Nro habitantes</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-xs-offset-2 col-xs-5">
+                          <fieldset>
+                            <span>SANEAMENTO</span>
+                            <div class="form-group">
+                              <label for="nro">Nro habitantes</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-5">
+                          <fieldset>
+                            <span>INDUSTRIA</span>
+                            <div class="form-group">
+                              <label for="nro">Tipo de actividade</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Instalações</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Efluente producido</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Medios tratamento água</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Evaluação impacto ambiental</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-xs-offset-2 col-xs-5">
+                          <fieldset>
+                            <span>PRODUCÇAO ENERGIA</span>
+                            <div class="form-group">
+                              <label for="nro">Tipo de actividade</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Altura de água</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Potência a instalar</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Tipo de equipamento</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="nro">Evaluação impacto ambiental</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <fieldset class="row">
+                            <span>PISCICULTURA</span>
+                            <div class="form-group col-xs-5">
+                              <label for="nro">Área de exploraçao</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                            <div class="form-group col-xs-offset-2 col-xs-5">
+                              <label for="nro">Volume reservas água</label>
+                              <input type="text" name="nro" class="form-control" value="">
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <fieldset class="row">
+                            <span>AGRICULTURA</span>
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Tipo de cultivo</th>
+                                  <th>Tipo de riego</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><i class="fa fa-caret-down"></i></td>
+                                  <td>Tomate</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td><i class="fa fa-caret-down"></i></td>
+                                  <td>Patata</td>
+                                  <td>-</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </fieldset>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <fieldset class="row">
+                            <span>PECUÁRIA</span>
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Tipo de reses</th>
+                                  <th>Nº de reses</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><i class="fa fa-caret-down"></i></td>
+                                  <td>Bovino</td>
+                                  <td>4</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </fieldset>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+
+              <div class="row">
+                <ul class="pager wizard">
+                  <li class="previous"><a href="#">Anterior</a></li>
+                  <li class="next"><a href="#">Seguinte</a></li>
+                </ul>
+              </div>
+
             </div>
 
           </div>
 
-        </div>
+        </form>
+      </div>
 
-      </form>
     </div>
-
   </div>
 </div>
 

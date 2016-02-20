@@ -1,0 +1,33 @@
+
+menu a,
+menu a:hover,
+menu a:visited,
+menu a:link,
+menu a:active{
+  color: white;
+  text-decoration: none;
+}
+
+menu{
+  border-bottom: 1px solid #ddd;
+  padding: 1em;
+  padding-top: 0em;
+  margin-bottom: 0em;
+}
+
+#search,
+#new,
+#gps{
+  color: #023858;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+/*#new:hover,
+#search:hover,
+#gps:hover{*/
+#search:hover,
+#new:hover{
+  background-color: #045a8d;
+  color: white;
+}

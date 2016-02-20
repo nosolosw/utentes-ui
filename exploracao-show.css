@@ -24,7 +24,7 @@ main,
 
 /* typography */
 
-@font-face {
+/*@font-face {
   font-family: "Circular";
   font-style: normal;
   font-weight: normal;
@@ -35,7 +35,7 @@ body{
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 15px;
   color:     #565A5C;
-}
+}*/
 
 label{ /*override bootstrap settings*/
   font-weight: inherit !important;
