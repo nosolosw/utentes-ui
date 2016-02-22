@@ -14,9 +14,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.Model.extend({
     'loc_bacia':  '',
     'loc_subaci':  '',
     'loc_rio':    '',
-    'pagos':  '',
+    'pagos':  false,
     'utente': new Backbone.SIXHIARA.Utente(),
     'licencias': new Backbone.SIXHIARA.LicenciaCollection(),
+    'fontes': []
   }
 
 });

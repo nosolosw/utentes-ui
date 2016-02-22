@@ -9,9 +9,9 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
   // },
 
   save: function(){
-    // TODO: save to API
+    c = new Backbone.SIXHIARA.ExploracaoCollection();
+    c.create(this.model)
     // make API configurable through config.js
-    console.log(this.model.attributes);
   }
 
 });
