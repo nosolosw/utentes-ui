@@ -3,32 +3,34 @@
 <head>
   <meta charset="utf-8">
   <title>Utentes GPS App</title>
-  <link rel="stylesheet" type="text/css" href="lib/reset/reset.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="lib/leaflet/leaflet.css">
   <link rel="stylesheet" type="text/css" href="lib/leaflet-table/src/leaflet-table.css">
   <link rel="stylesheet" type="text/css" href="lib/leaflet-table/lib/leaflet-toolbar/leaflet.toolbar.css">
-  <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="base.css">
   <link rel="stylesheet" type="text/css" href="exploracao-gps.css">
+  <link rel="stylesheet" type="text/css" href="base.css">
 
 </head>
 <body class="container-fluid">
 
-  <menu id="menu">
-    <a href="exploracao-search.html">
+  <menu class="row text-center">
+    <a href="exploracao-search.html" class="col-xs-1">
       <strong id="search">BUSCAR</strong>
     </a>
-    <a href="exploracao-new.html">
+    <a href="exploracao-new.html" class="col-xs-1">
       <strong id="new">ALTA</strong>
     </a>
-    <a href="#">
+    <a href="#" class="col-xs-1">
       <strong id="gps">GPS</strong>
     </a>
   </menu>
 
-  <div id="map-pane">
-    <input id="input-importgpx" type="file" accept=".gpx, .GPX" />
-  </div>
+  <section class="row">
+    <div id="map-pane" class="col-xs-12">
+      <input id="input-importgpx" type="file" accept=".gpx, .GPX" />
+    </div>
+  </section>
 
   <script src="lib/jquery/jquery-1.12.0.min.js"></script>
   <script src="lib/leaflet/leaflet.js"></script>
