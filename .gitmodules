@@ -1,0 +1,3 @@
+[submodule "lib/leaflet-table"]
+	path = lib/leaflet-table
+	url = https://github.com/iCarto/leaflet-table
