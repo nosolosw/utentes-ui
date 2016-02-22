@@ -7,15 +7,19 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
     });
 
     this.geoJSONLayer = L.geoJson(this.collection.toGeoJSON());
-
     this.map = L.map(this.el.id, {
       center: [-13, 39.25],
       zoom: 8,
       layers: [base, this.geoJSONLayer]
     });
 
-    this.map.fitBounds(this.geoJSONLayer.getBounds())
-    .setMaxBounds(this.geoJSONLayer.getBounds().pad(0.5));
+    if(this.collection.length > 0){
+      this.map.fitBounds(this.geoJSONLayer.getBounds())
+      .setMaxBounds(this.geoJSONLayer.getBounds().pad(0.5));
+    } else{
+      // TODO: zoom to the northen area of Mozambique
+      this.map.fitBounds([[-13, 39.25]]);
+    }
   },
 
   update: function(newCollection){
