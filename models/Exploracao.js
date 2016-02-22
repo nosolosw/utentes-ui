@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.Exploracao = Backbone.Model.extend({
+Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   defaults: {
     'exp_id':     '',
@@ -17,7 +17,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.Model.extend({
     'pagos':  false,
     'utente': new Backbone.SIXHIARA.Utente(),
     'licencias': new Backbone.SIXHIARA.LicenciaCollection(),
-    'fontes': []
-  }
+    'fontes': [],
+
+    'consumo': 'C' // FIXME. Está en las fixtures
+  },
 
 });
