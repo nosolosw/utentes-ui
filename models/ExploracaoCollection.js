@@ -4,4 +4,15 @@ Backbone.SIXHIARA.ExploracaoCollection = Backbone.GeoJson.FeatureCollection.exte
     model: Backbone.SIXHIARA.Exploracao,
     url: '/exploracaos.json',
 
+    filterBy: function(where){
+      a = this.filter(function(element) {
+        var properties = element.pick(_.keys(where));
+        if (properties.utente) {
+          properties.utente = properties.utente.nome;
+        }
+        return _.isEqual(properties, where);
+      });
+      return new Backbone.SIXHIARA.ExploracaoCollection(a);
+    }
+
 });

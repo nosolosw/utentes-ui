@@ -8,9 +8,6 @@ var where = new Backbone.SIXHIARA.Where();
 
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 
-MyDomains = Backbone.UILib.DomainCollection.extend({
-  url: '/domains.json'
-});
 var domains = new Backbone.UILib.DomainCollection();
 domains.url = '/domains.json';
 
@@ -33,23 +30,20 @@ var listView = new Backbone.UILib.ListView({
 });
 
 listView.listenTo(where, 'change', function(model, options){
-  this.update(exploracaos.where(where.values()));
+  this.update(exploracaos.filterBy(where.values()));
 });
 
-listView.listenTo(exploracaos, 'reset', function(model, options){
-  this.update(exploracaos);
-});
 
 var mapView = new Backbone.SIXHIARA.MapView({
   el: $('#map'),
   collection: exploracaos
 });
 mapView.listenTo(where, 'change', function(model, options){
-  this.update(new Backbone.GeoJson.FeatureCollection(exploracaos.where(where.values())));
-});
-mapView.listenTo(where, 'change', function(model, options){
-  this.update(new Backbone.GeoJson.FeatureCollection(exploracaos.where(where.values())));
+  this.update(exploracaos.filterBy(where.values()));
 });
 
-exploracaos.fetch({parse: true, reset: true})
-// exploracaos.trigger('reset'); // Descomentar para trabajar con fixtures
+exploracaos.fetch({
+  parse: true,
+  success: function() {where.trigger('change');}
+})
+
