@@ -5,16 +5,18 @@ $(document).ready(function() {
 });
 
 var domains = DOMAINS_REPO; // TODO: take from API
-var provincias = domains.byCategory('provincia');
-var distritos = domains.byCategory('distrito');
-var postos = domains.byCategory('posto');
-var bacias = domains.byCategory('bacia');
-var subacias = domains.byCategory('subacia');
+var provincias      = domains.byCategory('provincia');
+var distritos       = domains.byCategory('distrito');
+var postos          = domains.byCategory('posto');
+var bacias          = domains.byCategory('bacia');
+var subacias        = domains.byCategory('subacia');
 var estadosLicencia = domains.byCategory('estado-licencia');
 
 var utentes = UTENTES_REPO; // TODO: take from API
 
 var exploracao = new Backbone.SIXHIARA.Exploracao();
+
+// add skeleton licencias
 var licenciaSubterranea = new Backbone.SIXHIARA.Licencia({
   'lic_tipo': 'subterranea'
 });
@@ -23,8 +25,6 @@ var licenciaSuperficial = new Backbone.SIXHIARA.Licencia({
 });
 exploracao.get('licencias').add(licenciaSuperficial);
 exploracao.get('licencias').add(licenciaSubterranea);
-
-// TODO: review how to garbage-collect views after this window is closed
 
 new Backbone.SIXHIARA.ButtonSaveView({
   el: $('#save-button'),
@@ -102,3 +102,30 @@ new Backbone.UILib.SelectView({
   el: $('.estado-subterranea'),
   collection: estadosLicencia
 }).render();
+
+// var fontes = new Backbone.SIXHIARA.FonteCollection([
+//   {'tipo_agua': 'Superficial', 'tipo_fonte': 'Río',  'c_requerid': '5'},
+//   {'tipo_agua': 'Subterránea', 'tipo_fonte': 'Pozo', 'c_requerid': '12'},
+//   {'tipo_agua': 'Subterránea', 'tipo_fonte': 'Furo', 'c_requerid': '3'},
+// ]);
+// exploracao.set('fontes', fontes);
+var tableFontesView = new Backbone.SIXHIARA.TableFontesView({
+  el: $('#fontes'),
+  collection: exploracao.get('fontes')
+}).render();
+tableFontesView.listenTo(exploracao.get('fontes'), 'add', function(model, collection, options){
+  this.update(exploracao.get('fontes'));
+});
+tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, collection, options){
+  this.update(exploracao.get('fontes'));
+});
+
+new Backbone.SIXHIARA.ModalFonteView({
+  el: $('#fonteSupModal'),
+  collection: exploracao.get('fontes')
+});
+
+new Backbone.SIXHIARA.ModalFonteView({
+  el: $('#fonteSubModal'),
+  collection: exploracao.get('fontes')
+});
