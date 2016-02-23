@@ -1,15 +1,30 @@
-// TODO: take from API
-var domains = DOMAINS_REPO;
-// var exploracaos = EXPLORACAOS_REPO;
-var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 
 
 var where = new Backbone.SIXHIARA.Where();
-var filtersView = new Backbone.SIXHIARA.FiltersView({
-  el: $('#filters'),
-  model: where,
-  domains: domains,
-}).render();
+
+// var domains = DOMAINS_REPO; // Descomentar para trabajar con fixtures
+// var exploracaos = EXPLORACAOS_REPO; // Descomentar para trabajar con fixtures
+
+
+var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
+
+MyDomains = Backbone.UILib.DomainCollection.extend({
+  url: '/domains.json'
+});
+var domains = new Backbone.UILib.DomainCollection();
+domains.url = '/domains.json';
+
+domains.fetch({
+  success: function(collection, response, options) {
+  
+    new Backbone.SIXHIARA.FiltersView({
+      el: $('#filters'),
+      model: where,
+      domains: domains,
+  }).render();
+ 
+  }
+});
 
 var listView = new Backbone.UILib.ListView({
   el: $('#project_list'),
@@ -37,3 +52,4 @@ mapView.listenTo(where, 'change', function(model, options){
 });
 
 exploracaos.fetch({parse: true, reset: true})
+// exploracaos.trigger('reset'); // Descomentar para trabajar con fixtures

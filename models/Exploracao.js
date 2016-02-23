@@ -15,7 +15,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'loc_subaci':  '',
     'loc_rio':    '',
     'pagos':  false,
-    'utente': new Backbone.SIXHIARA.Utente(),
+    'utente': '',
+    'utente_obj': new Backbone.SIXHIARA.Utente(), // FIXME. No se está rellenando como un modelo si no como obj js
     'licencias': new Backbone.SIXHIARA.LicenciaCollection(),
     'fontes': [],
 
