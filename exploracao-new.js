@@ -4,16 +4,77 @@ $(document).ready(function() {
   });
 });
 
-var domains = DOMAINS_REPO; // TODO: take from API
-var provincias      = domains.byCategory('provincia');
-var distritos       = domains.byCategory('distrito');
-var postos          = domains.byCategory('posto');
-var bacias          = domains.byCategory('bacia');
-var subacias        = domains.byCategory('subacia');
-var estadosLicencia = domains.byCategory('licencia_estado');
-var actividades     = domains.byCategory('actividade');
-// var tiposFonte      = domains.byCategory('tipo-fonte');
+// var domains = DOMAINS_REPO;
 
+var domains = new Backbone.UILib.DomainCollection();
+domains.url = '/domains.json';
+
+domains.fetch({
+  success: function(collection, response, options) {
+
+    var provincias = domains.byCategory('provincia');
+    var distritos = domains.byCategory('distrito');
+    var postos = domains.byCategory('posto');
+    var bacias = domains.byCategory('bacia');
+    var subacias = domains.byCategory('subacia');
+    var estadosLicencia = domains.byCategory('licencia_estado');
+    var actividades     = domains.byCategory('actividade');
+    // var tiposFonte      = domains.byCategory('tipo-fonte');
+
+    // block localización
+    new Backbone.UILib.SelectView({
+      el: $('#loc_provin'),
+      collection: provincias
+    }).render();
+
+    var selectDistritos = new Backbone.UILib.SelectView({
+      el: $('#loc_distri'),
+      collection: [],
+    }).render();
+    selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value, options){
+      this.update(distritos.where({'parent': model.get('loc_provin')}));
+    });
+
+    var selectPostos = new Backbone.UILib.SelectView({
+      el: $('#loc_posto'),
+      collection: [],
+    }).render();
+    selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, options){
+      this.update(postos.where({'parent': model.get('loc_distri')}));
+    });
+
+    new Backbone.UILib.SelectView({
+      el: $('#loc_bacia'),
+      collection: bacias
+    }).render();
+
+    var selectSubacias = new Backbone.UILib.SelectView({
+      el: $('#loc_subaci'),
+      collection: [],
+    }).render();
+    selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, options){
+      this.update(subacias.where({'parent': model.get('loc_bacia')}));
+    });
+
+    // block licencias
+    new Backbone.UILib.SelectView({
+      el: $('.estado-superficial'),
+      collection: estadosLicencia
+    }).render();
+
+    new Backbone.UILib.SelectView({
+      el: $('.estado-subterranea'),
+      collection: estadosLicencia
+    }).render();
+    
+    new Backbone.UILib.SelectView({
+      el: $('#actividade'),
+      collection: actividades
+    }).render();
+
+
+  }
+});
 
 var utentes = UTENTES_REPO; // TODO: take from API
 
@@ -40,39 +101,6 @@ new Backbone.UILib.WidgetsView({
   model: exploracao
 }).render();
 
-new Backbone.UILib.SelectView({
-  el: $('#loc_provin'),
-  collection: provincias
-}).render();
-
-var selectDistritos = new Backbone.UILib.SelectView({
-  el: $('#loc_distri'),
-  collection: [],
-}).render();
-selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value, options){
-  this.update(distritos.where({'parent': model.get('loc_provin')}));
-});
-
-var selectPostos = new Backbone.UILib.SelectView({
-  el: $('#loc_posto'),
-  collection: [],
-}).render();
-selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, options){
-  this.update(postos.where({'parent': model.get('loc_distri')}));
-});
-
-new Backbone.UILib.SelectView({
-  el: $('#loc_bacia'),
-  collection: bacias
-}).render();
-
-var selectSubacias = new Backbone.UILib.SelectView({
-  el: $('#loc_subaci'),
-  collection: [],
-}).render();
-selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, options){
-  this.update(subacias.where({'parent': model.get('loc_bacia')}));
-});
 
 // block utente
 new Backbone.UILib.WidgetsView({
@@ -91,30 +119,17 @@ new Backbone.UILib.WidgetsView({
   model: exploracao
 }).render();
 
-new Backbone.UILib.SelectView({
-  el: $('#actividade'),
-  collection: actividades
-}).render();
 
 // block licencias
+
+new Backbone.UILib.WidgetsView({
+      el: $('#licencia-subterranea'),
+      model: licenciaSubterranea
+    }).render();
+
 new Backbone.UILib.WidgetsView({
   el: $('#licencia-superficial'),
   model: licenciaSuperficial
-}).render();
-
-new Backbone.UILib.SelectView({
-  el: $('.estado-superficial'),
-  collection: estadosLicencia
-}).render();
-
-new Backbone.UILib.WidgetsView({
-  el: $('#licencia-subterranea'),
-  model: licenciaSubterranea
-}).render();
-
-new Backbone.UILib.SelectView({
-  el: $('.estado-subterranea'),
-  collection: estadosLicencia
 }).render();
 
 var tableFontesView = new Backbone.SIXHIARA.TableFontesView({
