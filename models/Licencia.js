@@ -6,7 +6,7 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
     'lic_tipo':   '',
     'cadastro':   '',
     'estado':     '',
-    'c_requerid': '',
+    'c_requerid': null,
   }
 
 });

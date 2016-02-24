@@ -212,7 +212,7 @@
                             </div>
                             <div class="form-group">
                               <label for="c_requerid">Consumo solicitado</label>
-                              <input type="text" class="form-control widget" id="c_requerid">
+                              <input type="text" class="form-control widget widget-number" id="c_requerid">
                             </div>
                             <div class="form-group">
                               <button data-toggle="modal" data-target="#fonteSubModal" class="btn btn-default pull-right" id="fonte-subterranea">Nova fonte</button>
@@ -232,7 +232,7 @@
                             </div>
                             <div class="form-group">
                               <label for="c_requerid">Consumo solicitado</label>
-                              <input type="text" class="form-control widget" id="c_requerid">
+                              <input type="text" class="form-control widget widget-number" id="c_requerid">
                             </div>
                             <div class="form-group">
                               <button data-toggle="modal" data-target="#fonteSupModal" class="btn btn-default pull-right" id="fonte-superficial">Nova fonte</button>
@@ -377,10 +377,12 @@
 
 <script src="models/Fonte.js"></script>
 <script src="models/FonteCollection.js"></script>
+
 <script src="models/Licencia.js"></script>
 <script src="models/LicenciaCollection.js"></script>
 <script src="models/Utente.js"></script>
 <script src="models/UtenteCollection.js"></script>
+
 <script src="lib/backbone-geojson/Feature.js"></script>
 <script src="lib/backbone-geojson/FeatureCollection.js"></script>
 
@@ -391,14 +393,17 @@
 
 <script src="models/Exploracao.js"></script>
 <script src="models/ExploracaoCollection.js"></script>
+
 <script src="lib/backbone-uilib/views/OptionView.js"></script>
 <script src="lib/backbone-uilib/views/SelectView.js"></script>
 <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
 <script src="views/ButtonSaveView.js"></script>
 <script src="views/SelectUtenteView.js"></script>
+
 <script src="views/ModalFonteView.js"></script>
 <script src="views/RowFonteView.js"></script>
 <script src="views/TableFontesView.js"></script>
+
 <script src="exploracao-new.js"></script>
 
 </body>

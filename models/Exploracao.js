@@ -22,7 +22,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
     'consumo': 'C', // FIXME. Está en las fixtures
     'estado':  'L', // FIXME. Está en las fixtures
-    'pagos':   'P', // FIXME. Está en las fixtures
+    // 'pagos':   'P', // FIXME. Está en las fixtures. En create tiene que ser un booleano
   },
 
 });
