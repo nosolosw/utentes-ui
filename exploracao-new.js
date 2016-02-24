@@ -66,7 +66,7 @@ domains.fetch({
       el: $('.estado-subterranea'),
       collection: estadosLicencia
     }).render();
-    
+
     new Backbone.UILib.SelectView({
       el: $('#actividade'),
       collection: actividades
@@ -110,7 +110,7 @@ utentes.fetch({
     new Backbone.SIXHIARA.SelectUtenteView({
       el: $('#utente'),
       model: utentes
-   }).render();
+    }).render();
   }
 });
 
@@ -131,9 +131,9 @@ new Backbone.UILib.WidgetsView({
 // block licencias
 
 new Backbone.UILib.WidgetsView({
-      el: $('#licencia-subterranea'),
-      model: licenciaSubterranea
-    }).render();
+  el: $('#licencia-subterranea'),
+  model: licenciaSubterranea
+}).render();
 
 new Backbone.UILib.WidgetsView({
   el: $('#licencia-superficial'),
@@ -151,11 +151,19 @@ tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, co
   this.update(exploracao.get('fontes'));
 });
 
+$('#fonte-subterranea').on('click', function(e){
+  e.preventDefault();
+  $('#fonteSubModal').modal('toggle');
+});
 new Backbone.SIXHIARA.ModalFonteView({
   el: $('#fonteSupModal'),
   collection: exploracao.get('fontes')
 });
 
+$('#fonte-superficial').on('click', function(e){
+  e.preventDefault();
+  $('#fonteSupModal').modal('toggle');
+});
 new Backbone.SIXHIARA.ModalFonteView({
   el: $('#fonteSubModal'),
   collection: exploracao.get('fontes')
