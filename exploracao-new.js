@@ -76,7 +76,7 @@ domains.fetch({
   }
 });
 
-var utentes = UTENTES_REPO; // TODO: take from API
+
 
 var exploracao = new Backbone.SIXHIARA.Exploracao();
 
@@ -103,15 +103,23 @@ new Backbone.UILib.WidgetsView({
 
 
 // block utente
+// var utentes = UTENTES_REPO;
+var utentes = new Backbone.SIXHIARA.UtenteCollection();
+utentes.fetch({
+  success: function() {
+    new Backbone.SIXHIARA.SelectUtenteView({
+      el: $('#utente'),
+      model: utentes
+   }).render();
+  }
+});
+
 new Backbone.UILib.WidgetsView({
   el: $('#utente'),
   model: exploracao.get('utente')
 }).render();
 
-new Backbone.SIXHIARA.SelectUtenteView({
-  el: $('#utente'),
-  model: utentes
-}).render();
+
 
 // TODO: look for a better way to organize this
 new Backbone.UILib.WidgetsView({
