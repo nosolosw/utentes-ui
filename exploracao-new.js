@@ -10,9 +10,10 @@ var distritos       = domains.byCategory('distrito');
 var postos          = domains.byCategory('posto');
 var bacias          = domains.byCategory('bacia');
 var subacias        = domains.byCategory('subacia');
-var estadosLicencia = domains.byCategory('estado-licencia');
+var estadosLicencia = domains.byCategory('licencia_estado');
 var actividades     = domains.byCategory('actividade');
 // var tiposFonte      = domains.byCategory('tipo-fonte');
+
 
 var utentes = UTENTES_REPO; // TODO: take from API
 

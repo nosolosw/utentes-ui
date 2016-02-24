@@ -13,9 +13,9 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
     var provincias = domains.byCategory('provincia');
     var distritos = domains.byCategory('distrito');
     var postos = domains.byCategory('posto');
-    var licenciaTipos = domains.byCategory('tipo-licencia');
-    var licenciaEstados = domains.byCategory('estado-licencia');
-    var exploracaoPagamento = domains.byCategory('pagamento');
+    var licenciaTipos = domains.byCategory('licencia_tipo');
+    var licenciaEstados = domains.byCategory('licencia_estado');
+    var exploracaoPagamento = domains.byCategory('pagamentos');
     var actividades = domains.byCategory('actividade');
 
     // updates the model
