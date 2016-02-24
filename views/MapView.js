@@ -32,6 +32,7 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
     } else{
       // TODO: zoom to the northen area of Mozambique
       this.map.fitBounds([[-13, 39.25]]);
+      this.map.setZoom(8);
     }
   },
 
