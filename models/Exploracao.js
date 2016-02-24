@@ -28,7 +28,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   initialize: function(){
     // TODO: take exp_id from url
     var exp_id = window.location.search.split('=')[1];
-    this.set('exp_id', exp_id);
+    if((exp_id != undefined) && (exp_id != '') && (exp_id != null)){
+      this.set('exp_id', exp_id);
+    }
   }
 
 });
