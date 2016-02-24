@@ -20,7 +20,7 @@ Backbone.SIXHIARA.TableShowView = Backbone.View.extend({
     // Update DOM and _subviews array at once.
     // This would minimize reflows to only 1 instead of one per subview.
     if(this.collection.length === 0){
-      this.$('tbody').empty();
+      this.$('tbody').html('<tr><td colspan="9" class="no-fontes text-center">NON HAI FONTES</td></tr>');
     } else{
       this.$('tbody').html(content);
     }
