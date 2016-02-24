@@ -24,7 +24,7 @@ Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
     // update widgets
     var selectedOption = e.target.selectedOptions[0].value;
     var utente = this.model.findWhere({'nome': selectedOption});
-    this.$('.widget').each(function(index, widget){
+    this.$('.widget-utente').each(function(index, widget){
       if(utente === undefined){
         // enable widgets and clear values
         widget.removeAttribute('disabled');
