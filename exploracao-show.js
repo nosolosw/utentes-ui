@@ -15,29 +15,30 @@ if((exp_id != undefined) && (exp_id != null) && (exp_id != '')){
       // block utente
       new Backbone.UILib.WidgetsView({
         el: $('#utente'),
-        model: exploracao.get('utente')
+        model: new Backbone.SIXHIARA.Utente([exploracao.get('utente')]),
       }).render();
 
       // block Licencias
-      var licenciaSuperficial = exploracao.get('licencias').where({
-        'lic_tipo': 'Superficial'
-      });
-      new Backbone.UILib.WidgetsView({
-        el: $('#licencia-superficial'),
-        model: licenciaSuperficial
-      }).render();
+      var licencias = new Backbone.SIXHIARA.LicenciaCollection(exploracao.get('licencias'));
+      var licsSup = licencias.where({'lic_tipo': 'Superficial'});
+      if(licsSup.length > 0){
+        new Backbone.UILib.WidgetsView({
+          el: $('#licencia-superficial'),
+          model: licsSup[0]
+        }).render();
+      }
 
-      var licenciaSubterranea = exploracao.get('licencias').where({
-        'lic_tipo': 'Subterránea'
-      });
-      new Backbone.UILib.WidgetsView({
-        el: $('#licencia-subterranea'),
-        model: licenciaSubterranea
-      }).render();
+      var licsSub = licencias.where({'lic_tipo': 'Subterránea'});
+      if(licsSub.length > 0) {
+        new Backbone.UILib.WidgetsView({
+          el: $('#licencia-subterranea'),
+          model: licsSub[0]
+        }).render();
+      }
 
       new Backbone.SIXHIARA.TableShowView({
         el: $('#fontes'),
-        collection: exploracao.get('fontes'),
+        collection: new Backbone.SIXHIARA.FonteCollection(exploracao.get('fontes')),
       }).render();
     },
     error: function(){

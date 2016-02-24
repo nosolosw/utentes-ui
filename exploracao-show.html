@@ -537,18 +537,18 @@ var cultivosGeoJSON = {
     ]]
   }
 };
-var exploracao = L.geoJson(exploracaoGeoJSON);
+var exploracaoLeaflet = L.geoJson(exploracaoGeoJSON);
 var cultivos = L.geoJson(cultivosGeoJSON);
 
 var map = L.map('map', {
   center: [-13.3030, 38.5050],
   zoom: 10,
-  layers: [base, exploracao, cultivos]
+  layers: [base, exploracaoLeaflet, cultivos]
 });
 
 var baseMaps = {};
 var overlayMaps = {
-  'Exploração': exploracao,
+  'Exploração': exploracaoLeaflet,
   'Cultivos': cultivos
 };
 L.control.layers(baseMaps, overlayMaps).addTo(map);
@@ -562,7 +562,7 @@ var drawControl = new L.Control.Draw({
     polyline: false
   },
   edit: {
-    featureGroup: exploracao
+    featureGroup: exploracaoLeaflet
   }
 });
 map.addControl(drawControl);
