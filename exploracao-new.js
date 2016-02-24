@@ -11,6 +11,8 @@ var postos          = domains.byCategory('posto');
 var bacias          = domains.byCategory('bacia');
 var subacias        = domains.byCategory('subacia');
 var estadosLicencia = domains.byCategory('estado-licencia');
+var actividades     = domains.byCategory('actividade');
+// var tiposFonte      = domains.byCategory('tipo-fonte');
 
 var utentes = UTENTES_REPO; // TODO: take from API
 
@@ -82,6 +84,17 @@ new Backbone.SIXHIARA.SelectUtenteView({
   model: utentes
 }).render();
 
+// TODO: look for a better way to organize this
+new Backbone.UILib.WidgetsView({
+  el: $('#actividade-explotacion'),
+  model: exploracao
+}).render();
+
+new Backbone.UILib.SelectView({
+  el: $('#actividade'),
+  collection: actividades
+}).render();
+
 // block licencias
 new Backbone.UILib.WidgetsView({
   el: $('#licencia-superficial'),
@@ -103,12 +116,6 @@ new Backbone.UILib.SelectView({
   collection: estadosLicencia
 }).render();
 
-// var fontes = new Backbone.SIXHIARA.FonteCollection([
-//   {'tipo_agua': 'Superficial', 'tipo_fonte': 'Río',  'c_requerid': '5'},
-//   {'tipo_agua': 'Subterránea', 'tipo_fonte': 'Pozo', 'c_requerid': '12'},
-//   {'tipo_agua': 'Subterránea', 'tipo_fonte': 'Furo', 'c_requerid': '3'},
-// ]);
-// exploracao.set('fontes', fontes);
 var tableFontesView = new Backbone.SIXHIARA.TableFontesView({
   el: $('#fontes'),
   collection: exploracao.get('fontes')
@@ -129,3 +136,14 @@ new Backbone.SIXHIARA.ModalFonteView({
   el: $('#fonteSubModal'),
   collection: exploracao.get('fontes')
 });
+
+// TODO: convert to domains
+// new Backbone.UILib.SelectView({
+//   el: $('#fonteSubModal #tipo_fonte'),
+//   collection: tiposFonte.byParent('Subterránea')
+// });
+//
+// new Backbone.UILib.SelectView({
+//   el: $('#fonteSupModal #tipo_fonte'),
+//   collection: tiposFonte.byParent('Superficial')
+// });
