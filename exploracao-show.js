@@ -1,34 +1,61 @@
+// TODO: take from API
+
 var exploracao = new Backbone.SIXHIARA.Exploracao({
   'exp_id':     '2016-001',
   'exp_name':   'Planta de abastecimento',
   'd_solici':   '10/07/2015',
   'observacio': 'Observações sobre linha de água e outras notas sobre localização e modo de acesso.',
   'loc_provin': 'Cabo-Delgado',
-  'loc_distri': 'Mandimba',
-  'loc_posto':  'Posto',
-  'loc_nucleo': 'núcleo',
-  'loc_endere': 'enderezo',
+  'loc_distri': 'Ancuabe',
+  'loc_posto':  'Ancuabe',
+  'loc_nucleo': '',
+  'loc_endere': '',
   'loc_bacia':  'Rovuma',
-  'loc_subaci': 'sub',
-  'loc_rio':    'Chiulezi'
+  'loc_subaci': 'Rovuma',
+  'loc_rio':    ''
 });
 exploracao.set('utente', new Backbone.SIXHIARA.Utente({
-  'nome': 'Anadarco Mozambique',
-  'nuit': 'N3459',
-  'reg_comerc': '',
-  'reg_zona': ''
+  'nome':       'Anadarco Mozambique',
+  'nuit':       'N3459',
+  'reg_comerc': '1/3/2009',
+  'reg_zona':   'Ancuabe'
 }));
 var licenciaSubterranea = new Backbone.SIXHIARA.Licencia({
-  'lic_tipo': 'subterranea'
+  'lic_tipo':   'Subterránea',
+  'lic_nro':    '2016-001-01',
+  'cadastro':   'P86722',
+  'estado':     'Licenciada',
+  'c_licencia': '20',
+  'c_requerid': '21',
+  'c_real':     '19',
 });
 var licenciaSuperficial = new Backbone.SIXHIARA.Licencia({
-  'lic_tipo':   'superficial',
-  'lic_nro':    '2016-001-01',
+  'lic_tipo':   'Superficial',
+  'lic_nro':    '2016-001-02',
   'cadastro':   'N78999',
-  'estado':     'Irregular',
+  'estado':     'Licenciada',
+  'c_licencia': '90',
+  'c_requerid': '89',
+  'c_real':     '60',
 });
 exploracao.get('licencias').add(licenciaSuperficial);
 exploracao.get('licencias').add(licenciaSubterranea);
+
+var fontes = new Backbone.SIXHIARA.FonteCollection([
+  {
+    'tipo_agua':  'Superficial',
+    'tipo_fonte': 'Río',
+    'c_requerid': '90',
+    'comentario': '',
+  },
+  {
+    'tipo_agua':  'Subterránea',
+    'tipo_fonte': 'Pozo',
+    'c_requerid': '20',
+    'comentario': '',
+  }
+]);
+exploracao.set('fontes', fontes);
 
 // block info
 new Backbone.UILib.WidgetsView({
@@ -51,4 +78,9 @@ new Backbone.UILib.WidgetsView({
 new Backbone.UILib.WidgetsView({
   el: $('#licencia-subterranea'),
   model: licenciaSubterranea
+}).render();
+
+new Backbone.SIXHIARA.TableShowView({
+  el: $('#fontes'),
+  collection: fontes,
 }).render();

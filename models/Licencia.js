@@ -7,6 +7,10 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
     'cadastro':   '',
     'estado':     '',
     'c_requerid': null,
+    'c_real':     null,
+    'c_licencia': null,
+    'd_emissao':  '1/2/2016',
+    'd_validade': '1/2/2016',
   }
 
 });
