@@ -1,6 +1,8 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
+  rootUrl: '/exploracao',
+  
   defaults: {
     'exp_id':     '',
     'exp_name':   '',

@@ -7,7 +7,6 @@ Backbone.SIXHIARA.ButtonDeleteView = Backbone.View.extend({
 
   doClick: function(){
     
-    this.model.url = '/exploracao/' + this.model.get('exp_id') + '.json';
     this.model.destroy({
       // wait: true,
       success: function(model, resp, options) {
