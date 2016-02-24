@@ -4,6 +4,7 @@ var exp_id = exploracao.get('exp_id');
 if((exp_id != undefined) && (exp_id != null) && (exp_id != '')){
   exploracao.url = '/exploracao/' + exp_id +'.json';
   exploracao.fetch({
+    parse: true,
     success: function(){
       // block info
       new Backbone.UILib.WidgetsView({
