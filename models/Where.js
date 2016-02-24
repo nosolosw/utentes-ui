@@ -6,7 +6,7 @@ Backbone.SIXHIARA.Where = Backbone.Model.extend({
     'loc_distri': '',
     'loc_posto':  '',
     'utente':     '',
-    'lic_tipo':     '',
+    'lic_tipo':   '',
     'estado':     '',
     'pagos':      '',
     'actividade': '',
