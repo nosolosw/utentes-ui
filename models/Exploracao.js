@@ -25,4 +25,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     // 'pagos':   'P', // FIXME. Está en las fixtures. En create tiene que ser un booleano
   },
 
+  initialize: function(){
+    // TODO: take exp_id from url
+    var exp_id = window.location.search.split('=')[1];
+    this.set('exp_id', exp_id);
+  }
+
 });
