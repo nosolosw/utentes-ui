@@ -43,6 +43,26 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       messages.push('Nome de utente vacío')
     }
     if (messages.length > 0) return messages;
-  }
+  },
+
+  contains: function(where){
+    var values = _.omit(where.values(), 'utente', 'lic_tipo', 'estado');
+    var properties = this.pick(_.keys(values));
+    var containsAttrs = _.isEqual(properties, values);
+    var containsUtente = true;
+    if (where.attributes.utente) {
+      containsUtente = (this.get('utente').nome === where.attributes.utente);
+    }
+    var containsLic = true;
+    if(where.attributes.lic_tipo || where.attributes.estado){
+      containsLic = false;
+      var whereLic = _.pick(where.values(), 'lic_tipo', 'estado');
+      var lics = new Backbone.SIXHIARA.LicenciaCollection(this.get('licencias')).where(whereLic);
+      if (lics.length > 0) {
+        containsLic = true;
+      }
+    }
+    return containsAttrs && containsUtente && containsLic;
+  },
 
 });
