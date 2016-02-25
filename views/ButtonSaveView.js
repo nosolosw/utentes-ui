@@ -23,15 +23,21 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
       if (! lics.at(0).get('lic_nro') ) lics.remove(lics.at(0));
     }
 
-
-    if(this.model.isValid()){
-      c = new Backbone.SIXHIARA.ExploracaoCollection();
-      c.create(this.model)
-      // make API configurable through config.js
-      window.location = 'http://localhost:6543/static/utentes-ui/exploracao-show.html?exp_id=' + this.model.get('exp_id');
-    } else {
-      alert(this.model.validationError);
+    if(! this.model.isValid()) {
+        alert(this.model.validationError);
+        return;
     }
+
+    this.model.save(null, {
+      wait: true,
+      success: function(model, resp, options) {
+        window.location = '/static/utentes-ui/exploracao-show.html?id=' + model.get('id');
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        alert(textStatus.statusText);
+      }
+    });
+
   }
 
 });
