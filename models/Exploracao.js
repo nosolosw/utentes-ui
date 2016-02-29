@@ -29,14 +29,19 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   validate: function(attrs, options){
     var messages = [];
-    if((attrs.exp_id === '') || (attrs.exp_id === undefined) || (attrs.exp_id === null)){
-      messages.push('Nº de exploracão vacío')
-    }
-    var nome = this.get('utente').get('nome');
-    if((nome === '') || (nome === undefined) || (nome === null)){
-      messages.push('Nome de utente vacío')
-    }
+
+    var msgsExp = validator(EXPLORACAO_SCHEMA).validate(this.attributes);
+    msgsExp.forEach(function(msg){
+      messages.push(msg);
+    });
+
+    var msgsUtente = validator(UTENTE_SCHEMA).validate(this.get('utente').attributes);
+    msgsUtente.forEach(function(msg){
+      messages.push(msg);
+    });
+
     if (messages.length > 0) return messages;
+
   },
 
   contains: function(where){
