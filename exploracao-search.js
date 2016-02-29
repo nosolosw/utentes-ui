@@ -1,5 +1,3 @@
-
-
 var where = new Backbone.SIXHIARA.Where();
 
 // var domains = DOMAINS_REPO; // Descomentar para trabajar con fixtures
@@ -9,7 +7,7 @@ var where = new Backbone.SIXHIARA.Where();
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 
 var domains = new Backbone.UILib.DomainCollection();
-domains.url = '/domains';
+domains.url = '/api/domains';
 
 domains.fetch({
   success: function(collection, response, options) {

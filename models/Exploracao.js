@@ -1,8 +1,8 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
-  urlRoot: '/exploracao',
-  
+  urlRoot: '/api/exploracaos',
+
   defaults: {
     'exp_id':     '',
     'exp_name':   '',
@@ -25,14 +25,6 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'consumo': 'C', // FIXME. Está en las fixtures
     'estado':  'L', // FIXME. Está en las fixtures
     // 'pagos':   'P', // FIXME. Está en las fixtures. En create tiene que ser un booleano
-  },
-
-  initialize: function(){
-    // TODO: take exp_id from url
-    var exp_id = window.location.search.split('=')[1];
-    if((exp_id != undefined) && (exp_id != '') && (exp_id != null)){
-      this.set('exp_id', exp_id);
-    }
   },
 
   validate: function(attrs, options){

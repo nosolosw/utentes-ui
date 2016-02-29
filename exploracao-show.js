@@ -1,8 +1,8 @@
 var exploracao = new Backbone.SIXHIARA.Exploracao();
 
-var exp_id = exploracao.get('exp_id');
-if((exp_id != undefined) && (exp_id != null) && (exp_id != '')){
-  exploracao.url = '/exploracao/' + exp_id +'.json';
+exploracao.set('id', window.location.search.split('=')[1]);
+var id = exploracao.get('id');
+if((id != undefined) && (id != null) && (id != '')){
   exploracao.fetch({
     parse: true,
     success: function(){
