@@ -137,3 +137,8 @@ function populateFromFakeData(){
   }).render();
 
 }
+
+new Backbone.SIXHIARA.ButtonDeleteView({
+  el: $('#delete-button'),
+  model: exploracao
+});

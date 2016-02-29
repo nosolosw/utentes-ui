@@ -9,7 +9,7 @@ var where = new Backbone.SIXHIARA.Where();
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 
 var domains = new Backbone.UILib.DomainCollection();
-domains.url = '/domains.json';
+domains.url = '/domains';
 
 domains.fetch({
   success: function(collection, response, options) {
