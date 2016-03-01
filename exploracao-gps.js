@@ -26,7 +26,42 @@ var geoJsonLayer = L.geoJson([],
 
 var MySaveToAPI = SaveToAPI.extend({
   addHooks: function () {
-    console.log('save to API');
+    var polygonLayer = table.polygonLayer.toGeoJSON();
+    // TODO. Probably save button should be desactivated if the validations
+    // not pass
+    if ((! polygonLayer ) || (polygonLayer.features.length != 1)) {
+      alert ('Primeiro, você deve gerar um polígono');
+      return;
+    }
+    feat = polygonLayer.features[0];
+    exp_id = feat.properties.name
+    if (_.isEmpty(exp_id)) {
+      alert('O polígono deve ter um nome válido');
+      return;
+    }
+
+    e = exploracaos.filter({'exp_id':exp_id});
+    if (e.length != 1) {
+      alert('O arquivo de código não existe');
+      return;
+    }
+
+    valid = e[0].save('geometry', new Backbone.Model(feat.geometry), {
+      wait: true,
+      success: function(model, resp, options) {
+        table.deleteSelected();
+        table.clear();
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        alert(textStatus.statusText);
+      }
+    });
+
+    if (! valid) {
+      alert(e[0].validate());
+    }
+
+
   }
 });
 
@@ -55,3 +90,6 @@ var actionsToolbar = new L.Toolbar.Control({
 }).addTo(map);
 
 var table = L.control.table(geoJsonLayer).addTo(map);
+
+var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
+exploracaos.fetch();
