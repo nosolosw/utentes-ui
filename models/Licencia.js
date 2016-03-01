@@ -2,15 +2,21 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
 
   defaults: {
-    'lic_nro':    '', // TODO: autocalculate from exp_id
-    'lic_tipo':   '',
-    'cadastro':   '',
-    'estado':     '',
-    'c_requerid': null,
-    'c_real':     null,
+    'id':         null,
+    'lic_nro':    null, // TODO: autocalculate from exp_id
+    'lic_tipo':   null,
+    'cadastro':   null,
+    'finalidade': null,
+    'estado':     null,
+    'd_emissao':  null,
+    'd_validade': null,
+    'c_soli_tot': null,
+    'c_soli_int': null,
+    'c_soli_fon': null,
     'c_licencia': null,
-    'd_emissao':  '1/2/2016',
-    'd_validade': '1/2/2016',
+    'c_real_tot': null,
+    'c_real_int': null,
+    'c_real_fon': null,
   }
 
 });
