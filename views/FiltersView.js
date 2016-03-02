@@ -5,8 +5,7 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
     Backbone.UILib.BaseView.prototype.initialize.call(this);
 
     this.options = options || {};
-    var domains = new Backbone.UILib.DomainCollection();
-    if(this.options.domains) domains = this.options.domains;
+    domains = this.options.domains || new Backbone.UILib.DomainCollection();
 
     // properties
     var utentes = domains.byCategory('utente');

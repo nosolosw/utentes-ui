@@ -6,8 +6,7 @@ $(document).ready(function() {
 
 // var domains = DOMAINS_REPO;
 
-var domains = new Backbone.UILib.DomainCollection();
-domains.url = '/api/domains';
+var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
 
 domains.fetch({
   success: function(collection, response, options) {
