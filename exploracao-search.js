@@ -5,7 +5,7 @@ var where = new Backbone.SIXHIARA.Where();
 
 
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
-
+var exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection();
 var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
 
 domains.fetch({
@@ -22,24 +22,22 @@ domains.fetch({
 
 var listView = new Backbone.UILib.ListView({
   el: $('#project_list'),
-  collection: exploracaos,
+  collection: exploracaosFiltered,
   subviewTemplate: _.template($('#exploracao-li-tmpl').html())
 });
 
-listView.listenTo(where, 'change', function(model, options){
-  this.update(exploracaos.filterBy(where));
-});
-
-
 var mapView = new Backbone.SIXHIARA.MapView({
   el: $('#map'),
-  collection: exploracaos
+  collection: exploracaosFiltered
 });
-mapView.listenTo(where, 'change', function(model, options){
-  this.update(exploracaos.filterBy(where));
+
+exploracaos.listenTo(where, 'change', function(model, options){
+  exploracaosFiltered = exploracaos.filterBy(where);
+  listView.update(exploracaosFiltered);
+  mapView.update(exploracaosFiltered);
 });
 
 exploracaos.fetch({
   parse: true,
   success: function() {where.trigger('change');}
-})
+});
