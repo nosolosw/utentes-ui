@@ -9,7 +9,7 @@ Backbone.SIXHIARA.ModalFonteView = Backbone.View.extend({
     this.collection.add(new Backbone.SIXHIARA.Fonte({
       'tipo_agua':  this.$('#tipo_agua').val(),
       'tipo_fonte': this.$('#tipo_fonte').val(),
-      'c_requerid': this.$('#c_requerid').val(),
+      'c_soli':     this.$('#c_soli').val(),
       'comentario': this.$('#comentario').val(),
     }));
     // close on click or let it open to enter several fontes?

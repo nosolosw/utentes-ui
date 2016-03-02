@@ -45,6 +45,10 @@ small{ /*override bootstrap settings*/
   color: #bbb !important;
 }
 
+.label{
+  font-size: small;
+}
+
 /* blocks: colors, margins, paddings */
 
 #title{
@@ -57,6 +61,7 @@ small{ /*override bootstrap settings*/
 
 .volume-summary{
   background-color: #eee;
+  padding: .1em 0 .1em 0;
 }
 
 .volume-license,
