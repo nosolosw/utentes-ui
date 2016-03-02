@@ -11,6 +11,7 @@ Backbone.SIXHIARA.Utente = Backbone.Model.extend({
     'loc_distri': null,
     'loc_posto':  null,
     'loc_nucleo': null,
+    'observacio': null,
   }
 
 });

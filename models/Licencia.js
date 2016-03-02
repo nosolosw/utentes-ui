@@ -6,7 +6,6 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
     'lic_nro':    null, // TODO: autocalculate from exp_id
     'lic_tipo':   null,
     'cadastro':   null,
-    'finalidade': null,
     'estado':     null,
     'd_emissao':  null,
     'd_validade': null,

@@ -43,6 +43,7 @@
               <ul class="hide">
                 <li><a href="#info" data-toggle="tab">Info</a></li>
                 <li><a href="#utente" data-toggle="tab">Utente</a></li>
+                <li><a href="#info-actividade" data-toggle="tab">Actividade</a></li>
                 <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
               </ul>
 
@@ -154,27 +155,69 @@
                   </div>
 
                   <div class="row">
-                    <div class="form-group col-xs-offset-1 col-xs-3">
-                      <label for="nuit">NUIT</label>
-                      <input type="text" class="form-control widget widget-utente" id="nuit">
-                    </div>
-                    <div class="form-group col-xs-8">
+                    <div class="form-group col-xs-offset-1 col-xs-11">
                       <label for="nome">Nome do utente</label>
                       <input type="text" class="form-control widget widget-utente" id="nome">
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="form-group col-xs-offset-1 col-xs-3">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_provin">Provincia</label>
+                      <select class="form-control widget" id="loc_provin">
+                      </select>
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
+                      <label for="nuit">NUIT</label>
+                      <input type="text" class="form-control widget widget-utente" id="nuit">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_distri">Distrito</label>
+                      <select class="form-control widget" id="loc_distri">
+                      </select>
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
+                      <label for="entidade">Tipo de entidade</label>
+                      <input type="text" class="form-control widget widget-utente" id="entidade">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_posto">Posto administrativo</label>
+                      <select class="form-control widget" id="loc_posto">
+                      </select>
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
                       <label for="reg_comerc">Nº registro</label>
                       <input type="text" class="form-control widget widget-utente" id="reg_comerc">
                     </div>
-                    <div class="form-group col-xs-8">
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-4">
+                      <label for="loc_nucleo">Núcleo</label>
+                      <input type="text" class="form-control widget" id="loc_nucleo">
+                    </div>
+                    <div class="form-group col-xs-offset-3 col-xs-4">
                       <label for="reg_zona">Registrado em</label>
                       <input type="text" class="form-control widget widget-utente" id="reg_zona">
                     </div>
                   </div>
 
+                  <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-11">
+                      <label for="observacio">Observaçôes</label>
+                      <textarea class="form-control" id="observacio" rows="3"></textarea>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane" id="info-actividade">
                   <div class="row">
                     <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
                     <h3 class="col-xs-11">Actividade</h3>
@@ -187,7 +230,6 @@
                       </select>
                     </div>
                   </div>
-
                 </div>
 
                 <div class="tab-pane" id="licencia">
@@ -250,7 +292,7 @@
                               <th>Tipo de água</th>
                               <th>Tipo de fonte</th>
                               <th>V. solicitado</th>
-                              <th>Comentários</th>
+                              <th>Observaçôes</th>
                               <th></th>
                             </tr>
                           </thead>
@@ -312,8 +354,8 @@
             <input type="text" class="form-control" id="c_requerid" />
           </div>
           <div class="form-group col-xs-offset-1 col-xs-9">
-            <label for="comentario">Comentarios</label>
-            <textarea class="form-control" id="comentario" rows="3"></textarea>
+            <label for="observacio">Observaçôes</label>
+            <textarea class="form-control" id="observacio" rows="3"></textarea>
           </div>
         </div>
       </div>
@@ -349,8 +391,8 @@
             <input type="text" class="form-control" id="c_requerid" />
           </div>
           <div class="form-group col-xs-offset-1 col-xs-9">
-            <label for="comentario">Comentarios</label>
-            <textarea class="form-control" id="comentario" rows="3"></textarea>
+            <label for="observacio">Observaçôes</label>
+            <textarea class="form-control" id="observacio" rows="3"></textarea>
           </div>
         </div>
       </div>
