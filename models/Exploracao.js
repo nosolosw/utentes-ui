@@ -28,6 +28,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'utente':     new Backbone.SIXHIARA.Utente(),
     'licencias':  new Backbone.SIXHIARA.LicenciaCollection(),
     'fontes':     new Backbone.SIXHIARA.FonteCollection(),
+    'geometry':   new Backbone.Model(),
 
     'consumo': 'C', // FIXME. Está en las fixtures
     'estado':  'L', // FIXME. Está en las fixtures
