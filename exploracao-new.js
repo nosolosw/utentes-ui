@@ -18,7 +18,7 @@ domains.fetch({
     var subacias = domains.byCategory('subacia');
     var estadosLicencia = domains.byCategory('licencia_estado');
     var actividades     = domains.byCategory('actividade');
-    // var tiposFonte      = domains.byCategory('tipo-fonte');
+    var fonteTipos      = domains.byCategory('fonte_tipo');
 
     // block localización
     new Backbone.UILib.SelectView({
@@ -71,6 +71,15 @@ domains.fetch({
       collection: actividades
     }).render();
 
+    // TODO: convert to domains
+    new Backbone.UILib.SelectView({
+      el: $('#fonteSubModal #fonte_tipo'),
+      collection: fonteTipos.byParent('Subterrânea')
+    });
+    new Backbone.UILib.SelectView({
+      el: $('#fonteSupModal #fonte_tipo'),
+      collection: fonteTipos.byParent('Superficial')
+    });
 
   }
 });
@@ -150,31 +159,22 @@ tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, co
   this.update(exploracao.get('fontes'));
 });
 
+
 $('#fonte-subterranea').on('click', function(e){
   e.preventDefault();
   $('#fonteSubModal').modal('toggle');
-});
-new Backbone.SIXHIARA.ModalFonteView({
-  el: $('#fonteSupModal'),
-  collection: exploracao.get('fontes')
-});
-
-$('#fonte-superficial').on('click', function(e){
-  e.preventDefault();
-  $('#fonteSupModal').modal('toggle');
 });
 new Backbone.SIXHIARA.ModalFonteView({
   el: $('#fonteSubModal'),
   collection: exploracao.get('fontes')
 });
 
-// TODO: convert to domains
-// new Backbone.UILib.SelectView({
-//   el: $('#fonteSubModal #tipo_fonte'),
-//   collection: tiposFonte.byParent('Subterránea')
-// });
-//
-// new Backbone.UILib.SelectView({
-//   el: $('#fonteSupModal #tipo_fonte'),
-//   collection: tiposFonte.byParent('Superficial')
-// });
+
+$('#fonte-superficial').on('click', function(e){
+  e.preventDefault();
+  $('#fonteSupModal').modal('toggle');
+});
+new Backbone.SIXHIARA.ModalFonteView({
+  el: $('#fonteSupModal'),
+  collection: exploracao.get('fontes')
+});
