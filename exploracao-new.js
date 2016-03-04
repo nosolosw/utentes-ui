@@ -90,10 +90,10 @@ var exploracao = new Backbone.SIXHIARA.Exploracao();
 
 // add skeleton licencias
 var licenciaSubterranea = new Backbone.SIXHIARA.Licencia({
-  'lic_tipo': 'subterranea'
+  'lic_tipo': 'Subterrânea'
 });
 var licenciaSuperficial = new Backbone.SIXHIARA.Licencia({
-  'lic_tipo': 'superficial'
+  'lic_tipo': 'Superficial'
 });
 exploracao.get('licencias').add(licenciaSuperficial);
 exploracao.get('licencias').add(licenciaSubterranea);

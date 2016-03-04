@@ -20,7 +20,7 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
     }
 
     for (var i = 0; i < long; i++) {
-      if (! lics.at(0).get('lic_nro') ) lics.remove(lics.at(0));
+      if (! lics.at(0).get('estado') ) lics.remove(lics.at(0));
     }
 
     if(! this.model.isValid()) {
