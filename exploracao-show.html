@@ -93,10 +93,10 @@
               <h3 class="col-xs-11"><span class="widget" id="tipo"></span> <small>Editar</small></h3>
             </div>
             <div class="row">
-              <span class="col-xs-offset-1 col-xs-11">Nº habitantes: <span class="widget" id="n_hab"></span> </span>
+              <span class="col-xs-offset-1 col-xs-11">Nº habitantes: <span class="widget-number" id="n_hab"></span> </span>
             </div>
             <div class="row">
-              <span class="col-xs-offset-1 col-xs-11">Dotaçâo: <span class="widget" id="dotacao"></span> </span>
+              <span class="col-xs-offset-1 col-xs-11">Dotaçâo: <span class="widget-number" id="dotacao"></span> </span>
             </div>
           </section>
 
@@ -113,22 +113,22 @@
       <section id="consumos" class="row volume-summary text-center">
 
         <div class="col-xs-3">
-          <h3><span class="widget" id="c_licencia">-</span> </h3>
+          <h3><span class="widget-number" id="c_licencia">-</span> </h3>
           <span>LICENÇADOS</span>
         </div>
 
         <div class="col-xs-3">
-          <h3><span class="widget" id="c_soli">-</span> </h3>
+          <h3><span class="widget-number" id="c_soli">-</span> </h3>
           <span>SOLICITADOS</span>
         </div>
 
         <div class="col-xs-3">
-          <h3><span class="widget" id="c_real">-</span> </h3>
+          <h3><span class="widget-number" id="c_real">-</span> </h3>
           <span>REAIS</span>
         </div>
 
         <div class="col-xs-3">
-          <h3><span class="widget" id="c_estimado">-</span> </h3>
+          <h3><span class="widget-number" id="c_estimado">-</span> </h3>
           <span>ESTIMADOS</span>
         </div>
 
@@ -156,7 +156,7 @@
           <div class="row">
             <div class="col-xs-offset-1 col-xs-2">
               <div class="text-center volume-summary">
-                <h4><span class="widget" id="c_licencia"></span></h4>
+                <h4><span class="widget-number" id="c_licencia"></span></h4>
                 <span>licençados</span>
               </div>
             </div>
@@ -170,28 +170,28 @@
           <div class="row">
             <div class="col-xs-offset-1 col-xs-2">
               <div class="text-center volume-summary">
-                <h4><span class="widget" id="c_real_tot"></span></h4>
+                <h4><span class="widget-number" id="c_real_tot"></span></h4>
                 <span>reais</span>
               </div>
             </div>
             <div class="col-xs-4">
               <br>
-              Intermedio: <span class="widget" id="c_real_int"></span><br>
-              Fontes: <span class="widget" id="c_real_fon"></span>
+              Intermedio: <span class="widget-number" id="c_real_int"></span><br>
+              Fontes: <span class="widget-number" id="c_real_fon"></span>
             </div>
           </div>
 
           <div class="row">
             <div class="col-xs-offset-1 col-xs-2">
               <div class="text-center volume-summary">
-                <h4><span class="widget" id="c_soli_tot"></span></h4>
+                <h4><span class="widget-number" id="c_soli_tot"></span></h4>
                 <span>solicitados</span>
               </div>
             </div>
             <div class="col-xs-4">
               <br>
-              Intermedio: <span class="widget" id="c_soli_int"></span><br>
-              Fontes: <span class="widget" id="c_soli_fon"></span>
+              Intermedio: <span class="widget-number" id="c_soli_int"></span><br>
+              Fontes: <span class="widget-number" id="c_soli_fon"></span>
             </div>
           </div>
 
@@ -208,7 +208,7 @@
           <div class="row">
             <div class="col-xs-offset-1 col-xs-2">
               <div class="text-center volume-summary">
-                <h4><span class="widget" id="c_licencia"></span></h4>
+                <h4><span class="widget-number" id="c_licencia"></span></h4>
                 <span>licençados</span>
               </div>
             </div>
@@ -222,28 +222,28 @@
           <div class="row">
             <div class="col-xs-offset-1 col-xs-2">
               <div class="text-center volume-summary">
-                <h4><span class="widget" id="c_real_tot"></span></h4>
+                <h4><span class="widget-number" id="c_real_tot"></span></h4>
                 <span>reais</span>
               </div>
             </div>
             <div class="col-xs-4">
               <br>
-              Intermedio: <span class="widget" id="c_real_int"></span><br>
-              Fontes: <span class="widget" id="c_real_fon"></span>
+              Intermedio: <span class="widget-number" id="c_real_int"></span><br>
+              Fontes: <span class="widget-number" id="c_real_fon"></span>
             </div>
           </div>
 
           <div class="row">
             <div class="col-xs-offset-1 col-xs-2">
               <div class="text-center volume-summary">
-                <h4><span class="widget" id="c_soli_tot"></span></h4>
+                <h4><span class="widget-number" id="c_soli_tot"></span></h4>
                 <span>solicitados</span>
               </div>
             </div>
             <div class="col-xs-4">
               <br>
-              Intermedio: <span class="widget" id="c_soli_int"></span><br>
-              Fontes: <span class="widget" id="c_soli_fon"></span>
+              Intermedio: <span class="widget-number" id="c_soli_int"></span><br>
+              Fontes: <span class="widget-number" id="c_soli_fon"></span>
             </div>
           </div>
 
@@ -289,6 +289,9 @@
 
   </main>
   <script src="lib/moment-2.11.2/moment-with-locales.js"></script>
+  <script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
+  <script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
+  <script src="lib/formatter/formatter.js"></script>
   <script src="lib/jquery/jquery-1.12.0.min.js"></script>
   <script src="lib/json2.js"></script>
   <script src="lib/underscore/underscore-min.js"></script>
