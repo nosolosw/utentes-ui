@@ -53,7 +53,7 @@ var MySaveToAPI = SaveToAPI.extend({
         table.clear();
       },
       error: function(xhr, textStatus, errorThrown) {
-        alert(textStatus.statusText);
+        alert(textStatus.statusText + ' ' + textStatus.responseText);
       }
     });
 
