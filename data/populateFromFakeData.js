@@ -47,4 +47,6 @@ function populateFromFakeData(exploracao){
     collection: fontes,
   }).render();
 
+  // map
+  new Backbone.SIXHIARA.ExploracaoMapView({});
 }

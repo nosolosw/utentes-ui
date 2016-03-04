@@ -53,7 +53,7 @@
               <h3 class="col-xs-10"><span class="widget" id="exp_id"></span> <span class="widget" id="exp_name"></span> <small>Editar</small></h3>
             </div>
             <div class="row">
-              <span class="col-xs-offset-1 col-xs-11">Data solicitude: <span class="widget" id="d_solici"></span></span>
+              <span class="col-xs-offset-1 col-xs-11">Data solicitude: <span class="widget-date" id="d_soli"></span></span>
             </div>
             <div class="row">
               <span class="col-xs-offset-1 col-xs-11">Observações: <span class="widget" id="observacio"></span></span>
@@ -118,7 +118,7 @@
         </div>
 
         <div class="col-xs-3">
-          <h3><span class="widget" id="c_solici">-</span> </h3>
+          <h3><span class="widget" id="c_soli">-</span> </h3>
           <span>SOLICITADOS</span>
         </div>
 
@@ -163,7 +163,7 @@
             <div class="col-xs-7">
               <br>
               Cadastro: <span class="widget" id="cadastro"></span><br>
-              Data emision: <span class="widget" id="d_emissao"></span> / Data validade: <span class="widget" id="d_validade"></span>
+              Data emision: <span class="widget-date" id="d_emissao"></span> / Data validade: <span class="widget-date" id="d_validade"></span>
             </div>
           </div>
 
@@ -215,7 +215,7 @@
             <div class="col-xs-7">
               <br>
               Cadastro: <span class="widget" id="cadastro"></span><br>
-              Data emision: <span class="widget" id="d_emissao"></span> / Data validade: <span class="widget" id="d_validade"></span>
+              Data emision: <span class="widget-date" id="d_emissao"></span> / Data validade: <span class="widget-date" id="d_validade"></span>
             </div>
           </div>
 
@@ -288,7 +288,6 @@
 
 
   </main>
-
   <script src="lib/moment-2.11.2/moment-with-locales.js"></script>
   <script src="lib/jquery/jquery-1.12.0.min.js"></script>
   <script src="lib/json2.js"></script>
@@ -312,19 +311,15 @@
   <script src="views/TableRowShowView.js"></script>
   <script src="views/TableShowView.js"></script>
   <script src="views/ButtonDeleteView.js"></script>
-  <script src="exploracao-show.js"></script>
 
   <script src="lib/leaflet/leaflet.js"></script>
-
   <!-- <script src="libs/leaflet-src.js"></script> -->
 
   <script src="lib/leaflet-draw/src/Leaflet.draw.js"></script>
-
   <script src="lib/leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/Edit.Rectangle.js"></script>
-
   <script src="lib/leaflet-draw/src/draw/handler/Draw.Feature.js"></script>
   <script src="lib/leaflet-draw/src/draw/handler/Draw.Polyline.js"></script>
   <script src="lib/leaflet-draw/src/draw/handler/Draw.Polygon.js"></script>
@@ -332,105 +327,21 @@
   <script src="lib/leaflet-draw/src/draw/handler/Draw.Rectangle.js"></script>
   <script src="lib/leaflet-draw/src/draw/handler/Draw.Circle.js"></script>
   <script src="lib/leaflet-draw/src/draw/handler/Draw.Marker.js"></script>
-
   <script src="lib/leaflet-draw/src/ext/LatLngUtil.js"></script>
   <script src="lib/leaflet-draw/src/ext/GeometryUtil.js"></script>
   <script src="lib/leaflet-draw/src/ext/LineUtil.Intersect.js"></script>
   <script src="lib/leaflet-draw/src/ext/Polyline.Intersect.js"></script>
   <script src="lib/leaflet-draw/src/ext/Polygon.Intersect.js"></script>
-
   <script src="lib/leaflet-draw/src/Control.Draw.js"></script>
   <script src="lib/leaflet-draw/src/Tooltip.js"></script>
   <script src="lib/leaflet-draw/src/Toolbar.js"></script>
-
   <script src="lib/leaflet-draw/src/draw/DrawToolbar.js"></script>
   <script src="lib/leaflet-draw/src/edit/EditToolbar.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
+  <script src="views/ExploracaoMapView.js"></script>
 
-  <script type="text/javascript">
+  <script src="exploracao-show.js"></script>
 
-  var base = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  });
-
-  var exploracaoGeoJSON = {
-    "type": "Feature",
-    "properties": {
-      "name": "Coors Field",
-      "amenity": "Baseball Stadium",
-      "popupContent": "This is where the Rockies play!"
-    },
-    "geometry": {
-      "type": "Polygon",
-      // "coordinates": [38.5050, -13.3030]
-      "coordinates": [[
-        [38.4563, -13.2907],
-        [38.5908, -13.2720],
-        [38.5496, -13.3575],
-        [38.3464, -13.4403]
-      ]]
-    }
-  };
-  var cultivosGeoJSON = {
-    "type": "Feature",
-    "properties": {
-      "name": "Coors Field",
-      "amenity": "Baseball Stadium",
-      "popupContent": "This is where the Rockies play!"
-    },
-    "geometry": {
-      "type": "Polygon",
-      // "coordinates": [38.5050, -13.3030]
-      "coordinates": [[
-        [38.4700, -13.3000],
-        [38.4496, -13.3575],
-        [38.4302, -13.3503]
-      ]]
-    }
-  };
-  var exploracaoLeaflet = L.geoJson(exploracaoGeoJSON);
-  var cultivos = L.geoJson(cultivosGeoJSON);
-
-  var map = L.map('map', {
-    center: [-13.3030, 38.5050],
-    zoom: 10,
-    layers: [base, exploracaoLeaflet, cultivos]
-  });
-
-  var baseMaps = {};
-  var overlayMaps = {
-    'Exploração': exploracaoLeaflet,
-    'Cultivos': cultivos
-  };
-  L.control.layers(baseMaps, overlayMaps).addTo(map);
-
-  var drawnItems = new L.GeoJSON();
-  var drawControl = new L.Control.Draw({
-    draw: {
-      circle: false,
-      rectangle: false,
-      marker: false,
-      polyline: false
-    },
-    edit: {
-      featureGroup: exploracaoLeaflet
-    }
-  });
-  map.addControl(drawControl);
-
-  map.on('draw:start', function (e) {
-    var type = e.layerType,
-    layer = e.layer;
-
-    if (type === 'marker') {
-      // Do marker specific actions
-    }
-
-    // Do whatever else you need to. (save to db, add to map etc)
-    // exploracao.addData(drawnItems);
-  });
-
-  </script>
 </body>
 </html>

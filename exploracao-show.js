@@ -62,6 +62,8 @@ if((id === undefined) || (id === null) || (id === '')){
         model: exploracao
       });
 
+      // map
+      new Backbone.SIXHIARA.ExploracaoMapView({});
     },
 
     error: function(){
