@@ -31,6 +31,19 @@ if((id === undefined) || (id === null) || (id === '')){
         model: exploracao.get('utente'),
       }).render();
 
+      // // block actividade
+      // // TODO
+      // new Backbone.UILib.WidgetsView({
+      //   el: $('#actividade'),
+      //   model: exploracao.get('actividade'),
+      // }).render();
+
+      // block consumos
+      new Backbone.UILib.WidgetsView({
+        el: $('#consumos'),
+        model: exploracao
+      }).render();
+
       // block Licencias
       var licencias = exploracao.get('licencias');
 
