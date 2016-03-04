@@ -41,7 +41,7 @@ label{ /*override bootstrap settings*/
   font-weight: inherit !important;
 }
 
-small{ /*override bootstrap settings*/
+.btn-xs{ /*override bootstrap settings*/
   color: #bbb !important;
 }
 
