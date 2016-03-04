@@ -35,6 +35,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     // 'pagos':   'P', // FIXME. Está en las fixtures. En create tiene que ser un booleano
   },
 
+  showUrl: function() {
+    return Backbone.SIXHIARA.Config.showUrl + this.id;
+  },
+
   parse: function(response){
     response = Backbone.GeoJson.Feature.prototype.parse.apply(this, arguments);
 
@@ -59,6 +63,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     json.utente = this.get('utente').toJSON();
     json.licencias = this.get('licencias').toJSON();
     json.fontes = this.get('fontes').toJSON();
+    json.showUrl = this.showUrl();
     return json;
   },
 
@@ -97,6 +102,6 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       }
     }
     return containsAttrs && containsUtente && containsLic;
-  },
+  }
 
 });
