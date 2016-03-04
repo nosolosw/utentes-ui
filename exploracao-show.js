@@ -34,15 +34,19 @@ if((id === undefined) || (id === null) || (id === '')){
       // block Licencias
       var licencias = exploracao.get('licencias');
 
+      // TODO: how to choose the license between the possible list?
+      var licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
       new Backbone.SIXHIARA.LicenciaView({
         el: $('#licencia-superficial'),
-        collection: licencias.where({'lic_tipo': 'Superficial'}),
+        model: licSup,
         template: _.template($('#licencia-tmpl').html())
       }).render();
 
+      // TODO: how to choose the license between the possible list?
+      var licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
       new Backbone.SIXHIARA.LicenciaView({
         el: $('#licencia-subterranea'),
-        collection: licencias.where({'lic_tipo': 'Subterrânea'}),
+        model: licSub,
         template: _.template($('#licencia-tmpl').html())
       }).render();
 

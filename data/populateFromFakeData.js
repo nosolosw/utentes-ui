@@ -31,14 +31,22 @@ function populateFromFakeData(exploracao){
   }).render();
 
   // block Licencias
-  new Backbone.UILib.WidgetsView({
+  var licencias = exploracao.get('licencias');
+
+  // TODO: how to choose the license between the possible list?
+  var licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
+  new Backbone.SIXHIARA.LicenciaView({
     el: $('#licencia-superficial'),
-    model: exploracao.get('licencias').at(0)
+    model: licSup,
+    template: _.template($('#licencia-tmpl').html())
   }).render();
 
-  new Backbone.UILib.WidgetsView({
+  // TODO: how to choose the license between the possible list?
+  var licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
+  new Backbone.SIXHIARA.LicenciaView({
     el: $('#licencia-subterranea'),
-    model: exploracao.get('licencias').at(1)
+    model: licSub,
+    template: _.template($('#licencia-tmpl').html())
   }).render();
 
   // block fontes

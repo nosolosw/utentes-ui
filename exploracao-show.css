@@ -19,7 +19,7 @@ main,
 }
 
 #intro-section{
-  height: 50%;
+  height: 55%;
 }
 
 /* typography */
@@ -39,6 +39,10 @@ body{
 
 label{ /*override bootstrap settings*/
   font-weight: inherit !important;
+}
+
+.title{
+  color: #999;
 }
 
 .btn-xs{ /*override bootstrap settings*/
