@@ -33,22 +33,18 @@ if((id === undefined) || (id === null) || (id === '')){
 
       // block Licencias
       var licencias = exploracao.get('licencias');
-      var licsSup = licencias.where({'lic_tipo': 'Superficial'});
-      var licsSub = licencias.where({'lic_tipo': 'Subterrânea'});
 
-      if(licsSup.length > 0){
-        new Backbone.UILib.WidgetsView({
-          el: $('#licencia-superficial'),
-          model: licsSup[0]
-        }).render();
-      }
+      new Backbone.SIXHIARA.LicenciaView({
+        el: $('#licencia-superficial'),
+        collection: licencias.where({'lic_tipo': 'Superficial'}),
+        template: _.template($('#licencia-tmpl').html())
+      }).render();
 
-      if(licsSub.length > 0) {
-        new Backbone.UILib.WidgetsView({
-          el: $('#licencia-subterranea'),
-          model: licsSub[0]
-        }).render();
-      }
+      new Backbone.SIXHIARA.LicenciaView({
+        el: $('#licencia-subterranea'),
+        collection: licencias.where({'lic_tipo': 'Subterrânea'}),
+        template: _.template($('#licencia-tmpl').html())
+      }).render();
 
       // block fontes
       new Backbone.SIXHIARA.TableShowView({
