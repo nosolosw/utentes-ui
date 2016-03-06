@@ -70,30 +70,37 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   validate: function(attrs, options){
     var messages = [];
 
-    var myvalidator = validator(EXPLORACAO_SCHEMA);
-    myvalidator.addRule('EXP_ID_FORMAT', {
+    var expValidator = validator(EXPLORACAO_SCHEMA);
+    expValidator.addRule('EXP_ID_FORMAT', {
       fails: function (value) {
         var re = /^\d{4}-\d{3}$/;
         return (value && (! re.test(value)));
       }
     });
 
-    var msgsExp = myvalidator.validate(this.attributes);
+    var msgsExp = expValidator.validate(this.attributes);
     msgsExp.forEach(function(msg){
       messages.push(msg);
     });
 
-    var myvalidator = validator(LICENCIA_SCHEMA);
-    myvalidator.addRule('LIC_NRO_FORMAT', {
+    var licValidator = validator(LICENCIA_SCHEMA);
+    licValidator.addRule('LIC_NRO_FORMAT', {
       fails: function (value) {
         var re = /^\d{4}-\d{3}-\d{3}$/;
         return (value && (! re.test(value)));
       }
     });
-    myvalidator.validate(this.attributes.licencias).forEach(function(msg){
+    licValidator.validate(this.attributes.licencias).forEach(function(msg){
       messages.push(msg);
     });
 
+    var fonValidator = validator(FONTE_SCHEMA);
+    this.get('fontes').forEach(function(fonte) {
+      fonValidator.validate(fonte.toJSON()).forEach(function(msg){
+        messages.push(msg);
+      })
+    });
+    
     var msgsUtente = validator(UTENTE_SCHEMA).validate(this.get('utente').attributes);
     msgsUtente.forEach(function(msg){
       messages.push(msg);
