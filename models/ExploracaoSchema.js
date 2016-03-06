@@ -3,6 +3,10 @@ var EXPLORACAO_SCHEMA = [{
   'message':   'Nº de exploracão non pode estar vacío',
   'rules':     ['NOT_NULL']
 },{
+  'fieldname': 'exp_id',
+  'message': 'O Nº de exploracão não tem o formato correcto',
+  'rules': ['EXP_ID_FORMAT']
+}, {
   'fieldname': 'exp_name',
   'message':   'Nome da exploracão non pode estar vacío',
   'rules':     ['NOT_NULL']

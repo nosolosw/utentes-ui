@@ -70,8 +70,27 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   validate: function(attrs, options){
     var messages = [];
 
-    var msgsExp = validator(EXPLORACAO_SCHEMA).validate(this.attributes);
+    var myvalidator = validator(EXPLORACAO_SCHEMA);
+    myvalidator.addRule('EXP_ID_FORMAT', {
+      fails: function (value) {
+        var re = /^\d{4}-\d{3}$/;
+        return (value && (! re.test(value)));
+      }
+    });
+
+    var msgsExp = myvalidator.validate(this.attributes);
     msgsExp.forEach(function(msg){
+      messages.push(msg);
+    });
+
+    var myvalidator = validator(LICENCIA_SCHEMA);
+    myvalidator.addRule('LIC_NRO_FORMAT', {
+      fails: function (value) {
+        var re = /^\d{4}-\d{3}-\d{3}$/;
+        return (value && (! re.test(value)));
+      }
+    });
+    myvalidator.validate(this.attributes.licencias).forEach(function(msg){
       messages.push(msg);
     });
 
