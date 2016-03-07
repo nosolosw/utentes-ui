@@ -11,11 +11,11 @@ var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
 domains.fetch({
   success: function(collection, response, options) {
 
-    var provincias = domains.byCategory('provincia');
-    var distritos = domains.byCategory('distrito');
-    var postos = domains.byCategory('posto');
-    var bacias = domains.byCategory('bacia');
-    var subacias = domains.byCategory('subacia');
+    var provincias      = domains.byCategory('provincia');
+    var distritos       = domains.byCategory('distrito');
+    var postos          = domains.byCategory('posto');
+    var bacias          = domains.byCategory('bacia');
+    var subacias        = domains.byCategory('subacia');
     var estadosLicencia = domains.byCategory('licencia_estado');
     var actividades     = domains.byCategory('actividade');
     var fonteTipos      = domains.byCategory('fonte_tipo');
@@ -71,15 +71,15 @@ domains.fetch({
       collection: actividades
     }).render();
 
-    // TODO: convert to domains
+    // fontes
     new Backbone.UILib.SelectView({
       el: $('#fonteSubModal #fonte_tipo'),
       collection: fonteTipos.byParent('Subterrânea')
-    });
+    }).render();
     new Backbone.UILib.SelectView({
       el: $('#fonteSupModal #fonte_tipo'),
       collection: fonteTipos.byParent('Superficial')
-    });
+    }).render();
 
   }
 });
