@@ -5,6 +5,7 @@ Backbone.SIXHIARA.Utente = Backbone.Model.extend({
     'id':         null,
     'nome':       null,
     'nuit':       null,
+    'entidade':   null,
     'reg_comerc': null,
     'reg_zona':   null,
     'loc_provin': null,
