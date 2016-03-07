@@ -1,37 +1,49 @@
-var where = new Backbone.SIXHIARA.Where();
+var utentes = new Backbone.SIXHIARA.UtenteCollection();
 
-// var domains = DOMAINS_REPO; // Descomentar para trabajar con fixtures
-// var exploracaos = EXPLORACAOS_REPO; // Descomentar para trabajar con fixtures
-
-
-var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
-var exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection();
-var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
-
-domains.fetch({
-  success: function(collection, response, options) {
-
-    new Backbone.SIXHIARA.FiltersView({
-      el: $('#filters'),
-      model: where,
-      domains: domains,
-  }).render();
-
+var formatValue = function(k, v, rowData) {
+  var showUrl = Backbone.SIXHIARA.Config.showUrl;
+  if (k === 'nome') {
+    v = '<a href="#" target="_blank">' + v + '</a><br>' + (rowData.get('nuit') || '');
+  } else if (k === 'nuit') {
+    v = null;
+  } else if (k === 'exploracaos') {
+    v = v.map(function(e){
+      return '<a href="' + showUrl + e.gid + '" target="_blank">' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade;
+    }).join('<br>');
+  } else if (_.isEmpty(v)) {
+    v = '';
+  } else if (v === false) {
+    v = 'No';
+  } else if (v === true) {
+    v = 'Sí';
+  } else if (typeof(v) === 'number') {
+    v = formatter().format(v);
   }
+  return v;
+};
+
+var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
+  collection: utentes,
+  el: $('#the_utentes_table'),
+  columnNames: ['nome', 'reg_comerc', 'reg_zona', 'loc_provin', 'loc_distri', 'loc_posto', 'loc_nucleo', 'exploracaos', 'observacio'],
+  // 'nuit', Is show with 'nome' and not it its own column
+  columnTitles: {
+    'id':         'ID',
+    'nome':       'Nome',
+    'nuit':       'Nuit',
+    'reg_comerc': 'Reg. Comercial',
+    'reg_zona':   'Reg. Zona',
+    'loc_provin': 'Provincia',
+    'loc_distri': 'Distrito',
+    'loc_posto':  'Posto',
+    'loc_nucleo': 'Núcleo',
+    'exploracaos': 'Exploracaos',
+    'observacio': 'Observacións',
+  },
+  formatValue: formatValue
 });
 
-var listView = new Backbone.UILib.ListView({
-  el: $('#project_list'),
-  collection: exploracaosFiltered,
-  subviewTemplate: _.template($('#exploracao-li-tmpl').html())
-});
-
-exploracaos.listenTo(where, 'change', function(model, options){
-  exploracaosFiltered = exploracaos.filterBy(where);
-  listView.update(exploracaosFiltered);
-});
-
-exploracaos.fetch({
+utentes.fetch({
   parse: true,
-  success: function() {where.trigger('change');}
+  reset: true
 });
