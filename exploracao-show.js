@@ -75,7 +75,9 @@ if((id === undefined) || (id === null) || (id === '')){
       });
 
       // map
-      new Backbone.SIXHIARA.ExploracaoMapView({});
+      new Backbone.SIXHIARA.ExploracaoMapView({
+        model: exploracao
+      });
     },
 
     error: function(){
