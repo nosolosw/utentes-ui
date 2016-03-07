@@ -2,19 +2,18 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8">
-  <title>Procurar explorações</title>
+  <title>Procurar utentes</title>
   <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
-  <link rel="stylesheet" href="exploracao-search.css" />
+  <link rel="stylesheet" href="utentes.css" />
   <link rel="stylesheet" href="base.css" />
 </head>
 <body class="container-fluid">
 
   <menu class="row text-center">
-    <a href="#" class="col-xs-1">
+    <a href="exploracao-search.html" class="col-xs-1">
       <strong id="search">PROCURAR</strong>
     </a>
-    <a href="utentes.html" class="col-xs-1">
+    <a href="#" class="col-xs-1">
       <strong id="utentes">UTENTES</strong>
     </a>
     <a href="exploracao-new.html" class="col-xs-1">
@@ -114,9 +113,7 @@
 
   </section>
 
-  <section id="map-container" class="col-xs-6">
-    <div id="map" class="row"></div>
-  </section>
+  
 
 </main>
 
@@ -152,16 +149,14 @@
 <script src="lib/backbone-uilib/views/ListView.js"></script>
 <script src="lib/backbone-uilib/views/BaseView.js"></script>
 <script src="views/FiltersView.js"></script>
-<script src="lib/leaflet/leaflet.js"></script>
 <script src="lib/backbone-geojson/Feature.js"></script>
 <script src="lib/backbone-geojson/FeatureCollection.js"></script>
 
-<script src="data/domains.js"></script>
-<script src="data/exploracaos.js"></script>
+<!-- <script src="data/domains.js"></script>
+<script src="data/exploracaos.js"></script> -->
 <script src="Config.js"></script>
 
 <script src="models/Where.js"></script>
-<script src="views/MapView.js"></script>
 
 <script src="models/Fonte.js"></script>
 <script src="models/FonteCollection.js"></script>
@@ -171,7 +166,7 @@
 <script src="models/Exploracao.js"></script>
 <script src="models/ExploracaoCollection.js"></script>
 
-<script src="exploracao-search.js"></script>
+<script src="utentes.js"></script>
 
 </body>
 </html>

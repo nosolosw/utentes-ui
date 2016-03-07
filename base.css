@@ -15,6 +15,7 @@ menu{
 }
 
 #search,
+#utentes,
 #new,
 #gps{
   color: #023858;
@@ -23,6 +24,7 @@ menu{
 }
 
 #new:hover,
+#utentes:hover,
 #search:hover,
 #gps:hover{
   background-color: #045a8d;
