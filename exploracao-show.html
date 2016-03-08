@@ -408,12 +408,106 @@
     </div>
   </div>
 
+  <!-- modal licencia superficial -->
+  <div class="modal fade" id="editLicSupModal" tabindex="-1" role="dialog" aria-labelledby="editLicSupModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editLicSupModalLabel">Licencia superficial</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <input type="hidden" id="lic_tipo">
+            <input type="hidden" class="form-control widget" id="lic_nro">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="estado">Estado</label>
+              <select class="form-control widget estado-subterranea" id="estado">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="cadastro">Cadastro</label>
+              <input type="text" class="form-control widget widget-number" id="cadastro">
+            </div>
+            <div class="form-group col-xs-3">
+              <label for="d_validade">Data validade</label>
+              <input type="text" class="form-control widget widget-number" id="d_validade">
+            </div>
+            <div class="form-group col-xs-3">
+              <label for="d_emissao">Data emissão</label>
+              <input type="text" class="form-control widget widget-number" id="d_emissao">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="c_soli_int">C. solicitado intermedio</label>
+              <input type="text" class="form-control widget widget-number" id="c_soli_int">
+            </div>
+            <div class="form-group col-xs-6">
+              <label for="c_real_int">C. real intermedio</label>
+              <input type="text" class="form-control widget widget-number" id="c_real_int">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal licencia subterrânea -->
+  <div class="modal fade" id="editLicSubModal" tabindex="-1" role="dialog" aria-labelledby="editLicSubModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editLicSubModalLabel">Licencia subterrânea</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <input type="hidden" id="lic_tipo">
+            <input type="hidden" class="form-control widget" id="lic_nro">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="estado">Estado</label>
+              <select class="form-control widget estado-subterranea" id="estado">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="cadastro">Cadastro</label>
+              <input type="text" class="form-control widget widget-number" id="cadastro">
+            </div>
+            <div class="form-group col-xs-3">
+              <label for="d_validade">Data validade</label>
+              <input type="text" class="form-control widget widget-number" id="d_validade">
+            </div>
+            <div class="form-group col-xs-3">
+              <label for="d_emissao">Data emissão</label>
+              <input type="text" class="form-control widget widget-number" id="d_emissao">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="c_soli_int">C. solicitado intermedio</label>
+              <input type="text" class="form-control widget widget-number" id="c_soli_int">
+            </div>
+            <div class="form-group col-xs-6">
+              <label for="c_real_int">C. real intermedio</label>
+              <input type="text" class="form-control widget widget-number" id="c_real_int">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- templates -->
   <script type="text/template" id="licencia-tmpl">
     <div class="row">
       <h4 class="col-xs-offset-1 col-xs-11">Licença <%- lic_tipo + ': ' + (lic_nro || 'Não existe') %>
-        <button type="button" class="btn btn-default btn-xs">Editar</button>
-        <button type="button" class="btn btn-default btn-xs">Nova fonte</button>
+        <button type="button" class="btn btn-default btn-xs" id="<%= buttonEditLicName %>">Editar</button>
+        <button type="button" class="btn btn-default btn-xs" id="<%= buttonAddFonteName %>">Nova fonte</button>
       </h4>
       <span class="col-xs-offset-1 col-xs-11"><span class="title">Estado:</span> <%- estado || '-' %></span>
     </div>

@@ -6,6 +6,7 @@ function idIsNotValid(id){
 var exploracao = new Backbone.SIXHIARA.Exploracao();
 var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
 var utentes = new Backbone.SIXHIARA.UtenteCollection();
+var licSup, licSub;
 
 exploracao.set('id', window.location.search.split('=')[1], {silent: true});
 if(idIsNotValid(exploracao.get('id'))){
@@ -128,20 +129,36 @@ exploracao.fetch({
     var licencias = exploracao.get('licencias');
 
     // TODO: how to choose the license between the possible list?
-    var licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
-    new Backbone.SIXHIARA.LicenciaView({
+    licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
+    var licSupView = new Backbone.SIXHIARA.LicenciaView({
       el: $('#licencia-superficial'),
       model: licSup,
       template: _.template($('#licencia-tmpl').html())
     }).render();
+    licSup.on('change', function(){
+      licSupView.render();
+    });
+
+    $('#editLicSup').on('click', function(e){
+      e.preventDefault();
+      $('#editLicSupModal').modal('toggle');
+    });
 
     // TODO: how to choose the license between the possible list?
-    var licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
-    new Backbone.SIXHIARA.LicenciaView({
+    licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
+    var licSubView = new Backbone.SIXHIARA.LicenciaView({
       el: $('#licencia-subterranea'),
       model: licSub,
       template: _.template($('#licencia-tmpl').html())
     }).render();
+    licSub.on('change', function(){
+      licSubView.render();
+    });
+
+    $('#editLicSub').on('click', function(e){
+      e.preventDefault();
+      $('#editLicSubModal').modal('toggle');
+    });
 
     // block fontes
     new Backbone.SIXHIARA.TableShowView({
@@ -204,6 +221,7 @@ function fillComponentsWithDomains(){
   var bacias      = domains.byCategory('bacia');
   var subacias    = domains.byCategory('subacia');
   var actividades = domains.byCategory('actividade');
+  var estadosLic  = domains.byCategory('licencia_estado');
 
   // modal info
   new Backbone.UILib.SelectView({
@@ -278,4 +296,26 @@ function fillComponentsWithDomains(){
     el: $('#editActividadeModal #actividade'),
     collection: actividades
   }).render();
+
+  // modals licencias
+  new Backbone.UILib.SelectView({
+    el: $('#editLicSubModal #estado'),
+    collection: estadosLic
+  }).render();
+
+  new Backbone.UILib.WidgetsView({
+    el: $('#editLicSubModal'),
+    model: licSub,
+  }).render();
+
+  new Backbone.UILib.SelectView({
+    el: $('#editLicSupModal #estado'),
+    collection: estadosLic
+  }).render();
+
+  new Backbone.UILib.WidgetsView({
+    el: $('#editLicSupModal'),
+    model: licSup,
+  }).render();
+
 }
