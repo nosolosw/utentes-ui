@@ -25,11 +25,12 @@ var formatValue = function(k, v, rowData) {
 var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
   collection: utentes,
   el: $('#the_utentes_table'),
-  columnNames: ['nome', 'reg_comerc', 'reg_zona', 'loc_provin', 'loc_distri', 'loc_posto', 'loc_nucleo', 'exploracaos', 'observacio'],
+  columnNames: ['nome', 'entidade', 'reg_comerc', 'reg_zona', 'loc_provin', 'loc_distri', 'loc_posto', 'loc_nucleo', 'exploracaos', 'observacio'],
   // 'nuit', Is show with 'nome' and not it its own column
   columnTitles: {
     'id':         'ID',
     'nome':       'Nome',
+    'entidade':   'Entidade',
     'nuit':       'Nuit',
     'reg_comerc': 'Reg. Comercial',
     'reg_zona':   'Reg. Zona',
