@@ -2,12 +2,12 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.SummaryPagosView = Backbone.View.extend({
 
   render: function(){
-    var valid = this.model.get('pagos') || false;
-
-    if(valid){
-      this.$el.removeClass('label-danger').addClass('label-success');
+    if(this.model.get('pagos') === null){
+      this.$el.removeClass('label-danger label-success').addClass('label-default');
+    } else if (this.model.get('pagos')){
+      this.$el.removeClass('label-success label-default').addClass('label-danger');
     } else{
-      this.$el.removeClass('label-success').addClass('label-danger');
+      this.$el.removeClass('label-danger label-default').addClass('label-success');
     }
   }
 

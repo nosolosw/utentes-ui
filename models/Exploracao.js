@@ -30,11 +30,32 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'fontes':     new Backbone.SIXHIARA.FonteCollection(),
     'geometry':   new Backbone.Model(),
 
-    // computed properties
-    // only the label color changes, not its value
-    'summary_licencia': 'Licencia',
-    'summary_consumo':  'Consumo',
-    'summary_pagos':    'Pagos',
+  },
+
+  initialize: function(){
+    // set some computed properties
+    this.set('summary_licencia_val', this.getSummaryEstado());
+    this.set('summary_licencia_msg', 'Licencia');
+    this.set('summary_consumo_val',  this.getSummaryConsumo());
+    this.set('summary_consumo_msg',  'Consumo');
+    this.set('summary_pagos_val',    this.getSummaryPagos());
+    this.set('summary_pagos_msg',    'Pagos');
+  },
+
+  getSummaryEstado: function(){
+    var valid = true;
+    this.get('licencias').forEach(function(licencia){
+      valid = valid && (licencia.get('estado') === 'Licenciada');
+    });
+    return valid;
+  },
+
+  getSummaryConsumo: function(){
+    return (this.get('c_licencia') >= this.get('c_real'));
+  },
+
+  getSummaryPagos: function(){
+    return this.get('pagos');
   },
 
   showUrl: function() {

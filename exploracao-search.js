@@ -1,22 +1,15 @@
 var where = new Backbone.SIXHIARA.Where();
-
-// var domains = DOMAINS_REPO; // Descomentar para trabajar con fixtures
-// var exploracaos = EXPLORACAOS_REPO; // Descomentar para trabajar con fixtures
-
-
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 var exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection();
 var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
 
 domains.fetch({
   success: function(collection, response, options) {
-
     new Backbone.SIXHIARA.FiltersView({
       el: $('#filters'),
       model: where,
       domains: domains,
-  }).render();
-
+    }).render();
   }
 });
 

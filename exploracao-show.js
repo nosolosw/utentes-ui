@@ -27,17 +27,17 @@ if((id === undefined) || (id === null) || (id === '')){
 
       // summaries licencia, consumo & pagos
       new Backbone.SIXHIARA.SummaryLicenciaView({
-        el: $('#summary_licencia'),
+        el: $('#summary_licencia_msg'),
         model: exploracao
       }).render();
 
       new Backbone.SIXHIARA.SummaryConsumoView({
-        el: $('#summary_consumo'),
+        el: $('#summary_consumo_msg'),
         model: exploracao
       }).render();
 
       new Backbone.SIXHIARA.SummaryPagosView({
-        el: $('#summary_pagos'),
+        el: $('#summary_pagos_msg'),
         model: exploracao
       }).render();
 

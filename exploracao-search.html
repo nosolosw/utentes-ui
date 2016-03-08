@@ -126,9 +126,9 @@
   <li class="row exploracao">
     <a class="col-xs-12 pull-left" href="<%- showUrl %>"><%- exp_id %> <%- exp_name %></a>
     <span class="col-xs-12 ">
-      <small class="label label-success"><%- estado %></small>
-      <small class="label label-default"><%- consumo %></small>
-      <small class="label label-danger"><%- pagos %></small>
+      <small class="label <%- summary_licencia_val ? 'label-success' : 'label-danger' %>" id="summary_licencia"><%- summary_licencia_msg.charAt(0) %></small>
+      <small class="label <%- summary_consumo_val ? 'label-success' : 'label-danger' %>" id="summary_consumo"><%- summary_consumo_msg.charAt(0) %></small>
+      <small class="label <%- summary_pagos_val === null ? 'label-default' : (summary_pagos_val ? 'label-success' : 'label-danger') %>" id="summary_pagos"><%- summary_pagos_msg.charAt(0) %></small>
       <small style="color: grey; font-size: 75%"><%- utente['nome'] %></small>
     </span>
   </li>
@@ -156,8 +156,6 @@
 <script src="lib/backbone-geojson/Feature.js"></script>
 <script src="lib/backbone-geojson/FeatureCollection.js"></script>
 
-<script src="data/domains.js"></script>
-<script src="data/exploracaos.js"></script>
 <script src="Config.js"></script>
 
 <script src="models/Where.js"></script>
@@ -170,6 +168,8 @@
 <script src="models/Utente.js"></script>
 <script src="models/Exploracao.js"></script>
 <script src="models/ExploracaoCollection.js"></script>
+
+<script src="views/SummaryLicenciaView.js"></script>
 
 <script src="exploracao-search.js"></script>
 
