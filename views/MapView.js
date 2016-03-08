@@ -25,8 +25,9 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
   update: function(newCollection){
     this.collection = newCollection;
     this.geoJSONLayer.clearLayers();
-    if(this.collection.length > 0){
-      this.geoJSONLayer.addData(this.collection.toGeoJSON());
+    var geojson = this.collection.toGeoJSON();
+    if(geojson.features.length > 0){
+      this.geoJSONLayer.addData(geojson);
       this.map.fitBounds(this.geoJSONLayer.getBounds())
       .setMaxBounds(this.geoJSONLayer.getBounds().pad(0.5));
     } else{
