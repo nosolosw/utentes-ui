@@ -22,7 +22,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'c_licencia': null,
     'c_real':     null,
     'c_estimado': null,
-    'actividade': new Backbone.Model(),
+    'actividade': null,
     'area':       null,
     'geometry':   null,
     'utente':     new Backbone.SIXHIARA.Utente(),
@@ -75,11 +75,6 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
     if (_.has(response, 'fontes')) {
       response.fontes = new Backbone.SIXHIARA.FonteCollection(response.fontes)
-    }
-
-    // TODO: make actividade a nested model in API and BD
-    if(_.has(response, 'actividade')){
-      response.actividade = new Backbone.Model({'tipo': response.actividade});
     }
 
     return response;

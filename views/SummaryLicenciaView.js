@@ -7,6 +7,8 @@ Backbone.SIXHIARA.SummaryLicenciaView = Backbone.View.extend({
     } else{
       this.$el.removeClass('label-success').addClass('label-danger');
     }
+
+    return this;
   }
 
 });

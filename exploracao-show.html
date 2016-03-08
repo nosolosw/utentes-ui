@@ -39,12 +39,12 @@
           <span class="col-xs-12">
             <div>
               <h3>EXPLORACAO <span class="widget" id="exp_id"></span>
-              <span class="pull-right">
-                <button type="button" class="btn btn-default btn-sm">Documentos</button>
-                <button type="button" class="btn btn-primary btn-sm">Guardar</button>
-                <button id="delete-button" ftype="button" class="btn btn-default btn-sm">Eliminar</button>
-              </span>
-            </h3>
+                <span class="pull-right">
+                  <button type="button" class="btn btn-default btn-sm">Documentos</button>
+                  <button id="save-button" type="button" class="disabled btn btn-primary btn-sm">Guardar</button>
+                  <button id="delete-button" ftype="button" class="btn btn-default btn-sm">Eliminar</button>
+                </span>
+              </h3>
             </div>
           </div>
 
@@ -52,7 +52,7 @@
             <div class="row">
               <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
               <h3 class="col-xs-10"> <span class="widget" id="exp_name"></span>
-                <button type="button" class="btn btn-default btn-xs">Editar</button>
+                <button type="button" class="btn btn-default btn-xs" id="editInfo">Editar</button>
               </h3>
             </div>
             <div class="row">
@@ -75,7 +75,7 @@
             <div class="row">
               <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
               <h3 class="col-xs-11"><span class="widget" id="loc_provin"></span> / <span class="widget" id="loc_distri"></span>
-                <button type="button" class="btn btn-default btn-xs">Editar</button>
+                <button type="button" class="btn btn-default btn-xs" id="editLoc">Editar</button>
               </h3>
             </div>
             <div class="row">
@@ -91,11 +91,11 @@
             <div class="row">
               <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
               <h3 class="col-xs-11"><span class="widget" id="nome"></span>
-                <button type="button" class="btn btn-default btn-xs">Editar</button>
+                <button type="button" class="btn btn-default btn-xs" id="editUtente">Editar</button>
               </h3>
             </div>
             <div class="row">
-              <span class="col-xs-offset-1 col-xs-11"><span class="title">NUIT:</span> <span class="widget" id="nuit">-</span> <span class="title">Registro:</span> <span class="widget" id="reg_comerc">-</span> <span class="title">Zona registro:</span> <span class="widget" id="reg_zona">-</span> </span>
+              <span class="col-xs-offset-1 col-xs-11"><span class="title">NUIT:</span> <span class="widget" id="nuit">-</span> <span class="title">Registro:</span> <span class="widget" id="reg_comerc">-</span> <span class="title">Zona registro:</span> <span class="widget" id="reg_zona">-</span> <span class="title">Tipo de entidade:</span> <span class="widget" id="entidade">-</span></span>
             </div>
             <div class="row">
               <span class="col-xs-offset-1 col-xs-11"><span class="title">Localización:</span> <span class="widget" id="loc_provin">-</span> <span class="title">/</span> <span class="widget" id="loc_distri">-</span> <span class="title">/</span> <span class="widget" id="loc_posto">-</span> <span class="title">/</span> <span class="widget" id="loc_nucleo">-</span></span>
@@ -105,11 +105,11 @@
             </div>
           </section>
 
-          <section id="actividade">
+          <section id="info-actividade">
             <div class="row">
               <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
-              <h3 class="col-xs-11"><span class="widget" id="tipo">Actividade non declarada</span>
-                <button type="button" class="btn btn-default btn-xs">Editar</button>
+              <h3 class="col-xs-11"><span class="widget" id="actividade">Actividade non declarada</span>
+                <button type="button" class="btn btn-default btn-xs" id="editActividade">Editar</button>
               </h3>
             </div>
             <div class="row">
@@ -206,6 +206,208 @@
 
   </main>
 
+  <!-- modals -->
+
+  <!-- modal info -->
+  <div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog" aria-labelledby="editInfoModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editInfoModalLabel">Informação</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="exp_name">Nome da exploração</label>
+              <input type="text" class="form-control widget" id="exp_name">
+            </div>
+            <div class="form-group col-xs-3">
+              <label for="d_soli">D. solicitude</label>
+              <input type="text" class="form-control widget" id="d_soli">
+            </div>
+            <div class="form-group col-xs-3">
+              <label for="pagos">Pagos</label>
+              <select class="form-control widget" id="pagos">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
+              <textarea class="form-control widget" id="observacio" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal loc -->
+  <div class="modal fade" id="editLocModal" tabindex="-1" role="dialog" aria-labelledby="editLocModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editLocModalLabel">Localização</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_provin">Provincia</label>
+              <select class="form-control widget" id="loc_provin">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="loc_bacia">Bacia</label>
+              <select class="form-control widget" id="loc_bacia">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_distri">Distrito</label>
+              <select class="form-control widget" id="loc_distri">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="loc_subaci">Sub-bacia</label>
+              <select class="form-control widget" id="loc_subaci">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_posto">Posto administrativo</label>
+              <select class="form-control widget" id="loc_posto">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="loc_rio">Río</label>
+              <input type="text" class="form-control widget" id="loc_rio">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_nucleo">Núcleo</label>
+              <input type="text" class="form-control widget" id="loc_nucleo">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="loc_endere">Enderezo</label>
+              <input type="text" class="form-control widget" id="loc_endere">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal utente -->
+  <div class="modal fade" id="editUtenteModal" tabindex="-1" role="dialog" aria-labelledby="editUtenteModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editUtenteModalLabel">Utente</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <select id="select-utente" class="form-control">
+                <option selected value="novo"> - Novo utente - </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="nome">Nome do utente</label>
+              <input type="text" class="form-control widget widget-utente" id="nome">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_provin">Provincia</label>
+              <select class="form-control widget widget-utente" id="loc_provin">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="nuit">NUIT</label>
+              <input type="text" class="form-control widget widget-utente" id="nuit">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_distri">Distrito</label>
+              <select class="form-control widget widget-utente" id="loc_distri">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="entidade">Tipo de entidade</label>
+              <input type="text" class="form-control widget widget-utente" id="entidade">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_posto">Posto administrativo</label>
+              <select class="form-control widget widget-utente" id="loc_posto">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="reg_comerc">Nº registro</label>
+              <input type="text" class="form-control widget widget-utente" id="reg_comerc">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_nucleo">Núcleo</label>
+              <input type="text" class="form-control widget widget-utente" id="loc_nucleo">
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="reg_zona">Registrado em</label>
+              <input type="text" class="form-control widget widget-utente" id="reg_zona">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="observacio">Observaçôes</label>
+              <textarea class="form-control widget widget-utente" id="observacio" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal actividade -->
+  <div class="modal fade" id="editActividadeModal" tabindex="-1" role="dialog" aria-labelledby="editActividadeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editActividadeModalLabel">Actividade</h4>
+        </div>
+        <div class="modal-body">
+          <div id="actividade-explotacion" class="row">
+            <div class="form-group col-xs-offset-1 col-xs-5">
+              <label for="actividade">Tipo de actividade</label>
+              <select id="actividade" class="form-control widget">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- templates -->
   <script type="text/template" id="licencia-tmpl">
     <div class="row">
@@ -261,37 +463,13 @@
 
   <!-- javascript -->
 
-  <script src="lib/moment-2.11.2/moment-with-locales.js"></script>
-  <script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
-  <script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
-  <script src="lib/formatter/formatter.js"></script>
   <script src="lib/jquery/jquery-1.12.0.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="lib/json2.js"></script>
   <script src="lib/underscore/underscore-min.js"></script>
   <script src="lib/backbone/backbone-min.js"></script>
 
-  <script src="Config.js"></script>
-  <script src="models/Fonte.js"></script>
-  <script src="models/FonteCollection.js"></script>
-  <script src="models/Licencia.js"></script>
-  <script src="models/LicenciaCollection.js"></script>
-  <script src="models/Utente.js"></script>
-  <script src="lib/backbone-geojson/Feature.js"></script>
-  <script src="lib/backbone-geojson/FeatureCollection.js"></script>
-  <script src="models/Exploracao.js"></script>
-
-  <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
-  <script src="views/TableRowShowView.js"></script>
-  <script src="views/TableShowView.js"></script>
-  <script src="views/ButtonDeleteView.js"></script>
-  <script src="views/LicenciaView.js"></script>
-  <script src="views/SummaryLicenciaView.js"></script>
-  <script src="views/SummaryConsumoView.js"></script>
-  <script src="views/SummaryPagosView.js"></script>
-
   <script src="lib/leaflet/leaflet.js"></script>
-  <!-- <script src="libs/leaflet-src.js"></script> -->
-
   <script src="lib/leaflet-draw/src/Leaflet.draw.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
@@ -316,7 +494,47 @@
   <script src="lib/leaflet-draw/src/edit/EditToolbar.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
   <script src="lib/leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+  <script src="lib/moment-2.11.2/moment-with-locales.js"></script>
+  <script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
+  <script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
+  <script src="lib/formatter/formatter.js"></script>
+
+  <script src="lib/schema-validator/validator.js"></script>
+
+  <script src="lib/backbone-geojson/Feature.js"></script>
+  <script src="lib/backbone-geojson/FeatureCollection.js"></script>
+
+  <script src="lib/backbone-uilib/models/Domain.js"></script>
+  <script src="lib/backbone-uilib/models/DomainCollection.js"></script>
+  <script src="lib/backbone-uilib/views/OptionView.js"></script>
+  <script src="lib/backbone-uilib/views/SelectView.js"></script>
+  <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
+
+  <script src="Config.js"></script>
+
+  <script src="models/Fonte.js"></script>
+  <script src="models/FonteSchema.js"></script>
+  <script src="models/FonteCollection.js"></script>
+  <script src="models/Licencia.js"></script>
+  <script src="models/LicenciaSchema.js"></script>
+  <script src="models/LicenciaCollection.js"></script>
+  <script src="models/Utente.js"></script>
+  <script src="models/UtenteSchema.js"></script>
+  <script src="models/UtenteCollection.js"></script>
+  <script src="models/Exploracao.js"></script>
+  <script src="models/ExploracaoSchema.js"></script>
+
+  <script src="views/TableRowShowView.js"></script>
+  <script src="views/TableShowView.js"></script>
+  <script src="views/ButtonDeleteView.js"></script>
+  <script src="views/ButtonSaveView.js"></script>
+  <script src="views/LicenciaView.js"></script>
+  <script src="views/SummaryLicenciaView.js"></script>
+  <script src="views/SummaryConsumoView.js"></script>
+  <script src="views/SummaryPagosView.js"></script>
   <script src="views/ExploracaoMapView.js"></script>
+  <script src="views/SelectUtenteView.js"></script>
 
   <script src="exploracao-show.js"></script>
 

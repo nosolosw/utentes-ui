@@ -10,7 +10,6 @@ Backbone.SIXHIARA.ButtonDeleteView = Backbone.View.extend({
     this.model.destroy({
       // wait: true,
       success: function(model, resp, options) {
-        // TODO: parametrize
         window.location = Backbone.SIXHIARA.Config.searchUrl;
       },
       error: function(xhr, textStatus, errorThrown) {

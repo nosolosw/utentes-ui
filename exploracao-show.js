@@ -1,112 +1,281 @@
+function idIsNotValid(id){
+  // TODO: check id against all id in collection
+  return (id === undefined) || (id === null) || (id === '');
+}
+
 var exploracao = new Backbone.SIXHIARA.Exploracao();
-exploracao.set('id', window.location.search.split('=')[1]);
+var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
+var utentes = new Backbone.SIXHIARA.UtenteCollection();
 
-var id = exploracao.get('id');
-if((id === undefined) || (id === null) || (id === '')){
+exploracao.set('id', window.location.search.split('=')[1], {silent: true});
+if(idIsNotValid(exploracao.get('id'))){
+  window.location = Backbone.SIXHIARA.Config.searchUrl;
+}
 
-  // TODO: redirect to search
-  populateFromFakeData(exploracaoShow);
+exploracao.fetch({
+  parse: true,
+  success: function(){
 
-} else {
+    // TODO actions: delete, save, open file folder
 
-  exploracao.fetch({
-    parse: true,
-    success: function(){
+    // TODO: do not listen to events if button is disabled
+    new Backbone.SIXHIARA.ButtonSaveView({
+      el: $('#save-button'),
+      model: exploracao
+    });
 
-      // block info
-      new Backbone.UILib.WidgetsView({
-        el: $('#title'),
-        model: exploracao
-      }).render();
+    // TODO: ask before delete it
+    new Backbone.SIXHIARA.ButtonDeleteView({
+      el: $('#delete-button'),
+      model: exploracao
+    });
 
-      // block info
-      new Backbone.UILib.WidgetsView({
-        el: $('#info'),
-        model: exploracao
-      }).render();
+    // map
+    new Backbone.SIXHIARA.ExploracaoMapView({
+      model: exploracao
+    });
 
-      // summaries licencia, consumo & pagos
-      new Backbone.SIXHIARA.SummaryLicenciaView({
-        el: $('#summary_licencia_msg'),
-        model: exploracao
-      }).render();
+    // block title: exp_id
+    new Backbone.UILib.WidgetsView({
+      el: $('#title'),
+      model: exploracao
+    }).render();
 
-      new Backbone.SIXHIARA.SummaryConsumoView({
-        el: $('#summary_consumo_msg'),
-        model: exploracao
-      }).render();
+    // block info & its modal
+    var infoView = new Backbone.UILib.WidgetsView({
+      el: $('#info'),
+      model: exploracao
+    }).render();
 
-      new Backbone.SIXHIARA.SummaryPagosView({
-        el: $('#summary_pagos_msg'),
-        model: exploracao
-      }).render();
+    new Backbone.UILib.WidgetsView({
+      el: $('#editInfoModal'),
+      model: exploracao
+    }).render();
 
-      // block loc-info
-      new Backbone.UILib.WidgetsView({
-        el: $('#loc-info'),
-        model: exploracao
-      }).render();
+    $('#editInfo').on('click', function(e){
+      e.preventDefault();
+      $('#editInfoModal').modal('toggle');
+    });
 
-      // block utente
-      new Backbone.UILib.WidgetsView({
-        el: $('#utente'),
-        model: exploracao.get('utente'),
-      }).render();
+    // summaries licencia, consumo & pagos
+    var summaryLicenciaView = new Backbone.SIXHIARA.SummaryLicenciaView({
+      el: $('#summary_licencia_msg'),
+      model: exploracao
+    }).render();
 
-      // block actividade
-      new Backbone.UILib.WidgetsView({
-        el: $('#actividade'),
-        model: exploracao.get('actividade'),
-      }).render();
+    var summaryConsumoView = new Backbone.SIXHIARA.SummaryConsumoView({
+      el: $('#summary_consumo_msg'),
+      model: exploracao
+    }).render();
 
-      // block consumos
-      new Backbone.UILib.WidgetsView({
-        el: $('#consumos'),
-        model: exploracao
-      }).render();
+    // TODO: pagos is boolean, make select to use alias
+    var summaryPagosView = new Backbone.SIXHIARA.SummaryPagosView({
+      el: $('#summary_pagos_msg'),
+      model: exploracao
+    }).render();
 
-      // block Licencias
-      var licencias = exploracao.get('licencias');
+    // block loc-info & its modal
+    var locView = new Backbone.UILib.WidgetsView({
+      el: $('#loc-info'),
+      model: exploracao
+    }).render();
 
-      // TODO: how to choose the license between the possible list?
-      var licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
-      new Backbone.SIXHIARA.LicenciaView({
-        el: $('#licencia-superficial'),
-        model: licSup,
-        template: _.template($('#licencia-tmpl').html())
-      }).render();
+    $('#editLoc').on('click', function(e){
+      e.preventDefault();
+      $('#editLocModal').modal('toggle');
+    });
 
-      // TODO: how to choose the license between the possible list?
-      var licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
-      new Backbone.SIXHIARA.LicenciaView({
-        el: $('#licencia-subterranea'),
-        model: licSub,
-        template: _.template($('#licencia-tmpl').html())
-      }).render();
+    // block utente
+    var utente = exploracao.get('utente');
+    var utenteView = new Backbone.UILib.WidgetsView({
+      el: $('#utente'),
+      model: utente,
+    }).render();
 
-      // block fontes
-      new Backbone.SIXHIARA.TableShowView({
-        el: $('#fontes'),
-        collection: exploracao.get('fontes'),
-      }).render();
+    new Backbone.UILib.WidgetsView({
+      el: $('#editUtenteModal'),
+      model: exploracao.get('utente')
+    }).render();
 
-      // actions
-      new Backbone.SIXHIARA.ButtonDeleteView({
-        el: $('#delete-button'),
-        model: exploracao
-      });
+    $('#editUtente').on('click', function(e){
+      e.preventDefault();
+      $('#editUtenteModal').modal('toggle');
+    });
 
-      // map
-      new Backbone.SIXHIARA.ExploracaoMapView({
-        model: exploracao
-      });
-    },
+    // block actividade
+    var actividadeView = new Backbone.UILib.WidgetsView({
+      el: $('#info-actividade'),
+      model: exploracao,
+    }).render();
 
-    error: function(){
-      console.log('could not load data');
-      // TODO: show message
-    }
+    new Backbone.UILib.WidgetsView({
+      el: $('#editActividadeModal'),
+      model: exploracao,
+    }).render();
 
+    $('#editActividade').on('click', function(e){
+      e.preventDefault();
+      $('#editActividadeModal').modal('toggle');
+    });
+
+    // block consumos
+    var consumosView = new Backbone.UILib.WidgetsView({
+      el: $('#consumos'),
+      model: exploracao
+    }).render();
+
+    // block Licencias
+    var licencias = exploracao.get('licencias');
+
+    // TODO: how to choose the license between the possible list?
+    var licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
+    new Backbone.SIXHIARA.LicenciaView({
+      el: $('#licencia-superficial'),
+      model: licSup,
+      template: _.template($('#licencia-tmpl').html())
+    }).render();
+
+    // TODO: how to choose the license between the possible list?
+    var licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
+    new Backbone.SIXHIARA.LicenciaView({
+      el: $('#licencia-subterranea'),
+      model: licSub,
+      template: _.template($('#licencia-tmpl').html())
+    }).render();
+
+    // block fontes
+    new Backbone.SIXHIARA.TableShowView({
+      el: $('#fontes'),
+      collection: exploracao.get('fontes'),
+    }).render();
+
+    domains.fetch({
+      success: function(collection, response, options) {
+        fillComponentsWithDomains();
+      }
+    });
+
+    utentes.fetch({
+      success: function() {
+        fillSelectUtente();
+      }
+    });
+
+    // TODO: listen to specific attributes
+    exploracao.on('change', function(model, value, options){
+      // TODO: enable save button
+
+      infoView.render();
+      summaryLicenciaView.render();
+      summaryConsumoView.render();
+      summaryPagosView.render();
+      locView.render();
+      consumosView.render();
+      actividadeView.render();
+
+      // TODO: render licencias & fontes?
+    });
+
+    utente.on('change', function(model, value, options){
+      utenteView.render();
+    });
+
+  },
+
+  error: function(){
+    console.log('could not load data');
+    window.location = Backbone.SIXHIARA.Config.searchUrl;
+  }
+
+});
+
+function fillSelectUtente(){
+  new Backbone.SIXHIARA.SelectUtenteView({
+    el: $('#editUtenteModal'),
+    model: utentes
+  }).render();
+}
+
+function fillComponentsWithDomains(){
+  var pagos       = domains.byCategory('pagamentos');
+  var provincias  = domains.byCategory('provincia');
+  var distritos   = domains.byCategory('distrito');
+  var postos      = domains.byCategory('posto');
+  var bacias      = domains.byCategory('bacia');
+  var subacias    = domains.byCategory('subacia');
+  var actividades = domains.byCategory('actividade');
+
+  // modal info
+  new Backbone.UILib.SelectView({
+    el: $('#editInfoModal #pagos'),
+    collection: pagos
+  }).render();
+
+  // modal loc
+  new Backbone.UILib.SelectView({
+    el: $('#editLocModal #loc_provin'),
+    collection: provincias
+  }).render();
+
+  var selectDistritos = new Backbone.UILib.SelectView({
+    el: $('#editLocModal #loc_distri'),
+    collection: []
+  }).render();
+  selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value, options){
+    this.update(distritos.where({'parent': model.get('loc_provin')}));
   });
 
+  var selectPostos = new Backbone.UILib.SelectView({
+    el: $('#editLocModal #loc_posto'),
+    collection: []
+  }).render();
+  selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, options){
+    this.update(postos.where({'parent': model.get('loc_distri')}));
+  });
+
+  new Backbone.UILib.SelectView({
+    el: $('#editLocModal #loc_bacia'),
+    collection: bacias
+  }).render();
+
+  var selectSubacias = new Backbone.UILib.SelectView({
+    el: $('#editLocModal #loc_subaci'),
+    collection: [],
+  }).render();
+  selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, options){
+    this.update(subacias.where({'parent': model.get('loc_bacia')}));
+  });
+
+  new Backbone.UILib.WidgetsView({
+    el: $('#editLocModal'),
+    model: exploracao
+  }).render();
+
+  // modal utente: localizacao
+  new Backbone.UILib.SelectView({
+    el: $('#editUtenteModal #loc_provin'),
+    collection: provincias
+  }).render();
+
+  var distritosUtente = new Backbone.UILib.SelectView({
+    el: $('#editUtenteModal #loc_distri'),
+    collection: [],
+  }).render();
+  distritosUtente.listenTo(exploracao.get('utente'), 'change:loc_provin', function(model, value, options){
+    this.update(distritos.where({'parent': model.get('loc_provin')}));
+  });
+
+  var postosUtente = new Backbone.UILib.SelectView({
+    el: $('#editUtenteModal #loc_posto'),
+    collection: [],
+  }).render();
+  postosUtente.listenTo(exploracao.get('utente'), 'change:loc_distri', function(model, value, options){
+    this.update(postos.where({'parent': model.get('loc_distri')}));
+  });
+
+  // modal actividade: actividades
+  new Backbone.UILib.SelectView({
+    el: $('#editActividadeModal #actividade'),
+    collection: actividades
+  }).render();
 }
