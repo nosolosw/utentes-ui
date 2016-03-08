@@ -15,7 +15,29 @@ if((id === undefined) || (id === null) || (id === '')){
 
       // block info
       new Backbone.UILib.WidgetsView({
+        el: $('#title'),
+        model: exploracao
+      }).render();
+
+      // block info
+      new Backbone.UILib.WidgetsView({
         el: $('#info'),
+        model: exploracao
+      }).render();
+
+      // summaries licencia, consumo & pagos
+      new Backbone.SIXHIARA.SummaryLicenciaView({
+        el: $('#summary_licencia'),
+        model: exploracao
+      }).render();
+
+      new Backbone.SIXHIARA.SummaryConsumoView({
+        el: $('#summary_consumo'),
+        model: exploracao
+      }).render();
+
+      new Backbone.SIXHIARA.SummaryPagosView({
+        el: $('#summary_pagos'),
         model: exploracao
       }).render();
 

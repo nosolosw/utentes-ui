@@ -30,9 +30,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'fontes':     new Backbone.SIXHIARA.FonteCollection(),
     'geometry':   new Backbone.Model(),
 
-    'consumo': 'C', // FIXME. Está en las fixtures
-    'estado':  'L', // FIXME. Está en las fixtures
-    // 'pagos':   'P', // FIXME. Está en las fixtures. En create tiene que ser un booleano
+    // computed properties
+    // only the label color changes, not its value
+    'summary_licencia': 'Licencia',
+    'summary_consumo':  'Consumo',
+    'summary_pagos':    'Pagos',
   },
 
   showUrl: function() {

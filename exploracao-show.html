@@ -37,25 +37,32 @@
 
         <div id="title" class="row">
           <span class="col-xs-12">
-            <h3>Exploracao
-              <!-- <span class="label label-success">L</span>
-              <span class="label label-default">C</span>
-              <span class="label label-danger">P</span> -->
+            <div>
+              <h3>EXPLORACAO <span class="widget" id="exp_id"></span>
               <span class="pull-right">
                 <button type="button" class="btn btn-default btn-sm">Documentos</button>
                 <button type="button" class="btn btn-primary btn-sm">Guardar</button>
                 <button id="delete-button" ftype="button" class="btn btn-default btn-sm">Eliminar</button>
               </span>
             </h3>
+            </div>
           </div>
 
           <section id="info">
             <div class="row">
               <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
-              <h3 class="col-xs-10"><span class="widget" id="exp_id"></span> <span class="widget" id="exp_name"></span>
+              <h3 class="col-xs-10"> <span class="widget" id="exp_name"></span>
                 <button type="button" class="btn btn-default btn-xs">Editar</button>
               </h3>
             </div>
+            <div class="row">
+              <span class="col-xs-offset-1 col-xs-11">
+                <span class="label widget" id="summary_licencia"></span>
+                <span class="label widget" id="summary_consumo"></span>
+                <span class="label widget" id="summary_pagos"></span>
+              </span>
+            </div>
+            <br>
             <div class="row">
               <span class="col-xs-offset-1 col-xs-11"><span class="title">Data solicitude:</span> <span class="widget-date" id="d_soli">-</span></span>
             </div>
@@ -273,14 +280,14 @@
   <script src="lib/backbone-geojson/FeatureCollection.js"></script>
   <script src="models/Exploracao.js"></script>
 
-  <script src="data/exploracaos.js"></script>
-  <script src="data/populateFromFakeData.js"></script>
-
   <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
   <script src="views/TableRowShowView.js"></script>
   <script src="views/TableShowView.js"></script>
   <script src="views/ButtonDeleteView.js"></script>
   <script src="views/LicenciaView.js"></script>
+  <script src="views/SummaryLicenciaView.js"></script>
+  <script src="views/SummaryConsumoView.js"></script>
+  <script src="views/SummaryPagosView.js"></script>
 
   <script src="lib/leaflet/leaflet.js"></script>
   <!-- <script src="libs/leaflet-src.js"></script> -->
