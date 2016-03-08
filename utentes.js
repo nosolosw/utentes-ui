@@ -41,7 +41,8 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
     'exploracaos': 'Exploracaos',
     'observacio': 'Observacións',
   },
-  formatValue: formatValue
+  formatValue: formatValue,
+  colReorderOptions: false,
 });
 
 utentes.fetch({

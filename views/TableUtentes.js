@@ -10,6 +10,8 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     this.columnNames = this.options.columnNames;
     this.columnTitles = this.options.columnTitles;
     this.formatValue = this.options.formatValue;
+    this.customFiltering = this.options.customFiltering || [];
+    this.colReorderOptions = this.options.colReorderOptions || false;
   },
 
   reset: function() {
@@ -90,8 +92,15 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
           "sSortDescending": ": Activar para ordenar la columna de manera descendente"
         }
       },
-      "colReorder": {
-        "reorderCallback": function () {
+    });
+
+    /*
+    If colReorder is set when a column is moved the search function must be
+    reinitilized
+    */
+    if (this.colReorderOptions) {
+      new $.fn.dataTable.ColReorder( this.table, {
+        'reorderCallback': function () {
           self.table.columns({order:'applied'}).eq(0).each(function(colIdx) {
             self.table.column(colIdx).search('');
             $('input', self.table.column(colIdx).footer()).unbind().val('').on('keyup change',function(){
@@ -101,13 +110,19 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
           // self.table.search('');
           self.table.draw();
         }
-      },
-    });
+      });
+    }
 
     this.table.columns().eq(0).each(function(colIdx) {
       $('input', self.table.column(colIdx).footer()).on('keyup change',function(){
         self.table.column(colIdx).search(this.value).draw();
       });
+    });
+
+    // http://datatables.net/examples/plug-ins/range_filtering.html
+    // Allows combine DataTable filters with external filters
+    this.customFiltering.forEach(function(customFilter){
+      $.fn.dataTable.ext.search.push(customFilter);
     });
   }
 
