@@ -1,14 +1,8 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
 
-  // how to instantiate this view
-  //
-  // var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
-  //   collection: collection,
-  //   el: el
-  // });
 
-   template: '<table class="table table-hover table-bordered table-condensed"> <thead style="display: table-header-group;">  <tr id="header"> </tr> </thead> <tfoot style="display: table-header-group;"> <tr id="column-filter"> </tr> </tfoot> <tbody> </tbody> </table>',
+  template: '<table class="table table-hover table-bordered table-condensed"> <thead style="display: table-header-group;">  <tr id="header"> </tr> </thead> <tfoot style="display: table-header-group;"> <tr id="column-filter"> </tr> </tfoot> <tbody> </tbody> </table>',
 
   initialize: function(options){
     this.options = options || {};
@@ -116,11 +110,6 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       });
     });
   }
-  //
-  // render: function(){
-  //   this.$el.append(this.template(this.model.toJSON()));
-  //
-  //   return this;
-  // },
+
 
 });
