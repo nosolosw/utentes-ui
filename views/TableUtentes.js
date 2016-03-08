@@ -12,6 +12,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     this.formatValue = this.options.formatValue;
     this.customFiltering = this.options.customFiltering || [];
     this.colReorderOptions = this.options.colReorderOptions || false;
+    this.columnsWithOutTitle = this.options.columnsWithOutTitle || [];
   },
 
   reset: function() {
@@ -38,10 +39,16 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     var self = this;
 
     _.each(this.columnNames, function(v) {
-      var columnTitle = self.columnTitles[v];
-      var s = '<th>' + columnTitle + '</th>';
-      trHeader.append($(s));
-      trFilter.append($('<th><input type="text" placeholder="'+ columnTitle +'" /></th>'));
+      if (self.columnsWithOutTitle.indexOf(v) !== -1) {
+        trHeader.append($('<th> </th>'));
+        trFilter.append($('<th> </th>'));
+      } else {
+        var columnTitle = self.columnTitles[v];
+        var s = '<th>' + columnTitle + '</th>';
+        trHeader.append($(s));
+        trFilter.append($('<th><input type="text" placeholder="'+ columnTitle +'" /></th>'));
+      }
+
     });
 
     this.collection.forEach(this.appendRow, this);
@@ -65,11 +72,21 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
 
   createDataTable: function() {
     var self = this;
-    this.table = this.$('table').DataTable({
+    var dataTableOptions = {
       dom: 'R<"#table-toolbar"l<"pull-right"i>>rtp',
       language: self.language,
-      },
+    };
+
+    var columnDefs = [];
+    this.columnsWithOutTitle.forEach(function(column) {
+      var idx = self.columnNames.indexOf(column)
+      columnDefs.push({ "orderable": false, "targets": idx });
     });
+    if (! _.isEmpty(columnDefs)) {
+      dataTableOptions['columnDefs'] = columnDefs;
+    }
+
+    this.table = this.$('table').DataTable(dataTableOptions);
 
     /*
     If colReorder is set when a column is moved the search function must be
@@ -127,6 +144,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
       "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     },
+  },
 
 
 });

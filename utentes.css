@@ -1,3 +1,8 @@
+
+.btn-xs{ /*override bootstrap settings*/
+  color: #bbb !important;
+}
+
 /* ---- STRUCTURE ---- */
 
 /* height system to have scrolly panels */
@@ -175,44 +180,6 @@ nav a {
   font-weight: 400;
 }
 
-/* Buttons */
-
-.btn-default {
-  display: block;
-  width: 100%;
-  min-width: 50px;
-  height:48px;
-  padding: 8px 12px;
-  font-size: 16px;
-  line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 2px solid #edf0f4;
-  border-radius: 4px;
-  box-shadow: none!important;
-  margin-bottom:16px;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #FE8433;
-  border-color:#FE8433;
-  padding:10px 24px;
-  border-radius: 24px;
-  margin-top: 20px;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #EF7430;
-  border-color: #EF7430;
-}
-
 /* project panel */
 #project_data {
   padding-bottom: 4em;
@@ -332,14 +299,6 @@ nav a:hover,
 
 .current{
   background-color: #36537d;
-}
-
-.lead-btn{
-  background-color: #FD8D3C;
-}
-
-.lead-btn:hover{
-  background-color: #fd6d3c;
 }
 
 header,
