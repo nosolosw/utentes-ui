@@ -30,6 +30,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
   render: function() {
     this.createHtmlTable();
     this.createDataTable();
+    this.custom();
   },
 
   createHtmlTable: function() {
@@ -55,7 +56,8 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
   },
 
   appendRow: function(rowData){
-    var s = '<tr>';
+    // FIXME. http://datatables.net/reference/option/rowId
+    var s = '<tr id="gid-' + rowData.id + '">';
     var self = this;
     _.each(this.columnNames, function(field) {
       var v = rowData.get(field);
@@ -118,6 +120,42 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     this.customFiltering.forEach(function(customFilter){
       $.fn.dataTable.ext.search.push(customFilter);
     });
+  },
+
+  custom: function() {
+    var self = this;
+    $('#DataTables_Table_0_length').append($('<button id="create-button" type="button" class="btn btn-primary col-xs-1 pull-right">Criar</button>'));
+    $('#create-button').on('click', function(){
+      alert('Crear nueva utente');
+    });
+
+    $('#the_utentes_table table').on('click', 'button.delete', function() {
+      // table.row ( rowSelector ) http://datatables.net/reference/type/row-selector
+      var id = self.table.row(this.parentElement).id().split('-')[1];
+      var u = self.collection.filter({id:parseInt(id)})[0];
+
+      // FIXME. Don't reload page
+      if (confirm('Tem certeza de que deseja excluir: ' + u.get('nome'))) {
+        u.destroy({
+          wait: true,
+          success: function(model, resp, options) {
+            window.location = Backbone.SIXHIARA.Config.utentesUrl;
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            alert(textStatus.statusText);
+          }
+        });
+      }
+
+    });
+
+    $('#the_utentes_table table').on('click', 'button.edit', function() {
+      // table.row ( rowSelector ) http://datatables.net/reference/type/row-selector
+      var id = self.table.row(this.parentElement).id().split('-')[1];
+      var u = self.collection.filter({id:parseInt(id)})[0];
+      alert('Editando: ' + u.get('nome'));
+    });
+
   },
 
   language: {

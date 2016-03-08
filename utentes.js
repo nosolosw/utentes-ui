@@ -11,9 +11,9 @@ var formatValue = function(k, v, rowData) {
       return '<a href="' + showUrl + e.gid + '" target="_blank">' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade;
     }).join('<br>');
   } else if (k === 'actions') {
-    v = '<button type="button" class="btn btn-default btn-xs">Editar</button>';
-    v += ' ';
-    v += '<button type="button" class="btn btn-default btn-xs">Eliminar</button>';
+    v = '<button type="button" class="btn btn-default btn-xs edit">Editar</button>';
+    v += '<br><br>';
+    v += '<button type="button" class="btn btn-default btn-xs delete">Eliminar</button>';
   } else if (_.isEmpty(v)) {
     v = '';
   } else if (v === false) {
