@@ -7,8 +7,6 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
 
   save: function(){
 
-    // TODO: review this piece of code
-    // move validations to model.validate
     // FIXME. If Licencia is Emtpy the object should no be serialized
     var lics = this.model.get('licencias');
     var long = 0;
@@ -17,11 +15,13 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
     } else {
       long = lics.models.length;
     }
-    // what is this bucle for?
+
+    var to_remove = []
     for (var i = 0; i < long; i++) {
-      if (! lics.at(0).get('estado') ) lics.remove(lics.at(0));
+      if (! lics.at(i).get('estado') ) to_remove.push(i);
     }
-    // end of TODO: review this piece of code
+    for (index in to_remove) lics.remove(lics.at(index));
+    // end of FIXME
 
     if(! this.model.isValid()) {
         alert(this.model.validationError);

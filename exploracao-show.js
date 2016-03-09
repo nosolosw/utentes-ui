@@ -134,7 +134,11 @@ exploracao.fetch({
     var licencias = exploracao.get('licencias');
 
     // TODO: how to choose the license between the possible list?
-    licSup = licencias.where({'lic_tipo': 'Superficial'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
+    licSup = licencias.where({'lic_tipo': 'Superficial'})[0];
+    if(licSup == null) {
+      licSup = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
+      exploracao.get('licencias').add(licSup);
+    }
     var licSupView = new Backbone.SIXHIARA.LicenciaView({
       el: $('#licencia-superficial'),
       model: licSup,
@@ -151,7 +155,11 @@ exploracao.fetch({
     });
 
     // TODO: how to choose the license between the possible list?
-    licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0] || new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
+    licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0];
+    if(licSub == null) {
+      licSub = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
+      exploracao.get('licencias').add(licSub);
+    }
     var licSubView = new Backbone.SIXHIARA.LicenciaView({
       el: $('#licencia-subterranea'),
       model: licSub,
