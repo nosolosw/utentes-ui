@@ -114,11 +114,6 @@ exploracao.fetch({
     };
     actividadeView.render();
 
-    new Backbone.UILib.WidgetsView({
-      el: $('#editActividadeModal'),
-      model: exploracao,
-    }).render();
-
     $('#editActividade').on('click', function(e){
       e.preventDefault();
       $('#editActividadeModal').modal('toggle');
@@ -314,6 +309,11 @@ function fillComponentsWithDomains(){
   new Backbone.UILib.SelectView({
     el: $('#editActividadeModal #actividade'),
     collection: actividades
+  }).render();
+
+  new Backbone.UILib.WidgetsView({
+    el: $('#editActividadeModal'),
+    model: exploracao,
   }).render();
 
   // modals licencias
