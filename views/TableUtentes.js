@@ -75,8 +75,9 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
   createDataTable: function() {
     var self = this;
     var dataTableOptions = {
-      dom: 'R<"#table-toolbar"l<"pull-right"i>>rtp',
+      dom: 'R<"#table-toolbar"l<"pull-left"i>>rtp',
       language: self.language,
+      scrollx: false,
     };
 
     // FIXME. Introduce how to pass from the caller all posible options
