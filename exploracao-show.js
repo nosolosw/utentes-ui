@@ -102,7 +102,12 @@ exploracao.fetch({
     var actividadeView = new Backbone.UILib.WidgetsView({
       el: $('#info-actividade'),
       model: exploracao,
-    }).render();
+    });
+    actividadeView.displayNull = function(name){
+      if(name === 'actividade') return 'Actividade non declarada';
+      return '-';
+    };
+    actividadeView.render();
 
     new Backbone.UILib.WidgetsView({
       el: $('#editActividadeModal'),
