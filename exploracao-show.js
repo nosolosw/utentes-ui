@@ -1,3 +1,8 @@
+// hack for WidgetsView to display '-' as nullValues
+Backbone.UILib.WidgetsView.prototype.displayNull = function(name){
+  return '-';
+}
+
 function idIsNotValid(id){
   // TODO: check id against all id in collection
   return (id === undefined) || (id === null) || (id === '');
