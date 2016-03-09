@@ -18,11 +18,10 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
 
     var to_remove = []
     for (var i = 0; i < long; i++) {
-      if (! lics.at(i).get('estado') ) to_remove.push(i);
+      if (! lics.at(i).get('estado') ) to_remove.push(lics.at(i));
     }
-    to_remove.forEach(function(index){
-      lics.remove(lics.at(index))
-    });
+
+    lics.remove(to_remove);
     // end of FIXME
 
     if(! this.model.isValid()) {
