@@ -48,11 +48,6 @@ exploracao.fetch({
       model: exploracao
     }).render();
 
-    new Backbone.UILib.WidgetsView({
-      el: $('#editInfoModal'),
-      model: exploracao
-    }).render();
-
     $('#editInfo').on('click', function(e){
       e.preventDefault();
       $('#editInfoModal').modal('toggle');
@@ -227,6 +222,11 @@ function fillComponentsWithDomains(){
   new Backbone.UILib.SelectView({
     el: $('#editInfoModal #pagos'),
     collection: pagos
+  }).render();
+
+  new Backbone.UILib.WidgetsView({
+    el: $('#editInfoModal'),
+    model: exploracao
   }).render();
 
   // modal loc
