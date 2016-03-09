@@ -50,6 +50,10 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
   },
   formatValue: formatValue,
   colReorderOptions: false,
+  columnDefs: [{
+              "type": "localesort",
+              "targets": '_all'
+          }],
 });
 
 utentes.fetch({

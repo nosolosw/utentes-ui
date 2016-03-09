@@ -79,7 +79,9 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       language: self.language,
     };
 
-    var columnDefs = [];
+    // FIXME. Introduce how to pass from the caller all posible options
+    // of datatables
+    var columnDefs = this.options.columnDefs || [];
     this.columnsWithOutTitle.forEach(function(column) {
       var idx = self.columnNames.indexOf(column)
       columnDefs.push({ "orderable": false, "targets": idx });
