@@ -3,7 +3,7 @@ var utentes = new Backbone.SIXHIARA.UtenteCollection();
 var formatValue = function(k, v, rowData) {
   var showUrl = Backbone.SIXHIARA.Config.showUrl;
   if (k === 'nome') {
-    v = '<a href="#" target="_blank">' + v + '</a><br>' + (rowData.get('nuit') || '');
+    v = v + '<br>' + (rowData.get('nuit') || '');
   } else if (k === 'nuit') {
     v = null;
   } else if (k === 'exploracaos') {
