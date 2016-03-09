@@ -4,8 +4,8 @@ var EXPLORACAO_SCHEMA = [{
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'exp_id',
-  'message': 'O Nº de exploracão não tem o formato correcto',
-  'rules': ['EXP_ID_FORMAT']
+  'message':   'O Nº de exploracão não tem o formato correcto',
+  'rules':     ['EXP_ID_FORMAT']
 }, {
   'fieldname': 'exp_name',
   'message':   'Nome da exploracão non pode estar vacío',
@@ -50,4 +50,8 @@ var EXPLORACAO_SCHEMA = [{
   'fieldname': 'utente',
   'message':   'A exploracão ten que ter asignado un utente',
   'rules':     ['NOT_NULL']
+}, {
+  'fieldname': 'pagos',
+  'message':   'Pagos não tem o formato correcto',
+  'rules':     ['IS_BOOLEAN']
 }];
