@@ -101,8 +101,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       }
     });
 
-    var msgsExp = expValidator.validate(this.attributes);
-    msgsExp.forEach(function(msg){
+    expValidator.validate(this.attributes).forEach(function(msg){
       messages.push(msg);
     });
 
@@ -113,9 +112,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         return (value && (! re.test(value)));
       }
     });
-    licValidator.validate(this.attributes.licencias).forEach(function(msg){
-      messages.push(msg);
-    });
+    this.get('licencias').forEach(function(licencia){
+      licValidator.validate(licencia.attributes).forEach(function(msg){
+        messages.push(msg);
+      });
+    })
 
     var fonValidator = validator(FONTE_SCHEMA);
     this.get('fontes').forEach(function(fonte) {
@@ -124,8 +125,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       })
     });
 
-    var msgsUtente = validator(UTENTE_SCHEMA).validate(this.get('utente').attributes);
-    msgsUtente.forEach(function(msg){
+    validator(UTENTE_SCHEMA).validate(this.get('utente').attributes).forEach(function(msg){
       messages.push(msg);
     });
 
