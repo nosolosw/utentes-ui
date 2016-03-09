@@ -142,6 +142,7 @@ exploracao.fetch({
     }).render();
     licSup.on('change', function(){
       licSupView.render();
+      summaryLicenciaView.render();
     });
 
     $('#editLicSup').on('click', function(e){
@@ -158,6 +159,7 @@ exploracao.fetch({
     }).render();
     licSub.on('change', function(){
       licSubView.render();
+      summaryLicenciaView.render();
     });
 
     $('#editLicSub').on('click', function(e){
@@ -188,7 +190,6 @@ exploracao.fetch({
       // TODO: enable save button
 
       infoView.render();
-      summaryLicenciaView.render();
       summaryConsumoView.render();
       summaryPagosView.render();
       locView.render();
