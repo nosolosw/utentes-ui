@@ -316,70 +316,65 @@
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10">
-              <select id="select-utente" class="form-control">
-                <option selected value="novo"> - Novo utente - </option>
-              </select>
+              <select id="select-utente" class="form-control"></select>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10">
               <label for="nome">Nome do utente</label>
-              <input type="text" class="form-control widget widget-utente" id="nome">
+              <input type="text" class="form-control widget-utente" id="nome" disabled>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="loc_provin">Provincia</label>
-              <select class="form-control widget widget-utente" id="loc_provin">
-              </select>
+              <input type="text" class="form-control widget-utente" id="loc_provin" disabled>
             </div>
             <div class="form-group col-xs-offset-2 col-xs-4">
               <label for="nuit">NUIT</label>
-              <input type="text" class="form-control widget widget-utente" id="nuit">
+              <input type="text" class="form-control widget-utente" id="nuit" disabled>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="loc_distri">Distrito</label>
-              <select class="form-control widget widget-utente" id="loc_distri">
-              </select>
+              <input type="text" class="form-control widget-utente" id="loc_distri" disabled>
             </div>
             <div class="form-group col-xs-offset-2 col-xs-4">
               <label for="entidade">Tipo de entidade</label>
-              <input type="text" class="form-control widget widget-utente" id="entidade">
+              <input type="text" class="form-control widget-utente" id="entidade" disabled>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="loc_posto">Posto administrativo</label>
-              <select class="form-control widget widget-utente" id="loc_posto">
-              </select>
+              <input type="text" class="form-control widget-utente" id="loc_posto" disabled>
             </div>
             <div class="form-group col-xs-offset-2 col-xs-4">
               <label for="reg_comerc">Nº registro</label>
-              <input type="text" class="form-control widget widget-utente" id="reg_comerc">
+              <input type="text" class="form-control widget-utente" id="reg_comerc" disabled>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="loc_nucleo">Núcleo</label>
-              <input type="text" class="form-control widget widget-utente" id="loc_nucleo">
+              <input type="text" class="form-control widget-utente" id="loc_nucleo" disabled>
             </div>
             <div class="form-group col-xs-offset-2 col-xs-4">
               <label for="reg_zona">Registrado em</label>
-              <input type="text" class="form-control widget widget-utente" id="reg_zona">
+              <input type="text" class="form-control widget-utente" id="reg_zona" disabled>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10">
               <label for="observacio">Observaçôes</label>
-              <textarea class="form-control widget widget-utente" id="observacio" rows="3"></textarea>
+              <textarea class="form-control widget-utente" id="observacio" rows="3" disabled></textarea>
             </div>
           </div>
         </div>
@@ -636,7 +631,7 @@
   <script src="views/SummaryConsumoView.js"></script>
   <script src="views/SummaryPagosView.js"></script>
   <script src="views/ExploracaoMapView.js"></script>
-  <script src="views/SelectUtenteView.js"></script>
+  <script src="views/SelectUtenteViewShow.js"></script>
 
   <script src="exploracao-show.js"></script>
 

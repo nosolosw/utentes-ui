@@ -87,15 +87,9 @@ exploracao.fetch({
     });
 
     // block utente
-    var utente = exploracao.get('utente');
     var utenteView = new Backbone.UILib.WidgetsView({
       el: $('#utente'),
-      model: utente,
-    }).render();
-
-    new Backbone.UILib.WidgetsView({
-      el: $('#editUtenteModal'),
-      model: exploracao.get('utente')
+      model: exploracao.get('utente'),
     }).render();
 
     $('#editUtente').on('click', function(e){
@@ -202,7 +196,8 @@ exploracao.fetch({
       // TODO: render licencias & fontes?
     });
 
-    utente.on('change', function(model, value, options){
+    exploracao.on('change:utente', function(model, value, options){
+      utenteView.model = exploracao.get('utente');
       utenteView.render();
     });
 
@@ -282,28 +277,6 @@ function fillComponentsWithDomains(){
     el: $('#editLocModal'),
     model: exploracao
   }).render();
-
-  // modal utente: localizacao
-  new Backbone.UILib.SelectView({
-    el: $('#editUtenteModal #loc_provin'),
-    collection: provincias
-  }).render();
-
-  var distritosUtente = new Backbone.UILib.SelectView({
-    el: $('#editUtenteModal #loc_distri'),
-    collection: [],
-  }).render();
-  distritosUtente.listenTo(exploracao.get('utente'), 'change:loc_provin', function(model, value, options){
-    this.update(distritos.where({'parent': model.get('loc_provin')}));
-  });
-
-  var postosUtente = new Backbone.UILib.SelectView({
-    el: $('#editUtenteModal #loc_posto'),
-    collection: [],
-  }).render();
-  postosUtente.listenTo(exploracao.get('utente'), 'change:loc_distri', function(model, value, options){
-    this.update(postos.where({'parent': model.get('loc_distri')}));
-  });
 
   // modal actividade: actividades
   new Backbone.UILib.SelectView({
