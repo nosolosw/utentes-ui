@@ -142,7 +142,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
         u.destroy({
           wait: true,
           success: function(model, resp, options) {
-            window.location = Backbone.SIXHIARA.Config.utentesUrl;
+            window.location = Backbone.SIXHIARA.Config.urlUtentes;
           },
           error: function(xhr, textStatus, errorThrown) {
             alert(textStatus.statusText);

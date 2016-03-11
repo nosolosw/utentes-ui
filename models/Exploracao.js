@@ -1,7 +1,7 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
-  urlRoot: '/api/exploracaos',
+  urlRoot: Backbone.SIXHIARA.Config.apiExploracaos,
 
   defaults: {
     'id':         null,
@@ -60,8 +60,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     return this.get('pagos');
   },
 
-  showUrl: function() {
-    return Backbone.SIXHIARA.Config.showUrl + this.id;
+  urlShow: function() {
+    return Backbone.SIXHIARA.Config.urlShow + this.id;
   },
 
   parse: function(response){
@@ -83,12 +83,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   toJSON: function() {
-    var json =  _.clone(this.attributes);
-    json.geometry = this.get('geometry').toJSON();
-    json.utente = this.get('utente').toJSON();
+    var json       =  _.clone(this.attributes);
+    json.geometry  = this.get('geometry').toJSON();
+    json.utente    = this.get('utente').toJSON();
     json.licencias = this.get('licencias').toJSON();
-    json.fontes = this.get('fontes').toJSON();
-    json.showUrl = this.showUrl();
+    json.fontes    = this.get('fontes').toJSON();
+    json.urlShow   = this.urlShow();
     return json;
   },
 

@@ -1,7 +1,8 @@
 var where = new Backbone.SIXHIARA.Where();
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 var exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection();
-var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
+var domains = new Backbone.UILib.DomainCollection();
+domains.url = Backbone.SIXHIARA.Config.apiDomains;
 
 domains.fetch({
   success: function(collection, response, options) {

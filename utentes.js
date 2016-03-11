@@ -1,14 +1,14 @@
 var utentes = new Backbone.SIXHIARA.UtenteCollection();
 
 var formatValue = function(k, v, rowData) {
-  var showUrl = Backbone.SIXHIARA.Config.showUrl;
+  var urlShow = Backbone.SIXHIARA.Config.urlShow;
   if (k === 'nome') {
     v = v + '<br>' + (rowData.get('nuit') || '');
   } else if (k === 'nuit') {
     v = null;
   } else if (k === 'exploracaos') {
     v = v.map(function(e){
-      return '<a href="' + showUrl + e.gid + '" >' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade;
+      return '<a href="' + urlShow + e.gid + '" >' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade;
     }).join('<br>');
   } else if (k === 'actions') {
     v = '<button type="button" class="btn btn-default btn-xs edit">Editar</button>';

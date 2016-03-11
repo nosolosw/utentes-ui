@@ -1,4 +1,4 @@
-// hack for WidgetsView to display '-' as nullValues
+// All WidgetsView would display '-' as nullValues, unless it is set otherwise
 Backbone.UILib.WidgetsView.prototype.displayNull = function(name){
   return '-';
 }
@@ -9,13 +9,15 @@ function idIsNotValid(id){
 }
 
 var exploracao = new Backbone.SIXHIARA.Exploracao();
-var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
 var utentes = new Backbone.SIXHIARA.UtenteCollection();
+var domains = new Backbone.UILib.DomainCollection();
+domains.url = Backbone.SIXHIARA.Config.apiDomains;
+
 var licSup, licSub;
 
 exploracao.set('id', window.location.search.split('=')[1], {silent: true});
 if(idIsNotValid(exploracao.get('id'))){
-  window.location = Backbone.SIXHIARA.Config.searchUrl;
+  window.location = Backbone.SIXHIARA.Config.urlSearch;
 }
 
 exploracao.fetch({
@@ -205,7 +207,7 @@ exploracao.fetch({
 
   error: function(){
     console.log('could not load data');
-    window.location = Backbone.SIXHIARA.Config.searchUrl;
+    window.location = Backbone.SIXHIARA.Config.urlSearch;
   }
 
 });

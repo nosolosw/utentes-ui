@@ -4,7 +4,9 @@ $(document).ready(function() {
   });
 });
 
-var domains = new Backbone.UILib.DomainCollection({url: '/api/domains'});
+var domains = new Backbone.UILib.DomainCollection();
+domains.url = Backbone.SIXHIARA.Config.apiDomains;
+
 domains.fetch({
   success: function(collection, response, options) {
     fillComponentsWithDomains();

@@ -32,7 +32,7 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
     this.model.save(null, {
       wait: true,
       success: function(model, resp, options) {
-        window.location = model.showUrl();
+        window.location = model.urlShow();
       },
       error: function(xhr, textStatus, errorThrown) {
         alert(textStatus.statusText);
