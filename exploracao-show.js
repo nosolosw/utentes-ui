@@ -138,6 +138,7 @@ exploracao.fetch({
     licSup.on('change', function(){
       licSupView.render();
       summaryLicenciaView.render();
+      consumosView.render();
     });
 
     $('#editLicSup').on('click', function(e){
@@ -159,6 +160,7 @@ exploracao.fetch({
     licSub.on('change', function(){
       licSubView.render();
       summaryLicenciaView.render();
+      consumosView.render();
     });
 
     $('#editLicSub').on('click', function(e){
@@ -192,7 +194,6 @@ exploracao.fetch({
       summaryConsumoView.render();
       summaryPagosView.render();
       locView.render();
-      consumosView.render();
       actividadeView.render();
 
       // TODO: render licencias & fontes?

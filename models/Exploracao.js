@@ -40,6 +40,81 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.set('summary_consumo_msg',  'Consumo');
     this.set('summary_pagos_val',    this.getSummaryPagos());
     this.set('summary_pagos_msg',    'Pagos');
+
+    this.setListeners();
+    this.on('sync', function(model, response, options){
+      // TODO: on sync, how to off old listeners for licenses, if any?
+      this.setListeners();
+    }, this);
+
+  },
+
+  setListeners: function(){
+    var app = this;
+
+    this.get('licencias').forEach(function(model){
+      model.on('change:c_soli_tot', app.updateCSoli, app);
+      model.on('change:c_real_tot', app.updateCReal, app);
+      model.on('change:c_licencia', app.updateCLicencia, app);
+    });
+    this.get('licencias').on('add', function(model, collection, options){
+      model.on('change:c_soli_tot', this.updateCSoli, this);
+      model.on('change:c_real_tot', this.updateCReal, this);
+      model.on('change:c_licencia', this.updateCLicencia, this);
+    }, this);
+    this.get('licencias').on('reset', function(collection, options){
+      collection.forEach(function(license){
+        model.on('change:c_soli_tot', app.updateCSoli, app);
+        model.on('change:c_real_tot', app.updateCReal, app);
+        model.on('change:c_licencia', app.updateCLicencia, app);
+      });
+      collection.previousModels.forEach(function(license){
+        model.off('change:c_soli_tot', app.updateCSoli, app);
+        model.off('change:c_real_tot', app.updateCReal, app);
+        model.off('change:c_licencia', app.updateCLicencia, app);
+      })
+    });
+    this.get('licencias').on('remove', function(model, collection, options){
+      model.off('change:c_soli_tot', app.updateCSoli, this);
+      model.off('change:c_real_tot', app.updateCReal, this);
+      model.off('change:c_licencia', this.updateCLicencia, this);
+    }, this);
+  },
+
+  updateCSoli: function(){
+    this.set('c_soli', this.getCSoliTot());
+  },
+
+  getCSoliTot: function(){
+    var c_soli = null;
+    this.get('licencias').forEach(function(license){
+      c_soli += license.get('c_soli_tot');
+    });
+    return c_soli;
+  },
+
+  updateCReal: function(){
+    this.set('c_real', this.getCRealTot());
+  },
+
+  getCRealTot: function(){
+    var c_real = null;
+    this.get('licencias').forEach(function(license){
+      c_real += license.get('c_real_tot');
+    });
+    return c_real;
+  },
+
+  updateCLicencia: function(){
+    this.set('c_licencia', this.getCLicencia());
+  },
+
+  getCLicencia: function(){
+    var c_lic = null;
+    this.get('licencias').forEach(function(license){
+      c_lic += license.get('c_licencia');
+    });
+    return c_lic;
   },
 
   getSummaryEstado: function(){
