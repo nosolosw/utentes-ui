@@ -22,7 +22,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'c_licencia': null,
     'c_real':     null,
     'c_estimado': null,
-    'actividade': null,
+    'actividade': new Backbone.Model(),
     'area':       null,
     'geometry':   null,
     'utente':     new Backbone.SIXHIARA.Utente(),
@@ -154,6 +154,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       response.fontes = new Backbone.SIXHIARA.FonteCollection(response.fontes)
     }
 
+    if (_.has(response, 'actividade')) {
+      response.actividade = new Backbone.Model(response.actividade)
+    }
+
     return response;
   },
 
@@ -163,6 +167,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     json.utente    = this.get('utente').toJSON();
     json.licencias = this.get('licencias').toJSON();
     json.fontes    = this.get('fontes').toJSON();
+    json.actividade = this.get('actividade').toJSON();
     json.urlShow   = this.urlShow();
     return json;
   },
@@ -211,7 +216,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   contains: function(where){
-    var values = _.omit(where.values(), 'utente', 'lic_tipo', 'estado');
+    var values = _.omit(where.values(), 'utente', 'lic_tipo', 'estado', 'actividade');
     var properties = this.pick(_.keys(values));
     var containsAttrs = _.isEqual(properties, values);
     var containsUtente = true;
@@ -227,7 +232,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         containsLic = true;
       }
     }
-    return containsAttrs && containsUtente && containsLic;
+    var containsActividade = true;
+    if (where.attributes.actividade) {
+      containsActividade = (this.get('actividade').get('tipo') === where.attributes.actividade);
+    }
+
+    return containsAttrs && containsUtente && containsLic && containsActividade;
   }
 
 });
