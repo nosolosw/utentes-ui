@@ -52,33 +52,81 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   setListeners: function(){
     var app = this;
 
+    // licenses
     this.get('licencias').forEach(function(model){
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
     });
     this.get('licencias').on('add', function(model, collection, options){
-      model.on('change:c_soli_tot', this.updateCSoli, this);
-      model.on('change:c_real_tot', this.updateCReal, this);
-      model.on('change:c_licencia', this.updateCLicencia, this);
-    }, this);
+      model.on('change:c_soli_tot', app.updateCSoli, app);
+      model.on('change:c_real_tot', app.updateCReal, app);
+      model.on('change:c_licencia', app.updateCLicencia, app);
+      app.updateCSoli();
+      app.updateCReal();
+      app.updateCLicencia();
+    });
+    this.get('licencias').on('remove', function(model, collection, options){
+      model.off('change:c_soli_tot', app.updateCSoli, app);
+      model.off('change:c_real_tot', app.updateCReal, app);
+      model.off('change:c_licencia', app.updateCLicencia, app);
+      app.updateCSoli();
+      app.updateCReal();
+      app.updateCLicencia();
+    });
     this.get('licencias').on('reset', function(collection, options){
-      collection.forEach(function(license){
+      collection.forEach(function(model){
         model.on('change:c_soli_tot', app.updateCSoli, app);
         model.on('change:c_real_tot', app.updateCReal, app);
         model.on('change:c_licencia', app.updateCLicencia, app);
+        app.updateCSoli();
+        app.updateCReal();
+        app.updateCLicencia();
       });
-      collection.previousModels.forEach(function(license){
+      collection.previousModels.forEach(function(model){
         model.off('change:c_soli_tot', app.updateCSoli, app);
         model.off('change:c_real_tot', app.updateCReal, app);
         model.off('change:c_licencia', app.updateCLicencia, app);
+        app.updateCSoli();
+        app.updateCReal();
+        app.updateCLicencia();
       })
     });
-    this.get('licencias').on('remove', function(model, collection, options){
-      model.off('change:c_soli_tot', app.updateCSoli, this);
-      model.off('change:c_real_tot', app.updateCReal, this);
-      model.off('change:c_licencia', this.updateCLicencia, this);
-    }, this);
+
+    // fontes
+    this.get('fontes').forEach(function(model){
+      model.on('change:c_soli', app.updateCSoliFon, app);
+      model.on('change:c_real', app.updateCRealFon, app);
+      app.updateCSoliFon();
+      app.updateCRealFon();
+    });
+    this.get('fontes').on('add', function(model, collection, options){
+      model.on('change:c_soli', app.updateCSoliFon, app);
+      model.on('change:c_real', app.updateCRealFon, app);
+      app.updateCSoliFon();
+      app.updateCRealFon();
+    });
+    this.get('fontes').on('remove', function(model, collection, options){
+      model.off('change:c_soli', app.updateCSoliFon, app);
+      model.off('change:c_real', app.updateCRealFon, app);
+      app.updateCSoliFon();
+      app.updateCRealFon();
+    });
+    this.get('fontes').on('reset', function(collection, options){
+      collection.forEach(function(model){
+        model.on('change:c_soli', app.updateCSoliFon, app);
+        model.on('change:c_real', app.updateCRealFon, app);
+        app.updateCSoliFon();
+        app.updateCRealFon();
+      });
+      collection.previousModels.forEach(function(license){
+        model.off('change:c_soli', app.updateCSoliFon, app);
+        model.off('change:c_real', app.updateCRealFon, app);
+        app.updateCSoliFon();
+        app.updateCRealFon();
+      })
+    });
+
   },
 
   updateCSoli: function(){
@@ -93,6 +141,28 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     return c_soli;
   },
 
+  updateCSoliFon: function(){
+    var c_soli_fon_sup = null;
+    var c_soli_fon_sub = null;
+    this.get('fontes').where({'tipo_agua': 'Subterrânea'}).forEach(function(fonte){
+      c_soli_fon_sub += fonte.get('c_soli');
+    });
+    this.get('fontes').where({'tipo_agua': 'Superficial'}).forEach(function(fonte){
+      c_soli_fon_sup += fonte.get('c_soli');
+    });
+    // TODO: how to choose the license between the possible list?
+    var licSup = this.get('licencias').where({'lic_tipo': 'Superficial'})[0];
+    if(licSup != null){
+      // this would trigger a recalculation of exploracao.c_soli
+      licSup.set('c_soli_fon', c_soli_fon_sup);
+    }
+    var licSub = this.get('licencias').where({'lic_tipo': 'Subterrânea'})[0];
+    if(licSub != null){
+      // this would trigger a recalculation of exploracao.c_soli
+      licSub.set('c_soli_fon', c_soli_fon_sub);
+    }
+  },
+
   updateCReal: function(){
     this.set('c_real', this.getCRealTot());
   },
@@ -102,7 +172,14 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.get('licencias').forEach(function(license){
       c_real += license.get('c_real_tot');
     });
+    this.get('fontes').forEach(function(fonte){
+      c_real += fonte.get('c_real');
+    })
     return c_real;
+  },
+
+  updateCRealFon: function(){
+    console.log('real fon');
   },
 
   updateCLicencia: function(){

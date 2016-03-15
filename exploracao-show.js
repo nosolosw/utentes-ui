@@ -189,7 +189,9 @@ exploracao.fetch({
     tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, collection, options){
       this.update(exploracao.get('fontes'));
     });
-
+    exploracao.get('fontes').on('add destroy', function(model, collection, options){
+      consumosView.render();
+    });
     domains.fetch({
       success: function(collection, response, options) {
         fillComponentsWithDomains();
