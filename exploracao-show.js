@@ -146,6 +146,11 @@ exploracao.fetch({
       $('#editLicSupModal').modal('toggle');
     });
 
+    $('#addFonteSup').on('click', function(e){
+      e.preventDefault();
+      $('#fonteSupModal').modal('toggle');
+    });
+
     // TODO: how to choose the license between the possible list?
     licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0];
     if(licSub == null) {
@@ -168,11 +173,22 @@ exploracao.fetch({
       $('#editLicSubModal').modal('toggle');
     });
 
+    $('#addFonteSub').on('click', function(e){
+      e.preventDefault();
+      $('#fonteSubModal').modal('toggle');
+    });
+
     // block fontes
-    new Backbone.SIXHIARA.TableShowView({
+    var tableFontesView = new Backbone.SIXHIARA.TableShowView({
       el: $('#fontes'),
       collection: exploracao.get('fontes'),
     }).render();
+    tableFontesView.listenTo(exploracao.get('fontes'), 'add', function(model, collection, options){
+      this.update(exploracao.get('fontes'));
+    });
+    tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, collection, options){
+      this.update(exploracao.get('fontes'));
+    });
 
     domains.fetch({
       success: function(collection, response, options) {
@@ -229,6 +245,7 @@ function fillComponentsWithDomains(){
   var subacias    = domains.byCategory('subacia');
   var actividades = domains.byCategory('actividade');
   var estadosLic  = domains.byCategory('licencia_estado');
+  var fonteTipos  = domains.byCategory('fonte_tipo');
 
   // modal info
   new Backbone.UILib.SelectView({
@@ -312,5 +329,27 @@ function fillComponentsWithDomains(){
     el: $('#editLicSupModal'),
     model: licSup,
   }).render();
+
+  // fontes: tipos fonte
+  new Backbone.UILib.SelectView({
+    el: $('#fonteSubModal #fonte_tipo'),
+    collection: fonteTipos.byParent('Subterrânea')
+  }).render();
+
+  new Backbone.UILib.SelectView({
+    el: $('#fonteSupModal #fonte_tipo'),
+    collection: fonteTipos.byParent('Superficial')
+  }).render();
+
+  // fontes modals
+  new Backbone.SIXHIARA.ModalFonteView({
+    el: $('#fonteSubModal'),
+    collection: exploracao.get('fontes')
+  });
+
+  new Backbone.SIXHIARA.ModalFonteView({
+    el: $('#fonteSupModal'),
+    collection: exploracao.get('fontes')
+  });
 
 }
