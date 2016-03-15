@@ -22,7 +22,10 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
     }
 
     lics.remove(to_remove);
+
+    this.model.set('actividade', new Backbone.Model({tipo:this.model.get('actividade')}))
     // end of FIXME
+
 
     if(! this.model.isValid()) {
         alert(this.model.validationError);
