@@ -102,7 +102,7 @@ exploracao.fetch({
     // block actividade
     var actividadeView = new Backbone.SIXHIARA.ActividadeView({
       el: $('#info-actividade'),
-      model: exploracao.get('actividade'),
+      model: exploracao,
     });
     actividadeView.render();
 
@@ -302,10 +302,10 @@ function fillComponentsWithDomains(){
     collection: actividades
   }).render();
 
-  new Backbone.UILib.WidgetsView({
-    el: $('#editActividadeModal'),
-    model: exploracao,
-  }).render();
+  new Backbone.SIXHIARA.SelectActividadeView({
+    el: $('#actividade-explotacion'),
+    model: exploracao
+  });
 
   // modals licencias
   new Backbone.UILib.SelectView({
