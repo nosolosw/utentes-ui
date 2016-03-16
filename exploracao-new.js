@@ -55,12 +55,6 @@ new Backbone.UILib.WidgetsView({
   model: exploracao.get('utente')
 }).render();
 
-// page actividade
-new Backbone.UILib.WidgetsView({
-  el: $('#actividade-explotacion'),
-  model: exploracao
-}).render();
-
 // page licencias & fontes: licencias
 new Backbone.UILib.WidgetsView({
   el: $('#licencia-superficial'),
@@ -176,6 +170,11 @@ function fillComponentsWithDomains(){
     el: $('#actividade'),
     collection: actividades
   }).render();
+
+  new Backbone.SIXHIARA.SelectActividadeView({
+    el: $('#actividade-explotacion'),
+    model: exploracao
+  });
 
   // page licencias & fontes: estados
   new Backbone.UILib.SelectView({

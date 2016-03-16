@@ -22,7 +22,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'c_licencia': null,
     'c_real':     null,
     'c_estimado': null,
-    'actividade': new Backbone.Model(),
+    'actividade': new Backbone.SIXHIARA.Actividade(),
     'area':       null,
     'geometry':   null,
     'utente':     new Backbone.SIXHIARA.Utente(),
@@ -179,6 +179,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   updateCRealFon: function(){
+    // TODO: update as done for solicitados
     console.log('real fon');
   },
 
@@ -232,7 +233,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     if (_.has(response, 'actividade')) {
-      response.actividade = new Backbone.Model(response.actividade)
+      response.actividade = new Backbone.SIXHIARA.Actividade(response.actividade)
     }
 
     return response;
