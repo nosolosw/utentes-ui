@@ -127,6 +127,14 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       })
     });
 
+    // actividade
+    this.get('actividade').on('change', app.updateCEstimado, app);
+    this.on('change:actividade', app.updateCEstimado, app);
+
+  },
+
+  updateCEstimado: function(){
+    this.set('c_estimado', this.get('actividade').get('c_estimado'));
   },
 
   updateCSoli: function(){
@@ -179,8 +187,25 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   updateCRealFon: function(){
-    // TODO: update as done for solicitados
-    console.log('real fon');
+    var c_real_fon_sup = null;
+    var c_real_fon_sub = null;
+    this.get('fontes').where({'tipo_agua': 'Subterrânea'}).forEach(function(fonte){
+      c_real_fon_sub += fonte.get('c_real');
+    });
+    this.get('fontes').where({'tipo_agua': 'Superficial'}).forEach(function(fonte){
+      c_real_fon_sup += fonte.get('c_real');
+    });
+    // TODO: how to choose the license between the possible list?
+    var licSup = this.get('licencias').where({'lic_tipo': 'Superficial'})[0];
+    if(licSup != null){
+      // this would trigger a recalculation of exploracao.c_soli
+      licSup.set('c_real_fon', c_real_fon_sup);
+    }
+    var licSub = this.get('licencias').where({'lic_tipo': 'Subterrânea'})[0];
+    if(licSub != null){
+      // this would trigger a recalculation of exploracao.c_soli
+      licSub.set('c_real_fon', c_real_fon_sub);
+    }
   },
 
   updateCLicencia: function(){
