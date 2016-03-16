@@ -1,10 +1,10 @@
 var EXPLORACAO_SCHEMA = [{
   'fieldname': 'exp_id',
-  'message':   'Nº de exploracão non pode estar vacío',
+  'message':   'Nro de exploracão non pode estar vacío',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'exp_id',
-  'message':   'O Nº de exploracão não tem o formato correcto',
+  'message':   'Nro de exploracão não tem o formato correcto',
   'rules':     ['EXP_ID_FORMAT']
 }, {
   'fieldname': 'exp_name',
@@ -12,7 +12,7 @@ var EXPLORACAO_SCHEMA = [{
   'rules':     ['NOT_NULL']
 }, {
   'fieldname': 'd_soli',
-  'message':   'Data solicitude não tem o formato correcto',
+  'message':   'Data de solicitação não tem o formato correcto',
   'rules':     ['IS_DATE']
 }, {
   'fieldname': 'loc_provin',
