@@ -57,11 +57,18 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
+      // TODO: data should be shown as it is,
+      // without updating computed properties first time
+      app.updateCSoli();
+      app.updateCReal();
+      app.updateCLicencia();
     });
     this.get('licencias').on('add', function(model, collection, options){
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
+      // TODO: data should be shown as it is,
+      // without updating computed properties first time
       app.updateCSoli();
       app.updateCReal();
       app.updateCLicencia();
@@ -70,6 +77,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       model.off('change:c_soli_tot', app.updateCSoli, app);
       model.off('change:c_real_tot', app.updateCReal, app);
       model.off('change:c_licencia', app.updateCLicencia, app);
+      // TODO: data should be shown as it is,
+      // without updating computed properties first time
       app.updateCSoli();
       app.updateCReal();
       app.updateCLicencia();
@@ -79,6 +88,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         model.on('change:c_soli_tot', app.updateCSoli, app);
         model.on('change:c_real_tot', app.updateCReal, app);
         model.on('change:c_licencia', app.updateCLicencia, app);
+        // TODO: data should be shown as it is,
+        // without updating computed properties first time
         app.updateCSoli();
         app.updateCReal();
         app.updateCLicencia();
@@ -87,28 +98,36 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         model.off('change:c_soli_tot', app.updateCSoli, app);
         model.off('change:c_real_tot', app.updateCReal, app);
         model.off('change:c_licencia', app.updateCLicencia, app);
+        // TODO: data should be shown as it is,
+        // without updating computed properties first time
         app.updateCSoli();
         app.updateCReal();
         app.updateCLicencia();
-      })
+      });
     });
 
     // fontes
     this.get('fontes').forEach(function(model){
       model.on('change:c_soli', app.updateCSoliFon, app);
       model.on('change:c_real', app.updateCRealFon, app);
+      // TODO: data should be shown as it is,
+      // without updating computed properties first time
       app.updateCSoliFon();
       app.updateCRealFon();
     });
     this.get('fontes').on('add', function(model, collection, options){
       model.on('change:c_soli', app.updateCSoliFon, app);
       model.on('change:c_real', app.updateCRealFon, app);
+      // TODO: data should be shown as it is,
+      // without updating computed properties first time
       app.updateCSoliFon();
       app.updateCRealFon();
     });
     this.get('fontes').on('remove', function(model, collection, options){
       model.off('change:c_soli', app.updateCSoliFon, app);
       model.off('change:c_real', app.updateCRealFon, app);
+      // TODO: data should be shown as it is,
+      // without updating computed properties first time
       app.updateCSoliFon();
       app.updateCRealFon();
     });
@@ -116,15 +135,19 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       collection.forEach(function(model){
         model.on('change:c_soli', app.updateCSoliFon, app);
         model.on('change:c_real', app.updateCRealFon, app);
+        // TODO: data should be shown as it is,
+        // without updating computed properties first time
         app.updateCSoliFon();
         app.updateCRealFon();
       });
       collection.previousModels.forEach(function(license){
         model.off('change:c_soli', app.updateCSoliFon, app);
         model.off('change:c_real', app.updateCRealFon, app);
+        // TODO: data should be shown as it is,
+        // without updating computed properties first time
         app.updateCSoliFon();
         app.updateCRealFon();
-      })
+      });
     });
 
     // actividade
