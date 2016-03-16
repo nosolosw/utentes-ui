@@ -22,7 +22,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'c_licencia': null,
     'c_real':     null,
     'c_estimado': null,
-    'actividade': new Backbone.SIXHIARA.Actividade(),
+    'actividade': new Backbone.Model(),
     'area':       null,
     'geometry':   null,
     'utente':     new Backbone.SIXHIARA.Utente(),
@@ -281,7 +281,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     if (_.has(response, 'actividade')) {
-      response.actividade = new Backbone.SIXHIARA.Actividade(response.actividade)
+      response.actividade = new Backbone.Model(response.actividade)
     }
 
     return response;

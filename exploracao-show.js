@@ -103,6 +103,7 @@ exploracao.fetch({
     var actividadeView = new Backbone.SIXHIARA.ActividadeView({
       el: $('#info-actividade'),
       model: exploracao,
+      template: _.template($('#' + exploracao.get('actividade').get('tipo')).html())
     });
     actividadeView.render();
 

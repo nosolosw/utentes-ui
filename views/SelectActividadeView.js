@@ -20,14 +20,14 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
     var value = widgetSelected.text().trim() || null;
     var newActivity = null;
     if(value === 'Abastecimento'){
-      newActivity = new Backbone.SIXHIARA.Actividade({
+      newActivity = new Backbone.Model({
         'tipo': 'Abastecimento',
         'c_estimado': 0,
         'habitantes': 20,
         'dotacao': 0
       });
     } else if (value === 'Indústria'){
-      newActivity = new Backbone.SIXHIARA.Actividade({
+      newActivity = new Backbone.Model({
         'tipo': 'Indústria',
         'c_estimado': null,
         'tipo_indus': null,
@@ -37,14 +37,14 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
         'eval_impac': null
       });
     } else if (value === 'Piscicultura'){
-      newActivity = new Backbone.SIXHIARA.Actividade({
+      newActivity = new Backbone.Model({
         'tipo': 'Piscicultura',
         'c_estimado': null,
         'area': null,
         'v_reservas': null
       });
     } else if (value === 'Producção de energia'){
-      newActivity = new Backbone.SIXHIARA.Actividade({
+      newActivity = new Backbone.Model({
         'tipo': 'Producção de energia',
         'c_estimado': null,
         'energia_tipo': null,
@@ -54,7 +54,7 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
         'eval_impac': null
       });
     } else if (value === 'Saneamento'){
-      newActivity = new Backbone.SIXHIARA.Actividade({
+      newActivity = new Backbone.Model({
         'tipo': 'Saneamento',
         'c_estimado': null,
         'habitantes': null

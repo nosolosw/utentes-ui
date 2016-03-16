@@ -115,12 +115,10 @@
                 <button type="button" class="btn btn-default btn-xs" id="editActividade">Editar</button>
               </h3>
             </div>
-            <div class="row">
-              <span class="col-xs-offset-1 col-xs-11"><span class="title">Nro de habitantes:</span> <span class="widget-number" id="n_hab">-</span> </span>
+            <div class="actividade-render">
+
             </div>
-            <div class="row">
-              <span class="col-xs-offset-1 col-xs-11"><span class="title">Dotaçâo:</span> <span class="widget-number" id="dotacao">-</span> </span>
-            </div>
+            <!-- each activity needs to render itself here, so it needs to declare as many divs.row component as it needs -->
           </section>
 
         </div>
@@ -576,6 +574,70 @@
     </div>
   </div>
 
+  <!-- tmpl actividade abastecimento -->
+  <script type="text/template" id="Abastecimento">
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Nro de habitantes:</span> <span><%- habitantes || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Dotaçâo:</span> <span><%- dotacao || '-' %></span> </span>
+    </div>
+  </script>
+
+  <!-- tmpl actividade -->
+  <script type="text/template" id="Indústria">
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Efluente:</span> <span><%- efluente || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Tratamento:</span> <span><%- tratamento || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Evaluación impacto:</span> <span><%- eval_impac || '-' %></span> </span>
+    </div>
+  </script>
+
+  <!-- tmpl actividade -->
+  <script type="text/template" id="Piscicultura">
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Área:</span> <span><%- area || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Reservas:</span> <span><%- v_reservas || '-' %></span> </span>
+    </div>
+  </script>
+
+  <!-- tmpl actividade -->
+  <script type="text/template" id="Producção de energia">
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Tipo de energía:</span> <span><%- energia_tipo || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Altura água:</span> <span><%- alt_agua || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Potencia:</span> <span><%- potencia || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Equipo:</span> <span><%- equipo || '-' %></span> </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Evaluación impacto:</span> <span><%- eval_impac || '-' %></span> </span>
+    </div>
+  </script>
+
+  <!-- tmpl actividade -->
+  <script type="text/template" id="Saneamento">
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11"><span class="title">Nro de habitantes:</span> <span><%- habitantes || '-' %></span> </span>
+    </div>
+  </script>
 
   <!-- tmpl modal fonte -->
   <script type="text/template" id="edit-fonte-modal-tmpl">
@@ -726,7 +788,6 @@
   <script src="models/Utente.js"></script>
   <script src="models/UtenteSchema.js"></script>
   <script src="models/UtenteCollection.js"></script>
-  <script src="models/Actividade.js"></script>
   <script src="models/Exploracao.js"></script>
   <script src="models/ExploracaoSchema.js"></script>
 
