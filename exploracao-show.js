@@ -100,14 +100,10 @@ exploracao.fetch({
     });
 
     // block actividade
-    var actividadeView = new Backbone.UILib.WidgetsView({
+    var actividadeView = new Backbone.SIXHIARA.ActividadeView({
       el: $('#info-actividade'),
-      model: exploracao,
+      model: exploracao.get('actividade'),
     });
-    actividadeView.displayNull = function(name){
-      if(name === 'actividade') return 'Actividade non declarada';
-      return '-';
-    };
     actividadeView.render();
 
     $('#editActividade').on('click', function(e){
