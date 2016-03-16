@@ -22,14 +22,17 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
     }
 
     lics.remove(to_remove);
+    // end of FIXME for licenses
 
-    this.model.set('actividade', new Backbone.Model({tipo:this.model.get('actividade')}))
-    // end of FIXME
-
+    // FIXME for actividade
+    this.model.set('actividade', new Backbone.SIXHIARA.Actividade({
+      'tipo': this.model.get('actividade')
+    }));
+    // end of FIXME for actividade
 
     if(! this.model.isValid()) {
-        alert(this.model.validationError);
-        return;
+      alert(this.model.validationError);
+      return;
     }
 
     this.model.save(null, {

@@ -239,13 +239,13 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   toJSON: function() {
-    var json       =  _.clone(this.attributes);
-    json.geometry  = this.get('geometry').toJSON();
-    json.utente    = this.get('utente').toJSON();
-    json.licencias = this.get('licencias').toJSON();
-    json.fontes    = this.get('fontes').toJSON();
+    var json        =  _.clone(this.attributes);
+    json.geometry   = this.get('geometry').toJSON();
+    json.utente     = this.get('utente').toJSON();
+    json.licencias  = this.get('licencias').toJSON();
+    json.fontes     = this.get('fontes').toJSON();
     json.actividade = this.get('actividade').toJSON();
-    json.urlShow   = this.urlShow();
+    json.urlShow    = this.urlShow();
     return json;
   },
 
