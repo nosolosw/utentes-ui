@@ -106,6 +106,12 @@ exploracao.fetch({
       template: _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
     });
     actividadeView.render();
+    actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, options){
+      this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+      this.render();
+    });
+    // TODO: listen to changes inside actividade values
+    // care! actividade may change
 
     $('#editActividade').on('click', function(e){
       e.preventDefault();
@@ -209,7 +215,6 @@ exploracao.fetch({
       summaryConsumoView.render();
       summaryPagosView.render();
       locView.render();
-      actividadeView.render();
 
       // TODO: render licencias & fontes?
     });
