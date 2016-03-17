@@ -54,4 +54,8 @@ var EXPLORACAO_SCHEMA = [{
   'fieldname': 'pagos',
   'message':   'Pagos não tem o formato correcto',
   'rules':     ['IS_BOOLEAN']
+}, {
+  'fieldname': 'actividade',
+  'message':   'A exploracão ten que ter asignado uma actividade',
+  'rules':     ['NOT_NULL']
 }];
