@@ -1,12 +1,12 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
+Backbone.SIXHIARA.SelectUtenteViewShow = Backbone.View.extend({
 
   events: {
     'change #select-utente': "fillInputs"
   },
 
   render: function(){
-    this.model.models.forEach(this.appendOption, this);
+    this.collection.models.forEach(this.appendOption, this);
 
     return this;
   },
@@ -24,8 +24,8 @@ Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
   fillInputs: function(e){
     // update widgets
     var selectedOption = e.target.selectedOptions[0].value;
-    var utente = this.model.findWhere({'nome': selectedOption});
-    exploracao.set('utente', utente);
+    var utente = this.collection.findWhere({'nome': selectedOption});
+    this.model.set('utente', utente);
     this.$('.widget-utente').each(function(index, widget){
       widget.value = utente.get(widget.id);
     });

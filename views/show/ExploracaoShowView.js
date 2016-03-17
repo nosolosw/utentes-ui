@@ -9,11 +9,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       return '-';
     }
 
-    // auxiliary models we need and fetch on render
-    this.utentes = new Backbone.SIXHIARA.UtenteCollection();
-    this.domains = new Backbone.UILib.DomainCollection();
-    this.domains.url = Backbone.SIXHIARA.Config.apiDomains;
-
     this.subViews = [];
   },
 
@@ -27,6 +22,8 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.licSup = licencias.where({'lic_tipo': 'Superficial'})[0];
     this.licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0];
 
+    this.domains = new Backbone.UILib.DomainCollection();
+    this.domains.url = Backbone.SIXHIARA.Config.apiDomains;
     this.domains.fetch({
       success: function(collection, response, options) {
         // TODO: make views that needed to listen to sync events in the model
@@ -41,19 +38,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       }
     });
 
-    this.utentes.fetch({
-      success: function() {
-        // TODO: make views that needed to listen to sync events in the model
-        // edit capabilities for views that need this should not be enabled
-        // until this is sync
-        view.fillSelectUtente();
-        console.log('utentes loaded');
-      },
-      error: function () {
-        // TODO: show message to user
-        console.error('could not get utentes from API');
-      }
-    });
 
     // TODO add action for open file folder
 
@@ -96,16 +80,11 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     }).render();
     this.subViews.push(locBlockView);
 
-    // block utente
-    var utenteView = new Backbone.UILib.WidgetsView({
+    var utenteBlockView = new Backbone.SIXHIARA.UtenteBlockView({
       el: $('#utente'),
-      model: exploracao.get('utente'),
+      model: exploracao,
     }).render();
-
-    $('#editUtente').on('click', function(e){
-      e.preventDefault();
-      $('#editUtenteModal').modal('toggle');
-    });
+    this.subViews.push(utenteBlockView);
 
     // block actividade
     var actividadeView = new Backbone.SIXHIARA.ActividadeView({
@@ -196,18 +175,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       consumosView.render();
     });
 
-    exploracao.on('change:utente', function(model, value, options){
-      utenteView.model = exploracao.get('utente');
-      utenteView.render();
-    });
-
-  },
-
-  fillSelectUtente: function(){
-    new Backbone.SIXHIARA.SelectUtenteView({
-      el: $('#editUtenteModal'),
-      model: this.utentes
-    }).render();
   },
 
   fillComponentsWithDomains: function(){
