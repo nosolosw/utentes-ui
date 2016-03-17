@@ -6,7 +6,7 @@ Backbone.SIXHIARA.LicenciaBlockView = Backbone.View.extend({
     this.options = options;
 
     var licSupView = new Backbone.SIXHIARA.LicenciaView({
-      el: options.elLicencia,
+      el: this.el,
       model: this.model,
       template: _.template($('#licencia-tmpl').html())
     });
@@ -27,6 +27,7 @@ Backbone.SIXHIARA.LicenciaBlockView = Backbone.View.extend({
   },
 
   renderModal: function (collection, response, options) {
+
     this.options.elEditButton.on('click', function(e){
       e.preventDefault();
       options.elEditModal.modal('toggle');
@@ -50,7 +51,7 @@ Backbone.SIXHIARA.LicenciaBlockView = Backbone.View.extend({
   },
 
   remove: function () {
-    Backbone.View.
+    Backbone.View.prototype.remove.call(this);
     _.invoke(this.subViews, 'remove');
   }
 

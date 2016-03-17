@@ -109,7 +109,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       el: $('#licencia-superficial'),
       model: this.licSup,
       domains: this.domains,
-      elLicencia: $('#licencia-superficial'),
       elEditButton: $('#editLicSup'),
       elEditModal: $('#editLicSupModal'),
       elFonteButton: $('#addFonteSup'),
@@ -122,25 +121,17 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       this.licSub = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
       exploracao.get('licencias').add(this.licSub);
     }
-    var licSubView = new Backbone.SIXHIARA.LicenciaView({
+    var licenciaSubterraneaBlockView = new Backbone.SIXHIARA.LicenciaBlockView({
       el: $('#licencia-subterranea'),
       model: this.licSub,
-      template: _.template($('#licencia-tmpl').html())
+      domains: this.domains,
+      elEditButton: $('#editLicSub'),
+      elEditModal: $('#editLicSubModal'),
+      elFonteButton: $('#addFonteSub'),
+      elFonteModal: $('#fonteSubModal'),
+      elEstado: $('#editLicSubModal #estado'),
     }).render();
-    this.licSub.on('change', function(){
-      licSubView.render();
-      consumosView.render();
-    });
-
-    $('#editLicSub').on('click', function(e){
-      e.preventDefault();
-      $('#editLicSubModal').modal('toggle');
-    });
-
-    $('#addFonteSub').on('click', function(e){
-      e.preventDefault();
-      $('#fonteSubModal').modal('toggle');
-    });
+    this.subViews.push(licenciaSubterraneaBlockView);
 
     // block fontes
     var tableFontesView = new Backbone.SIXHIARA.TableShowView({
@@ -162,19 +153,7 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
   fillComponentsWithDomains: function(){
     var exploracao = this.model;
     var domains = this.domains;
-    var estadosLic  = domains.byCategory('licencia_estado');
     var fonteTipos  = domains.byCategory('fonte_tipo');
-
-    // modals licencias
-    new Backbone.UILib.SelectView({
-      el: $('#editLicSubModal #estado'),
-      collection: estadosLic
-    }).render();
-
-    new Backbone.UILib.WidgetsView({
-      el: $('#editLicSubModal'),
-      model: this.licSub,
-    }).render();
 
     // fontes: tipos fonte
     new Backbone.UILib.SelectView({
