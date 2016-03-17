@@ -86,24 +86,12 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     }).render();
     this.subViews.push(utenteBlockView);
 
-    // block actividade
-    var actividadeView = new Backbone.SIXHIARA.ActividadeView({
+    var actividadeBlockView = new Backbone.SIXHIARA.ActividadeBlockView({
       el: $('#info-actividade'),
       model: exploracao,
-      template: _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
-    });
-    actividadeView.render();
-    actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, options){
-      this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
-      this.render();
-    });
-    // TODO: listen to changes inside actividade values
-    // care! actividade may change
-
-    $('#editActividade').on('click', function(e){
-      e.preventDefault();
-      $('#editActividadeModal').modal('toggle');
-    });
+      domains: this.domains,
+    }).render();
+    this.subViews.push(actividadeBlockView);
 
     // block consumos
     var consumosView = new Backbone.UILib.WidgetsView({
@@ -180,20 +168,8 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
   fillComponentsWithDomains: function(){
     var exploracao = this.model;
     var domains = this.domains;
-    var actividades = domains.byCategory('actividade');
     var estadosLic  = domains.byCategory('licencia_estado');
     var fonteTipos  = domains.byCategory('fonte_tipo');
-
-    // modal actividade: actividades
-    new Backbone.UILib.SelectView({
-      el: $('#editActividadeModal #actividade'),
-      collection: actividades
-    }).render();
-
-    new Backbone.SIXHIARA.SelectActividadeView({
-      el: $('#actividade-explotacion'),
-      model: exploracao
-    });
 
     // modals licencias
     new Backbone.UILib.SelectView({
