@@ -94,35 +94,29 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.subViews.push(actividadeBlockView);
 
     // block consumos
-    var consumosView = new Backbone.UILib.WidgetsView({
+    var consumosBlockView = new Backbone.UILib.WidgetsView({
       el: $('#consumos'),
       model: exploracao
     }).render();
+    this.subViews.push(consumosBlockView);
 
-    // block Licencias
+    // Licencias
     if(this.licSup == null) {
       this.licSup = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
       exploracao.get('licencias').add(this.licSup);
     }
-    var licSupView = new Backbone.SIXHIARA.LicenciaView({
+    var licSuperficialBlockView = new Backbone.SIXHIARA.LicenciaBlockView({
       el: $('#licencia-superficial'),
       model: this.licSup,
-      template: _.template($('#licencia-tmpl').html())
+      domains: this.domains,
+      elLicencia: $('#licencia-superficial'),
+      elEditButton: $('#editLicSup'),
+      elEditModal: $('#editLicSupModal'),
+      elFonteButton: $('#addFonteSup'),
+      elFonteModal: $('#fonteSupModal'),
+      elEstado: $('#editLicSupModal #estado'),
     }).render();
-    this.licSup.on('change', function(){
-      licSupView.render();
-      consumosView.render();
-    });
-
-    $('#editLicSup').on('click', function(e){
-      e.preventDefault();
-      $('#editLicSupModal').modal('toggle');
-    });
-
-    $('#addFonteSup').on('click', function(e){
-      e.preventDefault();
-      $('#fonteSupModal').modal('toggle');
-    });
+    this.subViews.push(licSuperficialBlockView);
 
     if(this.licSub == null) {
       this.licSub = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
@@ -180,16 +174,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     new Backbone.UILib.WidgetsView({
       el: $('#editLicSubModal'),
       model: this.licSub,
-    }).render();
-
-    new Backbone.UILib.SelectView({
-      el: $('#editLicSupModal #estado'),
-      collection: estadosLic
-    }).render();
-
-    new Backbone.UILib.WidgetsView({
-      el: $('#editLicSupModal'),
-      model: this.licSup,
     }).render();
 
     // fontes: tipos fonte
