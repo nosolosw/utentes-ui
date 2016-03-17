@@ -1,6 +1,10 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.EditFonteModalView = Backbone.View.extend({
 
+  initialize: function (options) {
+    this.options = options;
+  },
+
   render: function(){
     var app = this;
     var fonte = this.model;
@@ -43,7 +47,7 @@ Backbone.SIXHIARA.EditFonteModalView = Backbone.View.extend({
     // make select work
     new Backbone.UILib.SelectView({
       el: $('#editFonteModal #fonte_tipo'),
-      collection: domains.byCategory('fonte_tipo').byParent(fonte.get('tipo_agua'))
+      collection: this.options.domains.byCategory('fonte_tipo').byParent(fonte.get('tipo_agua'))
     }).render();
 
     $('#editFonteModal').modal('show');

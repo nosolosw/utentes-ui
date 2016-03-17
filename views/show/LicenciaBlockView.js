@@ -14,7 +14,6 @@ Backbone.SIXHIARA.LicenciaBlockView = Backbone.View.extend({
 
     this.model.on('change', function(){
       licSupView.render();
-      // consumosView.render(); TODO move this up
     });
 
     options.domains.on('sync', this.renderModal, this);

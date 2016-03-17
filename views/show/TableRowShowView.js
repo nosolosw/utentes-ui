@@ -10,7 +10,8 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     'click .edit-fonte': 'modelUpdate',
   },
 
-  initialize: function(){
+  initialize: function(options){
+    this.options = options;
     this.model.on('remove', this.unrender, this);
     this.model.on('change', this.update, this);
   },
@@ -47,7 +48,8 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
   modelUpdate: function(e){
     e.preventDefault();
     var editFonteModal = new Backbone.SIXHIARA.EditFonteModalView({
-      model: this.model
+      model: this.model,
+      domains: this.options.domains,
     });
     editFonteModal.render()
   }

@@ -1,8 +1,9 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.TableShowView = Backbone.View.extend({
 
-  initialize: function(){
+  initialize: function(options){
     this._subviews = [];
+    this.options = options;
   },
 
   render: function(){
@@ -11,7 +12,8 @@ Backbone.SIXHIARA.TableShowView = Backbone.View.extend({
 
     this.collection.forEach(function(model){
       var rowView = new Backbone.SIXHIARA.TableRowShowView({
-        model: model
+        model: model,
+        domains: this.options.domains,
       });
       content.appendChild(rowView.render().el);
       subviews.push(rowView);

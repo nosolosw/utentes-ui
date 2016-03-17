@@ -26,10 +26,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.domains.url = Backbone.SIXHIARA.Config.apiDomains;
     this.domains.fetch({
       success: function(collection, response, options) {
-        // TODO: make views that needed to listen to sync events in the model
-        // edit capabilities for views that need this should not be enabled
-        // until this is sync
-        view.fillComponentsWithDomains();
         console.log('domains loaded');
       },
       error: function () {
@@ -40,6 +36,7 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
 
 
     // TODO add action for open file folder
+    // openFolderButtonView
 
     // TODO: do not listen to events if button is disabled
     var saveButtonView = new Backbone.SIXHIARA.ButtonSaveView({
@@ -93,11 +90,16 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     }).render();
     this.subViews.push(actividadeBlockView);
 
-    // block consumos
     var consumosBlockView = new Backbone.UILib.WidgetsView({
       el: $('#consumos'),
       model: exploracao
     }).render();
+    exploracao.get('fontes').on('add destroy', function(model, collection, options){
+      consumosBlockView.render();
+    });
+    exploracao.on('change', function (model, collection, options) {
+      consumosBlockView.render();
+    });
     this.subViews.push(consumosBlockView);
 
     // Licencias
@@ -133,49 +135,13 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     }).render();
     this.subViews.push(licenciaSubterraneaBlockView);
 
-    // block fontes
-    var tableFontesView = new Backbone.SIXHIARA.TableShowView({
+    var fontesBlockView = new Backbone.SIXHIARA.FontesBlockView({
       el: $('#fontes'),
       collection: exploracao.get('fontes'),
+      domains: this.domains,
     }).render();
-    tableFontesView.listenTo(exploracao.get('fontes'), 'add', function(model, collection, options){
-      this.update(exploracao.get('fontes'));
-    });
-    tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, collection, options){
-      this.update(exploracao.get('fontes'));
-    });
-    exploracao.get('fontes').on('add destroy', function(model, collection, options){
-      consumosView.render();
-    });
+    this.subViews.push(fontesBlockView);
 
-  },
-
-  fillComponentsWithDomains: function(){
-    var exploracao = this.model;
-    var domains = this.domains;
-    var fonteTipos  = domains.byCategory('fonte_tipo');
-
-    // fontes: tipos fonte
-    new Backbone.UILib.SelectView({
-      el: $('#fonteSubModal #fonte_tipo'),
-      collection: fonteTipos.byParent('Subterrânea')
-    }).render();
-
-    new Backbone.UILib.SelectView({
-      el: $('#fonteSupModal #fonte_tipo'),
-      collection: fonteTipos.byParent('Superficial')
-    }).render();
-
-    // fontes modals
-    new Backbone.SIXHIARA.ModalFonteView({
-      el: $('#fonteSubModal'),
-      collection: exploracao.get('fontes')
-    });
-
-    new Backbone.SIXHIARA.ModalFonteView({
-      el: $('#fonteSupModal'),
-      collection: exploracao.get('fontes')
-    });
   },
 
   remove: function () {
