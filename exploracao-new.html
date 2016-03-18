@@ -46,7 +46,7 @@
               <ul class="hide">
                 <li><a href="#info" data-toggle="tab">Info</a></li>
                 <li><a href="#utente" data-toggle="tab">Utente</a></li>
-                <li><a href="#info-actividade" data-toggle="tab">Actividade</a></li>
+                <li><a href="#tab-actividade" data-toggle="tab">Actividade</a></li>
                 <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
               </ul>
 
@@ -220,7 +220,7 @@
 
                 </div>
 
-                <div class="tab-pane" id="info-actividade">
+                <div class="tab-pane" id="tab-actividade">
                   <div class="row">
                     <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
                     <h3 class="col-xs-11">Actividade</h3>
@@ -233,6 +233,17 @@
                       </select>
                     </div>
                   </div>
+
+                  <section id="info-actividade">
+                    <div class="row">
+                      <h3 class="col-xs-offset-1 col-xs-11">Dados da actividade</h3>
+                    </div>
+                    <div class="actividade-render">
+
+                    </div>
+                    <!-- each activity needs to render itself here, so it needs to declare as many divs.row component as it needs -->
+                  </section>
+
                 </div>
 
                 <div class="tab-pane" id="licencia">
@@ -400,6 +411,123 @@
   </div>
 </div>
 
+
+<!-- TEMPLATES -->
+<!-- tmpl actividade abastecimento -->
+<script type="text/template" id="Abastecimento">
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="nro-habitantes">Nro de habitantes</label>
+      <input type="text" class="form-control widget-number" id="nro-habitantes">
+    </div>
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="dotacao">Dotaçâo</label>
+      <input type="text" class="form-control widget-number" id="dotacao">
+    </div>
+  </div>
+</script>
+
+<!-- tmpl actividade agricultura -->
+<script type="text/template" id="Agricultura-Regadia">
+  <div class="row">
+    <span class="col-xs-offset-1 col-xs-11"><span class="title">Cultivos:</span> <span><%- cultivos || '-' %></span> </span>
+  </div>
+</script>
+
+<!-- tmpl actividade industria-->
+<script type="text/template" id="Indústria">
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="tipo_industria">Tipo de indústria</label>
+      <input type="text" class="form-control widget" id="tipo_industria">
+    </div>
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="instalacio">Instalaçôes</label>
+      <input type="text" class="form-control widget" id="instalacio">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="efluente">Efluente</label>
+      <input type="text" class="form-control widget" id="efluente">
+    </div>
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="tratamento">Tratamento</label>
+      <input type="text" class="form-control widget" id="tratamento">
+    </div>
+
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="eval_impac">Evaluación impacto</label>
+      <input type="text" class="form-control widget" id="eval_impac">
+    </div>
+  </div>
+</script>
+
+<!-- tmpl actividade pecuaria -->
+<script type="text/template" id="Pecuária">
+  <div class="row">
+    <span class="col-xs-offset-1 col-xs-11"><span class="title">Reses:</span> <span><%- reses || '-' %></span> </span>
+  </div>
+</script>
+
+<!-- tmpl actividade piscicultura-->
+<script type="text/template" id="Piscicultura">
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="area">Área</label>
+      <input type="text" class="form-control widget" id="area">
+    </div>
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="v_reservas">Reservas</label>
+      <input type="text" class="form-control widget" id="v_reservas">
+    </div>
+  </div>
+</script>
+
+<!-- tmpl actividade produccao energia -->
+
+<script type="text/template" id="Producção de energia">
+
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="energia_tipo">Tipo de energía</label>
+      <input type="text" class="form-control widget" id="energia_tipo">
+    </div>
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="potencia">Potencia</label>
+      <input type="text" class="form-control widget" id="potencia">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="alt_agua">Altura água</label>
+      <input type="text" class="form-control widget" id="alt_agua">
+    </div>
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="equipo">Equipo</label>
+      <input type="text" class="form-control widget" id="equipo">
+    </div>
+
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="eval_impac">Evaluación impacto</label>
+      <input type="text" class="form-control widget" id="eval_impac">
+    </div>
+  </div>
+</script>
+
+<!-- tmpl actividade saneamento -->
+<script type="text/template" id="Saneamento">
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="nro-habitantes">Nro de habitantes:</label>
+      <input type="text" class="form-control widget-number" id="nro-habitantes">
+    </div>
+  </div>
+</script>
+
+
 <!-- javascript -->
 
 <script src="lib/jquery/jquery-1.12.0.min.js"></script>
@@ -446,6 +574,7 @@
 <script src="views/ModalFonteView.js"></script>
 <script src="views/RowFonteView.js"></script>
 <script src="views/TableFontesView.js"></script>
+<script src="views/ActividadeView.js"></script>
 
 <script src="exploracao-new.js"></script>
 

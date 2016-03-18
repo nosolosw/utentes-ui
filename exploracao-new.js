@@ -199,3 +199,30 @@ function fillComponentsWithDomains(){
   }).render();
 
 }
+
+
+
+
+
+
+
+
+// block actividade
+var actividadeView = new Backbone.SIXHIARA.ActividadeView({
+  el: $('#info-actividade'),
+  model: exploracao
+  // template: _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+});
+// actividadeView.render();
+actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, options){
+  this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+  this.render();
+});
+// TODO: listen to changes inside actividade values
+// care! actividade may change
+/*
+$('#editActividade').on('click', function(e){
+  e.preventDefault();
+  $('#editActividadeModal').modal('toggle');
+});
+*/

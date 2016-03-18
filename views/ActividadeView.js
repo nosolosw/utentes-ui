@@ -6,7 +6,7 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
     if(this.options.template){
       this.template = this.options.template;
     } else {
-      throw {message: 'no template provided'};
+      // throw {message: 'no template provided'};
     }
   },
 

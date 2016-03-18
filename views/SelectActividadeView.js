@@ -26,7 +26,13 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
         'habitantes': 20,
         'dotacao': 0
       });
-    } else if (value === 'Indústria'){
+    } else if (value === 'Agricultura-Regadia') {
+      newActivity = new Backbone.Model({
+        'tipo': 'Agricultura-Regadia',
+        'c_estimado': null,
+        'cultivos': null,
+      });
+    } else if (value === 'Indústria') {
       newActivity = new Backbone.Model({
         'tipo': 'Indústria',
         'c_estimado': null,
@@ -35,6 +41,11 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
         'efluente': null,
         'tratamento': null,
         'eval_impac': null
+      });
+    } else if (value === 'Pecuária') {
+      newActivity = new Backbone.Model({
+        'tipo': 'Pecuária',
+        'reses': null
       });
     } else if (value === 'Piscicultura'){
       newActivity = new Backbone.Model({
