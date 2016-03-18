@@ -6,7 +6,7 @@ Backbone.SIXHIARA.BlockFontesView = Backbone.View.extend({
     this.subViews = [];
 
     var tableFontesView = new Backbone.SIXHIARA.TableShowView({
-      el: $('#fontes'),
+      el: this.el,
       collection: this.collection,
       domains: options.domains,
     });

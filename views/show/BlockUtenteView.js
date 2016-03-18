@@ -7,7 +7,7 @@ Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
     this.subViews = [];
 
     var utenteView = new Backbone.UILib.WidgetsView({
-      el: $('#utente'),
+      el: this.el,
       model: this.model.get('utente')
     });
     this.subViews.push(utenteView);

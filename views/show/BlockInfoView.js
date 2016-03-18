@@ -2,7 +2,7 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
 
   events: {
-    'click #editInfo': 'renderModal'
+    'click #editBlockInfo': 'renderModal'
   },
 
   initialize: function (options) {
@@ -15,7 +15,7 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
 
     // create subviews
     var infoView = new Backbone.UILib.WidgetsView({
-      el: $('#info'),
+      el: this.el,
       model: exploracao
     });
     this.subViews.push(infoView);
@@ -41,13 +41,13 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
     this.subViews.push(summaryPagosView);
 
     this.domainsFilled = false;
-    options.domains.on('sync', this.domainsFilled, this);
+    options.domains.on('sync', this.setDomainsFilled, this);
 
     exploracao.on('change', this.render, this);
 
   },
 
-  domainsFilled: function () {
+  setDomainsFilled: function () {
     this.domainsFilled = true;
   },
 
@@ -66,20 +66,26 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
 
     // take it from DOM and connect events, fill components, etc
     var modalEl = $('#editInfoModal');
-    new Backbone.UILib.SelectView({
+    var modalViews = [];
+
+    var selectPagos = new Backbone.UILib.SelectView({
       el: $('#editInfoModal #pagos'),
       collection: this.options.domains.byCategory('pagamentos'),
     }).render();
-    new Backbone.UILib.WidgetsView({
+    modalViews.push(selectPagos);
+
+    var widgetsView = new Backbone.UILib.WidgetsView({
       el: modalEl,
       model: this.model
     }).render();
+    modalViews.push(widgetsView);
 
     // remove modal from DOM on hide
     modalEl.on('hidden.bs.modal', function () {
       // this is the modal itself
-      // should we unbind the events too?
       $(this).remove();
+      _.invoke(modalViews, 'remove');
+      modalViews = [];
     });
 
     // do open modal

@@ -65,40 +65,40 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.subViews.push(blockMapView);
 
     var blockTitleView = new Backbone.UILib.WidgetsView({
-      el: $('#title'),
+      el: $('#block-title'),
       model: exploracao
     }).render();
     this.subViews.push(blockTitleView);
 
     var blockInfoView = new Backbone.SIXHIARA.BlockInfoView({
-      el: $('#info'),
+      el: $('#block-info'),
       model: exploracao,
       domains: domains,
     }).render();
     this.subViews.push(blockInfoView);
 
     var blockLocationView = new Backbone.SIXHIARA.BlockLocationView({
-      el: $('#loc-info'),
+      el: $('#block-location'),
       model: exploracao,
       domains: domains,
     }).render();
     this.subViews.push(blockLocationView);
 
     var blockUtenteView = new Backbone.SIXHIARA.BlockUtenteView({
-      el: $('#utente'),
+      el: $('#block-utente'),
       model: exploracao,
     }).render();
     this.subViews.push(blockUtenteView);
 
     var blockActivityView = new Backbone.SIXHIARA.BlockActivityView({
-      el: $('#info-actividade'),
+      el: $('#block-activity'),
       model: exploracao,
       domains: domains,
     }).render();
     this.subViews.push(blockActivityView);
 
     var blockConsumosView = new Backbone.UILib.WidgetsView({
-      el: $('#consumos'),
+      el: $('#block-consumos'),
       model: exploracao
     }).render();
     blockConsumosView.listenTo(exploracao.get('fontes'), 'add destroy', blockConsumosView.render);
@@ -106,7 +106,7 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.subViews.push(blockConsumosView);
 
     var blockSuperficialView = new Backbone.SIXHIARA.BlockLicenseView({
-      el: $('#licencia-superficial'),
+      el: $('#block-superficial'),
       model: licSuperficial,
       fontes: exploracao.get('fontes'),
       domains: domains,
@@ -115,7 +115,7 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.subViews.push(blockSuperficialView);
 
     var blockSubterraneaView = new Backbone.SIXHIARA.BlockLicenseView({
-      el: $('#licencia-subterranea'),
+      el: $('#block-subterranea'),
       model: licSubterranea,
       fontes: exploracao.get('fontes'),
       domains: domains,
@@ -124,7 +124,7 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     this.subViews.push(blockSubterraneaView);
 
     var blockFontesView = new Backbone.SIXHIARA.BlockFontesView({
-      el: $('#fontes'),
+      el: $('#block-fontes'),
       collection: exploracao.get('fontes'),
       domains: domains,
     }).render();

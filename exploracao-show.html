@@ -34,7 +34,7 @@
 
       <section id="info-section" class="col-xs-6">
 
-        <section id="title" class="row">
+        <section id="block-title" class="row">
           <span class="col-xs-12">
             <h3>EXPLORACAO <span class="widget" id="exp_id"></span>
               <span class="pull-right">
@@ -46,11 +46,11 @@
           </span>
         </section>
 
-        <section id="info">
+        <section id="block-info">
           <div class="row">
             <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
             <h3 class="col-xs-10"> <span class="widget" id="exp_name"></span>
-              <button type="button" class="btn btn-default btn-xs" id="editInfo">Editar</button>
+              <button type="button" class="btn btn-default btn-xs" id="editBlockInfo">Editar</button>
             </h3>
           </div>
           <div class="row">
@@ -69,11 +69,11 @@
           </div>
         </section>
 
-        <section id="loc-info">
+        <section id="block-location">
           <div class="row">
             <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
             <h3 class="col-xs-11"><span class="widget" id="loc_provin"></span> / <span class="widget" id="loc_distri"></span>
-              <button type="button" class="btn btn-default btn-xs" id="editLoc">Editar</button>
+              <button type="button" class="btn btn-default btn-xs" id="editBlockLocation">Editar</button>
             </h3>
           </div>
           <div class="row">
@@ -88,7 +88,7 @@
           </div>
         </section>
 
-        <section id="utente">
+        <section id="block-utente">
           <div class="row">
             <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
             <h3 class="col-xs-11">
@@ -118,7 +118,7 @@
           </div>
         </section>
 
-        <section id="info-actividade">
+        <section id="block-activity">
           <div class="row">
             <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
             <h3 class="col-xs-11">
@@ -141,7 +141,7 @@
 
     </section>
 
-    <section id="consumos" class="row volume-summary text-center">
+    <section id="block-consumos" class="row volume-summary text-center">
       <div class="col-xs-3">
         <h3><span class="widget-number" id="c_licencia">-</span> </h3>
         <span>LICENÇADOS</span>
@@ -170,13 +170,15 @@
     </section>
 
     <section class="row">
-      <div class="col-xs-6" id="licencia-superficial"></div>
-      <div class="col-xs-6" id="licencia-subterranea"></div>
+      <div class="col-xs-6" id="block-superficial"></div>
+      <div class="col-xs-6" id="block-subterranea"></div>
     </section>
+
+    <br>
 
     <section class="row">
       <div class="col-xs-12">
-        <table class="table" id="fontes">
+        <table class="table" id="block-fontes">
           <thead>
             <tr>
               <th>Tipo de água</th>
@@ -201,249 +203,251 @@
 
   <!-- STATIC MODALS (the ones which are already in the DOM)  -->
 
-  <!-- modal loc -->
-  <div class="modal fade" id="editLocModal" tabindex="-1" role="dialog" aria-labelledby="editLocModalLabel">
+  <!-- modal utente -->
+  <div class="modal fade" id="editUtenteModal" tabindex="-1" role="dialog" aria-labelledby="editUtenteModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="editLocModalLabel">Localização</h4>
+          <h4 class="modal-title" id="editUtenteModalLabel">Utente</h4>
         </div>
         <div class="modal-body">
           <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <select id="select-utente" class="form-control"></select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="nome">Nome do utente</label>
+              <input type="text" class="form-control widget-utente" id="nome" disabled>
+            </div>
+          </div>
+          <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="loc_provin">Província</label>
-              <select class="form-control widget" id="loc_provin"></select>
+              <input type="text" class="form-control widget-utente" id="loc_provin" disabled>
             </div>
             <div class="form-group col-xs-offset-2 col-xs-4">
-              <label for="loc_bacia">Bacia</label>
-              <select class="form-control widget" id="loc_bacia"><select>
-              </div>
+              <label for="nuit">NUIT</label>
+              <input type="text" class="form-control widget-utente" id="nuit" disabled>
             </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_distri">Distrito</label>
+              <input type="text" class="form-control widget-utente" id="loc_distri" disabled>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="entidade">Tipo de entidade</label>
+              <input type="text" class="form-control widget-utente" id="entidade" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_posto">Posto administrativo</label>
+              <input type="text" class="form-control widget-utente" id="loc_posto" disabled>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="reg_comerc">Nro de registro comercial</label>
+              <input type="text" class="form-control widget-utente" id="reg_comerc" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_nucleo">Núcleo</label>
+              <input type="text" class="form-control widget-utente" id="loc_nucleo" disabled>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="reg_zona">Registrado em</label>
+              <input type="text" class="form-control widget-utente" id="reg_zona" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="observacio">Observaçôes</label>
+              <textarea class="form-control widget-utente" id="observacio" rows="3" disabled></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal actividade -->
+  <div class="modal fade" id="editActividadeModal" tabindex="-1" role="dialog" aria-labelledby="editActividadeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editActividadeModalLabel">Actividade</h4>
+        </div>
+        <div class="modal-body">
+          <div id="actividade-explotacion" class="row">
+            <div class="form-group col-xs-offset-1 col-xs-5">
+              <label for="actividade">Tipo de actividade</label>
+              <select id="actividade" class="form-control widget"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal fonte subterránea -->
+  <div class="modal fade" id="fonteSubModal" tabindex="-1" role="dialog" aria-labelledby="fonteSubModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="tipo_agua" value="Subterrânea" />
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="tipo_fonte">Tipo de fonte</label>
+              <select class="form-control" id="fonte_tipo"></select>
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="c_requerid">Consumo solicitado</label>
+              <input type="text" class="form-control" id="c_soli" />
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-9">
+              <label for="observacio">Observaçôes</label>
+              <textarea class="form-control" id="observacio" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal fonte superficial -->
+  <div class="modal fade" id="fonteSupModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="tipo_agua" value="Superficial" />
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="tipo_fonte">Tipo de fonte</label>
+              <select class="form-control" id="fonte_tipo"></select>
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="c_requerid">Consumo solicitado</label>
+              <input type="text" class="form-control" id="c_soli" />
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-9">
+              <label for="observacio">Observaçôes</label>
+              <textarea class="form-control" id="observacio" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEMPLATES -->
+
+  <!-- tmpl block info modal -->
+  <script type="text/template" id="block-info-modal-tmpl">
+    <div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog" aria-labelledby="editInfoModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="editInfoModalLabel">Informação</h4>
+          </div>
+          <div class="modal-body">
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="loc_distri">Distrito</label>
-                <select class="form-control widget" id="loc_distri"></select>
+                <label for="exp_name">Nome da exploração</label>
+                <input type="text" class="form-control widget" id="exp_name">
               </div>
-              <div class="form-group col-xs-offset-2 col-xs-4">
-                <label for="loc_subaci">Sub-bacia</label>
-                <select class="form-control widget" id="loc_subaci"></select>
+              <div class="form-group col-xs-3">
+                <label for="d_soli">Data de solicitação</label>
+                <input type="text" class="form-control widget-date" id="d_soli">
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="loc_posto">Posto administrativo</label>
-                <select class="form-control widget" id="loc_posto"></select>
-              </div>
-              <div class="form-group col-xs-offset-2 col-xs-4">
-                <label for="loc_rio">Río</label>
-                <input type="text" class="form-control widget" id="loc_rio">
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="loc_nucleo">Núcleo</label>
-                <input type="text" class="form-control widget" id="loc_nucleo">
+              <div class="form-group col-xs-3">
+                <label for="pagos">Pagos</label>
+                <select class="form-control widget-boolean" id="pagos"></select>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-10">
-                <label for="loc_endere">Endereço</label>
-                <input type="text" class="form-control widget" id="loc_endere">
+                <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
+                <textarea class="form-control widget" id="observacio" rows="2"></textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </script>
 
-    <!-- modal utente -->
-    <div class="modal fade" id="editUtenteModal" tabindex="-1" role="dialog" aria-labelledby="editUtenteModalLabel">
+  <!-- tmpl block location modal -->
+  <script type="text/template" id="block-location-modal-tmpl">
+    <div class="modal fade" id="editLocModal" tabindex="-1" role="dialog" aria-labelledby="editLocModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="editUtenteModalLabel">Utente</h4>
+            <h4 class="modal-title" id="editLocModalLabel">Localização</h4>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-10">
-                <select id="select-utente" class="form-control"></select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-10">
-                <label for="nome">Nome do utente</label>
-                <input type="text" class="form-control widget-utente" id="nome" disabled>
-              </div>
-            </div>
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="loc_provin">Província</label>
-                <input type="text" class="form-control widget-utente" id="loc_provin" disabled>
+                <select class="form-control widget" id="loc_provin"></select>
               </div>
               <div class="form-group col-xs-offset-2 col-xs-4">
-                <label for="nuit">NUIT</label>
-                <input type="text" class="form-control widget-utente" id="nuit" disabled>
+                <label for="loc_bacia">Bacia</label>
+                <select class="form-control widget" id="loc_bacia"><select>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="loc_distri">Distrito</label>
-                <input type="text" class="form-control widget-utente" id="loc_distri" disabled>
-              </div>
-              <div class="form-group col-xs-offset-2 col-xs-4">
-                <label for="entidade">Tipo de entidade</label>
-                <input type="text" class="form-control widget-utente" id="entidade" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="loc_posto">Posto administrativo</label>
-                <input type="text" class="form-control widget-utente" id="loc_posto" disabled>
-              </div>
-              <div class="form-group col-xs-offset-2 col-xs-4">
-                <label for="reg_comerc">Nro de registro comercial</label>
-                <input type="text" class="form-control widget-utente" id="reg_comerc" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="loc_nucleo">Núcleo</label>
-                <input type="text" class="form-control widget-utente" id="loc_nucleo" disabled>
-              </div>
-              <div class="form-group col-xs-offset-2 col-xs-4">
-                <label for="reg_zona">Registrado em</label>
-                <input type="text" class="form-control widget-utente" id="reg_zona" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-10">
-                <label for="observacio">Observaçôes</label>
-                <textarea class="form-control widget-utente" id="observacio" rows="3" disabled></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- modal actividade -->
-    <div class="modal fade" id="editActividadeModal" tabindex="-1" role="dialog" aria-labelledby="editActividadeModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="editActividadeModalLabel">Actividade</h4>
-          </div>
-          <div class="modal-body">
-            <div id="actividade-explotacion" class="row">
-              <div class="form-group col-xs-offset-1 col-xs-5">
-                <label for="actividade">Tipo de actividade</label>
-                <select id="actividade" class="form-control widget"></select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- modal fonte subterránea -->
-    <div class="modal fade" id="fonteSubModal" tabindex="-1" role="dialog" aria-labelledby="fonteSubModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" id="tipo_agua" value="Subterrânea" />
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="tipo_fonte">Tipo de fonte</label>
-                <select class="form-control" id="fonte_tipo"></select>
-              </div>
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="c_requerid">Consumo solicitado</label>
-                <input type="text" class="form-control" id="c_soli" />
-              </div>
-              <div class="form-group col-xs-offset-1 col-xs-9">
-                <label for="observacio">Observaçôes</label>
-                <textarea class="form-control" id="observacio" rows="3"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- modal fonte superficial -->
-    <div class="modal fade" id="fonteSupModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" id="tipo_agua" value="Superficial" />
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="tipo_fonte">Tipo de fonte</label>
-                <select class="form-control" id="fonte_tipo"></select>
-              </div>
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="c_requerid">Consumo solicitado</label>
-                <input type="text" class="form-control" id="c_soli" />
-              </div>
-              <div class="form-group col-xs-offset-1 col-xs-9">
-                <label for="observacio">Observaçôes</label>
-                <textarea class="form-control" id="observacio" rows="3"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEMPLATES -->
-
-    <!-- block info modal tmpl -->
-    <script type="text/template" id="block-info-modal-tmpl">
-      <div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog" aria-labelledby="editInfoModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="editInfoModalLabel">Informação</h4>
-            </div>
-            <div class="modal-body">
               <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="exp_name">Nome da exploração</label>
-                  <input type="text" class="form-control widget" id="exp_name">
+                  <label for="loc_distri">Distrito</label>
+                  <select class="form-control widget" id="loc_distri"></select>
                 </div>
-                <div class="form-group col-xs-3">
-                  <label for="d_soli">Data de solicitação</label>
-                  <input type="text" class="form-control widget-date" id="d_soli">
+                <div class="form-group col-xs-offset-2 col-xs-4">
+                  <label for="loc_subaci">Sub-bacia</label>
+                  <select class="form-control widget" id="loc_subaci"></select>
                 </div>
-                <div class="form-group col-xs-3">
-                  <label for="pagos">Pagos</label>
-                  <select class="form-control widget-boolean" id="pagos"></select>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-offset-1 col-xs-4">
+                  <label for="loc_posto">Posto administrativo</label>
+                  <select class="form-control widget" id="loc_posto"></select>
+                </div>
+                <div class="form-group col-xs-offset-2 col-xs-4">
+                  <label for="loc_rio">Río</label>
+                  <input type="text" class="form-control widget" id="loc_rio">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-offset-1 col-xs-4">
+                  <label for="loc_nucleo">Núcleo</label>
+                  <input type="text" class="form-control widget" id="loc_nucleo">
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-10">
-                  <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
-                  <textarea class="form-control widget" id="observacio" rows="2"></textarea>
+                  <label for="loc_endere">Endereço</label>
+                  <input type="text" class="form-control widget" id="loc_endere">
                 </div>
               </div>
             </div>
