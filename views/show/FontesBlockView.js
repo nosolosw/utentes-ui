@@ -4,12 +4,11 @@ Backbone.SIXHIARA.FontesBlockView = Backbone.View.extend({
   initialize: function (options) {
 
     this.subViews = [];
-    this.options = options;
 
     var tableFontesView = new Backbone.SIXHIARA.TableShowView({
       el: $('#fontes'),
       collection: this.collection,
-      domains: this.options.domains,
+      domains: options.domains,
     });
     tableFontesView.listenTo(this.collection, 'add', function(model, collection, options){
       this.update(collection);
@@ -18,6 +17,8 @@ Backbone.SIXHIARA.FontesBlockView = Backbone.View.extend({
       this.update(collection);
     });
     this.subViews.push(tableFontesView);
+
+    options.domains.on('sync', this.renderModal);
   },
 
   render: function () {
@@ -26,9 +27,8 @@ Backbone.SIXHIARA.FontesBlockView = Backbone.View.extend({
     return this;
   },
 
-  renderModal: function () {
-    var domains = this.options.domains;
-    var fonteTipos = domains.byCategory('fonte_tipo');
+  renderModal: function (collection, response, options) {
+    var fonteTipos = collection.byCategory('fonte_tipo');
 
     new Backbone.UILib.SelectView({
       el: $('#fonteSubModal #fonte_tipo'),
