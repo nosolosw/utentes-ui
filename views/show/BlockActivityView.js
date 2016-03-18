@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ActividadeBlockView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
 
   initialize: function (options) {
     this.subViews = [];

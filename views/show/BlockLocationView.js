@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.LocBlockView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
 
   // TODO:
   // - modal: selects do not update model

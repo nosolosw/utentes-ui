@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.FontesBlockView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockFontesView = Backbone.View.extend({
 
   initialize: function (options) {
 

@@ -19,12 +19,20 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
 
     // TODO: how to choose the license between the possible list?
     var licencias = exploracao.get('licencias');
-    this.licSup = licencias.where({'lic_tipo': 'Superficial'})[0];
-    this.licSub = licencias.where({'lic_tipo': 'Subterrânea'})[0];
+    var licSuperficial = licencias.where({'lic_tipo': 'Superficial'})[0];
+    var licSubterranea = licencias.where({'lic_tipo': 'Subterrânea'})[0];
+    if(licSuperficial == null) {
+      licSuperficial = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
+      exploracao.get('licencias').add(licSuperficial);
+    }
+    if(licSubterranea == null) {
+      licSubterranea = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
+      exploracao.get('licencias').add(licSubterranea);
+    }
 
-    this.domains = new Backbone.UILib.DomainCollection();
-    this.domains.url = Backbone.SIXHIARA.Config.apiDomains;
-    this.domains.fetch({
+    var domains = new Backbone.UILib.DomainCollection();
+    domains.url = Backbone.SIXHIARA.Config.apiDomains;
+    domains.fetch({
       success: function(collection, response, options) {
         console.log('domains loaded');
       },
@@ -34,112 +42,95 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       }
     });
 
-
     // TODO add action for open file folder
     // openFolderButtonView
 
     // TODO: do not listen to events if button is disabled
-    var saveButtonView = new Backbone.SIXHIARA.ButtonSaveView({
+    var buttonSaveView = new Backbone.SIXHIARA.ButtonSaveView({
       el: $('#save-button'),
       model: exploracao
     });
-    this.subViews.push(saveButtonView);
+    this.subViews.push(buttonSaveView);
 
     // TODO: ask before delete it
-    var deleteButtonView = new Backbone.SIXHIARA.ButtonDeleteView({
+    var buttonDeleteView = new Backbone.SIXHIARA.ButtonDeleteView({
       el: $('#delete-button'),
       model: exploracao
     });
-    this.subViews.push(deleteButtonView);
+    this.subViews.push(buttonDeleteView);
 
-    var mapView = new Backbone.SIXHIARA.ExploracaoMapView({
+    var blockMapView = new Backbone.SIXHIARA.BlockMapView({
       model: exploracao
     });
-    this.subViews.push(mapView);
+    this.subViews.push(blockMapView);
 
-    var titleView = new Backbone.UILib.WidgetsView({
+    var blockTitleView = new Backbone.UILib.WidgetsView({
       el: $('#title'),
       model: exploracao
     }).render();
-    this.subViews.push(titleView);
+    this.subViews.push(blockTitleView);
 
-    var infoBlockView = new Backbone.SIXHIARA.InfoBlockView({
+    var blockInfoView = new Backbone.SIXHIARA.BlockInfoView({
       el: $('#info'),
       model: exploracao,
-      domains: this.domains,
+      domains: domains,
     }).render();
-    this.subViews.push(infoBlockView);
+    this.subViews.push(blockInfoView);
 
-    var locBlockView = new Backbone.SIXHIARA.LocBlockView({
+    var blockLocationView = new Backbone.SIXHIARA.BlockLocationView({
       el: $('#loc-info'),
       model: exploracao,
-      domains: this.domains,
+      domains: domains,
     }).render();
-    this.subViews.push(locBlockView);
+    this.subViews.push(blockLocationView);
 
-    var utenteBlockView = new Backbone.SIXHIARA.UtenteBlockView({
+    var blockUtenteView = new Backbone.SIXHIARA.BlockUtenteView({
       el: $('#utente'),
       model: exploracao,
     }).render();
-    this.subViews.push(utenteBlockView);
+    this.subViews.push(blockUtenteView);
 
-    var actividadeBlockView = new Backbone.SIXHIARA.ActividadeBlockView({
+    var blockActivityView = new Backbone.SIXHIARA.BlockActivityView({
       el: $('#info-actividade'),
       model: exploracao,
-      domains: this.domains,
+      domains: domains,
     }).render();
-    this.subViews.push(actividadeBlockView);
+    this.subViews.push(blockActivityView);
 
-    var consumosBlockView = new Backbone.UILib.WidgetsView({
+    var blockConsumosView = new Backbone.UILib.WidgetsView({
       el: $('#consumos'),
       model: exploracao
     }).render();
-    exploracao.get('fontes').on('add destroy', function(model, collection, options){
-      consumosBlockView.render();
-    });
-    exploracao.on('change', function (model, collection, options) {
-      consumosBlockView.render();
-    });
-    this.subViews.push(consumosBlockView);
+    blockConsumosView.listenTo(exploracao.get('fontes'), 'add destroy', blockConsumosView.render);
+    blockConsumosView.listenTo(exploracao, 'change', blockConsumosView.render);
+    this.subViews.push(blockConsumosView);
 
-    // Licencias
-    if(this.licSup == null) {
-      this.licSup = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
-      exploracao.get('licencias').add(this.licSup);
-    }
-    var licSuperficialBlockView = new Backbone.SIXHIARA.LicenciaBlockView({
+    var blockSuperficialView = new Backbone.SIXHIARA.BlockLicenseView({
       el: $('#licencia-superficial'),
-      model: this.licSup,
+      model: licSuperficial,
       fontes: exploracao.get('fontes'),
-      domains: this.domains,
+      domains: domains,
     }).render();
-    licSuperficialBlockView.listenTo(this.licSup, 'change', function () {
-        this.render();
-    });
-    this.subViews.push(licSuperficialBlockView);
+    blockSuperficialView.listenTo(licSuperficial, 'change', blockSuperficialView.render);
+    this.subViews.push(blockSuperficialView);
 
-    if(this.licSub == null) {
-      this.licSub = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
-      exploracao.get('licencias').add(this.licSub);
-    }
-    var licenciaSubterraneaBlockView = new Backbone.SIXHIARA.LicenciaBlockView({
+    var blockSubterraneaView = new Backbone.SIXHIARA.BlockLicenseView({
       el: $('#licencia-subterranea'),
-      model: this.licSub,
+      model: licSubterranea,
       fontes: exploracao.get('fontes'),
-      domains: this.domains,
+      domains: domains,
     }).render();
-    licenciaSubterraneaBlockView.listenTo(this.licSub, 'change', function () {
-      this.render();
-    });
-    this.subViews.push(licenciaSubterraneaBlockView);
+    blockSubterraneaView.listenTo(licSubterranea, 'change', blockSubterraneaView.render);
+    this.subViews.push(blockSubterraneaView);
 
-    var fontesBlockView = new Backbone.SIXHIARA.FontesBlockView({
+    var blockFontesView = new Backbone.SIXHIARA.BlockFontesView({
       el: $('#fontes'),
       collection: exploracao.get('fontes'),
-      domains: this.domains,
+      domains: domains,
     }).render();
-    this.subViews.push(fontesBlockView);
+    this.subViews.push(blockFontesView);
 
+    return this;
   },
 
   remove: function () {

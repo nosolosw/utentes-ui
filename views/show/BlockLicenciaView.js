@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.LicenciaBlockView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockLicenciaView = Backbone.View.extend({
 
   template: _.template($('#licencia-tmpl').html()),
 
@@ -13,6 +13,7 @@ Backbone.SIXHIARA.LicenciaBlockView = Backbone.View.extend({
   },
 
   render: function(){
+    if(!this.model) return;
     this.$el.html('');
     this.$el.append(this.template(this.model.toJSON()));
 

@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.InfoBlockView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
 
   // TODO:
   // - pagos select to update models
@@ -22,17 +22,13 @@ Backbone.SIXHIARA.InfoBlockView = Backbone.View.extend({
     });
     this.subViews.push(infoView);
 
-    var summaryLicenciaView = new Backbone.SIXHIARA.SummaryLicenciaView({
+    var summaryLicenseView = new Backbone.SIXHIARA.SummaryLicenseView({
       el: $('#summary_licencia_msg'),
       model: exploracao
     });
-    summaryLicenciaView.listenTo(licSup, 'change', function(){
-      this.render();
-    });
-    summaryLicenciaView.listenTo(licSub, 'change', function(){
-      this.render();
-    });
-    this.subViews.push(summaryLicenciaView);
+    summaryLicenseView.listenTo(licSup, 'change', summaryLicenseView.render);
+    summaryLicenseView.listenTo(licSub, 'change', summaryLicenseView.render);
+    this.subViews.push(summaryLicenseView);
 
     var summaryConsumoView = new Backbone.SIXHIARA.SummaryConsumoView({
       el: $('#summary_consumo_msg'),

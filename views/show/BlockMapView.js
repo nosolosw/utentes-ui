@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ExploracaoMapView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
   initialize: function(){
 

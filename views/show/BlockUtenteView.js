@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.UtenteBlockView = Backbone.View.extend({
+Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
 
   initialize: function () {
 

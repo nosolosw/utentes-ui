@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.SummaryLicenciaView = Backbone.View.extend({
+Backbone.SIXHIARA.SummaryLicenseView = Backbone.View.extend({
 
   render: function(){
     if(this.model.getSummaryEstado()){
