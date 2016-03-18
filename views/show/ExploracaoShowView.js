@@ -110,13 +110,12 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     var licSuperficialBlockView = new Backbone.SIXHIARA.LicenciaBlockView({
       el: $('#licencia-superficial'),
       model: this.licSup,
+      fontes: exploracao.get('fontes'),
       domains: this.domains,
-      elEditButton: $('#editLicSup'),
-      elEditModal: $('#editLicSupModal'),
-      elFonteButton: $('#addFonteSup'),
-      elFonteModal: $('#fonteSupModal'),
-      elEstado: $('#editLicSupModal #estado'),
     }).render();
+    licSuperficialBlockView.listenTo(this.licSup, 'change', function () {
+        this.render();
+    });
     this.subViews.push(licSuperficialBlockView);
 
     if(this.licSub == null) {
@@ -126,13 +125,12 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     var licenciaSubterraneaBlockView = new Backbone.SIXHIARA.LicenciaBlockView({
       el: $('#licencia-subterranea'),
       model: this.licSub,
+      fontes: exploracao.get('fontes'),
       domains: this.domains,
-      elEditButton: $('#editLicSub'),
-      elEditModal: $('#editLicSubModal'),
-      elFonteButton: $('#addFonteSub'),
-      elFonteModal: $('#fonteSubModal'),
-      elEstado: $('#editLicSubModal #estado'),
     }).render();
+    licenciaSubterraneaBlockView.listenTo(this.licSub, 'change', function () {
+      this.render();
+    });
     this.subViews.push(licenciaSubterraneaBlockView);
 
     var fontesBlockView = new Backbone.SIXHIARA.FontesBlockView({
