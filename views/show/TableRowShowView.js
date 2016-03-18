@@ -11,8 +11,15 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
   },
 
   initialize: function(options){
-    this.options = options;
-    this.model.on('remove', this.unrender, this);
+    this.subViews = [];
+
+    this.editFonteModal = new Backbone.SIXHIARA.EditFonteModalView({
+      model: this.model,
+      domains: options.domains,
+    });
+    this.subViews.push(this.editFonteModal);
+
+    this.model.on('remove', this.remove, this);
     this.model.on('change', this.update, this);
   },
 
@@ -20,6 +27,11 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     this.$el.append(this.template(this.model.toJSON()));
 
     return this;
+  },
+
+  remove: function () {
+      Backbone.View.prototype.remove.call(this);
+      _.invoke(this.subViews, 'remove');
   },
 
   update: function(){
@@ -37,21 +49,13 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     this.$('td.observacio').text(fonte.get('observacio') || displayNull);
   },
 
-  unrender: function(){
-    this.$el.remove();
-  },
-
   modelDestroy: function(e){
     this.model.collection.remove(this.model);
   },
 
   modelUpdate: function(e){
     e.preventDefault();
-    var editFonteModal = new Backbone.SIXHIARA.EditFonteModalView({
-      model: this.model,
-      domains: this.options.domains,
-    });
-    editFonteModal.render()
-  }
+    this.editFonteModal.render()
+  },
 
 });
