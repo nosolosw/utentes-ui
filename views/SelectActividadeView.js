@@ -22,9 +22,9 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
     if(value === 'Abastecimento'){
       newActivity = new Backbone.Model({
         'tipo': 'Abastecimento',
-        'c_estimado': 0,
-        'habitantes': 20,
-        'dotacao': 0
+        'c_estimado': null,
+        'habitantes': null,
+        'dotacao': 20
       });
     } else if (value === 'Agricultura-Regadia') {
       newActivity = new Backbone.Model({
