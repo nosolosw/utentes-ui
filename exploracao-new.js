@@ -203,26 +203,44 @@ function fillComponentsWithDomains(){
 
 
 
-
-
-
-
 // block actividade
 var actividadeView = new Backbone.SIXHIARA.ActividadeView({
   el: $('#info-actividade'),
-  model: exploracao
-  // template: _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+  model: exploracao,
+  template: _.template($("#Abastecimento").html()),
+  nestedViews: []
 });
-// actividadeView.render();
+
 actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, options){
   this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
   this.render();
+
+  var actividade = exploracao.get('actividade');
+  if (actividade)  {
+    this.options.nestedViews.forEach(function(nestedView){nestedView.unbind()});
+    this.options.nestedViews = [];
+
+    this.options.nestedViews.push(
+      new Backbone.UILib.WidgetsView({
+        el: $('#info-actividade'),
+        model: actividade
+      }).render()
+    );
+
+    if (actividade.get('tipo') === 'Indústria') {
+      this.options.nestedViews.push(
+        new Backbone.UILib.SelectView({
+          el: $('#tipo_indus'),
+          collection: domains.byCategory('industria_tipo')
+        }).render()
+      );
+    } else if (actividade.get('tipo') === 'Producção de energia') {
+      this.options.nestedViews.push(
+        new Backbone.UILib.SelectView({
+          el: $('#energia_tipo'),
+          collection: domains.byCategory('energia_tipo')
+        }).render()
+      );
+    }
+  }
 });
-// TODO: listen to changes inside actividade values
-// care! actividade may change
-/*
-$('#editActividade').on('click', function(e){
-  e.preventDefault();
-  $('#editActividadeModal').modal('toggle');
-});
-*/

@@ -417,8 +417,8 @@
 <script type="text/template" id="Abastecimento">
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="nro-habitantes">Nro de habitantes</label>
-      <input type="text" class="form-control widget-number" id="nro-habitantes">
+      <label for="habitantes">Nro de habitantes</label>
+      <input type="text" class="form-control widget-number" id="habitantes">
     </div>
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="dotacao">Dotaçâo</label>
@@ -438,8 +438,9 @@
 <script type="text/template" id="Indústria">
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="tipo_industria">Tipo de indústria</label>
-      <input type="text" class="form-control widget" id="tipo_industria">
+      <label for="tipo_indus">Tipo de indústria</label>
+      <select class="form-control widget" id="tipo_indus">
+      </select>
     </div>
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="instalacio">Instalaçôes</label>
@@ -459,7 +460,7 @@
 
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="eval_impac">Evaluación impacto</label>
-      <input type="text" class="form-control widget" id="eval_impac">
+      <input type="text" class="form-control widget" id="eval_impac"> <!-- FIXME -->
     </div>
   </div>
 </script>
@@ -476,11 +477,11 @@
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="area">Área</label>
-      <input type="text" class="form-control widget" id="area">
+      <input type="text" class="form-control widget-number" id="area">
     </div>
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="v_reservas">Reservas</label>
-      <input type="text" class="form-control widget" id="v_reservas">
+      <input type="text" class="form-control widget-number" id="v_reservas">
     </div>
   </div>
 </script>
@@ -492,18 +493,19 @@
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="energia_tipo">Tipo de energía</label>
-      <input type="text" class="form-control widget" id="energia_tipo">
+      <select class="form-control widget" id="energia_tipo">
+      </select>
     </div>
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="potencia">Potencia</label>
-      <input type="text" class="form-control widget" id="potencia">
+      <input type="text" class="form-control widget-number" id="potencia">
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="alt_agua">Altura água</label>
-      <input type="text" class="form-control widget" id="alt_agua">
+      <input type="text" class="form-control widget-number" id="alt_agua">
     </div>
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="equipo">Equipo</label>
@@ -512,7 +514,7 @@
 
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="eval_impac">Evaluación impacto</label>
-      <input type="text" class="form-control widget" id="eval_impac">
+      <input type="text" class="form-control widget" id="eval_impac"> <!-- FIXME -->
     </div>
   </div>
 </script>
@@ -521,8 +523,8 @@
 <script type="text/template" id="Saneamento">
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="nro-habitantes">Nro de habitantes:</label>
-      <input type="text" class="form-control widget-number" id="nro-habitantes">
+      <label for="habitantes">Nro de habitantes:</label>
+      <input type="text" class="form-control widget-number" id="habitantes">
     </div>
   </div>
 </script>
