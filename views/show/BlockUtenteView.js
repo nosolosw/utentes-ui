@@ -1,6 +1,10 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
 
+  events: {
+    'click #editBlockUtente': 'renderModal'
+  },
+
   initialize: function () {
 
     var view = this;
@@ -10,16 +14,16 @@ Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
       el: this.el,
       model: this.model.get('utente')
     });
+    utenteView.listenTo(this.model, 'change:utente', function (model, value, options) {
+      this.model = model.get('utente');
+      this.render();
+    });
     this.subViews.push(utenteView);
 
-    this.model.on('change:utente', function(model, value, options){
-      utenteView.model = view.model.get('utente');
-      utenteView.render();
-    });
-
-    var utentes = new Backbone.SIXHIARA.UtenteCollection();
-    utentes.on('sync', this.renderModal, this);
-    utentes.fetch({
+    this.utentes = new Backbone.SIXHIARA.UtenteCollection();
+    this.domainsFilled = false;
+    this.utentes.on('sync', this.setDomainsFilled, this);
+    this.utentes.fetch({
       success: function() {
         console.log('utentes loaded');
       },
@@ -31,23 +35,44 @@ Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
 
   },
 
+  setDomainsFilled: function () {
+      this.domainsFilled = true;
+  },
+
   render: function () {
     _.invoke(this.subViews, 'render');
 
     return this;
   },
 
-  renderModal: function (collection, response, options) {
-    $('#editUtente').on('click', function(e){
-      e.preventDefault();
-      $('#editUtenteModal').modal('toggle');
+  renderModal: function (event) {
+
+    if(!this.domainsFilled) return;
+
+    // add modal to DOM
+    var node = $(document.body).append($('#block-utente-modal-tmpl').html());
+
+    // take it from DOM and connect events, fill components, etc
+    var modalEl = $('#editUtenteModal');
+    var modalViews = [];
+
+    var selectUtente = new Backbone.SIXHIARA.SelectUtenteView({
+      el: modalEl,
+      model: this.model,
+      collection: this.utentes,
+    }).render();
+    modalViews.push(selectUtente);
+
+    // remove modal from DOM on hide
+    modalEl.on('hidden.bs.modal', function () {
+      // this is the modal itself
+      $(this).remove();
+      _.invoke(modalViews, 'remove');
+      modalViews = [];
     });
 
-    new Backbone.SIXHIARA.SelectUtenteViewShow({
-      el: $('#editUtenteModal'),
-      model: this.model.get('utente'),
-      collection: collection,
-    }).render();
+    // do open modal
+    modalEl.modal('show');
 
   },
 

@@ -2,11 +2,11 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
 
   events: {
-    'change #select-utente': "fillInputs"
+    'change #select-utente': "fillInputsEvent"
   },
 
   render: function(){
-    this.model.models.forEach(this.appendOption, this);
+    this.collection.models.forEach(this.appendOption, this);
 
     return this;
   },
@@ -17,26 +17,38 @@ Backbone.SIXHIARA.SelectUtenteView = Backbone.View.extend({
       text:  'nome',
       attributes: {'value': utente.get('nome')}
     });
+    if(this.model && (this.model.get('utente').get('nome') === utente.get('nome'))){
+      option.$el.attr('selected', 'selected');
+      this.fillInputs(option.model.get('nome'));
+    }
     this.$('#select-utente').append(option.render().$el);
   },
 
-  fillInputs: function(e){
+  fillInputsEvent: function(e){
     // update widgets
     var selectedOption = e.target.selectedOptions[0].value;
-    var utente = this.model.findWhere({'nome': selectedOption});
-    this.$('.widget-utente').each(function(index, widget){
-      if(utente === undefined){
+    this.fillInputs(selectedOption);
+  },
+
+  fillInputs: function (selectedOption) {
+    var utente = this.collection.findWhere({'nome': selectedOption});
+    if(utente === undefined){
+      this.$('.widget-utente').each(function(index, widget){
         // enable widgets and clear values
         widget.removeAttribute('disabled');
         widget.value = '';
         $(widget).trigger('input');
-      } else {
+      });
+      if(this.model) this.model.set('utente', new Backbone.SIXHIARA.Utente());
+    } else {
+      this.$('.widget-utente').each(function(index, widget){
         // disable widgets and set values from model
         widget.setAttribute('disabled', true);
         widget.value = utente.get(widget.id);
         $(widget).trigger('input');
-      }
-    });
-  }
+      });
+      if(this.model) this.model.set('utente', utente);
+    }
+  },
 
 });

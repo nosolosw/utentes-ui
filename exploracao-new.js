@@ -47,7 +47,7 @@ new Backbone.UILib.WidgetsView({
 function fillSelectUtente(){
   new Backbone.SIXHIARA.SelectUtenteView({
     el: $('#utente'),
-    model: utentes
+    collection: utentes
   }).render();
 }
 new Backbone.UILib.WidgetsView({
