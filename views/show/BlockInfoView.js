@@ -1,19 +1,17 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
 
-  // TODO:
-  // - pagos select to update models
-  // - pagosView to re-render on exploracao.pagos update
+  events: {
+    'click #editInfo': 'renderModal'
+  },
 
   initialize: function (options) {
     this.subViews = [];
+    this.options = options;
 
     var exploracao = this.model;
     var licSup = exploracao.get('licencias').where({'lic_tipo': 'Superficial'})[0];
     var licSub = exploracao.get('licencias').where({'lic_tipo': 'Subterrânea'})[0];
-
-    exploracao.on('change', this.render, this);
-    options.domains.on('sync', this.renderModal, this);
 
     // create subviews
     var infoView = new Backbone.UILib.WidgetsView({
@@ -42,6 +40,15 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
     });
     this.subViews.push(summaryPagosView);
 
+    this.domainsFilled = false;
+    options.domains.on('sync', this.domainsFilled, this);
+
+    exploracao.on('change', this.render, this);
+
+  },
+
+  domainsFilled: function () {
+    this.domainsFilled = true;
   },
 
   render: function () {
@@ -50,26 +57,34 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
     return this;
   },
 
-  renderModal: function (collection, response, options) {
-    // TODO: open modal with JS to avoid event & memory leaks
-    // that prevent proper operation
-    $('#editInfo').on('click', function(e){
-      e.preventDefault();
-      $('#editInfoModal').modal('toggle');
-    });
+  renderModal: function (event) {
 
-    // fill select pagos
+    if(!this.domainsFilled) return;
+
+    // add modal to DOM
+    var node = $(document.body).append($('#block-info-modal-tmpl').html());
+
+    // take it from DOM and connect events, fill components, etc
+    var modalEl = $('#editInfoModal');
     new Backbone.UILib.SelectView({
       el: $('#editInfoModal #pagos'),
-      collection: collection.byCategory('pagamentos'),
+      collection: this.options.domains.byCategory('pagamentos'),
     }).render();
-
-    // TODO: pagos is boolean, make select to use alias
-    // connect components in modal with model
     new Backbone.UILib.WidgetsView({
-      el: $('#editInfoModal'),
+      el: modalEl,
       model: this.model
     }).render();
+
+    // remove modal from DOM on hide
+    modalEl.on('hidden.bs.modal', function () {
+      // this is the modal itself
+      // should we unbind the events too?
+      $(this).remove();
+    });
+
+    // do open modal
+    modalEl.modal('show');
+
   },
 
   remove: function () {

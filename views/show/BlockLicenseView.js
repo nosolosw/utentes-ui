@@ -19,7 +19,7 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
     return this;
   },
 
-  renderAddFonteModal: function () {
+  renderAddFonteModal: function (event) {
 
     // append modal to DOM
     var node = $(document.body).append($('#edit-fonte-modal-tmpl').html());
@@ -59,18 +59,14 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   renderEditLicenseModal: function (event) {
 
     // add modal to DOM
-    var node = $(document.body).append($('#licencia-modal-tmpl').html());
+    var node = $(document.body).append($('#block-license-modal-tmpl').html());
 
     // take it from DOM and connect events, fill components, etc
     var modalEl = $('#licenciaModal');
-    var estadoSelectEl = $('#licenciaModal #estado');
-
-    // connect components and fill select after modal was added to DOM
     new Backbone.UILib.SelectView({
-      el: estadoSelectEl,
+      el: $('#licenciaModal #estado'),
       collection: this.options.domains.byCategory('licencia_estado')
     }).render();
-
     new Backbone.UILib.WidgetsView({
       el: modalEl,
       model: this.model,
