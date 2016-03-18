@@ -71,7 +71,7 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
         'habitantes': null
       });
     }
-    if(newActivity) this.model.set(attr, newActivity);
+    this.model.set(attr, newActivity);
   },
 
 });
