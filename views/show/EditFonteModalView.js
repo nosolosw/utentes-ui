@@ -2,12 +2,17 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.EditFonteModalView = Backbone.View.extend({
 
   initialize: function (options) {
-    options.domains.on('sync', this.fillSelect, this);
+    this.options = options;
+
+    this.domainsFilled = false;
+    options.domains.on('sync', this.setDomainsFilled, this);
 
     this.template = $('#edit-fonte-modal-tmpl').html();
   },
 
   render: function(){
+
+    if(!this.domainsFilled) return; // do not open modal
 
     // https://github.com/twbs/bootstrap/issues/17732
     // Bootstrap adds the modal to the DOM every time modal('toggle') is called
@@ -17,6 +22,12 @@ Backbone.SIXHIARA.EditFonteModalView = Backbone.View.extend({
     //
     // So, we better append it to the DOM ourselves and remove it on hide.
     var node = $(document.body).append(this.template);
+
+    var tipoAgua = this.model.get('tipo_agua');
+    new Backbone.UILib.SelectView({
+      el: $('#editFonteModal #fonte_tipo'),
+      collection: this.options.domains.byCategory('fonte_tipo').byParent(tipoAgua)
+    }).render();
 
     this.bindEvents();
 
@@ -59,12 +70,8 @@ Backbone.SIXHIARA.EditFonteModalView = Backbone.View.extend({
 
   },
 
-  fillSelect: function (collection, response, options) {
-    var tipoAgua = this.model.get('tipo_agua');
-    new Backbone.UILib.SelectView({
-      el: $('#editFonteModal #fonte_tipo'),
-      collection: collection.byCategory('fonte_tipo').byParent(tipoAgua)
-    }).render();
+  setDomainsFilled: function (collection, response, options) {
+    this.domainsFilled = true;
   },
 
 });
