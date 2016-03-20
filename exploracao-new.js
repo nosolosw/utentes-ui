@@ -107,6 +107,7 @@ function fillComponentsWithDomains(){
   var estadosLicencia = domains.byCategory('licencia_estado');
   var actividades     = domains.byCategory('actividade');
   var fonteTipos      = domains.byCategory('fonte_tipo');
+  var resesTipos      = domains.byCategory('animal_tipo')
 
   // page info: localizacao
   new Backbone.UILib.SelectView({
@@ -198,6 +199,12 @@ function fillComponentsWithDomains(){
     collection: fonteTipos.byParent('Superficial')
   }).render();
 
+
+ // actividades modal windows
+ new Backbone.UILib.SelectView({
+   el: $('#resModal #reses_tipo'),
+   collection: resesTipos
+ }).render();
 }
 
 
@@ -211,18 +218,29 @@ var actividadeView = new Backbone.SIXHIARA.ActividadeView({
   nestedViews: []
 });
 
+$('.modal').on('hidden.bs.modal', function(){
+    $('form').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
+    $(this).find('input, textarea, select').val('');
+});
+
 actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, options){
+  var actividade = exploracao.get('actividade');
+
+  this.options.nestedViews.forEach(function(nestedView){
+    nestedView.unbind();
+    nestedView.remove();
+  });
+  this.options.nestedViews = [];
+  $('#info-actividade').append($('<div class="actividade-render">'));
+
   this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
   this.render();
 
-  var actividade = exploracao.get('actividade');
-  if (actividade)  {
-    this.options.nestedViews.forEach(function(nestedView){nestedView.unbind()});
-    this.options.nestedViews = [];
+
 
     this.options.nestedViews.push(
       new Backbone.UILib.WidgetsView({
-        el: $('#info-actividade'),
+        el: $('.actividade-render'),
         model: actividade
       }).render()
     );
@@ -241,6 +259,37 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
           collection: domains.byCategory('energia_tipo')
         }).render()
       );
+    } else if (actividade.get('tipo') === 'Pecuária') {
+
+      $('#nova-res').on('click', function(e){
+        e.preventDefault();
+        $('#resModal').modal('toggle');
+      });
+
+      this.options.nestedViews.push(
+        new Backbone.SIXHIARA.ModalTableView({
+          el: $('#resModal'),
+          collection: exploracao.get('actividade').get('reses'),
+        })
+      );
+      var resesTableView = new Backbone.SIXHIARA.TableView({
+        el: $('table#reses'),
+        collection: exploracao.get('actividade').get('reses'),
+        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><%- observacio %></td><td class="close">&times;</td>'
+      }).render();
+
+      this.options.nestedViews.push(
+          resesTableView
+      );
+
+      resesTableView.listenTo(exploracao.get('actividade').get('reses'), 'add', function(model, collection, options){
+        this.update(exploracao.get('actividade').get('reses'));
+      });
+      resesTableView.listenTo(exploracao.get('actividade').get('reses'), 'destroy', function(model, collection, options){
+        this.update(exploracao.get('actividade').get('reses'));
+      });
+
+    } else if (actividade.get('tipo') === 'Agricultura-Regadia') {
+
     }
-  }
-});
+}); // actividadeView.listenTo

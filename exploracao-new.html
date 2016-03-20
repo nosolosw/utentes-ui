@@ -238,10 +238,7 @@
                     <div class="row">
                       <h3 class="col-xs-offset-1 col-xs-11">Dados da actividade</h3>
                     </div>
-                    <div class="actividade-render">
-
-                    </div>
-                    <!-- each activity needs to render itself here, so it needs to declare as many divs.row component as it needs -->
+                    <!-- <div class="actividade-render"></div> -->
                   </section>
 
                 </div>
@@ -467,10 +464,70 @@
 
 <!-- tmpl actividade pecuaria -->
 <script type="text/template" id="Pecuária">
+  <div class="form-group">
+    <button class="btn btn-default pull-right" id="nova-res">Nova res</button>
+  </div>
   <div class="row">
-    <span class="col-xs-offset-1 col-xs-11"><span class="title">Reses:</span> <span><%- reses || '-' %></span> </span>
+    <table class="col-xs-offset-1 table" id="reses">
+      <thead>
+        <tr>
+          <th>Estimado</th>
+          <th>Tipo de reses</th>
+          <th>Nro de reses</th>
+          <th>C. por res</th>
+          <th>Observações</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 </script>
+
+<!-- modal engadir res -->
+<div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="resModalLabel">Res</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="c_estimado">Estimado</label>
+            <input type="text" class="form-control widget-number" id="c_estimado" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="reses_tipo">Tipo de reses</label>
+            <select class="form-control widget" id="reses_tipo">
+            </select>
+          </div>
+
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="reses_nro">Nro de reses</label>
+            <input type="text" class="form-control widget-number" id="reses_nro" />
+          </div>
+
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="c_res">C. por res</label>
+            <input type="text" class="form-control widget-number" id="c_res" />
+          </div>
+
+          <div class="form-group col-xs-offset-1 col-xs-9">
+            <label for="observacio">Observaçôes</label>
+            <textarea class="form-control" id="observacio" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="saveRow">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- tmpl actividade piscicultura-->
 <script type="text/template" id="Piscicultura">
@@ -578,6 +635,7 @@
 <script src="views/TableFontesView.js"></script>
 <script src="views/ActividadeView.js"></script>
 
+<script src="views/ActividadesTableView.js"></script>
 <script src="exploracao-new.js"></script>
 
 </body>
