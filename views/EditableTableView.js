@@ -140,4 +140,8 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
     this.$el.modal('toggle');
   },
 
+  remove: function() {
+    // Don't remove $el here
+  }
+
 });
