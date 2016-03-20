@@ -198,9 +198,31 @@ function fillComponentsWithDomains(){
     el: $('#fonteSupModal #fonte_tipo'),
     collection: fonteTipos.byParent('Superficial')
   }).render();
+
+
+  // Update actividades templates in the DOM adding the
+  // options to the selects
+  new Backbone.UILib.SelectView({
+    el: $('#tipo_indus'),
+    collection: domains.byCategory('industria_tipo')
+  }).render();
+  new Backbone.UILib.SelectView({
+    el: $('#energia_tipo'),
+    collection: domains.byCategory('energia_tipo')
+  }).render();
+  new Backbone.UILib.SelectView({
+    el: $('#resModal #reses_tipo'),
+    collection: domains.byCategory('animal_tipo'),
+  }).render();
+  new Backbone.UILib.SelectView({
+    el: $('#cultivoModal #cultivo'),
+    collection: domains.byCategory('cultivo_tipo'),
+  }).render();
+  new Backbone.UILib.SelectView({
+    el: $('#cultivoModal #rega'),
+    collection: domains.byCategory('rega_tipo'),
+  }).render();
 }
-
-
 
 
 // block actividade
@@ -236,28 +258,7 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
     }).render()
   );
 
-  if (actividade.get('tipo') === 'Indústria') {
-    this.options.nestedViews.push(
-      new Backbone.UILib.SelectView({
-        el: $('#tipo_indus'),
-        collection: domains.byCategory('industria_tipo')
-      }).render()
-    );
-  } else if (actividade.get('tipo') === 'Producção de energia') {
-    this.options.nestedViews.push(
-      new Backbone.UILib.SelectView({
-        el: $('#energia_tipo'),
-        collection: domains.byCategory('energia_tipo')
-      }).render()
-    );
-  } else if (actividade.get('tipo') === 'Pecuária') {
-
-    this.options.nestedViews.push(
-      new Backbone.UILib.SelectView({
-        el: $('#resModal #reses_tipo'),
-        collection: domains.byCategory('animal_tipo'),
-      }).render()
-    );
+  if (actividade.get('tipo') === 'Pecuária') {
 
     this.options.nestedViews.push(
       new Backbone.SIXHIARA.EditableTableView({
@@ -272,18 +273,6 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
 
   } else if (actividade.get('tipo') === 'Agricultura-Regadia') {
 
-    this.options.nestedViews.push(
-      new Backbone.UILib.SelectView({
-        el: $('#cultivoModal #cultivo'),
-        collection: domains.byCategory('cultivo_tipo'),
-      }).render()
-    );
-    this.options.nestedViews.push(
-      new Backbone.UILib.SelectView({
-        el: $('#cultivoModal #rega'),
-        collection: domains.byCategory('rega_tipo'),
-      }).render()
-    );
     this.options.nestedViews.push(
       new Backbone.SIXHIARA.EditableTableView({
         el: $('Agricultura-Regadia'),
