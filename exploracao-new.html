@@ -426,10 +426,77 @@
 
 <!-- tmpl actividade agricultura -->
 <script type="text/template" id="Agricultura-Regadia">
+  <div class="form-group">
+    <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+  </div>
   <div class="row">
-    <span class="col-xs-offset-1 col-xs-11"><span class="title">Cultivos:</span> <span><%- cultivos || '-' %></span> </span>
+    <table class="col-xs-offset-1 table" id="cultivos">
+      <thead>
+        <tr>
+          <th>Estimado</th>
+          <th>Tipo de cultivo</th>
+          <th>Tipo de rega</th>
+          <th>Eficiencia</th>
+          <th>Área</th>
+          <th>Observações</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 </script>
+
+<!-- modal engadir cultivo -->
+<div class="modal fade" id="cultivoModal" tabindex="-1" role="dialog" aria-labelledby="cultivoModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="cultivoModalLabel">Cultivo</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="c_estimado">Estimado</label>
+            <input type="text" class="form-control widget-number" id="c_estimado" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="cultivo">Tipo de cultivo</label>
+            <select class="form-control widget" id="cultivo">
+            </select>
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="rega">Tipo de rego</label>
+            <select class="form-control widget" id="rega">
+            </select>
+          </div>
+
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="eficiencia">Eficiencia del riego</label>
+            <input type="text" class="form-control widget-number" id="eficiencia" />
+          </div>
+
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="area">Área</label>
+            <input type="text" class="form-control widget-number" id="area" />
+          </div>
+
+          <div class="form-group col-xs-offset-1 col-xs-9">
+            <label for="observacio">Observaçôes</label>
+            <textarea class="form-control" id="observacio" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="saveRow">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- tmpl actividade industria-->
 <script type="text/template" id="Indústria">

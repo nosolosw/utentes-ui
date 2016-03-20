@@ -107,7 +107,7 @@ function fillComponentsWithDomains(){
   var estadosLicencia = domains.byCategory('licencia_estado');
   var actividades     = domains.byCategory('actividade');
   var fonteTipos      = domains.byCategory('fonte_tipo');
-  var resesTipos      = domains.byCategory('animal_tipo')
+
 
   // page info: localizacao
   new Backbone.UILib.SelectView({
@@ -198,13 +198,6 @@ function fillComponentsWithDomains(){
     el: $('#fonteSupModal #fonte_tipo'),
     collection: fonteTipos.byParent('Superficial')
   }).render();
-
-
- // actividades modal windows
- new Backbone.UILib.SelectView({
-   el: $('#resModal #reses_tipo'),
-   collection: resesTipos
- }).render();
 }
 
 
@@ -259,18 +252,47 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
     );
   } else if (actividade.get('tipo') === 'Pecuária') {
 
-    var resesTableView = new Backbone.SIXHIARA.EditableTableView({
-      el: $('Pecuária'),
-      newRowBtSelector: '#newRow',
-      modalSelector: '#resModal',
-      tableSelector: 'table#reses',
-      collection: exploracao.get('actividade').get('reses'),
-      rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="close">&times;</td>',
-    });
+    this.options.nestedViews.push(
+      new Backbone.UILib.SelectView({
+        el: $('#resModal #reses_tipo'),
+        collection: domains.byCategory('animal_tipo'),
+      }).render()
+    );
 
-    this.options.nestedViews.push(resesTableView);
+    this.options.nestedViews.push(
+      new Backbone.SIXHIARA.EditableTableView({
+        el: $('Pecuária'),
+        newRowBtSelector: '#newRow',
+        modalSelector: '#resModal',
+        tableSelector: 'table#reses',
+        collection: exploracao.get('actividade').get('reses'),
+        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="close">&times;</td>',
+      })
+    );
 
   } else if (actividade.get('tipo') === 'Agricultura-Regadia') {
 
+    this.options.nestedViews.push(
+      new Backbone.UILib.SelectView({
+        el: $('#cultivoModal #cultivo'),
+        collection: domains.byCategory('cultivo_tipo'),
+      }).render()
+    );
+    this.options.nestedViews.push(
+      new Backbone.UILib.SelectView({
+        el: $('#cultivoModal #rega'),
+        collection: domains.byCategory('rega_tipo'),
+      }).render()
+    );
+    this.options.nestedViews.push(
+      new Backbone.SIXHIARA.EditableTableView({
+        el: $('Agricultura-Regadia'),
+        newRowBtSelector: '#newRow',
+        modalSelector: '#cultivoModal',
+        tableSelector: 'table#cultivos',
+        collection: exploracao.get('actividade').get('cultivos'),
+        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %></td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="close">&times;</td>',
+      })
+    );
   }
 }); // actividadeView.listenTo
