@@ -1,4 +1,48 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
+
+  initialize: function(options) {
+    this.options = options || {};
+    this._subviews = [];
+    var self = this;
+    $(this.options.newRowBtSelector || '#newRow').on('click', function(e){
+      e.preventDefault();
+      $(self.options.modalSelector).modal('toggle');
+    });
+
+    this._subviews.push(
+      new Backbone.SIXHIARA.ModalTableView({
+        el: $(this.options.modalSelector),
+        collection: this.collection,
+      })
+    );
+
+    var tableView = new Backbone.SIXHIARA.TableView({
+      el: $(this.options.tableSelector),
+      collection: this.collection,
+      rowTemplate: this.options.rowTemplate,
+    }).render();
+
+    this._subviews.push(tableView);
+
+    tableView.listenTo(this.collection, 'add', function(model, collection, options){
+      this.update(this.collection);
+    });
+    tableView.listenTo(this.collection, 'destroy', function(model, collection, options){
+      this.update(this.collection);
+    });
+  },
+
+  remove: function(){
+    Backbone.View.prototype.remove.call(this);
+    _.invoke(this._subviews, 'unbind');
+    _.invoke(this._subviews, 'remove');
+  },
+
+});
+
+
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.TableView = Backbone.View.extend({
 
   initialize: function(options){

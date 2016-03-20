@@ -236,60 +236,41 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
   this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
   this.render();
 
+  this.options.nestedViews.push(
+    new Backbone.UILib.WidgetsView({
+      el: $('.actividade-render'),
+      model: actividade
+    }).render()
+  );
 
-
+  if (actividade.get('tipo') === 'Indústria') {
     this.options.nestedViews.push(
-      new Backbone.UILib.WidgetsView({
-        el: $('.actividade-render'),
-        model: actividade
+      new Backbone.UILib.SelectView({
+        el: $('#tipo_indus'),
+        collection: domains.byCategory('industria_tipo')
       }).render()
     );
+  } else if (actividade.get('tipo') === 'Producção de energia') {
+    this.options.nestedViews.push(
+      new Backbone.UILib.SelectView({
+        el: $('#energia_tipo'),
+        collection: domains.byCategory('energia_tipo')
+      }).render()
+    );
+  } else if (actividade.get('tipo') === 'Pecuária') {
 
-    if (actividade.get('tipo') === 'Indústria') {
-      this.options.nestedViews.push(
-        new Backbone.UILib.SelectView({
-          el: $('#tipo_indus'),
-          collection: domains.byCategory('industria_tipo')
-        }).render()
-      );
-    } else if (actividade.get('tipo') === 'Producção de energia') {
-      this.options.nestedViews.push(
-        new Backbone.UILib.SelectView({
-          el: $('#energia_tipo'),
-          collection: domains.byCategory('energia_tipo')
-        }).render()
-      );
-    } else if (actividade.get('tipo') === 'Pecuária') {
+    var resesTableView = new Backbone.SIXHIARA.EditableTableView({
+      el: $('Pecuária'),
+      newRowBtSelector: '#newRow',
+      modalSelector: '#resModal',
+      tableSelector: 'table#reses',
+      collection: exploracao.get('actividade').get('reses'),
+      rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="close">&times;</td>',
+    });
 
-      $('#nova-res').on('click', function(e){
-        e.preventDefault();
-        $('#resModal').modal('toggle');
-      });
+    this.options.nestedViews.push(resesTableView);
 
-      this.options.nestedViews.push(
-        new Backbone.SIXHIARA.ModalTableView({
-          el: $('#resModal'),
-          collection: exploracao.get('actividade').get('reses'),
-        })
-      );
-      var resesTableView = new Backbone.SIXHIARA.TableView({
-        el: $('table#reses'),
-        collection: exploracao.get('actividade').get('reses'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><%- observacio %></td><td class="close">&times;</td>'
-      }).render();
+  } else if (actividade.get('tipo') === 'Agricultura-Regadia') {
 
-      this.options.nestedViews.push(
-          resesTableView
-      );
-
-      resesTableView.listenTo(exploracao.get('actividade').get('reses'), 'add', function(model, collection, options){
-        this.update(exploracao.get('actividade').get('reses'));
-      });
-      resesTableView.listenTo(exploracao.get('actividade').get('reses'), 'destroy', function(model, collection, options){
-        this.update(exploracao.get('actividade').get('reses'));
-      });
-
-    } else if (actividade.get('tipo') === 'Agricultura-Regadia') {
-
-    }
+  }
 }); // actividadeView.listenTo
