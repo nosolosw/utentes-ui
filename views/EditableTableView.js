@@ -127,14 +127,13 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
   saveRow: function(){
     // FIXME: Validations, formats, more widgets
     var res = new Backbone.Model();
-    var b = this.$('input, select, textarea').each(function(k, v){
+    this.$('input, select, textarea').each(function(k, v){
       var $v = $(v);
       if ($v.hasClass('widget-number')) {
         res.set(v.id, formatter().unformatNumber($v.val()));
       } else {
         res.set(v.id, $v.val() || null);
       }
-
     });
     this.collection.add(res)
     this.$el.modal('toggle');

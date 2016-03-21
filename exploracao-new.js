@@ -236,7 +236,6 @@ var actividadeView = new Backbone.SIXHIARA.ActividadeView({
 
 // FIXME. put in EditableTableView
 $('.modal').on('hidden.bs.modal', function(){
-    $('form').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
     $(this).find('input, textarea, select').val('');
 });
 
