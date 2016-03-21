@@ -408,46 +408,7 @@
   </div>
 </div>
 
-
-<!-- TEMPLATES -->
-<!-- tmpl actividade abastecimento -->
-<script type="text/template" id="Abastecimento">
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="habitantes">Nro de habitantes</label>
-      <input type="text" class="form-control widget-number" id="habitantes">
-    </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="dotacao">Dotaçâo</label>
-      <input type="text" class="form-control widget-number" id="dotacao">
-    </div>
-  </div>
-</script>
-
-<!-- tmpl actividade agricultura -->
-<script type="text/template" id="Agricultura-Regadia">
-  <div class="form-group">
-    <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
-  </div>
-  <div class="row">
-    <table class="col-xs-offset-1 table" id="cultivos">
-      <thead>
-        <tr>
-          <th>Estimado</th>
-          <th>Tipo de cultivo</th>
-          <th>Tipo de rega</th>
-          <th>Eficiencia</th>
-          <th>Área</th>
-          <th>Observações</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-</script>
-
+<!-- MODAL ACTIVITIES -->
 <!-- modal engadir cultivo -->
 <div class="modal fade" id="cultivoModal" tabindex="-1" role="dialog" aria-labelledby="cultivoModalLabel">
   <div class="modal-dialog" role="document">
@@ -497,61 +458,6 @@
   </div>
 </div>
 
-
-<!-- tmpl actividade industria-->
-<script type="text/template" id="Indústria">
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="tipo_indus">Tipo de indústria</label>
-      <select class="form-control widget" id="tipo_indus">
-      </select>
-    </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="instalacio">Instalaçôes</label>
-      <input type="text" class="form-control widget" id="instalacio">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="efluente">Efluente</label>
-      <input type="text" class="form-control widget" id="efluente">
-    </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="tratamento">Tratamento</label>
-      <input type="text" class="form-control widget" id="tratamento">
-    </div>
-
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="eval_impac">Evaluación impacto</label>
-      <input type="text" class="form-control widget" id="eval_impac"> <!-- FIXME -->
-    </div>
-  </div>
-</script>
-
-<!-- tmpl actividade pecuaria -->
-<script type="text/template" id="Pecuária">
-  <div class="form-group">
-    <button class="btn btn-default pull-right" id="newRow">Nova res</button>
-  </div>
-  <div class="row">
-    <table class="col-xs-offset-1 table" id="reses">
-      <thead>
-        <tr>
-          <th>Estimado</th>
-          <th>Tipo de reses</th>
-          <th>Nro de reses</th>
-          <th>C. por res</th>
-          <th>Observações</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-</script>
-
 <!-- modal engadir res -->
 <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
   <div class="modal-dialog" role="document">
@@ -596,62 +502,8 @@
   </div>
 </div>
 
-<!-- tmpl actividade piscicultura-->
-<script type="text/template" id="Piscicultura">
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="area">Área</label>
-      <input type="text" class="form-control widget-number" id="area">
-    </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="v_reservas">Reservas</label>
-      <input type="text" class="form-control widget-number" id="v_reservas">
-    </div>
-  </div>
-</script>
-
-<!-- tmpl actividade produccao energia -->
-
-<script type="text/template" id="Producção de energia">
-
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="energia_tipo">Tipo de energía</label>
-      <select class="form-control widget" id="energia_tipo">
-      </select>
-    </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="potencia">Potencia</label>
-      <input type="text" class="form-control widget-number" id="potencia">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="alt_agua">Altura água</label>
-      <input type="text" class="form-control widget-number" id="alt_agua">
-    </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="equipo">Equipo</label>
-      <input type="text" class="form-control widget" id="equipo">
-    </div>
-
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="eval_impac">Evaluación impacto</label>
-      <input type="text" class="form-control widget" id="eval_impac"> <!-- FIXME -->
-    </div>
-  </div>
-</script>
-
-<!-- tmpl actividade saneamento -->
-<script type="text/template" id="Saneamento">
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="habitantes">Nro de habitantes:</label>
-      <input type="text" class="form-control widget-number" id="habitantes">
-    </div>
-  </div>
-</script>
+<!-- ACTIVITIES TEMPLATES -->
+<div id="templates"></div>
 
 
 <!-- javascript -->

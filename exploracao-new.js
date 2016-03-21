@@ -2,6 +2,7 @@ $(document).ready(function() {
   $('#wizard-exp').bootstrapWizard({
     'withVisible': false
   });
+  $('#templates').load('templates.html');
 });
 
 var domains = new Backbone.UILib.DomainCollection();
@@ -229,7 +230,7 @@ function fillComponentsWithDomains(){
 var actividadeView = new Backbone.SIXHIARA.ActividadeView({
   el: $('#info-actividade'),
   model: exploracao,
-  template: _.template($("#Abastecimento").html()),
+  template: null,
   nestedViews: []
 });
 
