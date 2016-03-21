@@ -251,10 +251,11 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
   $('#info-actividade').append($('<div class="actividade-render">'));
 
   if(exploracao.get('actividade')){
-    this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+    this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "_edit']").html())
   } else{
     this.template = null;
   }
+
 
   this.render();
 
