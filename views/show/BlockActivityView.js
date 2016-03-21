@@ -5,16 +5,13 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     this.options = options || {};
     this.subViews = [];
 
-    var actividadeView = new Backbone.SIXHIARA.ActividadeView({
+    this.actividadeView = new Backbone.SIXHIARA.ActividadeView({
       el: this.el,
       model: this.model,
       template: _.template($("[id='" + this.model.get('actividade').get('tipo') + "']").html())
     });
-    actividadeView.listenTo(this.model, 'change:actividade', function(model, value, options){
-      this.template = _.template($("[id='" + model.get('actividade').get('tipo') + "']").html())
-      this.render();
-    });
-    this.subViews.push(actividadeView);
+
+    this.subViews.push(this.actividadeView);
 
     options.domains.on('sync', this.renderModal, this);
 
@@ -27,6 +24,23 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
   },
 
   renderModal: function (collection, response, options) {
+
+
+
+
+        new Backbone.UILib.SelectView({
+          el: $('#resModal #reses_tipo'),
+          collection: this.options.domains.byCategory('animal_tipo'),
+        }).render();
+        new Backbone.UILib.SelectView({
+          el: $('#cultivoModal #cultivo'),
+          collection: this.options.domains.byCategory('cultivo_tipo'),
+        }).render();
+        new Backbone.UILib.SelectView({
+          el: $('#cultivoModal #rega'),
+          collection: this.options.domains.byCategory('rega_tipo'),
+        }).render();
+
 
     var self = this;
     $('#editActividade').on('click', function(e){
@@ -46,6 +60,15 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         el: $('#editActividadeModal #energia_tipo'),
         collection: self.options.domains.byCategory('energia_tipo')
       }).render();
+
+      var actv = self.model.get('actividade');
+      actv.keys().forEach(function(k){
+        if (k === 'tipo') {
+          $('#editActividadeModal #actividade').val(actv.get(k));
+        } else {
+          $('#editActividadeModal #' + k).val(actv.get(k));
+        }
+      });
 
       self.listenToOnce(self.model, 'change:actividade', function(model, value, options){
         self.doToggle = true;
@@ -73,6 +96,8 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
             self.model.get('actividade').set(v.id, $v.val() || null);
           }
         });
+        self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
+        self.actividadeView.render();
     });
 
     var actividades = collection.byCategory('actividade');
