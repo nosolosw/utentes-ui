@@ -157,7 +157,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   updateCEstimado: function(){
-    this.set('c_estimado', this.get('actividade').get('c_estimado'));
+    // FIXME. Until formulas are ready we need to bypass validation
+    var c_estimado = this.get('actividade').get('c_estimado') || 99.99;
+    this.set('c_estimado', c_estimado);
   },
 
   updateCSoli: function(){

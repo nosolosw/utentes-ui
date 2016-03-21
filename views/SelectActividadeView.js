@@ -71,6 +71,9 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
         'habitantes': null
       });
     }
+    // FIXME. To pass the validations until formulas
+    // are working
+    newActivity.set('c_estimado', -99.99);
     this.model.set(attr, newActivity);
   },
 
