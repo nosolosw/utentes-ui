@@ -1,3 +1,17 @@
+$(document).ready(function() {
+  $('#templates').load('templates.html', function() {
+    exploracaoModel.fetch({
+      parse: true,
+      success: function(){
+        showView.render()
+      },
+      error: function(){
+        window.location = Backbone.SIXHIARA.Config.urlSearch;
+      }
+    });
+  });
+});
+
 function idIsNotValid(id){
   // TODO: check id against all id in collection
   return (id === undefined) || (id === null) || (id === '');
@@ -12,16 +26,6 @@ if(idIsNotValid(exploracaoModel.get('id'))){
 var showView = new Backbone.SIXHIARA.ExploracaoShowView({
   el: $('body')[0],
   model: exploracaoModel
-});
-
-exploracaoModel.fetch({
-  parse: true,
-  success: function(){
-    showView.render()
-  },
-  error: function(){
-    window.location = Backbone.SIXHIARA.Config.urlSearch;
-  }
 });
 
 exploracaoModel.on('destroy', function (model, collection, options) {
