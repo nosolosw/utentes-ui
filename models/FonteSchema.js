@@ -1,4 +1,8 @@
 var FONTE_SCHEMA = [{
+  'fieldname': 'tipo_agua',
+  'message':   'tipo_agua não tem o formato correcto',
+  'rules':     ['NOT_NULL']
+}, {
   'fieldname': 'd_dado',
   'message':   'd_dado não tem o formato correcto',
   'rules':     ['IS_DATE']
