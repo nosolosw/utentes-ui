@@ -284,6 +284,14 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
     if (_.has(response, 'actividade')) {
       response.actividade = new Backbone.Model(response.actividade)
+      if (response.actividade.has('cultivos')) {
+        response.actividade.set('cultivos',
+          new Backbone.GeoJson.FeatureCollection(response.actividade.get('cultivos'), {parse:true}));
+      };
+      if (response.actividade.has('reses')) {
+        response.actividade.set('reses',
+          new Backbone.Collection(response.actividade.get('reses')));
+      };
     }
 
     return response;
