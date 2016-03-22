@@ -132,6 +132,12 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
     'click #saveRow': 'saveRow'
   },
 
+  initialize:function() {
+    this.$el.on('show.bs.modal', function() {
+      $(this).find('input, textarea, select').val('');
+    });
+  },
+
   saveRow: function(){
     // FIXME: Validations, formats, more widgets
     var rowModel = new Backbone.Model();
@@ -149,6 +155,7 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
   remove: function() {
     // Don't remove $el here
+    this.$el.unbind();
   }
 
 });

@@ -234,11 +234,6 @@ var actividadeView = new Backbone.SIXHIARA.ActividadeView({
   nestedViews: []
 });
 
-// FIXME. put in EditableTableView
-$('.modal').on('hidden.bs.modal', function(){
-    $(this).find('input, textarea, select').val('');
-});
-
 actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, options){
   var actividade = exploracao.get('actividade');
 
