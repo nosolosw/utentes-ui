@@ -103,6 +103,7 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   },
 
   initialize: function(options) {
+    this.options = options || {};
     this.template = _.template(options.rowTemplate);
   },
 
@@ -133,17 +134,17 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
   saveRow: function(){
     // FIXME: Validations, formats, more widgets
-    var res = new Backbone.Model();
+    var rowModel = new Backbone.Model();
     this.$('input, select, textarea').each(function(k, v){
       var $v = $(v);
       if ($v.hasClass('widget-number')) {
-        res.set(v.id, formatter().unformatNumber($v.val()));
+        rowModel.set(v.id, formatter().unformatNumber($v.val()));
       } else {
-        res.set(v.id, $v.val() || null);
+        rowModel.set(v.id, $v.val() || null);
       }
     });
-    this.collection.add(res)
-    this.$el.modal('toggle');
+    this.collection.add(rowModel);
+    this.$el.modal('hide');
   },
 
   remove: function() {
