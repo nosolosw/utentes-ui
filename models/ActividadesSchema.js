@@ -62,6 +62,10 @@ ActividadeSchema['Indústria'] = [{
   'fieldname': 'c_estimado',
   'message':   'c_estimado não tem o formato correcto',
   'rules':     ['IS_NUMERIC']
+}, {
+  'fieldname': 'eval_impac',
+  'message':   'eval_impac não tem o formato correcto',
+  'rules':     ['IS_BOOLEAN']
 }];
 
 ActividadeSchema['Pecuária'] = [{
@@ -89,7 +93,7 @@ ActividadeSchema['Reses'] = [{
 }, {
   'fieldname': 'reses_nro',
   'message':   'reses_nro non pode estar vacío',
-  'rules':     ['NOT_NULL']
+  'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }, {
   'fieldname': 'c_res',
   'message':   'c_res non pode estar vacío',
@@ -102,8 +106,8 @@ ActividadeSchema['Piscicultura'] = [{
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message': 'c_estimado não tem o formato correcto',
-  'rules': ['IS_NUMERIC']
+  'message':   'c_estimado não tem o formato correcto',
+  'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'area',
   'message':   'area non pode estar vacío',
@@ -130,6 +134,10 @@ ActividadeSchema['Producção de energia'] = [{
   'fieldname': 'potencia',
   'message':   'potencia não tem o formato correcto',
   'rules':     ['IS_NUMERIC']
+}, {
+  'fieldname': 'eval_impac',
+  'message':   'eval_impac não tem o formato correcto',
+  'rules':     ['IS_BOOLEAN']
 }];
 
 ActividadeSchema['Saneamento'] = [{
