@@ -14,9 +14,11 @@ Backbone.SIXHIARA.ActividadeAbastecimento = Backbone.Model.extend({
   },
 
   updateCEstimado: function () {
-      if(habitantes && dotacao) {
-        this.set('c_estimado', habitantes * dotacao * 30/1000);
-      };
+    var habitantes = this.get('habitantes');
+    var dotacao = this.get('dotacao');
+    if(habitantes && dotacao) {
+      this.set('c_estimado', habitantes * dotacao * 30/1000);
+    };
   }
 
 });

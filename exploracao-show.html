@@ -556,7 +556,7 @@
             <h4 class="modal-title" id="cultivoModalLabel">Cultivo</h4>
           </div>
           <div class="modal-body">
-            <input type="hidden" id="id">
+            <input type="hidden" class="widget-number" id="id">
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="c_estimado">Estimado</label>
@@ -613,7 +613,6 @@
 
     <!-- tmpl actividade pecuaria -->
     <script type="text/template" id="Pecuária">
-      <input type="hidden" id="id">
       <div class="form-group">
         <button class="btn btn-default pull-right" id="newRow">Nova res</button>
       </div>
@@ -688,7 +687,7 @@
             <h4 class="modal-title" id="resModalLabel">Res</h4>
           </div>
           <div class="modal-body">
-            <input type="hidden" id="id">
+            <input type="hidden" class="widget-number" id="id">
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="c_estimado">Estimado</label>
@@ -957,6 +956,14 @@
     <script src="models/Utente.js"></script>
     <script src="models/UtenteSchema.js"></script>
     <script src="models/UtenteCollection.js"></script>
+    <script src="models/ActividadeAbastecimento.js"></script>
+    <script src="models/ActividadeEnergia.js"></script>
+    <script src="models/ActividadeIndustria.js"></script>
+    <script src="models/ActividadePecuaria.js"></script>
+    <script src="models/ActividadePiscicultura.js"></script>
+    <script src="models/ActividadeRegadia.js"></script>
+    <script src="models/ActividadeSaneamento.js"></script>
+    <script src="models/ActividadesSchema.js"></script>
     <script src="models/Exploracao.js"></script>
     <script src="models/ExploracaoSchema.js"></script>
 
