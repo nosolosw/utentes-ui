@@ -98,7 +98,8 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   tagName: 'tr',
 
   events:{
-    'click .close': 'modelDestroy'
+    'click .close': 'modelDestroy',
+    'click .edit': 'modelEdit',
   },
 
   initialize: function(options) {
@@ -112,7 +113,13 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   },
 
   modelDestroy: function(){
+    // Unsets id to avoid send DELETE to server
+    this.model.unset('id', {silent:true});
     this.model.destroy();
+  },
+
+  modelEdit: function(){
+    console.log('clicked');
   }
 
 });
