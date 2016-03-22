@@ -157,9 +157,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   updateCEstimado: function(){
-    // FIXME. Until formulas are ready we need to bypass validation
-    var c_estimado = this.get('actividade').get('c_estimado') || 99.99;
-    this.set('c_estimado', c_estimado);
+    if(this.get('actividade')){
+      this.set('c_estimado', this.get('actividade').get('c_estimado'));
+    }
   },
 
   updateCSoli: function(){
@@ -338,6 +338,19 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     validator(UTENTE_SCHEMA).validate(this.get('utente').attributes).forEach(function(msg){
       messages.push(msg);
     });
+
+    var tipo = null;
+    if (this.get('actividade')) {
+      tipo = this.get('actividade').get('tipo');
+    }
+    if(tipo){
+      var actividadeSchema = ActividadeSchema[tipo];
+      validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
+        messages.push(msg);
+      });
+    } else{
+      messages.push('A exploracão ten que ter asignado uma actividade');
+    }
 
     if (messages.length > 0) return messages;
 

@@ -11,10 +11,17 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
   },
 
   render: function(){
-    this.$('#actividade').text(this.model.get('actividade').get('tipo') || 'Actividade non declarada');
+    var actividade = this.model.get('actividade');
+    if(actividade){
+      this.$('#actividade').text(this.model.get('actividade').get('tipo') || 'Actividade non declarada');
+    } else{
+      this.$('#actividade').text('Actividade non declarada');
+    }
 
     this.$('.actividade-render').html('');
-    this.$('.actividade-render').append(this.template(this.model.get('actividade').toJSON()));
+    if(this.template){
+      this.$('.actividade-render').append(this.template(this.model.get('actividade').toJSON()));
+    }
 
     return this;
   }

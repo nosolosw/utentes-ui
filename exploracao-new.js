@@ -249,7 +249,12 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
   this.options.nestedViews = [];
   $('#info-actividade').append($('<div class="actividade-render">'));
 
-  this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+  if(exploracao.get('actividade')){
+    this.template = _.template($("[id='" + exploracao.get('actividade').get('tipo') + "']").html())
+  } else{
+    this.template = null;
+  }
+
   this.render();
 
   this.options.nestedViews.push(
@@ -259,7 +264,7 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
     }).render()
   );
 
-  if (actividade.get('tipo') === 'Pecuária') {
+  if (actividade && (actividade.get('tipo') === 'Pecuária')) {
 
     this.options.nestedViews.push(
       new Backbone.SIXHIARA.EditableTableView({
@@ -272,7 +277,7 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
       })
     );
 
-  } else if (actividade.get('tipo') === 'Agricultura-Regadia') {
+  } else if (actividade && (actividade.get('tipo') === 'Agricultura-Regadia')) {
 
     this.options.nestedViews.push(
       new Backbone.SIXHIARA.EditableTableView({

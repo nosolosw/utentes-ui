@@ -18,62 +18,8 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
     // model.get('example') would return "Some text", not "1"
     var widgetSelected = this.$('#' + attr + ' option:selected');
     var value = widgetSelected.text().trim() || null;
-    var newActivity = null;
-    if(value === 'Abastecimento'){
-      newActivity = new Backbone.Model({
-        'tipo': 'Abastecimento',
-        'c_estimado': null,
-        'habitantes': null,
-        'dotacao': 20
-      });
-    } else if (value === 'Agricultura-Regadia') {
-      newActivity = new Backbone.Model({
-        'tipo': 'Agricultura-Regadia',
-        'c_estimado': null,
-        'cultivos': new Backbone.Collection(),
-      });
-    } else if (value === 'Indústria') {
-      newActivity = new Backbone.Model({
-        'tipo': 'Indústria',
-        'c_estimado': null,
-        'tipo_indus': null,
-        'instalacio': null,
-        'efluente': null,
-        'tratamento': null,
-        'eval_impac': null
-      });
-    } else if (value === 'Pecuária') {
-      newActivity = new Backbone.Model({
-        'tipo': 'Pecuária',
-        'reses': new Backbone.Collection()
-      });
-    } else if (value === 'Piscicultura'){
-      newActivity = new Backbone.Model({
-        'tipo': 'Piscicultura',
-        'c_estimado': null,
-        'area': null,
-        'v_reservas': null
-      });
-    } else if (value === 'Producção de energia'){
-      newActivity = new Backbone.Model({
-        'tipo': 'Producção de energia',
-        'c_estimado': null,
-        'energia_tipo': null,
-        'alt_agua': null,
-        'potencia': null,
-        'equipo': null,
-        'eval_impac': null
-      });
-    } else if (value === 'Saneamento'){
-      newActivity = new Backbone.Model({
-        'tipo': 'Saneamento',
-        'c_estimado': null,
-        'habitantes': null
-      });
-    }
-    // FIXME. To pass the validations until formulas
-    // are working
-    newActivity.set('c_estimado', -99.99);
+    var newActivity = Backbone.SIXHIARA.ActividadesFactory[value] || null;
+
     this.model.set(attr, newActivity);
   },
 
