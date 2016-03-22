@@ -21,6 +21,7 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
       el: $(this.options.tableSelector),
       collection: this.collection,
       rowTemplate: this.options.rowTemplate,
+      editModalSelector: this.options.editModalSelector,
     }).render();
 
     this._subviews.push(tableView);
@@ -29,6 +30,9 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
       this.update(this.collection);
     });
     tableView.listenTo(this.collection, 'destroy', function(model, collection, options){
+      this.update(this.collection);
+    });
+    tableView.listenTo(this.collection, 'change', function(model, collection, options){
       this.update(this.collection);
     });
   },
@@ -58,6 +62,7 @@ Backbone.SIXHIARA.TableView = Backbone.View.extend({
       var rowView = new Backbone.SIXHIARA.RowView({
         model: model,
         rowTemplate: this.options.rowTemplate,
+        editModalSelector: this.options.editModalSelector,
       });
       content.appendChild(rowView.render().el);
       subviews.push(rowView);
@@ -120,7 +125,21 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   },
 
   modelEdit: function(){
-    console.log('clicked');
+    $(this.options.editModalSelector).modal('toggle');
+
+    new Backbone.SIXHIARA.EditModalTableView({
+      el: $(this.options.editModalSelector),
+      model: this.model,
+    });
+
+    var self = this;
+    $(self.options.editModalSelector).one('shown.bs.modal', function(e){
+      self.model.keys().forEach(function(k){
+        $(self.options.editModalSelector +' #' + k).val(self.model.get(k));
+      });
+    });
+
+
   }
 
 });
@@ -156,6 +175,34 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
   remove: function() {
     // Don't remove $el here
     this.$el.unbind();
+  }
+
+});
+
+Backbone.SIXHIARA = Backbone.SIXHIARA || {};
+Backbone.SIXHIARA.EditModalTableView = Backbone.View.extend({
+
+  events: {
+    'click #saveRow': 'saveRow'
+  },
+
+  saveRow: function(){
+    // FIXME: Validations, formats, more widgets
+    var rowModel = new Backbone.Model();
+    this.$('input, select, textarea').each(function(k, v){
+      var $v = $(v);
+      if ($v.hasClass('widget-number')) {
+        rowModel.set(v.id, formatter().unformatNumber($v.val()));
+      } else {
+        rowModel.set(v.id, $v.val() || null);
+      }
+    });
+    this.model.set(rowModel.toJSON());
+    this.$el.modal('hide');
+  },
+
+  remove: function() {
+    // Don't remove $el here
   }
 
 });

@@ -28,6 +28,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         tableSelector: 'table#reses',
         collection: this.model.get('actividade').get('reses'),
         rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        editModalSelector: '#resModalEdit',
       })
       this.subViews.push(this.editableTableView);
     } else if (tipo === 'Agricultura-Regadia') {
@@ -38,6 +39,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
         rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        editModalSelector: '#cultivoModalEdit',
       })
       this.subViews.push(this.editableTableView);
     }
@@ -46,23 +48,6 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
   },
 
   renderModal: function (collection, response, options) {
-
-
-
-
-        new Backbone.UILib.SelectView({
-          el: $('#resModal #reses_tipo'),
-          collection: this.options.domains.byCategory('animal_tipo'),
-        }).render();
-        new Backbone.UILib.SelectView({
-          el: $('#cultivoModal #cultivo'),
-          collection: this.options.domains.byCategory('cultivo_tipo'),
-        }).render();
-        new Backbone.UILib.SelectView({
-          el: $('#cultivoModal #rega'),
-          collection: this.options.domains.byCategory('rega_tipo'),
-        }).render();
-
 
     var self = this;
     $('#editActividade').on('click', function(e){
