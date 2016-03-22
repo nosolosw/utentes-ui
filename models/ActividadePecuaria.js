@@ -7,6 +7,19 @@ Backbone.SIXHIARA.ActividadePecuaria = Backbone.Model.extend({
     'reses': new Backbone.Collection()
   },
 
+  initialize: function() {
+    // on add, remove & update every cultivo
+    this.get('reses').on('all', this.updateCEstimado, this);
+  },
+
+  updateCEstimado: function () {
+    var c_estimado = 0;
+    this.get('reses').forEach(function(res){
+      c_estimado = c_estimado + res.get('c_estimado');
+    });
+    this.set('c_estimado', c_estimado);
+  },
+
   toJSON: function () {
     var json   =  _.clone(this.attributes);
     json.reses = this.get('reses').toJSON();
