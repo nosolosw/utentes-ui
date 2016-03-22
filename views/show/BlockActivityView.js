@@ -19,6 +19,28 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
 
   render: function () {
     _.invoke(this.subViews, 'render');
+    var tipo = this.model.get('actividade').get('tipo');
+    if (tipo === 'Pecuária') {
+      this.editableTableView = new Backbone.SIXHIARA.EditableTableView({
+        el: $('Pecuária'),
+        newRowBtSelector: '#newRow',
+        modalSelector: '#resModal',
+        tableSelector: 'table#reses',
+        collection: this.model.get('actividade').get('reses'),
+        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+      })
+      this.subViews.push(this.editableTableView);
+    } else if (tipo === 'Agricultura-Regadia') {
+      this.editableTableView = new Backbone.SIXHIARA.EditableTableView({
+        el: $('Agricultura-Regadia'),
+        newRowBtSelector: '#newRow',
+        modalSelector: '#cultivoModal',
+        tableSelector: 'table#cultivos',
+        collection: this.model.get('actividade').get('cultivos'),
+        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+      })
+      this.subViews.push(this.editableTableView);
+    }
 
     return this;
   },
@@ -47,6 +69,16 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       e.preventDefault();
       $('#editActividadeModal').modal('toggle');
     });
+
+    $('#editActividadeModal').on('show.bs.modal', function(e){
+      var tipoAct = self.model.get('actividade').get('tipo')
+      if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária')) {
+        $('#editActividadeModal #info-actividade').hide();
+      } else {
+        $('#editActividadeModal #info-actividade').show();
+      }
+    });
+
     $('#editActividadeModal').on('shown.bs.modal', function(e){
       $('#editActividadeModal #info-actividade').append($('<div class="actividade-render">'));
       var template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "_edit']").html())

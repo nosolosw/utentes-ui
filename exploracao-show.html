@@ -475,6 +475,31 @@
       </div>
     </script>
 
+    <!-- tmpl actividade agricultura -->
+    <script type="text/template" id="Agricultura-Regadia">
+      <div class="form-group">
+        <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+      </div>
+      <div class="row">
+        <table class="table" id="cultivos">
+          <thead>
+            <tr>
+              <th>Estimado</th>
+              <th>Cultivo / Rega</th>
+              <th>Eficiencia</th>
+              <th>Área</th>
+              <th>Observações</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </script>
+
     <!-- tmpl actividade -->
     <script type="text/template" id="Indústria">
       <div class="row">
@@ -486,6 +511,31 @@
         <span class="col-xs-offset-1 col-xs-11">
           <span class="title">Efluente:</span> <span><%- efluente || '-' %></span> / <span class="title">Tratamento:</span> <span><%- tratamento || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac || '-' %></span>
         </span>
+      </div>
+    </script>
+
+    <!-- tmpl actividade pecuaria -->
+    <script type="text/template" id="Pecuária">
+      <input type="hidden" id="id">
+      <div class="form-group">
+        <button class="btn btn-default pull-right" id="newRow">Nova res</button>
+      </div>
+      <div class="row">
+        <table class="col-xs-offset-1 table" id="reses">
+          <thead>
+            <tr>
+              <th>Estimado</th>
+              <th>Tipo de reses</th>
+              <th>Nro de reses</th>
+              <th>C. por res</th>
+              <th>Observações</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </script>
 
@@ -735,6 +785,7 @@
     <script src="views/show/BlockLocationView.js"></script>
     <script src="views/common/SelectUtenteView.js"></script>
     <script src="views/show/BlockUtenteView.js"></script>
+    <script src="views/EditableTableView.js"></script>
     <script src="views/ActividadeView.js"></script>
     <script src="views/SelectActividadeView.js"></script>
     <script src="views/show/BlockActivityView.js"></script>

@@ -31,7 +31,31 @@ menu{
   color: white;
 }
 
+
+/* EditableTableView css */
 .TableView-nodata,
 .no-fontes{
   color: #bbb;
+}
+
+td.close, td.edit {
+  /* float: right; */
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  width: 4px;
+}
+td.close:hover,
+td.edit:hover,
+td.close:focus,
+td.edit:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
