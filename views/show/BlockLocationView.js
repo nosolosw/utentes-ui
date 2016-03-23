@@ -46,35 +46,16 @@ Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
 
     var exploracao = this.model;
     var domains    = this.options.domains;
-    var provincias = domains.byCategory('provincia');
-    var distritos  = domains.byCategory('distrito');
-    var postos     = domains.byCategory('posto');
+    modalViews.push(
+      new Backbone.SIXHIARA.SelectLocationView({
+        domains: domains,
+        model: exploracao,
+        el: $('#editLocModal'),
+      }).render()
+  );
+
     var bacias     = domains.byCategory('bacia');
     var subacias   = domains.byCategory('subacia');
-
-    var selectProvincias = new Backbone.UILib.SelectView({
-      el: $('#editLocModal #loc_provin'),
-      collection: provincias
-    }).render();
-    modalViews.push(selectProvincias);
-
-    var selectDistritos = new Backbone.UILib.SelectView({
-      el: $('#editLocModal #loc_distri'),
-      collection: []
-    }).render();
-    selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value, options){
-      this.update(distritos.where({'parent': model.get('loc_provin')}));
-    });
-    modalViews.push(selectDistritos);
-
-    var selectPostos = new Backbone.UILib.SelectView({
-      el: $('#editLocModal #loc_posto'),
-      collection: []
-    }).render();
-    selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, options){
-      this.update(postos.where({'parent': model.get('loc_distri')}));
-    });
-    modalViews.push(selectPostos);
 
     var selectBacias = new Backbone.UILib.SelectView({
       el: $('#editLocModal #loc_bacia'),

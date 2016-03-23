@@ -138,29 +138,12 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       modalEl.modal('show');
 
       modalEl.on('show.bs.modal', function(e){
-        var provincias      = domains.byCategory('provincia');
-        var distritos       = domains.byCategory('distrito');
-        var postos          = domains.byCategory('posto');
-        this.selectProvincias = new Backbone.UILib.SelectView({
-          el: $('#editUtenteModal #loc_provin'),
-          collection: provincias
+        self.selectLocationView = new Backbone.SIXHIARA.SelectLocationView({
+          domains: domains,
+          model: u,
+          el: $('#editUtenteModal'),
         }).render();
 
-        this.selectDistritos = new Backbone.UILib.SelectView({
-          el: $('#editUtenteModal #loc_distri'),
-          collection: [],
-        }).render();
-        this.selectDistritos.listenTo(u, 'change:loc_provin', function(model, value, options){
-          this.update(distritos.where({'parent': model.get('loc_provin')}));
-        });
-
-        this.selectPostos = new Backbone.UILib.SelectView({
-          el: $('#editUtenteModal #loc_posto'),
-          collection: [],
-        }).render();
-        this.selectPostos.listenTo(u, 'change:loc_distri', function(model, value, options){
-          this.update(postos.where({'parent': model.get('loc_distri')}));
-        });
         self.utenteView = new Backbone.UILib.WidgetsView({
           el: $('#editUtenteModal'),
           model: u,
@@ -171,10 +154,8 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
         $(this).remove();
         self.utenteView.remove();
         delete self.utenteView;
-        this.selectProvincias.remove();
-        delete self.selectProvincias  ;
-        this.selectDistritos.remove();
-        this.selectPostos.remove();
+        self.selectLocationView.remove();
+        delete self.selectLocationView;
       });
       modalEl.find('#saveRow').on('click', function() {
         if(! u.isValid()) {
@@ -235,29 +216,12 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       modalEl.modal('show');
 
       modalEl.on('show.bs.modal', function(e){
-        var provincias      = domains.byCategory('provincia');
-        var distritos       = domains.byCategory('distrito');
-        var postos          = domains.byCategory('posto');
-        this.selectProvincias = new Backbone.UILib.SelectView({
-          el: $('#editUtenteModal #loc_provin'),
-          collection: provincias
+        self.selectLocationView = new Backbone.SIXHIARA.SelectLocationView({
+          domains: domains,
+          model: u,
+          el: $('#editUtenteModal'),
         }).render();
 
-        this.selectDistritos = new Backbone.UILib.SelectView({
-          el: $('#editUtenteModal #loc_distri'),
-          collection: [],
-        }).render();
-        this.selectDistritos.listenTo(u, 'change:loc_provin', function(model, value, options){
-          this.update(distritos.where({'parent': model.get('loc_provin')}));
-        });
-
-        this.selectPostos = new Backbone.UILib.SelectView({
-          el: $('#editUtenteModal #loc_posto'),
-          collection: [],
-        }).render();
-        this.selectPostos.listenTo(u, 'change:loc_distri', function(model, value, options){
-          this.update(postos.where({'parent': model.get('loc_distri')}));
-        });
         self.utenteView = new Backbone.UILib.WidgetsView({
           el: $('#editUtenteModal'),
           model: u,
@@ -268,10 +232,8 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
         $(this).remove();
         self.utenteView.remove();
         delete self.utenteView;
-        this.selectProvincias.remove();
-        delete self.selectProvincias  ;
-        this.selectDistritos.remove();
-        this.selectPostos.remove();
+        self.selectLocationView.remove();
+        delete self.selectLocationView;
       });
       modalEl.find('#saveRow').on('click', function() {
         if(! u.isValid()) {

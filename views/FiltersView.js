@@ -9,9 +9,6 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
 
     // properties
     var utentes = domains.byCategory('utente');
-    var provincias = domains.byCategory('provincia');
-    var distritos = domains.byCategory('distrito');
-    var postos = domains.byCategory('posto');
     var licenciaTipos = domains.byCategory('licencia_tipo');
     var licenciaEstados = domains.byCategory('licencia_estado');
     var exploracaoPagamento = domains.byCategory('pagamentos');
@@ -24,33 +21,17 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
     }));
 
     // select views
+    this.addView(
+      new Backbone.SIXHIARA.SelectLocationView({
+        domains: domains,
+        model: this.model,
+        el: this.$el,
+      })
+    );
     this.addView(new Backbone.UILib.SelectView({
       el: this.$('#utente'),
       collection: utentes
     }));
-
-    this.addView(new Backbone.UILib.SelectView({
-      el: this.$('#loc_provin'),
-      collection: provincias
-    }));
-
-    var selectDistritos = new Backbone.UILib.SelectView({
-      el: this.$('#loc_distri'),
-      collection: [],
-    });
-    selectDistritos.listenTo(this.model, 'change:loc_provin', function(model, value, options){
-      this.update(distritos.where({'parent': model.get('loc_provin')}));
-    });
-    this.addView(selectDistritos);
-
-    var selectPostos = new Backbone.UILib.SelectView({
-      el: this.$('#loc_posto'),
-      collection: [],
-    });
-    selectPostos.listenTo(this.model, 'change:loc_distri', function(model, value, options){
-      this.update(postos.where({'parent': model.get('loc_distri')}));
-    });
-    this.addView(selectPostos);
 
     this.addView(new Backbone.UILib.SelectView({
       el: this.$('#lic_tipo'),

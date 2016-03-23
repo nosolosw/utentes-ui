@@ -100,9 +100,6 @@ tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, co
 
 function fillComponentsWithDomains(){
 
-  var provincias      = domains.byCategory('provincia');
-  var distritos       = domains.byCategory('distrito');
-  var postos          = domains.byCategory('posto');
   var bacias          = domains.byCategory('bacia');
   var subacias        = domains.byCategory('subacia');
   var estadosLicencia = domains.byCategory('licencia_estado');
@@ -110,27 +107,11 @@ function fillComponentsWithDomains(){
   var fonteTipos      = domains.byCategory('fonte_tipo');
 
   // page info: localizacao
-  new Backbone.UILib.SelectView({
-    el: $('#info #loc_provin'),
-    collection: provincias
+  new Backbone.SIXHIARA.SelectLocationView({
+    domains: domains,
+    model: exploracao,
+    el: $('#info'),
   }).render();
-
-  var selectDistritos = new Backbone.UILib.SelectView({
-    el: $('#info #loc_distri'),
-    collection: [],
-  }).render();
-  selectDistritos.listenTo(exploracao, 'change:loc_provin', function(model, value, options){
-    this.update(distritos.where({'parent': model.get('loc_provin')}));
-  });
-
-  var selectPostos = new Backbone.UILib.SelectView({
-    el: $('#info #loc_posto'),
-    collection: [],
-  }).render();
-  selectPostos.listenTo(exploracao, 'change:loc_distri', function(model, value, options){
-    this.update(postos.where({'parent': model.get('loc_distri')}));
-  });
-
   new Backbone.UILib.SelectView({
     el: $('#info #loc_bacia'),
     collection: bacias
@@ -145,26 +126,11 @@ function fillComponentsWithDomains(){
   });
 
   // page utente: localizacion
-  new Backbone.UILib.SelectView({
-    el: $('#utente #loc_provin'),
-    collection: provincias
+  new Backbone.SIXHIARA.SelectLocationView({
+    domains: domains,
+    model: exploracao.get('utente'),
+    el: $('#utente'),
   }).render();
-
-  var distritosUtente = new Backbone.UILib.SelectView({
-    el: $('#utente #loc_distri'),
-    collection: [],
-  }).render();
-  distritosUtente.listenTo(exploracao.get('utente'), 'change:loc_provin', function(model, value, options){
-    this.update(distritos.where({'parent': model.get('loc_provin')}));
-  });
-
-  var postosUtente = new Backbone.UILib.SelectView({
-    el: $('#utente #loc_posto'),
-    collection: [],
-  }).render();
-  postosUtente.listenTo(exploracao.get('utente'), 'change:loc_distri', function(model, value, options){
-    this.update(postos.where({'parent': model.get('loc_distri')}));
-  });
 
   // page actividade: actividades
   new Backbone.UILib.SelectView({
