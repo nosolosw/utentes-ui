@@ -100,8 +100,7 @@ tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, co
 
 function fillComponentsWithDomains(){
 
-  var bacias          = domains.byCategory('bacia');
-  var subacias        = domains.byCategory('subacia');
+
   var estadosLicencia = domains.byCategory('licencia_estado');
   var actividades     = domains.byCategory('actividade');
   var fonteTipos      = domains.byCategory('fonte_tipo');
@@ -112,18 +111,12 @@ function fillComponentsWithDomains(){
     model: exploracao,
     el: $('#info'),
   }).render();
-  new Backbone.UILib.SelectView({
-    el: $('#info #loc_bacia'),
-    collection: bacias
+  new Backbone.SIXHIARA.SelectBaciaView({
+    domains: domains,
+    model: exploracao,
+    el: $('#info'),
   }).render();
-
-  var selectSubacias = new Backbone.UILib.SelectView({
-    el: $('#info #loc_subaci'),
-    collection: [],
-  }).render();
-  selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, options){
-    this.update(subacias.where({'parent': model.get('loc_bacia')}));
-  });
+  
 
   // page utente: localizacion
   new Backbone.SIXHIARA.SelectLocationView({

@@ -52,25 +52,14 @@ Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
         model: exploracao,
         el: $('#editLocModal'),
       }).render()
-  );
-
-    var bacias     = domains.byCategory('bacia');
-    var subacias   = domains.byCategory('subacia');
-
-    var selectBacias = new Backbone.UILib.SelectView({
-      el: $('#editLocModal #loc_bacia'),
-      collection: bacias
-    }).render();
-    modalViews.push(selectBacias);
-
-    var selectSubacias = new Backbone.UILib.SelectView({
-      el: $('#editLocModal #loc_subaci'),
-      collection: [],
-    }).render();
-    selectSubacias.listenTo(exploracao, 'change:loc_bacia', function(model, value, options){
-      this.update(subacias.where({'parent': model.get('loc_bacia')}));
-    });
-    modalViews.push(selectSubacias);
+    );
+    modalViews.push(
+      new Backbone.SIXHIARA.SelectBaciaView({
+        domains: domains,
+        model: exploracao,
+        el: $('#editLocModal'),
+      }).render()
+    );
 
     // TODO: this does not update the chained selects properly
     var widgetsView = new Backbone.UILib.WidgetsView({
