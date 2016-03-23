@@ -74,6 +74,10 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         collection: self.options.domains.byCategory('industria_tipo')
       }).render();
       new Backbone.UILib.SelectView({
+        el: $('#editActividadeModal #eval_impac'),
+        collection: self.options.domains.byCategory('boolean'),
+      }).render();
+      new Backbone.UILib.SelectView({
         el: $('#editActividadeModal #energia_tipo'),
         collection: self.options.domains.byCategory('energia_tipo')
       }).render();
@@ -94,27 +98,33 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     });
 
     $('#editActividadeModal').on('hidden.bs.modal', function(){
-        $(this).find('input, textarea, select').val('');
-        $('#editActividadeModal .actividade-render').remove();
-        if (self.doToggle) {
-            self.doToggle = false;
-            $('#editActividadeModal').modal('show');
-        }
+      $(this).find('input, textarea, select').val('');
+      $('#editActividadeModal .actividade-render').remove();
+      if (self.doToggle) {
+        self.doToggle = false;
+        $('#editActividadeModal').modal('show');
+      }
     });
 
     $('#editActividadeModal').on('hide.bs.modal', function(){
-        if (self.doToggle) return;
-        if (!self.model.get('actividade')) return;
-        $('#editActividadeModal .actividade-render').find('input, select, textarea').each(function(k, v){
-          var $v = $(v);
-          if ($v.hasClass('widget-number')) {
-            self.model.get('actividade').set(v.id, formatter().unformatNumber($v.val()));
-          } else {
-            self.model.get('actividade').set(v.id, $v.val() || null);
-          }
-        });
-        self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
-        self.actividadeView.render();
+      if (self.doToggle) return;
+      if (!self.model.get('actividade')) return;
+      $('#editActividadeModal .actividade-render').find('input, select, textarea').each(function(k, v){
+        var $v = $(v);
+        if ($v.hasClass('widget-number')) {
+          self.model.get('actividade').set(v.id, formatter().unformatNumber($v.val()));
+        } else if ($v.hasClass('widget-boolean')){
+          var option = $v.find('option:selected').val();
+          var value = null;
+          if(option === 'true') value = true;
+          if(option === 'false') value = false;
+          self.model.get('actividade').set(v.id, value);
+        } else {
+          self.model.get('actividade').set(v.id, $v.val() || null);
+        }
+      });
+      self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
+      self.actividadeView.render();
     });
 
     var actividades = collection.byCategory('actividade');

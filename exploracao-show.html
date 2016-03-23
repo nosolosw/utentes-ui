@@ -605,7 +605,7 @@
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Efluente:</span> <span><%- efluente || '-' %></span> / <span class="title">Tratamento:</span> <span><%- tratamento || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac || '-' %></span>
+          <span class="title">Efluente:</span> <span><%- efluente || '-' %></span> / <span class="title">Tratamento:</span> <span><%- tratamento || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
         </span>
       </div>
     </script>
@@ -740,7 +740,7 @@
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Altura água:</span> <span><%- alt_agua || '-' %></span> / <span class="title">Equipo:</span> <span><%- equipo || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac || '-' %></span>
+          <span class="title">Altura água:</span> <span><%- alt_agua || '-' %></span> / <span class="title">Equipo:</span> <span><%- equipo || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
         </span>
       </div>
     </script>
