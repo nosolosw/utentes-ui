@@ -1,3 +1,7 @@
+var domains = new Backbone.UILib.DomainCollection();
+domains.url = Backbone.SIXHIARA.Config.apiDomains;
+domains.fetch();
+
 var utentes = new Backbone.SIXHIARA.UtenteCollection();
 
 var formatValue = function(k, v, rowData) {

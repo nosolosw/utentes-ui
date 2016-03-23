@@ -60,6 +60,81 @@
   </li>
 </script>
 
+<script type="text/template" id="block-utente-modal-tmpl">
+  <div class="modal fade" id="editUtenteModal" tabindex="-1" role="dialog" aria-labelledby="editUtenteModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editUtenteModalLabel">Utente</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="id">
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="nome">Nome do utente</label>
+              <input type="text" class="form-control widget widget-utente" id="nome">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_provin">Província</label>
+              <select class="form-control widget" id="loc_provin">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="nuit">NUIT</label>
+              <input type="text" class="form-control widget widget-utente" id="nuit">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_distri">Distrito</label>
+              <select class="form-control widget" id="loc_distri">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="entidade">Tipo de entidade</label>
+              <input type="text" class="form-control widget widget-utente" id="entidade">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_posto">Posto administrativo</label>
+              <select class="form-control widget" id="loc_posto">
+              </select>
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="reg_comerc">Nro de registro comercial</label>
+              <input type="text" class="form-control widget widget-utente" id="reg_comerc">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="loc_nucleo">Núcleo</label>
+              <input type="text" class="form-control widget widget-utente" id="loc_nucleo">
+            </div>
+            <div class="form-group col-xs-offset-2 col-xs-4">
+              <label for="reg_zona">Registrado em</label>
+              <input type="text" class="form-control widget widget-utente" id="reg_zona">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <label for="observacio">Observaçôes</label>
+              <textarea class="form-control widget widget-utente" id="observacio" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveRow">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
 <!-- javascript -->
 
 <script src="lib/jquery/jquery-1.12.0.min.js"></script>
@@ -81,7 +156,11 @@
 <script src="lib/formatter/formatter.js"></script>
 
 <script src="Config.js"></script>
-
+<script src="lib/backbone-uilib/models/Domain.js"></script>
+<script src="lib/backbone-uilib/models/DomainCollection.js"></script>
+<script src="lib/backbone-uilib/views/OptionView.js"></script>
+<script src="lib/backbone-uilib/views/SelectView.js"></script>
+<script src="lib/backbone-uilib/views/WidgetsView.js"></script>
 <script src="views/TableUtentes.js"></script>
 
 <script src="models/Utente.js"></script>
