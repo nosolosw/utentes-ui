@@ -43,38 +43,38 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
       // var cultivos = L.geoJson(cultivosGeoJSON);
       map.fitBounds(exploracaoLeaflet.getBounds()).setMaxBounds(exploracaoLeaflet.getBounds());
 
-      var baseMaps = {};
-      var overlayMaps = {
-        'Exploração': exploracaoLeaflet,
-        // 'Cultivos': cultivos
-      };
-      L.control.layers(baseMaps, overlayMaps).addTo(map);
+      // var baseMaps = {};
+      // var overlayMaps = {
+      //   'Exploração': exploracaoLeaflet,
+      //   // 'Cultivos': cultivos
+      // };
+      // L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-      var drawnItems = new L.GeoJSON();
-      var drawControl = new L.Control.Draw({
-        draw: {
-          circle: false,
-          rectangle: false,
-          marker: false,
-          polyline: false
-        },
-        edit: {
-          featureGroup: exploracaoLeaflet
-        }
-      });
-      map.addControl(drawControl);
+      // var drawnItems = new L.GeoJSON();
+      // var drawControl = new L.Control.Draw({
+      //   draw: {
+      //     circle: false,
+      //     rectangle: false,
+      //     marker: false,
+      //     polyline: false
+      //   },
+      //   edit: {
+      //     featureGroup: exploracaoLeaflet
+      //   }
+      // });
+      // map.addControl(drawControl);
 
-      map.on('draw:start', function (e) {
-        var type = e.layerType,
-        layer = e.layer;
-
-        if (type === 'marker') {
-          // Do marker specific actions
-        }
+      // map.on('draw:start', function (e) {
+      //   var type = e.layerType,
+      //   layer = e.layer;
+      //
+      //   if (type === 'marker') {
+      //     // Do marker specific actions
+      //   }
 
         // Do whatever else you need to. (save to db, add to map etc)
         // exploracao.addData(drawnItems);
-      });
+      // });
     }
 
 
