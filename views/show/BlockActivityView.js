@@ -92,7 +92,12 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       });
 
       self.listenToOnce(self.model, 'change:actividade', function(model, value, options){
-        self.doToggle = true;
+        var tipoAct = self.model.get('actividade').get('tipo');
+        if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária')) {
+          self.doToggle = false;
+        } else {
+          self.doToggle = true;
+        }
         $('#editActividadeModal').modal('hide');
       });
     });
@@ -125,6 +130,30 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       });
       self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
       self.actividadeView.render();
+      var tipoAct = self.model.get('actividade').get('tipo');
+      if (tipoAct === 'Pecuária') {
+        self.editableTableView = new Backbone.SIXHIARA.EditableTableView({
+          el: $('Pecuária'),
+          newRowBtSelector: '#newRow',
+          modalSelector: '#resModal',
+          tableSelector: 'table#reses',
+          collection: self.model.get('actividade').get('reses'),
+          rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          editModalSelector: '#resModalEdit',
+        })
+        self.subViews.push(self.editableTableView);
+      } else if (tipoAct === 'Agricultura-Regadia') {
+        self.editableTableView = new Backbone.SIXHIARA.EditableTableView({
+          el: $('Agricultura-Regadia'),
+          newRowBtSelector: '#newRow',
+          modalSelector: '#cultivoModal',
+          tableSelector: 'table#cultivos',
+          collection: self.model.get('actividade').get('cultivos'),
+          rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          editModalSelector: '#cultivoModalEdit',
+        })
+        self.subViews.push(self.editableTableView);
+      }
     });
 
     var actividades = collection.byCategory('actividade');
