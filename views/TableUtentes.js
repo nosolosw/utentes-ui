@@ -129,7 +129,77 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     var self = this;
     $('.dataTables_length').append($('<button id="create-button" type="button" class="btn btn-primary col-xs-1 pull-right">Criar</button>'));
     $('#create-button').on('click', function(){
-      alert('Crear nueva utente');
+
+
+      var node = $(document.body).append($('#block-utente-modal-tmpl').html());
+      var modalEl = $('#editUtenteModal');
+      var u = new Backbone.SIXHIARA.Utente();
+      // do open modal
+      modalEl.modal('show');
+
+      modalEl.on('show.bs.modal', function(e){
+        var provincias      = domains.byCategory('provincia');
+        var distritos       = domains.byCategory('distrito');
+        var postos          = domains.byCategory('posto');
+        this.selectProvincias = new Backbone.UILib.SelectView({
+          el: $('#editUtenteModal #loc_provin'),
+          collection: provincias
+        }).render();
+
+        this.selectDistritos = new Backbone.UILib.SelectView({
+          el: $('#editUtenteModal #loc_distri'),
+          collection: [],
+        }).render();
+        this.selectDistritos.listenTo(u, 'change:loc_provin', function(model, value, options){
+          this.update(distritos.where({'parent': model.get('loc_provin')}));
+        });
+
+        this.selectPostos = new Backbone.UILib.SelectView({
+          el: $('#editUtenteModal #loc_posto'),
+          collection: [],
+        }).render();
+        this.selectPostos.listenTo(u, 'change:loc_distri', function(model, value, options){
+          this.update(postos.where({'parent': model.get('loc_distri')}));
+        });
+        self.utenteView = new Backbone.UILib.WidgetsView({
+          el: $('#editUtenteModal'),
+          model: u,
+        }).render();
+      });
+      modalEl.on('hidden.bs.modal', function(e){
+        $(this).unbind();
+        $(this).remove();
+        self.utenteView.remove();
+        delete self.utenteView;
+        this.selectProvincias.remove();
+        delete self.selectProvincias  ;
+        this.selectDistritos.remove();
+        this.selectPostos.remove();
+      });
+      modalEl.find('#saveRow').on('click', function() {
+        if(! u.isValid()) {
+          alert(u.validationError);
+          return;
+        }
+      self.collection.create(u, {
+        wait: true,
+        success: function(model, resp, options) {
+          modalEl.modal('hide');
+          self.reset();
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          if (textStatus && textStatus.responseJSON && textStatus.responseJSON.error) {
+            alert(textStatus.responseJSON.error.join('\n'));
+          } else {
+            alert(textStatus.statusText);
+          }
+        }
+      });
+
+      });
+
+      modalEl.modal('show');
+
     });
 
     $('#the_utentes_table table').on('click', 'button.delete', function() {
