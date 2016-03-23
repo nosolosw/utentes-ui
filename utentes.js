@@ -8,7 +8,7 @@ var formatValue = function(k, v, rowData) {
     v = null;
   } else if (k === 'exploracaos') {
     v = v.map(function(e){
-      return '<a href="' + urlShow + e.gid + '" >' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade;
+      return '<a href="' + urlShow + e.gid + '" >' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade.tipo;
     }).join('<br>');
   } else if (k === 'actions') {
     v = '<button type="button" class="btn btn-default btn-xs edit">Editar</button>';
