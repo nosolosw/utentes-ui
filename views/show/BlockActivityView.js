@@ -8,6 +8,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     this.actividadeView = new Backbone.SIXHIARA.ActividadeView({
       el: this.el,
       model: this.model,
+      domains: options.domains,
       template: _.template($("[id='" + this.model.get('actividade').get('tipo') + "']").html())
     });
 

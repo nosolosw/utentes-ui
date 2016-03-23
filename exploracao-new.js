@@ -109,7 +109,6 @@ function fillComponentsWithDomains(){
   var actividades     = domains.byCategory('actividade');
   var fonteTipos      = domains.byCategory('fonte_tipo');
 
-
   // page info: localizacao
   new Backbone.UILib.SelectView({
     el: $('#info #loc_provin'),
@@ -204,14 +203,6 @@ function fillComponentsWithDomains(){
   // Update actividades templates in the DOM adding the
   // options to the selects
   new Backbone.UILib.SelectView({
-    el: $('#tipo_indus'),
-    collection: domains.byCategory('industria_tipo')
-  }).render();
-  new Backbone.UILib.SelectView({
-    el: $('#energia_tipo'),
-    collection: domains.byCategory('energia_tipo')
-  }).render();
-  new Backbone.UILib.SelectView({
     el: $('#resModal #reses_tipo'),
     collection: domains.byCategory('animal_tipo'),
   }).render();
@@ -225,11 +216,11 @@ function fillComponentsWithDomains(){
   }).render();
 }
 
-
 // block actividade
 var actividadeView = new Backbone.SIXHIARA.ActividadeView({
   el: $('#info-actividade'),
   model: exploracao,
+  domains: domains,
   template: null,
   nestedViews: []
 });
