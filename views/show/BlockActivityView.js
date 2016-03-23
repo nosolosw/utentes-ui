@@ -82,6 +82,10 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         el: $('#editActividadeModal #energia_tipo'),
         collection: self.options.domains.byCategory('energia_tipo')
       }).render();
+      new Backbone.SIXHIARA.CEstimadoComputedView({
+        el: $('#c_estimado_computed'),
+        model: self.model
+      }).render();
 
       var actv = self.model.get('actividade');
       actv.keys().forEach(function(k){

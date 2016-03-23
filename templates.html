@@ -43,29 +43,37 @@
   <input type="hidden" id="id">
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="c_estimado">C. estimado</label>
+      <input type="text" class="form-control widget-number" id="c_estimado">
+    </div>
+    <div class="form-group col-xs-6">
+      <label for="c_estimado_computed">C. estimado (autocalculado dende área)</label>
+      <input type="text" class="form-control" id="c_estimado_computed" disabled>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="tipo_indus">Tipo de indústria</label>
       <select class="form-control widget" id="tipo_indus">
       </select>
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-4">
+      <label for="eval_impac">Evaluación impacto</label>
+      <select class="form-control widget-boolean" id="eval_impac"></select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1  col-xs-3">
       <label for="instalacio">Instalaçôes</label>
       <input type="text" class="form-control widget" id="instalacio">
     </div>
-  </div>
-
-  <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-3">
       <label for="efluente">Efluente</label>
       <input type="text" class="form-control widget" id="efluente">
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-3">
       <label for="tratamento">Tratamento</label>
       <input type="text" class="form-control widget" id="tratamento">
-    </div>
-
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="eval_impac">Evaluación impacto</label>
-      <select class="form-control widget-boolean" id="eval_impac"></select>
     </div>
   </div>
 </script>
@@ -99,10 +107,14 @@
   <input type="hidden" id="id">
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="area">C. estimado</label>
+      <input type="text" class="form-control widget-number" id="c_estimado">
+    </div>
+    <div class="form-group col-xs-3">
       <label for="area">Área</label>
       <input type="text" class="form-control widget-number" id="area">
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-3">
       <label for="v_reservas">Reservas</label>
       <input type="text" class="form-control widget-number" id="v_reservas">
     </div>
@@ -115,11 +127,15 @@
   <input type="hidden" id="id">
   <div class="row">
     <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="c_estimado">C. estimado</label>
+      <input type="text" class="form-control widget-number" id="c_estimado">
+    </div>
+    <div class="form-group col-xs-3">
       <label for="energia_tipo">Tipo de energía</label>
       <select class="form-control widget" id="energia_tipo">
       </select>
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-3">
       <label for="potencia">Potencia</label>
       <input type="text" class="form-control widget-number" id="potencia">
     </div>
@@ -130,12 +146,12 @@
       <label for="alt_agua">Altura água</label>
       <input type="text" class="form-control widget-number" id="alt_agua">
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-3">
       <label for="equipo">Equipo</label>
       <input type="text" class="form-control widget" id="equipo">
     </div>
 
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-4">
       <label for="eval_impac">Evaluación impacto</label>
       <select class="form-control widget-boolean" id="eval_impac"></select>
     </div>
@@ -146,6 +162,10 @@
 <script type="text/template" id="Saneamento_edit">
   <input type="hidden" id="id">
   <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-3">
+      <label for="c_estimado">C. estimado:</label>
+      <input type="text" class="form-control widget-number" id="c_estimado">
+    </div>
     <div class="form-group col-xs-offset-1 col-xs-3">
       <label for="habitantes">Nro de habitantes:</label>
       <input type="text" class="form-control widget-number" id="habitantes">

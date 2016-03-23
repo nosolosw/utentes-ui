@@ -469,7 +469,12 @@
     <script type="text/template" id="Abastecimento">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Nro de habitantes:</span> <span><%- habitantes || '-' %></span> / <span class="title">Dotaçâo:</span> <span><%- dotacao || '-' %></span>
+          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span> / <span class="title">Dotaçâo:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
         </span>
       </div>
     </script>
@@ -596,8 +601,13 @@
       </div>
     </div>
 
-    <!-- tmpl actividade -->
+    <!-- tmpl actividade industria -->
     <script type="text/template" id="Indústria">
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+        </span>
+      </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
           <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span> / <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
@@ -722,11 +732,16 @@
       </div>
     </div>
 
-    <!-- tmpl actividade -->
+    <!-- tmpl actividade piscicultura -->
     <script type="text/template" id="Piscicultura">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Área:</span> <span><%- area || '-' %></span> / <span class="title">Reservas:</span> <span><%- v_reservas || '-' %></span>
+          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Área:</span> <span><%- formatter().formatNumber(area) || '-' %></span> / <span class="title">Reservas:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
         </span>
       </div>
     </script>
@@ -735,12 +750,17 @@
     <script type="text/template" id="Producção de energia">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Tipo de energía:</span> <span><%- energia_tipo || '-' %></span> / <span class="title">Potencia:</span> <span><%- potencia || '-' %></span>
+          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
         </span>
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Altura água:</span> <span><%- alt_agua || '-' %></span> / <span class="title">Equipo:</span> <span><%- equipo || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
+          <span class="title">Tipo de energía:</span> <span><%- energia_tipo || '-' %></span> / <span class="title">Potencia:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Altura água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span> / <span class="title">Equipo:</span> <span><%- equipo || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
         </span>
       </div>
     </script>
@@ -749,7 +769,12 @@
     <script type="text/template" id="Saneamento">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Nro de habitantes:</span> <span><%- habitantes || '-' %></span>
+          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
         </span>
       </div>
     </script>
@@ -947,6 +972,7 @@
     <script src="views/show/SummaryConsumoView.js"></script>
     <script src="views/show/SummaryLicenseView.js"></script>
     <script src="views/show/SummaryPagosView.js"></script>
+    <script src="views/show/CEstimadoComputedView.js"></script>
     <script src="views/show/BlockInfoView.js"></script>
     <script src="views/show/BlockMapView.js"></script>
     <script src="views/show/BlockLocationView.js"></script>
