@@ -127,7 +127,7 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   modelEdit: function(){
     $(this.options.editModalSelector).modal('toggle');
 
-    new Backbone.SIXHIARA.EditModalTableView({
+    var editTableModalView = new Backbone.SIXHIARA.EditModalTableView({
       el: $(this.options.editModalSelector),
       model: this.model,
     });
@@ -136,6 +136,9 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
     $(self.options.editModalSelector).one('shown.bs.modal', function(e){
       self.model.keys().forEach(function(k){
         $(self.options.editModalSelector +' #' + k).val(self.model.get(k));
+      });
+      $(self.options.editModalSelector).find('#saveRow').one('click', function(){
+        editTableModalView.saveRow();
       });
     });
 
@@ -181,10 +184,6 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.EditModalTableView = Backbone.View.extend({
-
-  events: {
-    'click #saveRow': 'saveRow'
-  },
 
   saveRow: function(){
     // FIXME: Validations, formats, more widgets
