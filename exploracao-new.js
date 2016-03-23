@@ -260,7 +260,8 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
         modalSelector: '#resModal',
         tableSelector: 'table#reses',
         collection: exploracao.get('actividade').get('reses'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="close">&times;</td>',
+        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="close">&times;</td>',
+        collectionModel: Backbone.SIXHIARA.ActividadeRes,
       })
     );
 
@@ -273,7 +274,9 @@ actividadeView.listenTo(exploracao, 'change:actividade', function(model, value, 
         modalSelector: '#cultivoModal',
         tableSelector: 'table#cultivos',
         collection: exploracao.get('actividade').get('cultivos'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %></td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="close">&times;</td>',
+        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %></td><td><%- area %></td><td><%- observacio %></td><td class="close">&times;</td>',
+        collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
+
       })
     );
   }

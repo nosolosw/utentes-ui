@@ -286,11 +286,14 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       response.actividade = new Backbone.Model(response.actividade)
       if (response.actividade.has('cultivos')) {
         response.actividade.set('cultivos',
-          new Backbone.GeoJson.FeatureCollection(response.actividade.get('cultivos'), {parse:true}));
+          new Backbone.GeoJson.FeatureCollection(response.actividade.get('cultivos'), {
+            parse:true,
+            model: Backbone.SIXHIARA.ActividadeCultivo,
+          }));
       };
       if (response.actividade.has('reses')) {
         response.actividade.set('reses',
-          new Backbone.Collection(response.actividade.get('reses')));
+          new Backbone.Collection(response.actividade.get('reses'), {model: Backbone.SIXHIARA.ActividadeRes}));
       };
     }
 

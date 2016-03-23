@@ -28,8 +28,9 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelector: '#resModal',
         tableSelector: 'table#reses',
         collection: this.model.get('actividade').get('reses'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         editModalSelector: '#resModalEdit',
+        collectionModel: Backbone.SIXHIARA.ActividadeRes,
       })
       this.subViews.push(this.editableTableView);
     } else if (tipo === 'Agricultura-Regadia') {
@@ -39,8 +40,9 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelector: '#cultivoModal',
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %> </td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         editModalSelector: '#cultivoModalEdit',
+        collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
       })
       this.subViews.push(this.editableTableView);
     }
@@ -145,6 +147,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           collection: self.model.get('actividade').get('reses'),
           rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           editModalSelector: '#resModalEdit',
+          collectionModel: Backbone.SIXHIARA.ActividadeRes,
         })
         self.subViews.push(self.editableTableView);
       } else if (tipoAct === 'Agricultura-Regadia') {
@@ -156,6 +159,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           collection: self.model.get('actividade').get('cultivos'),
           rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           editModalSelector: '#cultivoModalEdit',
+          collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
         })
         self.subViews.push(self.editableTableView);
       }
