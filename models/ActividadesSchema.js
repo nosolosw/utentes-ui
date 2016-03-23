@@ -75,7 +75,7 @@ ActividadeSchema['Pecuária'] = [{
 },{
   'fieldname': 'c_estimado',
   'message':   'c_estimado não tem o formato correcto',
-  'rules':     ['IS_NUMERIC']
+  'rules':     ['IS_NUMERIC', 'NOT_NULL']
 }, {
   'fieldname': 'reses',
   'message':   'reses non pode estar vacío',
@@ -124,8 +124,8 @@ ActividadeSchema['Producção de energia'] = [{
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message': 'c_estimado não tem o formato correcto',
-  'rules': ['IS_NUMERIC']
+  'message':   'c_estimado não tem o formato correcto',
+  'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'alt_agua',
   'message':   'alt_agua non pode estar vacío',
