@@ -13,6 +13,14 @@ Backbone.SIXHIARA.Utente = Backbone.Model.extend({
     'loc_posto':  null,
     'loc_nucleo': null,
     'observacio': null,
-  }
+  },
+
+  validate: function(attrs, options){
+    var messages = [];
+    validator(UTENTE_SCHEMA).validate(this.attributes).forEach(function(msg){
+      messages.push(msg);
+    });
+    if (messages.length > 0) return messages;
+  },
 
 });
