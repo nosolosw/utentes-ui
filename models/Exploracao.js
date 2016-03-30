@@ -29,7 +29,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'licencias':  new Backbone.SIXHIARA.LicenciaCollection(),
     'fontes':     new Backbone.SIXHIARA.FonteCollection(),
     'geometry':   new Backbone.Model(),
-
+    'geometry_edited': false,
   },
 
   initialize: function(){
@@ -302,7 +302,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   toJSON: function() {
     var json        =  _.clone(this.attributes);
-    json.geometry   = this.get('geometry').toJSON();
+    if (this.get('geometry')) {
+      json.geometry = this.get('geometry').toJSON();
+    } else {
+      json.geometry = null;
+    }
     json.utente     = this.get('utente').toJSON();
     json.licencias  = this.get('licencias').toJSON();
     json.fontes     = this.get('fontes').toJSON();
