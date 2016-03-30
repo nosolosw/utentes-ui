@@ -16,4 +16,4 @@ Backbone.SIXHIARA.ActividadeEnergia = Backbone.Model.extend({
 
 // declare activity for dinamic discovery
 Backbone.SIXHIARA.ActividadesFactory = Backbone.SIXHIARA.ActividadesFactory || {};
-Backbone.SIXHIARA.ActividadesFactory['Producção de energia'] = new Backbone.SIXHIARA.ActividadeEnergia();
+Backbone.SIXHIARA.ActividadesFactory['Producção de energia'] = Backbone.SIXHIARA.ActividadeEnergia;

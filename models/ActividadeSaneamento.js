@@ -12,4 +12,4 @@ Backbone.SIXHIARA.ActividadeSaneamento = Backbone.Model.extend({
 
 // declare activity for dinamic discovery
 Backbone.SIXHIARA.ActividadesFactory = Backbone.SIXHIARA.ActividadesFactory || {};
-Backbone.SIXHIARA.ActividadesFactory['Saneamento'] = new Backbone.SIXHIARA.ActividadeSaneamento();
+Backbone.SIXHIARA.ActividadesFactory['Saneamento'] = Backbone.SIXHIARA.ActividadeSaneamento;

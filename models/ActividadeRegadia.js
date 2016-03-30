@@ -31,4 +31,4 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.Model.extend({
 
 // declare activity for dinamic discovery
 Backbone.SIXHIARA.ActividadesFactory = Backbone.SIXHIARA.ActividadesFactory || {};
-Backbone.SIXHIARA.ActividadesFactory['Agricultura-Regadia'] = new Backbone.SIXHIARA.ActividadeRegadia();
+Backbone.SIXHIARA.ActividadesFactory['Agricultura-Regadia'] = Backbone.SIXHIARA.ActividadeRegadia;
