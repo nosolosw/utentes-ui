@@ -45,11 +45,18 @@ var MySaveToAPI = SaveToAPI.extend({
       alert('O arquivo de código não existe');
       return;
     }
+
     e = e[0];
     e.get('geometry').set('type', feat.geometry.type);
     e.get('geometry').set('coordinates', feat.geometry.coordinates);
     e.set('geometry_edited', true);
-    valid = e.save(null, {
+
+    if(! e.isValid()) {
+      alert(e.validationError);
+      return;
+    }
+
+    e.save(null, {
       wait: true,
       success: function(model, resp, options) {
         table.deleteSelected();
@@ -59,11 +66,6 @@ var MySaveToAPI = SaveToAPI.extend({
         alert(textStatus.statusText + ' ' + textStatus.responseText);
       }
     });
-
-    if (! valid) {
-      alert(e[0].validate());
-    }
-
 
   }
 });
