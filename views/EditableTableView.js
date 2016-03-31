@@ -39,9 +39,9 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
   },
 
   remove: function(){
-    Backbone.View.prototype.remove.call(this);
-    _.invoke(this._subviews, 'unbind');
+    _.invoke(this._subviews, 'off');
     _.invoke(this._subviews, 'remove');
+    Backbone.View.prototype.remove.call(this);
   },
 
 });
@@ -92,8 +92,9 @@ Backbone.SIXHIARA.TableView = Backbone.View.extend({
   // Remove the container element and then clean up its managed subviews
   // as to minimize document reflows.
   remove: function(){
-    Backbone.View.prototype.remove.call(this);
+    _.invoke(this._subviews, 'off');
     _.invoke(this._subviews, 'remove');
+    Backbone.View.prototype.remove.call(this);
   },
 });
 
@@ -164,7 +165,7 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
   saveRow: function(){
     // FIXME: Validations, formats, more widgets
-    var rowModel = new this.options.collectionModel;
+    var rowModel = new this.options.collectionModel();
     this.$('input, select, textarea').each(function(k, v){
       var $v = $(v);
       if ($v.hasClass('widget-number')) {
@@ -180,6 +181,7 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
   remove: function() {
     // Don't remove $el here
     this.$el.unbind();
+    this.off();
   }
 
 });
@@ -204,6 +206,8 @@ Backbone.SIXHIARA.EditModalTableView = Backbone.View.extend({
 
   remove: function() {
     // Don't remove $el here
+    this.$el.unbind();
+    this.off();
   }
 
 });

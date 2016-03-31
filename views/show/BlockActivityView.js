@@ -21,6 +21,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
   render: function () {
     _.invoke(this.subViews, 'render');
     var tipo = this.model.get('actividade').get('tipo');
+    if (this.editableTableView) this.editableTableView.off();
     if (tipo === 'Pecuária') {
       this.editableTableView = new Backbone.SIXHIARA.EditableTableView({
         el: $('Pecuária'),
@@ -48,7 +49,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     }
 
     return this;
-  },
+    },
 
   renderModal: function (collection, response, options) {
 
@@ -121,23 +122,27 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     $('#editActividadeModal').on('hide.bs.modal', function(){
       if (self.doToggle) return;
       if (!self.model.get('actividade')) return;
-      $('#editActividadeModal .actividade-render').find('input, select, textarea').each(function(k, v){
-        var $v = $(v);
-        if ($v.hasClass('widget-number')) {
-          self.model.get('actividade').set(v.id, formatter().unformatNumber($v.val()));
-        } else if ($v.hasClass('widget-boolean')){
-          var option = $v.find('option:selected').val();
-          var value = null;
-          if(option === 'true') value = true;
-          if(option === 'false') value = false;
-          self.model.get('actividade').set(v.id, value);
-        } else {
-          self.model.get('actividade').set(v.id, $v.val() || null);
-        }
-      });
+      var tipoAct = self.model.get('actividade').get('tipo');
+      if ((tipoAct !== 'Agricultura-Regadia') && (tipoAct !== 'Pecuária')) {
+        $('#editActividadeModal .actividade-render').find('input, select, textarea').each(function(k, v){
+          var $v = $(v);
+          if ($v.hasClass('widget-number')) {
+            self.model.get('actividade').set(v.id, formatter().unformatNumber($v.val()));
+          } else if ($v.hasClass('widget-boolean')){
+            var option = $v.find('option:selected').val();
+            var value = null;
+            if(option === 'true') value = true;
+            if(option === 'false') value = false;
+            self.model.get('actividade').set(v.id, value);
+          } else {
+            self.model.get('actividade').set(v.id, $v.val() || null);
+          }
+        });
+      }
       self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
       self.actividadeView.render();
-      var tipoAct = self.model.get('actividade').get('tipo');
+
+      if (self.editableTableView) self.editableTableView.off();
       if (tipoAct === 'Pecuária') {
         self.editableTableView = new Backbone.SIXHIARA.EditableTableView({
           el: $('Pecuária'),
@@ -145,7 +150,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelector: '#resModal',
           tableSelector: 'table#reses',
           collection: self.model.get('actividade').get('reses'),
-          rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- c_res %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           editModalSelector: '#resModalEdit',
           collectionModel: Backbone.SIXHIARA.ActividadeRes,
         })
