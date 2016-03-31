@@ -45,8 +45,11 @@ var MySaveToAPI = SaveToAPI.extend({
       alert('O arquivo de código não existe');
       return;
     }
-
-    valid = e[0].save('geometry', new Backbone.Model(feat.geometry), {
+    e = e[0];
+    e.get('geometry').set('type', feat.geometry.type);
+    e.get('geometry').set('coordinates', feat.geometry.coordinates);
+    e.set('geometry_edited', true);
+    valid = e.save(null, {
       wait: true,
       success: function(model, resp, options) {
         table.deleteSelected();
