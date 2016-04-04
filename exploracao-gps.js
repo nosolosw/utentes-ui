@@ -34,41 +34,52 @@ var MySaveToAPI = SaveToAPI.extend({
       return;
     }
     feat = polygonLayer.features[0];
-    exp_id = feat.properties.name
-    if (_.isEmpty(exp_id)) {
+    code = feat.properties.name
+    if (_.isEmpty(code)) {
       alert('O polígono deve ter um nome válido');
       return;
     }
 
-    e = exploracaos.filter({'exp_id':exp_id});
+    var model = new Backbone.Model({'entidade':null, 'identificador':null});
+
+    // $('#show-modal').click(function() {
+        var view = new Backbone.SIXHIARA.GPSModalView({ model: model });
+        view.show();
+        return;
+    // });
+
+    e = exploracaos.filter({'exp_id':code});
     if (e.length != 1) {
       alert('O arquivo de código não existe');
       return;
     }
 
-    e = e[0];
-    e.get('geometry').set('type', feat.geometry.type);
-    e.get('geometry').set('coordinates', feat.geometry.coordinates);
-    e.set('geometry_edited', true);
 
-    if(! e.isValid()) {
-      alert(e.validationError);
-      return;
-    }
 
-    e.save(null, {
-      wait: true,
-      success: function(model, resp, options) {
-        table.deleteSelected();
-        table.clear();
-      },
-      error: function(xhr, textStatus, errorThrown) {
-        alert(textStatus.statusText + ' ' + textStatus.responseText);
-      }
-    });
-
+    saveModelToAPI(e[0], feat.geometry)
   }
 });
+
+var saveModelToAPI = function(model, geometry) {
+  model.get('geometry').set('type', geometry.type);
+  model.get('geometry').set('coordinates', geometry.coordinates);
+  model.set('geometry_edited', true);
+  if(! model.isValid()) {
+    alert(model.validationError);
+    return;
+  }
+
+  model.save(null, {
+    wait: true,
+    success: function(model, resp, options) {
+      table.deleteSelected();
+      table.clear();
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      alert(textStatus.statusText + ' ' + textStatus.responseText);
+    }
+  });
+}
 
 var MyImportGPX = ImportGPX.extend({
 
@@ -98,3 +109,6 @@ var table = L.control.table(geoJsonLayer).addTo(map);
 
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 exploracaos.fetch();
+
+var cultivos = new Backbone.SIXHIARA.CultivoCollection();
+cultivos.fetch();
