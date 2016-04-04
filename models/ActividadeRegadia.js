@@ -5,7 +5,7 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.Model.extend({
     'id':         null,
     'tipo':       'Agricultura-Regadia',
     'c_estimado': null,
-    'cultivos':   new Backbone.Collection(),
+    'cultivos':   new Backbone.SIXHIARA.CultivoCollection(),
   },
 
   initialize: function () {

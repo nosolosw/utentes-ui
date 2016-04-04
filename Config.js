@@ -7,5 +7,5 @@ Backbone.SIXHIARA.Config = {
   apiDomains:     '/api/domains',
   apiExploracaos: '/api/exploracaos',
   apiUtentes:     '/api/utentes',
-
+  apiCultivos:    '/api/cultivos',
 };
