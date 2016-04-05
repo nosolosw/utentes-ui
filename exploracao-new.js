@@ -116,7 +116,7 @@ function fillComponentsWithDomains(){
     model: exploracao,
     el: $('#info'),
   }).render();
-  
+
 
   // page utente: localizacion
   new Backbone.SIXHIARA.SelectLocationView({
