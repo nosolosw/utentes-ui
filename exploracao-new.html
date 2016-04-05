@@ -27,7 +27,7 @@
       <a href="exploracao-gps.html" class="col-xs-1">
         <strong id="gps">GPS</strong>
       </a>
-      <a href="#" class="pull-right">
+      <a href="#" class="pull-right col-xs-1">
         <strong id="settings" class="glyphicon glyphicon-cog"></strong>
       </a>
     </menu>
@@ -37,10 +37,9 @@
       <div class="col-xs-offset-2 col-xs-8">
 
         <div class="row text-center">
-          <h1>Nova Exploracão
-            <button id="save-button" type="button" class="btn btn-primary col-xs-1 pull-right">Criar</button>
+          <h1 class="col-xs-12">Nova Exploracão
+            <button id="save-button" type="button" class="btn btn-primary pull-right">Criar</button>
           </h1>
-          <hr>
         </div>
 
         <div class="row">
@@ -261,8 +260,8 @@
                         <div class="col-xs-5">
                           <fieldset id="licencia-subterranea">
                             <span>SUBTERRÂNEA</span>
-                            <input type="hidden" id="lic_tipo">
-                            <input type="hidden" class="form-control widget" id="lic_nro">
+                            <input type="hidden" class="widget" id="lic_tipo">
+                            <input type="hidden" class="widget" id="lic_nro">
                             <div class="form-group">
                               <label for="estado">Estado</label>
                               <select class="form-control widget estado-subterranea" id="estado">
@@ -273,7 +272,7 @@
                               <input type="text" class="form-control widget-number" id="c_soli_int">
                             </div>
                             <div class="form-group">
-                              <button class="btn btn-default pull-right" id="fonte-subterranea">Nova fonte</button>
+                              <button type="button" class="btn btn-default pull-right" id="fonte-subterranea">Nova fonte</button>
                             </div>
                           </fieldset>
                         </div>
@@ -282,7 +281,7 @@
                           <fieldset id="licencia-superficial">
                             <span>SUPERFICIAL</span>
                             <input type="hidden" class="widget" id="lic_tipo">
-                            <input type="hidden" class="form-control widget" id="lic_nro">
+                            <input type="hidden" class="widget" id="lic_nro">
                             <div class="form-group">
                               <label for="estado">Estado</label>
                               <select class="form-control widget estado-superficial" id="estado">
@@ -293,7 +292,7 @@
                               <input type="text" class="form-control widget-number" id="c_soli_int">
                             </div>
                             <div class="form-group">
-                              <button class="btn btn-default pull-right" id="fonte-superficial">Nova fonte</button>
+                              <button type="button" class="btn btn-default pull-right" id="fonte-superficial">Nova fonte</button>
                             </div>
                           </fieldset>
                         </div>
@@ -302,7 +301,7 @@
 
                       <div class="row">
 
-                        <table class="table" id="fontes">
+                        <table class="table col-xs-12" id="fontes">
                           <thead>
                             <tr>
                               <th>Tipo de água</th>
@@ -326,7 +325,7 @@
               </div>
 
               <div class="row">
-                <ul class="pager wizard">
+                <ul class="pager wizard col-xs-12">
                   <li class="previous"><a href="#">Anterior</a></li>
                   <li class="next"><a href="#">Seguinte</a></li>
                 </ul>
@@ -354,8 +353,9 @@
         <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
       </div>
       <div class="modal-body">
+        <div class="container">
         <div class="row">
-          <input type="hidden" id="tipo_agua" value="Subterrânea" />
+          <input type="hidden" id="tipo_agua" value="Subterrânea" class="col-xs-1"/>
           <div class="form-group col-xs-offset-1 col-xs-4">
             <label for="tipo_fonte">Tipo de fonte</label>
             <select class="form-control" id="fonte_tipo">
@@ -370,6 +370,7 @@
             <textarea class="form-control" id="observacio" rows="3"></textarea>
           </div>
         </div>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -388,8 +389,9 @@
         <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <input type="hidden" id="tipo_agua" value="Superficial" />
+        <div class="container-fluid">
+          <div class="row">
+          <input type="hidden" id="tipo_agua" value="Superficial" class="col-xs-1"/>
           <div class="form-group col-xs-offset-1 col-xs-4">
             <label for="tipo_fonte">Tipo de fonte</label>
             <select class="form-control" id="fonte_tipo">
@@ -404,6 +406,7 @@
             <textarea class="form-control" id="observacio" rows="3"></textarea>
           </div>
         </div>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -423,6 +426,7 @@
         <h4 class="modal-title" id="cultivoModalLabel">Cultivo</h4>
       </div>
       <div class="modal-body">
+        <div class="container-fluid">
         <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-4">
             <label for="cultivo">Tipo de cultivo</label>
@@ -446,6 +450,7 @@
           </div>
         </div>
       </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" id="saveRow">Aceptar</button>
@@ -463,6 +468,7 @@
         <h4 class="modal-title" id="resModalLabel">Res</h4>
       </div>
       <div class="modal-body">
+        <div class="container-fluid">
         <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-4">
             <label for="reses_tipo">Tipo de reses</label>
@@ -480,6 +486,7 @@
             <textarea class="form-control" id="observacio" rows="3"></textarea>
           </div>
         </div>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
