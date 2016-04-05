@@ -8,4 +8,6 @@ Backbone.SIXHIARA.Config = {
   apiExploracaos: '/api/exploracaos',
   apiUtentes:     '/api/utentes',
   apiCultivos:    '/api/cultivos',
+
+  docPath: '',
 };

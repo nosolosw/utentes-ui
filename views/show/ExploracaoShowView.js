@@ -42,8 +42,12 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
       }
     });
 
-    // TODO add action for open file folder
-    // openFolderButtonView
+
+    var openFolderButtonView = new Backbone.SIXHIARA.OpenFolderButtonView({
+      el: $('#documentos'),
+      model: exploracao
+    });
+    this.subViews.push(openFolderButtonView);
 
     // TODO: do not listen to events if button is disabled
     var buttonSaveView = new Backbone.SIXHIARA.ButtonSaveView({
