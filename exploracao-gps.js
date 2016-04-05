@@ -42,44 +42,12 @@ var MySaveToAPI = SaveToAPI.extend({
 
     var model = new Backbone.Model({'entidade':null, 'identificador':null});
 
-    // $('#show-modal').click(function() {
-        var view = new Backbone.SIXHIARA.GPSModalView({ model: model });
-        view.show();
-        return;
-    // });
-
-    e = exploracaos.filter({'exp_id':code});
-    if (e.length != 1) {
-      alert('O arquivo de código não existe');
-      return;
-    }
-
-
-
-    saveModelToAPI(e[0], feat.geometry)
+    var view = new Backbone.SIXHIARA.GPSModalView({ model: model });
+    view.show();
+    return;
   }
 });
 
-var saveModelToAPI = function(model, geometry) {
-  model.get('geometry').set('type', geometry.type);
-  model.get('geometry').set('coordinates', geometry.coordinates);
-  model.set('geometry_edited', true);
-  if(! model.isValid()) {
-    alert(model.validationError);
-    return;
-  }
-
-  model.save(null, {
-    wait: true,
-    success: function(model, resp, options) {
-      table.deleteSelected();
-      table.clear();
-    },
-    error: function(xhr, textStatus, errorThrown) {
-      alert(textStatus.statusText + ' ' + textStatus.responseText);
-    }
-  });
-}
 
 var MyImportGPX = ImportGPX.extend({
 
