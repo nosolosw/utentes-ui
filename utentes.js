@@ -93,3 +93,11 @@ utentes.fetch({
   parse: true,
   reset: true
 });
+
+
+
+$('#settings').on('click', function(e){
+  e.preventDefault();
+  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
+  configModalView.show();
+});

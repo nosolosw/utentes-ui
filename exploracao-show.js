@@ -31,3 +31,9 @@ var showView = new Backbone.SIXHIARA.ExploracaoShowView({
 exploracaoModel.on('destroy', function (model, collection, options) {
   showView.remove();
 });
+
+$('#settings').on('click', function(e){
+  e.preventDefault();
+  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
+  configModalView.show();
+});

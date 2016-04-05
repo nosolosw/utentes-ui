@@ -80,3 +80,9 @@ exploracaos.fetch();
 
 var cultivos = new Backbone.SIXHIARA.CultivoCollection();
 cultivos.fetch();
+
+$('#settings').on('click', function(e){
+  e.preventDefault();
+  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
+  configModalView.show();
+});

@@ -35,3 +35,9 @@ exploracaos.fetch({
   parse: true,
   success: function() {where.trigger('change');}
 });
+
+$('#settings').on('click', function(e){
+  e.preventDefault();
+  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
+  configModalView.show();
+});
