@@ -17,7 +17,8 @@ menu{
 #search,
 #utentes,
 #new,
-#gps{
+#gps,
+#settings {
   color: #023858;
   padding: 0.5em;
   border-radius: 5px;
@@ -26,7 +27,8 @@ menu{
 #new:hover,
 #utentes:hover,
 #search:hover,
-#gps:hover{
+#gps:hover,
+#settings:hover {
   background-color: #045a8d;
   color: white;
 }
