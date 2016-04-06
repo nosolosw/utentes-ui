@@ -41,7 +41,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelector: '#cultivoModal',
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %> </td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><%- cult_id %></td><td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %> </td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         editModalSelector: '#cultivoModalEdit',
         collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
       })
@@ -162,7 +162,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelector: '#cultivoModal',
           tableSelector: 'table#cultivos',
           collection: self.model.get('actividade').get('cultivos'),
-          rowTemplate: '<td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><%- cult_id %></td><td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           editModalSelector: '#cultivoModalEdit',
           collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
         })
