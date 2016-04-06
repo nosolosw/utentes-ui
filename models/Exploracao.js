@@ -301,12 +301,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   toJSON: function() {
-    var json        =  _.clone(this.attributes);
-    if (this.get('geometry')) {
-      json.geometry = this.get('geometry').toJSON();
-    } else {
-      json.geometry = null;
-    }
+    var json = _.clone(this.attributes);
+    json.geometry   = this.get('geometry') ? this.get('geometry').toJSON() : null;
     json.utente     = this.get('utente').toJSON();
     json.licencias  = this.get('licencias').toJSON();
     json.fontes     = this.get('fontes').toJSON();
@@ -326,7 +322,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       }
     });
 
-    expValidator.validate(this.attributes).forEach(function(msg){
+    expValidator.validate(this.toJSON()).forEach(function(msg){
       messages.push(msg);
     });
 
@@ -338,7 +334,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       }
     });
     this.get('licencias').forEach(function(licencia){
-      licValidator.validate(licencia.attributes).forEach(function(msg){
+      licValidator.validate(licencia.toJSON()).forEach(function(msg){
         messages.push(msg);
       });
     })
@@ -350,7 +346,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       })
     });
 
-    validator(UTENTE_SCHEMA).validate(this.get('utente').attributes).forEach(function(msg){
+    validator(UTENTE_SCHEMA).validate(this.get('utente').toJSON()).forEach(function(msg){
       messages.push(msg);
     });
 
