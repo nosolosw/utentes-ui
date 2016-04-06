@@ -10,27 +10,28 @@ domains.url = Backbone.SIXHIARA.Config.apiDomains;
 
 domains.fetch({
   success: function(collection, response, options) {
+    console.log('success fetching domains');
     fillComponentsWithDomains();
+  },
+  error: function (collection, response, option) {
+    console.log('error fetching domains');
+    alert('error fetching domains');
   }
 });
 
 var utentes = new Backbone.SIXHIARA.UtenteCollection();
 utentes.fetch({
-  success: function() {
+  success: function(collection, response, options) {
+    console.log('success fetching utentes');
     fillSelectUtente();
+  },
+  error: function (collection, response, options) {
+    alert('error fetching utentes');
   }
 });
 
 // model to save
 var exploracao = new Backbone.SIXHIARA.Exploracao();
-var licenciaSubterranea = new Backbone.SIXHIARA.Licencia({
-  'lic_tipo': 'Subterrânea'
-});
-var licenciaSuperficial = new Backbone.SIXHIARA.Licencia({
-  'lic_tipo': 'Superficial'
-});
-exploracao.get('licencias').add(licenciaSuperficial);
-exploracao.get('licencias').add(licenciaSubterranea);
 
 // save action
 new Backbone.SIXHIARA.ButtonSaveView({
@@ -56,54 +57,40 @@ new Backbone.UILib.WidgetsView({
   model: exploracao.get('utente')
 }).render();
 
-// page licencias & fontes: licencias
-new Backbone.UILib.WidgetsView({
+// page licencias & fontes: superficial
+var licenseSupView = new Backbone.SIXHIARA.LicenseView({
   el: $('#licencia-superficial'),
-  model: licenciaSuperficial
+  model: exploracao,
+  domains: domains,
+  lic_tipo: 'Superficial',
+  elModalFonte: $('#fonteSupModal'),
+  elModalFonteButton: $('#fonte-superficial'),
+  elModalFonteSelect: $('#fonteSupModal #fonte_tipo')
 }).render();
 
-new Backbone.UILib.WidgetsView({
+// page licencias & fontes: subterranea
+var licenseSubView = new Backbone.SIXHIARA.LicenseView({
   el: $('#licencia-subterranea'),
-  model: licenciaSubterranea
+  model: exploracao,
+  domains: domains,
+  lic_tipo: 'Subterrânea',
+  elModalFonte: $('#fonteSubModal'),
+  elModalFonteButton: $('#fonte-subterranea'),
+  elModalFonteSelect: $('#fonteSubModal #fonte_tipo'),
 }).render();
-
-$('#fonte-subterranea').on('click', function(e){
-  e.preventDefault();
-  $('#fonteSubModal').modal('toggle');
-});
-new Backbone.SIXHIARA.ModalFonteView({
-  el: $('#fonteSubModal'),
-  collection: exploracao.get('fontes')
-});
-
-// page licencias & fontes: fontes modal
-$('#fonte-superficial').on('click', function(e){
-  e.preventDefault();
-  $('#fonteSupModal').modal('toggle');
-});
-new Backbone.SIXHIARA.ModalFonteView({
-  el: $('#fonteSupModal'),
-  collection: exploracao.get('fontes')
-});
 
 // page licencias & fontes: fontes table
 var tableFontesView = new Backbone.SIXHIARA.TableFontesView({
   el: $('#fontes'),
   collection: exploracao.get('fontes')
 }).render();
-tableFontesView.listenTo(exploracao.get('fontes'), 'add', function(model, collection, options){
-  this.update(exploracao.get('fontes'));
-});
-tableFontesView.listenTo(exploracao.get('fontes'), 'destroy', function(model, collection, options){
+tableFontesView.listenTo(exploracao.get('fontes'), 'update', function(model, collection, options){
   this.update(exploracao.get('fontes'));
 });
 
 function fillComponentsWithDomains(){
 
-
-  var estadosLicencia = domains.byCategory('licencia_estado');
   var actividades     = domains.byCategory('actividade');
-  var fonteTipos      = domains.byCategory('fonte_tipo');
 
   // page info: localizacao
   new Backbone.SIXHIARA.SelectLocationView({
@@ -116,7 +103,6 @@ function fillComponentsWithDomains(){
     model: exploracao,
     el: $('#info'),
   }).render();
-
 
   // page utente: localizacion
   new Backbone.SIXHIARA.SelectLocationView({
@@ -135,29 +121,6 @@ function fillComponentsWithDomains(){
     el: $('#actividade-explotacion'),
     model: exploracao
   });
-
-  // page licencias & fontes: estados
-  new Backbone.UILib.SelectView({
-    el: $('.estado-superficial'),
-    collection: estadosLicencia
-  }).render();
-
-  new Backbone.UILib.SelectView({
-    el: $('.estado-subterranea'),
-    collection: estadosLicencia
-  }).render();
-
-  // page licencias & fontes: tipos fonte
-  new Backbone.UILib.SelectView({
-    el: $('#fonteSubModal #fonte_tipo'),
-    collection: fonteTipos.byParent('Subterrânea')
-  }).render();
-
-  new Backbone.UILib.SelectView({
-    el: $('#fonteSupModal #fonte_tipo'),
-    collection: fonteTipos.byParent('Superficial')
-  }).render();
-
 
   // Update actividades templates in the DOM adding the
   // options to the selects

@@ -48,10 +48,10 @@
             <div id="wizard-exp" >
 
               <ul class="hide">
+                <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
                 <li><a href="#info" data-toggle="tab">Info</a></li>
                 <li><a href="#utente" data-toggle="tab">Utente</a></li>
                 <li><a href="#tab-actividade" data-toggle="tab">Actividade</a></li>
-                <li><a href="#licencia" data-toggle="tab">Licencia</a></li>
               </ul>
 
               <div class="tab-content">
@@ -263,16 +263,24 @@
                             <input type="hidden" class="widget" id="lic_tipo">
                             <input type="hidden" class="widget" id="lic_nro">
                             <div class="form-group">
-                              <label for="estado">Estado</label>
-                              <select class="form-control widget estado-subterranea" id="estado">
+                              <label>
+                                <input type="checkbox"/>
+                                Licença activa?
+                              </label>
+                            </div>
+                            <div class="form-group">
+                              <label for="estado" class="text-muted set-enability">Estado</label>
+                              <select class="form-control widget" id="estado" disabled>
                               </select>
                             </div>
                             <div class="form-group">
-                              <label for="c_soli_int">Consumo intermedio</label>
-                              <input type="text" class="form-control widget-number" id="c_soli_int">
+                              <label for="c_soli_int" class="text-muted set-enability">Consumo intermedio</label>
+                              <input type="text" class="form-control widget-number" id="c_soli_int" disabled>
                             </div>
                             <div class="form-group">
-                              <button type="button" class="btn btn-default pull-right" id="fonte-subterranea">Nova fonte</button>
+                              <button type="button" class="btn btn-default pull-right" id="fonte-subterranea" disabled>
+                                Nova fonte
+                              </button>
                             </div>
                           </fieldset>
                         </div>
@@ -283,16 +291,24 @@
                             <input type="hidden" class="widget" id="lic_tipo">
                             <input type="hidden" class="widget" id="lic_nro">
                             <div class="form-group">
-                              <label for="estado">Estado</label>
-                              <select class="form-control widget estado-superficial" id="estado">
+                              <label>
+                                <input type="checkbox"/>
+                                Licença activa?
+                              </label>
+                            </div>
+                            <div class="form-group">
+                              <label for="estado" class="text-muted set-enability">Estado</label>
+                              <select class="form-control widget" id="estado" disabled>
                               </select>
                             </div>
                             <div class="form-group">
-                              <label for="c_soli_int">Consumo intermedio</label>
-                              <input type="text" class="form-control widget-number" id="c_soli_int">
+                              <label for="c_soli_int" class="text-muted set-enability">Consumo intermedio</label>
+                              <input type="text" class="form-control widget-number" id="c_soli_int" disabled>
                             </div>
                             <div class="form-group">
-                              <button type="button" class="btn btn-default pull-right" id="fonte-superficial">Nova fonte</button>
+                              <button type="button" class="btn btn-default pull-right" id="fonte-superficial" disabled>
+                                Nova fonte
+                              </button>
                             </div>
                           </fieldset>
                         </div>
@@ -562,6 +578,7 @@
 <script src="views/RowFonteView.js"></script>
 <script src="views/TableFontesView.js"></script>
 <script src="views/ActividadeView.js"></script>
+<script src="views/new/LicenseView.js"></script>
 <script src="views/EditableTableView.js"></script>
 
 <script src="models/Setting.js"></script>
