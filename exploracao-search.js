@@ -11,6 +11,12 @@ domains.fetch({
       model: where,
       domains: domains,
     }).render();
+
+    exploracaos.listenTo(where, 'change', function(model, options){
+      exploracaosFiltered = exploracaos.filterBy(where);
+      listView.update(exploracaosFiltered);
+      mapView.update(exploracaosFiltered);
+    });
   }
 });
 
@@ -23,12 +29,6 @@ var listView = new Backbone.UILib.ListView({
 var mapView = new Backbone.SIXHIARA.MapView({
   el: $('#map'),
   collection: exploracaosFiltered
-});
-
-exploracaos.listenTo(where, 'change', function(model, options){
-  exploracaosFiltered = exploracaos.filterBy(where);
-  listView.update(exploracaosFiltered);
-  mapView.update(exploracaosFiltered);
 });
 
 exploracaos.fetch({
