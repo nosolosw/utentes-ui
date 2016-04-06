@@ -17,19 +17,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     var view = this;
     var exploracao = this.model;
 
-    // TODO: how to choose the license between the possible list?
-    var licencias = exploracao.get('licencias');
-    var licSuperficial = licencias.where({'lic_tipo': 'Superficial'})[0];
-    var licSubterranea = licencias.where({'lic_tipo': 'Subterrânea'})[0];
-    if(licSuperficial == null) {
-      licSuperficial = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Superficial'});
-      exploracao.get('licencias').add(licSuperficial);
-    }
-    if(licSubterranea == null) {
-      licSubterranea = new Backbone.SIXHIARA.Licencia({'lic_tipo': 'Subterrânea'});
-      exploracao.get('licencias').add(licSubterranea);
-    }
-
     var domains = new Backbone.UILib.DomainCollection();
     domains.url = Backbone.SIXHIARA.Config.apiDomains;
     domains.fetch({
@@ -41,7 +28,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
         console.error('could not get domains from API');
       }
     });
-
 
     var openFolderButtonView = new Backbone.SIXHIARA.OpenFolderButtonView({
       el: $('#documentos'),
@@ -111,20 +97,18 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
 
     var blockSuperficialView = new Backbone.SIXHIARA.BlockLicenseView({
       el: $('#block-superficial'),
-      model: licSuperficial,
-      fontes: exploracao.get('fontes'),
+      model: exploracao,
       domains: domains,
+      lic_tipo: 'Superficial',
     }).render();
-    blockSuperficialView.listenTo(licSuperficial, 'change', blockSuperficialView.render);
     this.subViews.push(blockSuperficialView);
 
     var blockSubterraneaView = new Backbone.SIXHIARA.BlockLicenseView({
       el: $('#block-subterranea'),
-      model: licSubterranea,
-      fontes: exploracao.get('fontes'),
+      model: exploracao,
       domains: domains,
+      lic_tipo: 'Subterrânea',
     }).render();
-    blockSubterraneaView.listenTo(licSubterranea, 'change', blockSubterraneaView.render);
     this.subViews.push(blockSubterraneaView);
 
     var blockFontesView = new Backbone.SIXHIARA.BlockFontesView({

@@ -10,10 +10,7 @@ Backbone.SIXHIARA.BlockFontesView = Backbone.View.extend({
       collection: this.collection,
       domains: options.domains,
     });
-    tableFontesView.listenTo(this.collection, 'add', function(model, collection, options){
-      this.update(collection);
-    });
-    tableFontesView.listenTo(this.collection, 'destroy', function(model, collection, options){
+    tableFontesView.listenTo(this.collection, 'update', function(collection, options){
       this.update(collection);
     });
     this.subViews.push(tableFontesView);

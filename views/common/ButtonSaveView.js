@@ -6,24 +6,6 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
   },
 
   save: function(){
-
-    // FIXME. If Licencia is Emtpy the object should no be serialized
-    var lics = this.model.get('licencias');
-    var long = 0;
-    if (_.isArray(lics)) {
-      long = lics.length
-    } else {
-      long = lics.models.length;
-    }
-
-    var to_remove = []
-    for (var i = 0; i < long; i++) {
-      if (! lics.at(i).get('estado') ) to_remove.push(lics.at(i));
-    }
-
-    lics.remove(to_remove);
-    // end of FIXME for licenses
-
     if(! this.model.isValid()) {
       alert(this.model.validationError);
       return;
