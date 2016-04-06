@@ -34,7 +34,8 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
         },
       });
 
-      this.map.fitBounds(exploracaoLeaflet.getBounds()).setMaxBounds(exploracaoLeaflet.getBounds());
+      var bounds = exploracaoLeaflet.getBounds().pad(0.1);
+      this.map.fitBounds(bounds).setMaxBounds(bounds);
     }
 
     var drawControl = new L.Control.Draw({
@@ -66,6 +67,40 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     });
 
     drawnItems.addTo(this.map);
-  }
+
+    this.renderCultivos();
+  },
+
+  renderCultivos: function() {
+    var tipo = this.model.get('actividade') && this.model.get('actividade').get('tipo');
+    if (tipo !== "Agricultura-Regadia") return;
+    var cultivos = this.model.get('actividade').get('cultivos');
+    if (! cultivos) return;
+    var geojson = cultivos.toGeoJSON();
+    if (geojson.features.length == 0) return;
+    var self = this;
+    var cultivosLayer = L.geoJson(geojson, {
+      onEachFeature: function(feature, layer) {
+        var label = L.marker(layer.getBounds().getCenter(), {
+          icon: L.divIcon({
+            className: 'label',
+            html: feature.properties.cult_id,
+            iconSize: [100, 40]
+          })
+        }).addTo(self.map);
+      },
+      style: {
+        stroke: true,
+        color: '#05a',
+        weight: 1,
+        opacity: 0.4,
+        fillColor: '#05a',
+        fillOpacity: 0.1,
+      }
+    });
+    cultivosLayer.addTo(this.map);
+    var bounds = this.map.getBounds().extend(cultivosLayer.getBounds()).pad(0.1);
+    this.map.fitBounds(bounds).setMaxBounds(bounds);
+  },
 
 });
