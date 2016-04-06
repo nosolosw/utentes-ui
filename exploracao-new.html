@@ -369,9 +369,11 @@
         <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
       </div>
       <div class="modal-body">
-        <div class="container">
+        <div class="container-fluid">
           <div class="row">
-            <input type="hidden" id="tipo_agua" value="Subterrânea" class="col-xs-1"/>
+            <input type="hidden" id="tipo_agua" value="Subterrânea" class="col-xs-12"/>
+          </div>
+          <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="tipo_fonte">Tipo de fonte</label>
               <select class="form-control" id="fonte_tipo">
@@ -381,6 +383,8 @@
               <label for="c_requerid">Consumo solicitado</label>
               <input type="text" class="form-control" id="c_soli" />
             </div>
+          </div>
+          <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-9">
               <label for="observacio">Observaçôes</label>
               <textarea class="form-control" id="observacio" rows="3"></textarea>
@@ -408,6 +412,8 @@
         <div class="container-fluid">
           <div class="row">
             <input type="hidden" id="tipo_agua" value="Superficial" class="col-xs-1"/>
+          </div>
+          <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="tipo_fonte">Tipo de fonte</label>
               <select class="form-control" id="fonte_tipo">
@@ -417,6 +423,8 @@
               <label for="c_requerid">Consumo solicitado</label>
               <input type="text" class="form-control" id="c_soli" />
             </div>
+          </div>
+          <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-9">
               <label for="observacio">Observaçôes</label>
               <textarea class="form-control" id="observacio" rows="3"></textarea>
