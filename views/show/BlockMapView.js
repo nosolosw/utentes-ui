@@ -69,9 +69,12 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     drawnItems.addTo(this.map);
 
     this.renderCultivos();
+
+    this.listenTo(this.model, 'change:actividade', this.renderCultivos);
   },
 
   renderCultivos: function() {
+    if (this.cultivosLayer) this.cultivosLayer.clearLayers();
     var tipo = this.model.get('actividade') && this.model.get('actividade').get('tipo');
     if (tipo !== "Agricultura-Regadia") return;
     var cultivos = this.model.get('actividade').get('cultivos');
@@ -79,7 +82,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     var geojson = cultivos.toGeoJSON();
     if (geojson.features.length == 0) return;
     var self = this;
-    var cultivosLayer = L.geoJson(geojson, {
+    this.cultivosLayer = L.geoJson(geojson, {
       onEachFeature: function(feature, layer) {
         var label = L.marker(layer.getBounds().getCenter(), {
           icon: L.divIcon({
@@ -98,8 +101,8 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
         fillOpacity: 0.1,
       }
     });
-    cultivosLayer.addTo(this.map);
-    var bounds = this.map.getBounds().extend(cultivosLayer.getBounds()).pad(0.1);
+    this.cultivosLayer.addTo(this.map);
+    var bounds = this.map.getBounds().extend(this.cultivosLayer.getBounds()).pad(0.1);
     this.map.fitBounds(bounds).setMaxBounds(bounds);
   },
 
