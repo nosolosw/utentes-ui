@@ -60,7 +60,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     });
 
     $('#editActividadeModal').on('show.bs.modal', function(e){
-      var tipoAct = self.model.get('actividade').get('tipo')
+      var tipoAct = self.model.getActividadeTipo();
       if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária')) {
         $('#editActividadeModal #info-actividade').hide();
       } else {
@@ -100,8 +100,8 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       });
 
       self.listenToOnce(self.model, 'change:actividade', function(model, value, options){
-        var tipoAct = self.model.get('actividade').get('tipo');
-        if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária')) {
+        var tipoAct = self.model.getActividadeTipo();
+        if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária') || tipoAct === 'Actividade non declarada') {
           self.doToggle = false;
         } else {
           self.doToggle = true;
@@ -121,9 +121,8 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
 
     $('#editActividadeModal').on('hide.bs.modal', function(){
       if (self.doToggle) return;
-      if (!self.model.get('actividade')) return;
-      var tipoAct = self.model.get('actividade').get('tipo');
-      if ((tipoAct !== 'Agricultura-Regadia') && (tipoAct !== 'Pecuária')) {
+      var tipoAct = self.model.getActividadeTipo();
+      if ((tipoAct !== 'Agricultura-Regadia') && (tipoAct !== 'Pecuária') && (tipoAct !== 'Actividade non declarada')) {
         $('#editActividadeModal .actividade-render').find('input, select, textarea').each(function(k, v){
           var $v = $(v);
           if ($v.hasClass('widget-number')) {
@@ -139,7 +138,11 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           }
         });
       }
-      self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
+      if (tipoAct !== 'Actividade non declarada') {
+        self.actividadeView.template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "']").html());
+      } else {
+        self.actividadeView.template = null;
+      }
       self.actividadeView.render();
 
       if (self.editableTableView) self.editableTableView.off();

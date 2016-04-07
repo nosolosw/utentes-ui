@@ -416,6 +416,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     return containsAttrs && containsUtente && containsLic && containsActividade;
-  }
+  },
+
+  getActividadeTipo: function() {
+    return _.result(this.get('actividade'), 'tipo', 'Actividade non declarada');
+  },
 
 });
