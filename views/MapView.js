@@ -12,12 +12,38 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
 
     var self = this;
     this.geoJSONLayer = L.geoJson(this.collection.toGeoJSON(), {
+      style: this.leafletStyle,
       onEachFeature: function(feature, layer) {
         if (feature.properties) {
           var exp_id = feature.properties.exp_id;
           var exp = self.collection.filter({'exp_id': exp_id})[0];
           layer.bindPopup('<a href="' + exp.urlShow() + '">' + exp_id + '</a>');
         };
+        layer.on({
+          mouseover: function(e) {
+            var layer = e.target;
+            var exp_id = layer.feature.properties.exp_id
+            self.collection.trigger('leaflet', {
+              type: 'mouseover',
+              exp_id: exp_id,
+            })
+
+            layer.setStyle({
+                opacity: 1,
+                fillOpacity: 0.4
+            });
+
+            layer.bringToFront();
+
+          },
+          mouseout: function(e) {
+            self.geoJSONLayer.resetStyle(self.geoJSONLayer);
+            self.collection.trigger('leaflet', {
+              type: 'mouseout',
+              exp_id: exp_id,
+            })
+          },
+        });
       }
     });
 
@@ -26,6 +52,19 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       maxBounds: maxBounds,
       minZoom: 6,
     });
+  },
+
+  leafletStyle: function style(feature) {
+    /* Even if the default style is used, to get resetStyle working is needed
+    to pass a function to L.geojson */
+    return {
+      stroke: true,
+      color: '#03f',
+      weight: 4,
+      opacity: 0.5,
+      fillColor: '#03f',
+      fillOpacity: 0.2
+    };
   },
 
   update: function(newCollection){

@@ -23,7 +23,9 @@ menu{
   height: 100%;
 }
 
-
+#projects .leaflet-mouseover {
+  background-color: rgba(204, 204, 204, 0.5);
+}
 
 /*#filters,*/
 #projects {
@@ -47,15 +49,6 @@ menu{
 
 /* sections micro-space */
 
-nav{
-  padding: 2em 0 2em 0;
-}
-
-#hero-intro h2{
-  margin: 0;
-  padding: 0.8em 0 0.8em 0;
-}
-
 #filters{
   padding-top: 1em;
 }
@@ -71,19 +64,6 @@ nav{
 #projects h2{
   margin: 0;
   padding-bottom: .5em;
-}
-
-#submit-form {
-  padding: 0 3em 0 0;
-}
-
-#submit-form-div{
-  padding: 2em 4em 2em 4em;
-}
-
-#about,
-#data-policy{
-  padding: 1em 3em 3em 3em;
 }
 
 .footer-nav{
@@ -275,12 +255,8 @@ nav,
   background-color: #36537d;
 }
 
-#hero-intro{
-  background-color: #486fa6;
-}
 
-main,
-#submit-form{
+main{
   background-color: #f3f3f3;
 }
 
