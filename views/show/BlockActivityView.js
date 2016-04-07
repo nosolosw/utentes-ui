@@ -40,12 +40,14 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       this.editableTableView = new Backbone.SIXHIARA.EditableTableView({
         el: $('Agricultura-Regadia'),
         newRowBtSelector: '#newRow',
+        modalSelectorTpl: '#cultivoModalTpl',
         modalSelector: '#cultivoModal',
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
         rowTemplate: '<td><%- cult_id %></td><td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %> </td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         editModalSelector: '#cultivoModalEdit',
         collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
+        domains: this.options.domains,
       })
       this.subViews.push(this.editableTableView);
     }
@@ -171,11 +173,13 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           el: $('Agricultura-Regadia'),
           newRowBtSelector: '#newRow',
           modalSelector: '#cultivoModal',
+          modalSelectorTpl: '#cultivoModalTpl',
           tableSelector: 'table#cultivos',
           collection: self.model.get('actividade').get('cultivos'),
           rowTemplate: '<td><%- cult_id %></td><td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           editModalSelector: '#cultivoModalEdit',
           collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
+          domains: self.options.domains,
         })
         self.subViews.push(self.editableTableView);
       }

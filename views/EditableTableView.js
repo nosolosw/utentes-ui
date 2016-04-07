@@ -197,10 +197,24 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
       el: this.$el,
       model: this.model
     }).render()
-    var selectEntidade = new Backbone.UILib.SelectView({
+
+    // FIXME
+    new Backbone.UILib.SelectView({
       el: this.$('#reses_tipo'),
       collection: this.options.domains.byCategory('animal_tipo')
     }).render();
+
+    new Backbone.UILib.SelectView({
+      el: this.$('#cultivo'),
+      collection: this.options.domains.byCategory('cultivo_tipo')
+    }).render();
+
+    new Backbone.UILib.SelectView({
+      el: this.$('#rega'),
+      collection: this.options.domains.byCategory('rega_tipo')
+    }).render();
+
+    // /FIXME
   },
 
   saveRow: function(){

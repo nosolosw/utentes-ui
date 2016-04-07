@@ -12,7 +12,7 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.Model.extend({
     // Workaround. Al añadir modelos a reses por algún motivo se estaba
     // modificando el modelo de ActividadePecuaria en sí por lo que cuando se
     // creaba uno nuevo mantenía las reses creadas anteriormente
-    this.set('cultivos', new Backbone.Collection());
+    this.set('cultivos', new Backbone.SIXHIARA.CultivoCollection());
     // on add, remove & update every cultivo
     this.get('cultivos').on('all', this.updateCEstimado, this);
   },

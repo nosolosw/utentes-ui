@@ -3,6 +3,7 @@ Backbone.SIXHIARA.ActividadeCultivo = Backbone.GeoJson.Feature.extend({
 
   defaults: {
     'id':         null,
+    'cult_id': null,
     'actividade': null,
     'c_estimado': null,
     'cultivo': null,
