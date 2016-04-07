@@ -22,32 +22,41 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     domains.fetch({
       success: function(collection, response, options) {
         console.log('domains loaded');
+
+        /** Buttons View are here, because after the domains are loaded,
+        'change' events are triggered in the model. If a button like refresh
+        is listening it to be enabled, we must wait here **/
+        var openFolderButtonView = new Backbone.SIXHIARA.OpenFolderButtonView({
+          el: $('#documentos'),
+          model: exploracao
+        });
+        view.subViews.push(openFolderButtonView);
+
+        // TODO: do not listen to events if button is disabled
+        var buttonSaveView = new Backbone.SIXHIARA.ButtonSaveView({
+          el: $('#save-button'),
+          model: exploracao
+        });
+        view.subViews.push(buttonSaveView);
+
+        // TODO: ask before delete it
+        var buttonDeleteView = new Backbone.SIXHIARA.ButtonDeleteView({
+          el: $('#delete-button'),
+          model: exploracao
+        });
+        view.subViews.push(buttonDeleteView);
+
+        var buttonRefreshView = new Backbone.SIXHIARA.ButtonRefreshView({
+          el: $('#refresh-button'),
+          model: exploracao
+        });
+        view.subViews.push(buttonRefreshView);
       },
       error: function () {
         // TODO: show message to user
         console.error('could not get domains from API');
       }
     });
-
-    var openFolderButtonView = new Backbone.SIXHIARA.OpenFolderButtonView({
-      el: $('#documentos'),
-      model: exploracao
-    });
-    this.subViews.push(openFolderButtonView);
-
-    // TODO: do not listen to events if button is disabled
-    var buttonSaveView = new Backbone.SIXHIARA.ButtonSaveView({
-      el: $('#save-button'),
-      model: exploracao
-    });
-    this.subViews.push(buttonSaveView);
-
-    // TODO: ask before delete it
-    var buttonDeleteView = new Backbone.SIXHIARA.ButtonDeleteView({
-      el: $('#delete-button'),
-      model: exploracao
-    });
-    this.subViews.push(buttonDeleteView);
 
     var blockMapView = new Backbone.SIXHIARA.BlockMapView({
       model: exploracao
