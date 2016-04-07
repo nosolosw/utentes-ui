@@ -23,7 +23,8 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
       el: $(this.options.tableSelector),
       collection: this.collection,
       rowTemplate: this.options.rowTemplate,
-      editModalSelector: this.options.editModalSelector,
+      modalSelectorTpl: this.options.modalSelectorTpl,
+      domains: this.options.domains,
     }).render();
 
     this._subviews.push(tableView);
@@ -64,7 +65,8 @@ Backbone.SIXHIARA.TableView = Backbone.View.extend({
       var rowView = new Backbone.SIXHIARA.RowView({
         model: model,
         rowTemplate: this.options.rowTemplate,
-        editModalSelector: this.options.editModalSelector,
+        modalSelectorTpl: this.options.modalSelectorTpl,
+        domains: this.options.domains,
       });
       content.appendChild(rowView.render().el);
       subviews.push(rowView);
@@ -128,25 +130,16 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   },
 
   modelEdit: function(){
-    $(this.options.editModalSelector).modal('toggle');
-
-    var editTableModalView = new Backbone.SIXHIARA.EditModalTableView({
-      el: $(this.options.editModalSelector),
+    new Backbone.SIXHIARA.ModalTableView({
+      // el: $(this.options.modalSelector),
+      modalSelectorTpl: this.options.modalSelectorTpl,
+      collection: this.collection,
+      collectionModel: this.options.collectionModel,
       model: this.model,
-    });
-
-    var self = this;
-    $(self.options.editModalSelector).one('shown.bs.modal', function(e){
-      self.model.keys().forEach(function(k){
-        $(self.options.editModalSelector +' #' + k).val(self.model.get(k));
-      });
-      $(self.options.editModalSelector).find('#saveRow').one('click', function(){
-        editTableModalView.saveRow();
-      });
-    });
-
-
-  }
+      domains: this.options.domains,
+      editing: true,
+    }).show();
+  },
 
 });
 
@@ -193,10 +186,6 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
   },
 
   customConfiguration: function() {
-    new Backbone.UILib.WidgetsView({
-      el: this.$el,
-      model: this.model
-    }).render()
 
     // FIXME
     new Backbone.UILib.SelectView({
@@ -213,49 +202,28 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
       el: this.$('#rega'),
       collection: this.options.domains.byCategory('rega_tipo')
     }).render();
-
     // /FIXME
+
+
+    this.widgetModel = this.model;
+    if (this.options.editing) {
+      this.widgetModel = this.model.clone();
+    }
+
+    new Backbone.UILib.WidgetsView({
+      el: this.$el,
+      model: this.widgetModel
+    }).render()
+
   },
 
   saveRow: function(){
-    // FIXME: Validations, formats, more widgets
-    var self = this;
-    this.$('input, select, textarea').each(function(k, v){
-      var $v = $(v);
-      if ($v.hasClass('widget-number')) {
-        self.model.set(v.id, formatter().unformatNumber($v.val()));
-      } else {
-        self.model.set(v.id, $v.val() || null);
-      }
-    });
-    this.collection.add(this.model);
+    if (this.options.editing) {
+      this.model.set(this.widgetModel.toJSON());
+    } else {
+      this.collection.add(this.model);
+    }
     this.$('.modal').modal('hide');
-  },
-
-  remove: function() {
-    // Don't remove $el here
-    this.$el.unbind();
-    this.off();
-  }
-
-});
-
-Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.EditModalTableView = Backbone.View.extend({
-
-  saveRow: function(){
-    // FIXME: Validations, formats, more widgets
-    var rowModel = new Backbone.Model();
-    this.$('input, select, textarea').each(function(k, v){
-      var $v = $(v);
-      if ($v.hasClass('widget-number')) {
-        rowModel.set(v.id, formatter().unformatNumber($v.val()));
-      } else {
-        rowModel.set(v.id, $v.val() || null);
-      }
-    });
-    this.model.set(rowModel.toJSON());
-    this.$el.modal('hide');
   },
 
   remove: function() {
