@@ -2,7 +2,6 @@ $(document).ready(function() {
   $('#wizard-exp').bootstrapWizard({
     'withVisible': false
   });
-  $('#templates').load('templates.html');
 });
 
 $('#settings').on('click', function(e){
