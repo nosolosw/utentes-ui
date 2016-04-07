@@ -29,7 +29,7 @@ ActividadeSchema['Agricultura-Regadia'] = [{
 },{
   'fieldname': 'cultivos',
   'message':   'cultivos non pode estar vacío',
-  'rules':     ['NOT_NULL']
+  'rules':     ['ARRAY_NOT_VOID']
 }];
 
 ActividadeSchema['Cultivos'] = [{
@@ -79,7 +79,7 @@ ActividadeSchema['Pecuária'] = [{
 }, {
   'fieldname': 'reses',
   'message':   'reses non pode estar vacío',
-  'rules':     ['NOT_NULL']
+  'rules':     ['ARRAY_NOT_VOID']
 }];
 
 ActividadeSchema['Reses'] = [{

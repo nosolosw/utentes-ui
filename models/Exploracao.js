@@ -285,15 +285,17 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     if (_.has(response, 'actividade')) {
       response.actividade = new Backbone.Model(response.actividade)
       if (response.actividade.has('cultivos')) {
-        response.actividade.set('cultivos',
-          new Backbone.GeoJson.FeatureCollection(response.actividade.get('cultivos'), {
-            parse:true,
-            model: Backbone.SIXHIARA.ActividadeCultivo,
-          }));
+        var cultivos = new Backbone.GeoJson.FeatureCollection(response.actividade.get('cultivos'), {
+          parse:true,
+          model: Backbone.SIXHIARA.ActividadeCultivo,
+        });
+        response.actividade.set('cultivos', cultivos);
       };
       if (response.actividade.has('reses')) {
-        response.actividade.set('reses',
-          new Backbone.Collection(response.actividade.get('reses'), {model: Backbone.SIXHIARA.ActividadeRes}));
+        var reses = new Backbone.Collection(response.actividade.get('reses'), {
+          model: Backbone.SIXHIARA.ActividadeRes
+        });
+        response.actividade.set('reses', reses);
       };
     }
 
@@ -314,6 +316,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   validate: function(attrs, options){
     var messages = [];
 
+    // exploracao rules
     var expValidator = validator(EXPLORACAO_SCHEMA);
     expValidator.addRule('EXP_ID_FORMAT', {
       fails: function (value) {
@@ -321,11 +324,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         return (value && (! re.test(value)));
       }
     });
-
     expValidator.validate(this.toJSON()).forEach(function(msg){
       messages.push(msg);
     });
 
+    // licencia rules
     var licValidator = validator(LICENCIA_SCHEMA);
     licValidator.addRule('LIC_NRO_FORMAT', {
       fails: function (value) {
@@ -339,6 +342,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       });
     })
 
+    // fonte rules
     var fonValidator = validator(FONTE_SCHEMA);
     this.get('fontes').forEach(function(fonte) {
       fonValidator.validate(fonte.toJSON()).forEach(function(msg){
@@ -346,6 +350,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       })
     });
 
+    // utente rules
     validator(UTENTE_SCHEMA).validate(this.get('utente').toJSON()).forEach(function(msg){
       messages.push(msg);
     });
@@ -355,10 +360,31 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       tipo = this.get('actividade').get('tipo');
     }
     if(tipo){
-      var actividadeSchema = ActividadeSchema[tipo];
-      validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
-        messages.push(msg);
+      // only validate activities for a subset of estados
+      var notValidatableStatus = [
+        'Irregular',
+        'Denegada',
+        'Pendente solicitação utente',
+        'Pendente revisão solicitação (Direcção)',
+        'Pendente revisão solicitação (D. Jurídico)',
+        'Pendente aprobação tecnica (D. Cadastro)'
+      ];
+      var estados = [];
+      this.get('licencias').forEach(function (licencia) {
+          estados.push(licencia.get('estado'));
       });
+      var toValidateActivity = false;
+      estados.forEach(function (estado) {
+          if(!notValidatableStatus.includes(estado)){
+            toValidateActivity = true;
+          }
+      })
+      if(toValidateActivity){
+        var actividadeSchema = ActividadeSchema[tipo];
+        validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
+          messages.push(msg);
+        });
+      }
     } else{
       messages.push('A exploracão ten que ter asignado uma actividade');
     }
