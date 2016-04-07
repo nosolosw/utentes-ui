@@ -26,12 +26,14 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       this.editableTableView = new Backbone.SIXHIARA.EditableTableView({
         el: $('Pecuária'),
         newRowBtSelector: '#newRow',
+        modalSelectorTpl: '#resModalTpl',
         modalSelector: '#resModal',
         tableSelector: 'table#reses',
         collection: this.model.get('actividade').get('reses'),
         rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         editModalSelector: '#resModalEdit',
         collectionModel: Backbone.SIXHIARA.ActividadeRes,
+        domains: this.options.domains,
       })
       this.subViews.push(this.editableTableView);
     } else if (tipo === 'Agricultura-Regadia') {
@@ -155,11 +157,13 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           el: $('Pecuária'),
           newRowBtSelector: '#newRow',
           modalSelector: '#resModal',
+          modalSelectorTpl: '#resModalTpl',
           tableSelector: 'table#reses',
           collection: self.model.get('actividade').get('reses'),
           rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           editModalSelector: '#resModalEdit',
           collectionModel: Backbone.SIXHIARA.ActividadeRes,
+          domains: self.options.domains,
         })
         self.subViews.push(self.editableTableView);
       } else if (tipoAct === 'Agricultura-Regadia') {

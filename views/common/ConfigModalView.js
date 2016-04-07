@@ -28,7 +28,7 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
 
   events: {
     'click .close': 'close',
-    'click #openFile': 'open',
+    'click #openFile': 'openFile',
   },
 
   initialize: function() {
@@ -74,7 +74,7 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
     this.remove();
   },
 
-  open:function() {
+  openFile: function() {
     var remote = nodeRequire('remote');
 
     var dialog = remote.require('dialog');

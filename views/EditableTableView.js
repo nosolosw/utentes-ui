@@ -7,16 +7,17 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
     var self = this;
     $(this.options.newRowBtSelector || '#newRow').on('click', function(e){
       e.preventDefault();
-      $(self.options.modalSelector).modal('toggle');
+      new Backbone.SIXHIARA.ModalTableView({
+        // el: $(this.options.modalSelector),
+        modalSelectorTpl: self.options.modalSelectorTpl,
+        modalSelector: self.options.modalSelector,
+        collection: self.collection,
+        collectionModel: self.options.collectionModel,
+        model: new self.options.collectionModel(),
+        domains: self.options.domains,
+      }).show();
     });
 
-    this._subviews.push(
-      new Backbone.SIXHIARA.ModalTableView({
-        el: $(this.options.modalSelector),
-        collection: this.collection,
-        collectionModel: this.options.collectionModel,
-      })
-    );
 
     var tableView = new Backbone.SIXHIARA.TableView({
       el: $(this.options.tableSelector),
@@ -158,24 +159,63 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
   initialize:function(options) {
     this.options = options || {};
-    this.$el.on('show.bs.modal', function() {
-      $(this).find('input, textarea, select').val('');
+    this.template = _.template($(this.options.modalSelectorTpl).html());
+    // this.template = _.template(this.html);
+  },
+
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  },
+
+  show: function() {
+    $(document.body).append(this.render().el);
+    var self = this;
+
+    this.customConfiguration();
+    // $(this.idModal).on('hide.bs.modal', function(){
+    //   self.s.save(null);
+    // });
+    this.$('.modal').on('hidden.bs.modal', function(){
+      self._close();
     });
+    this.$('.modal').modal('show');
+  },
+
+  close: function() {
+    this.$('.modal').modal('hide');
+  },
+
+  _close: function() {
+    this.$('.modal').unbind();
+    this.$('.modal').remove();
+    this.remove();
+  },
+
+  customConfiguration: function() {
+    new Backbone.UILib.WidgetsView({
+      el: this.$el,
+      model: this.model
+    }).render()
+    var selectEntidade = new Backbone.UILib.SelectView({
+      el: this.$('#reses_tipo'),
+      collection: this.options.domains.byCategory('animal_tipo')
+    }).render();
   },
 
   saveRow: function(){
     // FIXME: Validations, formats, more widgets
-    var rowModel = new this.options.collectionModel();
+    var self = this;
     this.$('input, select, textarea').each(function(k, v){
       var $v = $(v);
       if ($v.hasClass('widget-number')) {
-        rowModel.set(v.id, formatter().unformatNumber($v.val()));
+        self.model.set(v.id, formatter().unformatNumber($v.val()));
       } else {
-        rowModel.set(v.id, $v.val() || null);
+        self.model.set(v.id, $v.val() || null);
       }
     });
-    this.collection.add(rowModel);
-    this.$el.modal('hide');
+    this.collection.add(this.model);
+    this.$('.modal').modal('hide');
   },
 
   remove: function() {

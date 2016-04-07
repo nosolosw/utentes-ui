@@ -638,39 +638,41 @@
     </script>
 
     <!-- modal engadir res -->
-    <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="resModalLabel">Res</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="reses_tipo">Tipo de reses</label>
-                <select class="form-control widget" id="reses_tipo">
-                </select>
-              </div>
+    <script type="text/template" id="resModalTpl">
+      <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="resModalLabel">Res</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-offset-1 col-xs-4">
+                  <label for="reses_tipo">Tipo de reses</label>
+                  <select class="form-control widget" id="reses_tipo">
+                  </select>
+                </div>
 
-              <div class="form-group col-xs-offset-1 col-xs-4">
-                <label for="reses_nro">Nro de reses</label>
-                <input type="text" class="form-control widget-number" id="reses_nro" />
-              </div>
+                <div class="form-group col-xs-offset-1 col-xs-4">
+                  <label for="reses_nro">Nro de reses</label>
+                  <input type="text" class="form-control widget-number" id="reses_nro" />
+                </div>
 
-              <div class="form-group col-xs-offset-1 col-xs-9">
-                <label for="observacio">Observaçôes</label>
-                <textarea class="form-control" id="observacio" rows="3"></textarea>
+                <div class="form-group col-xs-offset-1 col-xs-9">
+                  <label for="observacio">Observaçôes</label>
+                  <textarea class="form-control" id="observacio" rows="3"></textarea>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="saveRow">Aceptar</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" id="saveRow">Aceptar</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </script>
 
     <div class="modal fade" id="resModalEdit" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
       <div class="modal-dialog" role="document">
