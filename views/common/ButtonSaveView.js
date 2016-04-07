@@ -26,7 +26,7 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
         }
       });
     } else {
-      alert(this.model.validationError);
+      alert(this.model.validationError.join('\n'));
     }
 
   }
