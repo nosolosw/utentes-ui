@@ -308,7 +308,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     json.utente     = this.get('utente').toJSON();
     json.licencias  = this.get('licencias').toJSON();
     json.fontes     = this.get('fontes').toJSON();
-    json.actividade = this.get('actividade').toJSON();
+    if (this.getActividadeTipo() === 'Actividade non declarada') {
+      json.actividade = null;
+    } else {
+      json.actividade = this.get('actividade').toJSON();
+    }
     json.urlShow    = this.urlShow();
     return json;
   },
@@ -327,6 +331,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     expValidator.validate(this.toJSON()).forEach(function(msg){
       messages.push(msg);
     });
+    this.validateActividade(messages);
 
     // licencia rules
     var licValidator = validator(LICENCIA_SCHEMA);
@@ -355,11 +360,15 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       messages.push(msg);
     });
 
-    var tipo = null;
-    if (this.get('actividade')) {
-      tipo = this.get('actividade').get('tipo');
-    }
-    if(tipo){
+
+
+    if (messages.length > 0) return messages;
+
+  },
+
+  validateActividade: function(messages) {
+    var tipo = this.getActividadeTipo();
+    if(tipo !== 'Actividade non declarada'){
       // only validate activities for a subset of estados
       var notValidatableStatus = [
         'Irregular',
@@ -385,12 +394,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
           messages.push(msg);
         });
       }
-    } else{
-      messages.push('A exploracão ten que ter asignado uma actividade');
     }
-
-    if (messages.length > 0) return messages;
-
   },
 
   contains: function(where){
@@ -419,7 +423,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   getActividadeTipo: function() {
-    return _.result(this.get('actividade'), 'tipo', 'Actividade non declarada');
+    var tipo = 'Actividade non declarada';
+    if (this.get('actividade')) {
+      tipo = this.get('actividade').get('tipo') || tipo;
+    }
+    return tipo;
   },
 
 });
