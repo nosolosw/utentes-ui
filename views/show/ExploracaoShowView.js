@@ -63,12 +63,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     });
     this.subViews.push(blockMapView);
 
-    var blockTitleView = new Backbone.UILib.WidgetsView({
-      el: $('#block-title'),
-      model: exploracao
-    }).render();
-    this.subViews.push(blockTitleView);
-
     var blockInfoView = new Backbone.SIXHIARA.BlockInfoView({
       el: $('#block-info'),
       model: exploracao,
