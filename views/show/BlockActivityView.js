@@ -61,7 +61,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
 
     $('#editActividadeModal').on('show.bs.modal', function(e){
       var tipoAct = self.model.getActividadeTipo();
-      if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária')) {
+      if ((tipoAct === 'Agricultura-Regadia') || (tipoAct === 'Pecuária') || (tipoAct === 'Actividade non declarada')) {
         $('#editActividadeModal #info-actividade').hide();
       } else {
         $('#editActividadeModal #info-actividade').show();
@@ -70,9 +70,11 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
 
     $('#editActividadeModal').on('shown.bs.modal', function(e){
       $('#editActividadeModal #info-actividade').append($('<div class="actividade-render">'));
-      var template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "_edit']").html())
       $('#editActividadeModal .actividade-render').html('');
-      $('#editActividadeModal .actividade-render').append(template(self.model.get('actividade').toJSON()));
+      if (self.model.getActividadeTipo() !== 'Actividade non declarada') {
+        var template = _.template($("[id='" + self.model.get('actividade').get('tipo') + "_edit']").html());
+        $('#editActividadeModal .actividade-render').append(template(self.model.get('actividade').toJSON()));
+      }
       new Backbone.UILib.SelectView({
         el: $('#editActividadeModal #tipo_indus'),
         collection: self.options.domains.byCategory('industria_tipo')
@@ -91,13 +93,15 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       }).render();
 
       var actv = self.model.get('actividade');
-      actv.keys().forEach(function(k){
-        if (k === 'tipo') {
-          $('#editActividadeModal #actividade').val(actv.get(k));
-        } else {
-          $('#editActividadeModal #' + k).val(actv.get(k));
-        }
-      });
+      if (actv) {
+        actv.keys().forEach(function(k){
+          if (k === 'tipo') {
+            $('#editActividadeModal #actividade').val(actv.get(k));
+          } else {
+            $('#editActividadeModal #' + k).val(actv.get(k));
+          }
+        });
+      };
 
       self.listenToOnce(self.model, 'change:actividade', function(model, value, options){
         var tipoAct = self.model.getActividadeTipo();
