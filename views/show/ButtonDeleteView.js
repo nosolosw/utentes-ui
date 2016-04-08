@@ -6,6 +6,8 @@ Backbone.SIXHIARA.ButtonDeleteView = Backbone.View.extend({
   },
 
   doClick: function(){
+    var confirmation = confirm('Se você aceitar a exploração é excluído');
+    if (!confirmation) return;
 
     this.model.destroy({
       // wait: true,
@@ -16,7 +18,6 @@ Backbone.SIXHIARA.ButtonDeleteView = Backbone.View.extend({
         alert(textStatus.statusText);
       }
     });
-
-  }
+  },
 
 });

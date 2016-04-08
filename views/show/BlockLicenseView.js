@@ -42,8 +42,8 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   },
 
   removeLicense: function (e) {
-    // TODO: ask before delete
-    console.log('remove license');
+    var confirmation = confirm('Se você aceitar a licença e as fontes associadas serán borradas');
+    if (!confirmation) return;
     this.model.get('licencias').remove(this.license);
     var fontes = this.model.get('fontes').where({'tipo_agua': this.options.lic_tipo});
     this.model.get('fontes').remove(fontes);
