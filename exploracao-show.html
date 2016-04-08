@@ -233,71 +233,7 @@
     </div>
   </div>
 
-  <!-- modal fonte subterránea -->
-  <div class="modal fade" id="fonteSubModal" tabindex="-1" role="dialog" aria-labelledby="fonteSubModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" id="tipo_agua" value="Subterrânea" />
-          <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="tipo_fonte">Tipo de fonte</label>
-              <select class="form-control" id="fonte_tipo"></select>
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_requerid">Consumo solicitado</label>
-              <input type="text" class="form-control" id="c_soli" />
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-9">
-              <label for="observacio">Observaçôes</label>
-              <textarea class="form-control" id="observacio" rows="3"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- modal fonte superficial -->
-  <div class="modal fade" id="fonteSupModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" id="tipo_agua" value="Superficial" />
-          <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="tipo_fonte">Tipo de fonte</label>
-              <select class="form-control" id="fonte_tipo"></select>
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_requerid">Consumo solicitado</label>
-              <input type="text" class="form-control" id="c_soli" />
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-9">
-              <label for="observacio">Observaçôes</label>
-              <textarea class="form-control" id="observacio" rows="3"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- TEMPLATES -->
 
@@ -736,40 +672,6 @@
       </div>
     </script>
 
-    <!-- tmpl modal fonte -->
-    <script type="text/template" id="edit-fonte-modal-tmpl">
-      <div class="modal fade" id="editFonteModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="fonteSupModalLabel">Fonte</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="tipo_fonte">Tipo de fonte</label>
-                  <select class="form-control" id="fonte_tipo"></select>
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="c_requerid">Consumo solicitado</label>
-                  <input type="text" class="form-control" id="c_soli" />
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-9">
-                  <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control" id="observacio" rows="3"></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" id="updateFonte">Actualizar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </script>
-
     <!-- template licencia -->
     <script type="text/template" id="licencia-tmpl">
       <div class="row">
@@ -898,9 +800,8 @@
     <script src="views/ActividadeView.js"></script>
     <script src="views/SelectActividadeView.js"></script>
     <script src="views/show/BlockActivityView.js"></script>
-    <script src="views/ModalFonteView.js"></script>
+    <script src="views/show/ModalEditFonteView.js"></script>
     <script src="views/show/BlockLicenseView.js"></script>
-    <script src="views/show/EditFonteModalView.js"></script>
     <script src="views/show/TableRowShowView.js"></script>
     <script src="views/show/TableShowView.js"></script>
     <script src="views/show/BlockFontesView.js"></script>

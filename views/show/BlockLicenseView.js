@@ -53,45 +53,13 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   },
 
   renderAddFonteModal: function (event) {
-
-    // append modal to DOM
-    var node = $(document.body).append($('#edit-fonte-modal-tmpl').html());
-    var subViewsModal = [];
-
-    // take it from DOM and connect events, fill components, etc
-    var modalEl = $('#editFonteModal');
-    // update name of action
-    var modalAddEl = $('#editFonteModal #updateFonte');
-    modalAddEl.text('Adicionar');
-    var view = this;
-    var tipoAgua = view.options.lic_tipo;
-    modalAddEl.on('click', function () {
-      view.model.get('fontes').add(new Backbone.SIXHIARA.Fonte({
-        'tipo_agua':  tipoAgua,
-        'tipo_fonte': $('#editFonteModal #fonte_tipo').val(),
-        'c_soli':     formatter().unformatNumber($('#editFonteModal #c_soli').val()),
-        'observacio': $('#editFonteModal #observacio').val(),
-      }));
-    });
-
-    var tiposView = new Backbone.UILib.SelectView({
-      el: $('#editFonteModal #fonte_tipo'),
-      collection: this.options.domains.byCategory('fonte_tipo').byParent(tipoAgua)
-    }).render();
-    subViewsModal.push(tiposView);
-
-    // remove modal from DOM on hide
-    modalEl.on('hidden.bs.modal', function () {
-      // this is the modal itself
-      // should we unbind the events too?
-      $(this).remove();
-      subViewsModal.forEach(function (view) {
-        view.remove();
-      })
-    });
-
-    modalEl.modal('show');
-
+    new Backbone.SIXHIARA.ModalEditFonteView({
+      textConfirmBt: 'Adicionar',
+      domains: this.options.domains,
+      editing: false,
+      collection: this.model.get('fontes'),
+      model: new Backbone.SIXHIARA.Fonte({tipo_agua: this.options.lic_tipo}),
+    }).show();
   },
 
   renderEditLicenseModal: function (event) {

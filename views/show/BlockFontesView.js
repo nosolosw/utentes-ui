@@ -14,40 +14,12 @@ Backbone.SIXHIARA.BlockFontesView = Backbone.View.extend({
       this.update(collection);
     });
     this.subViews.push(tableFontesView);
-
-    options.domains.on('sync', this.renderModal);
   },
 
   render: function () {
     _.invoke(this.subViews, 'render');
 
     return this;
-  },
-
-  renderModal: function (collection, response, options) {
-    var fonteTipos = collection.byCategory('fonte_tipo');
-
-    new Backbone.UILib.SelectView({
-      el: $('#fonteSubModal #fonte_tipo'),
-      collection: fonteTipos.byParent('Subterrânea')
-    }).render();
-
-    new Backbone.UILib.SelectView({
-      el: $('#fonteSupModal #fonte_tipo'),
-      collection: fonteTipos.byParent('Superficial')
-    }).render();
-
-    // fontes modals
-    new Backbone.SIXHIARA.ModalFonteView({
-      el: $('#fonteSubModal'),
-      collection: this.collection
-    });
-
-    new Backbone.SIXHIARA.ModalFonteView({
-      el: $('#fonteSupModal'),
-      collection: this.collection
-    });
-
   },
 
   remove: function () {
