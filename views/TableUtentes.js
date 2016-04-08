@@ -139,7 +139,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       var u = self.collection.filter({id:parseInt(id)})[0];
 
       // FIXME. Don't reload page
-      if (confirm('Tem certeza de que deseja excluir: ' + u.get('nome'))) {
+      if (confirm('Tem certeza de que deseja excluir e as exploracaos asociadas: ' + u.get('nome'))) {
         u.destroy({
           wait: true,
           success: function(model, resp, options) {
