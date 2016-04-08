@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ModalFonteView = Backbone.View.extend({
+Backbone.SIXHIARA.ModalNovaFonteView = Backbone.View.extend({
 
   events: {
     'click #addFonte': 'addFonte'
