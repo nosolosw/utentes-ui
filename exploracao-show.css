@@ -1,8 +1,6 @@
-/* UNCOMMENT THIS FOR DEBUG MODE*/
-/*.row{
-border: 1px solid red;
-}*/
-
+#tooltipEstadoLicenciaModalView .done {
+  background-color: #eee;
+}
 
 /* ---- STRUCTURE ---- */
 

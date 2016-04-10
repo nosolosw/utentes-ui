@@ -3,36 +3,33 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
 
 
   html: `
-  <div class="modal fade" id="configModalView" tabindex="-1" role="dialog" aria-labelledby="configModalViewLabel">
+  <div class="modal fade" id="configModalView" tabindex="-1" role="dialog" aria-labelledby="modalViewLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="configModalViewLabel">Configuraçao</h4>
+          <h4 class="modal-title" id="modalViewLabel">Configuraçao</h4>
         </div>
         <div class="modal-body">
           <div class="row">
-          <label class="col-xs-offset-1" for="docPath">Ruta aos documentos</label>
+            <label class="col-xs-offset-1" for="docPath">Ruta aos documentos</label>
             <div class="input-group col-xs-offset-1 col-xs-10">
               <input type="text" class="form-control" id="docPath" aria-describedby="openFile" disabled>
               <span class="input-group-addon btn btn-default" id="openFile">...</span>
             </div>
           </div>
-        </div>
+        </div> <!-- /modal-body -->
       </div>
     </div>
   </div>
   `,
 
-  idModal: '#configModalView',
-
   events: {
-    'click .close': 'close',
     'click #openFile': 'openFile',
   },
 
-  initialize: function() {
-    // this.template = _.template($('#modal-template').html());
+  initialize: function(options) {
+    this.options = options || {};
     this.template = _.template(this.html);
   },
 
@@ -44,33 +41,25 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
   show: function() {
     $(document.body).append(this.render().el);
 
-
-
-
     var self = this;
-    $(this.idModal).on('hide.bs.modal', function(){
+    this.$('.modal').on('hide.bs.modal', function(){
       self.s.save(null);
     });
-    $(this.idModal).on('hidden.bs.modal', function(){
+    this.$('.modal').on('hidden.bs.modal', function(){
       self._close();
     });
     this.s = new Backbone.SIXHIARA.Setting();
     this.s.fetch({
       success: function() {
           self.setValue();
-          $(self.idModal).modal('show');
+          this.$('.modal').modal('show');
       }
     });
-
-  },
-
-  close: function() {
-    $(this.idModal).modal('hide');
   },
 
   _close: function() {
-    $(this.idModal).unbind();
-    $(this.idModal).remove();
+    this.$('.modal').unbind();
+    this.$('.modal').remove();
     this.remove();
   },
 
@@ -91,7 +80,7 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
 
   setValue: function() {
     var docPath = this.s.get('docPath');
-    $(this.idModal).find('#docPath').val(docPath);
+    this.$('#docPath').val(docPath);
   },
 
 });

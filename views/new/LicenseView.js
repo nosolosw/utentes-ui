@@ -3,6 +3,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
 
   events: {
     'click input:checkbox': 'clickActive',
+    'click .help': 'showModalEstadoLicencia',
   },
 
   initialize: function (options) {
@@ -20,7 +21,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
       e.preventDefault();
       options.elModalFonte.modal('toggle');
     });
-    var modalFonte = new Backbone.SIXHIARA.ModalFonteView({
+    var modalFonte = new Backbone.SIXHIARA.ModalNovaFonteView({
       el: options.elModalFonte,
       collection: exploracao.get('fontes')
     });
@@ -29,12 +30,12 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
     this.isDisabled = true;
     var app = this;
     options.domains.on('sync', function () {
-      var estadosLicencia = options.domains.byCategory('licencia_estado');
+      app.estadosLicencia = options.domains.byCategory('licencia_estado');
       var fonteTipos = options.domains.byCategory('fonte_tipo');
 
       var estadosView = new Backbone.UILib.SelectView({
         el: app.$('#estado'),
-        collection: estadosLicencia
+        collection: app.estadosLicencia
       });
       app.addView(estadosView);
 
@@ -85,6 +86,14 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
     this.$('.widget').prop('disabled', this.isDisabled);
     this.$('.widget-number').prop('disabled', this.isDisabled);
     this.$('button').prop('disabled', this.isDisabled);
+  },
+
+  showModalEstadoLicencia: function() {
+    console.log('clicked');
+    new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+      collection: this.estadosLicencia,
+      actual_state: this.license.get('estado'),
+    }).show();
   },
 
 });

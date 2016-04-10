@@ -7,7 +7,8 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
     'click #addLicense':    'renderAddLicenseModal',
     'click #removeLicense': 'removeLicense',
     'click #editLicense':   'renderEditLicenseModal',
-    'click #addFonte':      'renderAddFonteModal'
+    'click #addFonte':      'renderAddFonteModal',
+    'click #info-estado-licencia': 'showModalEstadoLicencia',
   },
 
   initialize: function(options){
@@ -92,6 +93,13 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
       });
 
     });
+    var self = this;
+    modalEl.find('#info-estado-licencia').on('click', function() {
+      new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+          collection: self.options.domains.byCategory('licencia_estado'),
+          actual_state: self.license.get('estado'),
+      }).show();
+    });
 
     // do open modal
     modalEl.modal('show');
@@ -134,9 +142,25 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
       });
     });
 
+    var self = this;
+    modalEl.find('#info-estado-licencia').on('click', function() {
+      new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+          collection: self.options.domains.byCategory('licencia_estado'),
+          actual_state: self.license.get('estado'),
+      }).show();
+    });
+
+
     // do open modal
     modalEl.modal('show');
 
+  },
+
+  showModalEstadoLicencia: function(){
+    new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+      collection: this.options.domains.byCategory('licencia_estado'),
+      actual_state: this.license && this.license.get('estado') || null,
+    }).show();
   },
 
 });
