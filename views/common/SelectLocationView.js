@@ -17,7 +17,7 @@ Backbone.SIXHIARA.SelectLocationView = Backbone.UILib.BaseView.extend({
 
     var selectDistritos = new Backbone.UILib.SelectView({
       el: this.$('#loc_distri'),
-      collection: [],
+      collection: distritos.byParent(this.model.get('loc_provin')),
     });
     selectDistritos.listenTo(this.model, 'change:loc_provin', function(model, value, options){
       this.update(distritos.where({'parent': model.get('loc_provin')}));
@@ -26,7 +26,7 @@ Backbone.SIXHIARA.SelectLocationView = Backbone.UILib.BaseView.extend({
 
     var selectPostos = new Backbone.UILib.SelectView({
       el: this.$('#loc_posto'),
-      collection: [],
+      collection: postos.byParent(this.model.get('loc_distri')),
     });
     selectPostos.listenTo(this.model, 'change:loc_distri', function(model, value, options){
       this.update(postos.where({'parent': model.get('loc_distri')}));

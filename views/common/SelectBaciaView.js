@@ -16,7 +16,7 @@ Backbone.SIXHIARA.SelectBaciaView = Backbone.UILib.BaseView.extend({
 
     var selectSubacias = new Backbone.UILib.SelectView({
       el: this.$('#loc_subaci'),
-      collection: [],
+      collection: subacias.byParent(this.model.get('loc_bacia')),
     });
     selectSubacias.listenTo(this.model, 'change:loc_bacia', function(model, value, options){
       this.update(subacias.where({'parent': model.get('loc_bacia')}));
