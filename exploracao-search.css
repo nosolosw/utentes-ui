@@ -1,15 +1,7 @@
-/* ---- STRUCTURE ---- */
-
-/* height system to have scrolly panels */
-
 html,
 body,
 .container-fluid{
   height: 100%;
-}
-
-menu{
-  height: 4%;
 }
 
 .main-content{
@@ -66,57 +58,12 @@ menu{
   padding-bottom: .5em;
 }
 
-.footer-nav{
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
 
-.footer-nav li{
-  margin: .5em 0 .5em 0;
-}
-
-.copyright{
-  padding-top: 1em;
-}
-
-.initiative-by{
-  margin-top: .5em;
-  margin-bottom: 1em;
-}
-
-.initiative-by img{
-  margin-top: .5em;
-  margin-bottom: .5em;
-}
-
-div.cartodb-popup.v2 {
-  width:417px
-}
-
-/* ----- MODULES ----- */
-
-/* buttons style for links */
-nav a {
-  padding: .3em .9em .3em .9em;
-  border-radius: 20px;
-  margin: .4% .7% 0% .7%;
-  float: right;
-}
-
-.footer-nav a{
-  padding: .3em .9em .3em .9em;
-  border-radius: 20px;
-}
-
-/* project and agency summaries */
 #projects > div{
   border-bottom: 1px solid #f3f3f3;
   margin-bottom: 1em;
 }
 
-#projects-summary{
-  border-right: 1px solid #f3f3f3;
-}
 
 /* each project stands for itself */
 #projects li {
@@ -126,35 +73,16 @@ nav a {
   padding: 1em 0 .75em 0;
 }
 
-/* explanations in form */
-.well {
-  padding: 1.5em;
-  background-color: #edf0f4;
-  border: 1px solid #E2E3E4;
-  border-radius: 4px;
-}
 
 /* Form */
 
 #filters .form-control {
-  display: block;
-  width: 100%;
   height:48px;
   padding: 8px 12px;
   font-size: 16px;
-  line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
   border: 2px solid #edf0f4;
-  border-radius: 4px;
   box-shadow: none!important;
   margin-bottom:16px;
-}
-
-.form-horizontal .control-label {
-  text-align: right;
-  font-weight: 400;
 }
 
 /* Buttons */
@@ -178,48 +106,6 @@ nav a {
   border-color: #EF7430;
 }
 
-/* project panel */
-#project_data {
-  padding-bottom: 4em;
-}
-
-#project_data .glyphicon {
-  margin-right: 8px;
-}
-
-/* #project_data h3 a { */
-/*    padding-right: 18px; */
-/*    background: transparent url(../img/Icon_External_Link.png) no-repeat center right; */
-/* } */
-
-/* more space within form components: fieldset block and header (legend) */
-fieldset {
-  margin-top: 3em;
-}
-
-legend{
-  padding-bottom: 0.5em;
-}
-
-legend i{
-  padding-right:0.5em;
-}
-
-/* search button discard contents */
-
-#searchclear {
-  position:absolute;
-  right: 60px;
-  top:0;
-  bottom:0;
-  height:14px;
-  margin:auto;
-  font-size:20px;
-  cursor:pointer;
-  color:#a6a6a6;
-  z-index:3;
-  margin-top: 15px;
-}
 
 /* ----- TYPOGRAPHY ----- */
 
@@ -227,16 +113,9 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 
-.well{
-  font-weight:300;
-}
-
-#hero-intro,
-/* #projects, */
 #projects h2{
   text-align: center;
 }
-
 
 a:hover{
   text-decoration: none;
@@ -250,106 +129,31 @@ from there: nav and hero sections are a shade variation of the blue sea.
 
 */
 
-nav,
-.footer-nav{
-  background-color: #36537d;
-}
-
-
 main{
   background-color: #f3f3f3;
 }
 
-#about,
-#data-policy,
 #filters,
-#projects,
-#submit-form-div{
+#projects{
   background-color: white;
-}
-
-.copyright{
-  background-color: #1D3464;
 }
 
 #map-container{
   background-color: #d8e1ee;
 }
 
-nav a{
-  background-color: #192639;
-}
-
-nav a:hover,
-.footer-nav a:hover{
-  background-color: #486fa6;
-}
-
-.current{
-  background-color: #36537d;
-}
-
-.lead-btn{
-  background-color: #FD8D3C;
-}
-
-.lead-btn:hover{
-  background-color: #fd6d3c;
-}
-
-header,
-footer {
-  color: white;
-}
-
-.copyright {
-  color: #5A87AA;
-}
-
 a {
   color: #00a2da;
 }
 
-.copyright a:hover,
 a:hover {
   color: #FE8433;
 }
 
-nav a,
-.footer-nav a,
-nav a:hover,
-.footer-nav a:hover,
-.copyright a{
-  color: white;
-}
 
 #projects h5,
 #filters p{
   color: #7d7d7d;
-}
-
-#project_data p strong{
-  color: #FE8433;
-}
-
-#project_data #contact_info h4{
-  color: #0067AB;
-}
-
-.orange{
-  color: #FE8433;
-}
-
-.light-blue{
-  color: #00A1DC;
-}
-
-.blue{
-  color: #0067AB;
-}
-
-.light-grey{
-  color: #e2e3e4;
 }
 
 .feature{
