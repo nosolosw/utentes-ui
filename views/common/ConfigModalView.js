@@ -52,7 +52,7 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
     this.s.fetch({
       success: function() {
           self.setValue();
-          this.$('.modal').modal('show');
+          self.$('.modal').modal('show');
       }
     });
   },
