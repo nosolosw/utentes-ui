@@ -29,6 +29,18 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
     }, this);
   },
 
+  parse: function(response) {
+    this.parseDate(response, 'd_emissao');
+    this.parseDate(response, 'd_validade');
+    return response;
+  },
+
+  parseDate: function(response, field) {
+    if (response[field]) {
+      response[field] = new Date(response[field]);
+    }
+  },
+
   getSoliTot: function(){
     return this.get('c_soli_int') + this.get('c_soli_fon');
   },

@@ -288,7 +288,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     if (_.has(response, 'licencias')) {
-      response.licencias = new Backbone.SIXHIARA.LicenciaCollection(response.licencias)
+      response.licencias = new Backbone.SIXHIARA.LicenciaCollection(response.licencias, {parse:true})
     }
 
     if (_.has(response, 'fontes')) {
