@@ -296,7 +296,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     if (_.has(response, 'actividade')) {
-      response.actividade = new Backbone.SIXHIARA.ActividadesFactory[response.actividade.tipo](response.actividade, {parse:true});
+      if (response.actividade) {
+        response.actividade = new Backbone.SIXHIARA.ActividadesFactory[response.actividade.tipo](response.actividade, {parse:true});
+      } else {
+        response.actividade = new Backbone.Model();
+      }
     }
 
     return response;

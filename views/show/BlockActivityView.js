@@ -4,12 +4,18 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
   initialize: function (options) {
     this.options = options || {};
     this.subViews = [];
+    var tipoAct = this.model.getActividadeTipo();
+    if (tipoAct !== 'Actividade non declarada') {
+      var template = _.template($("[id='" + this.model.get('actividade').get('tipo') + "']").html());
+    } else {
+      var template = null;
+    }
 
     this.actividadeView = new Backbone.SIXHIARA.ActividadeView({
       el: this.el,
       model: this.model,
       domains: options.domains,
-      template: _.template($("[id='" + this.model.get('actividade').get('tipo') + "']").html())
+      template: template
     });
 
     this.subViews.push(this.actividadeView);
@@ -29,7 +35,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelectorTpl: '#resModalTpl',
         tableSelector: 'table#reses',
         collection: this.model.get('actividade').get('reses'),
-        rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         collectionModel: Backbone.SIXHIARA.ActividadeRes,
         domains: this.options.domains,
       })
@@ -41,7 +47,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelectorTpl: '#cultivoModalTpl',
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
-        rowTemplate: '<td><%- cult_id %></td><td><%- c_estimado %></td><td><%- cultivo %></td><td><%- rega %> </td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %></td><td><%- rega %> </td><td><% print(formatter().formatNumber(area)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
         domains: this.options.domains,
       })
@@ -157,7 +163,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelectorTpl: '#resModalTpl',
           tableSelector: 'table#reses',
           collection: self.model.get('actividade').get('reses'),
-          rowTemplate: '<td><%- c_estimado %></td><td><%- reses_tipo %></td><td><%- reses_nro %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           collectionModel: Backbone.SIXHIARA.ActividadeRes,
           domains: self.options.domains,
         })
@@ -169,7 +175,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelectorTpl: '#cultivoModalTpl',
           tableSelector: 'table#cultivos',
           collection: self.model.get('actividade').get('cultivos'),
-          rowTemplate: '<td><%- cult_id %></td><td><%- c_estimado %></td><td><%- cultivo %> / <%- rega %> </td><td><%- eficiencia %></td><td><%- area %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %></td><td><%- rega %></td><td><% print(formatter().formatNumber(area)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
           domains: self.options.domains,
         })
