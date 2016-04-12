@@ -32,7 +32,8 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     this.$('td.c_soli').text(fonte.get('c_soli') || displayNull);
     this.$('td.c_max').text(fonte.get('c_max') || displayNull);
     this.$('td.c_real').text(fonte.get('c_real') || displayNull);
-    this.$('td.d_dado').text(fonte.get('d_dado') || displayNull);
+    var d_dado = formatter().formatDate(fonte.get('d_dado'));
+    this.$('td.d_dado').text( d_dado || displayNull);
     this.$('td.contador').text(fonte.get('contador') || displayNull);
     this.$('td.metodo_est').text(fonte.get('metodo_est') || displayNull);
     this.$('td.observacio').text(fonte.get('observacio') || displayNull);

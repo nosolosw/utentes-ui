@@ -15,4 +15,15 @@ Backbone.SIXHIARA.Fonte = Backbone.Model.extend({
     'observacio': null,
   },
 
+  parse: function(response) {
+    this.parseDate(response, 'd_dado');
+    return response;
+  },
+
+  parseDate: function(response, field) {
+    if (response[field]) {
+      response[field] = new Date(response[field]);
+    }
+  },
+
 });

@@ -292,7 +292,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     if (_.has(response, 'fontes')) {
-      response.fontes = new Backbone.SIXHIARA.FonteCollection(response.fontes)
+      response.fontes = new Backbone.SIXHIARA.FonteCollection(response.fontes, {parse:true})
     }
 
     if (_.has(response, 'actividade')) {
