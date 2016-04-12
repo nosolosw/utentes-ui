@@ -2,6 +2,7 @@ var where = new Backbone.SIXHIARA.Where();
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 var exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection();
 var domains = new Backbone.UILib.DomainCollection();
+var listView, mapView;
 domains.url = Backbone.SIXHIARA.Config.apiDomains;
 
 domains.fetch({
@@ -20,20 +21,26 @@ domains.fetch({
   }
 });
 
-var listView = new Backbone.UILib.ListView({
-  el: $('#project_list'),
-  collection: exploracaosFiltered,
-  subviewTemplate: _.template($('#exploracao-li-tmpl').html())
-});
 
-var mapView = new Backbone.SIXHIARA.MapView({
-  el: $('#map'),
-  collection: exploracaosFiltered
-});
 
 exploracaos.fetch({
   parse: true,
-  success: function() {where.trigger('change');}
+  success: function() {
+    exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection(exploracaos.models);
+    listView = new Backbone.UILib.ListView({
+      el: $('#project_list'),
+      collection: exploracaosFiltered,
+      subviewTemplate: _.template($('#exploracao-li-tmpl').html())
+    });
+
+    mapView = new Backbone.SIXHIARA.MapView({
+      el: $('#map'),
+      collection: exploracaosFiltered,
+      where: where,
+    });
+    listView.update(exploracaosFiltered);
+    mapView.update(exploracaosFiltered);
+  }
 });
 
 $('#settings').on('click', function(e){
