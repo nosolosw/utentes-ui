@@ -282,6 +282,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   parse: function(response){
     response = Backbone.GeoJson.Feature.prototype.parse.apply(this, arguments);
+    this.parseDate(response, 'd_soli');
 
     if (_.has(response, 'utente')) {
       response.utente = new Backbone.SIXHIARA.Utente(response.utente)
@@ -304,6 +305,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     return response;
+  },
+
+  parseDate: function(response, field) {
+    if (response[field]) {
+      response[field] = new Date(response[field]);
+    }
   },
 
   toJSON: function() {
