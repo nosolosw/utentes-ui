@@ -6,7 +6,7 @@ Backbone.SIXHIARA.ActividadeAbastecimento = Backbone.Model.extend({
     'tipo':       'Abastecimento',
     'c_estimado': null,
     'habitantes': null,
-    'dotacao':    20
+    'dotacao':    null,
   },
 
   initialize: function () {
