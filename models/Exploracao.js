@@ -55,7 +55,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     // licenses
     this.get('licencias').forEach(function(model){
       model.on('change:c_soli_tot', app.updateCSoli, app);
-      model.on('change:c_real_tot', app.updateCReal, app);
+      model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
       // TODO: data should be shown as it is,
       // without updating computed properties first time
@@ -65,7 +65,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     });
     this.get('licencias').on('add', function(model, collection, options){
       model.on('change:c_soli_tot', app.updateCSoli, app);
-      model.on('change:c_real_tot', app.updateCReal, app);
+      model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
       // TODO: data should be shown as it is,
       // without updating computed properties first time
@@ -75,7 +75,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     });
     this.get('licencias').on('remove', function(model, collection, options){
       model.off('change:c_soli_tot', app.updateCSoli, app);
-      model.off('change:c_real_tot', app.updateCReal, app);
+      model.off('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.off('change:c_licencia', app.updateCLicencia, app);
       // TODO: data should be shown as it is,
       // without updating computed properties first time
@@ -86,7 +86,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.get('licencias').on('reset', function(collection, options){
       collection.forEach(function(model){
         model.on('change:c_soli_tot', app.updateCSoli, app);
-        model.on('change:c_real_tot', app.updateCReal, app);
+        model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
         model.on('change:c_licencia', app.updateCLicencia, app);
         // TODO: data should be shown as it is,
         // without updating computed properties first time
@@ -114,6 +114,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       // without updating computed properties first time
       app.updateCSoliFon();
       app.updateCRealFon();
+      app.updateCSoli();
+      app.updateCReal();
     });
     this.get('fontes').on('add', function(model, collection, options){
       model.on('change:c_soli', app.updateCSoliFon, app);
@@ -122,6 +124,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       // without updating computed properties first time
       app.updateCSoliFon();
       app.updateCRealFon();
+      app.updateCSoli();
+      app.updateCReal();
     });
     this.get('fontes').on('remove', function(model, collection, options){
       model.off('change:c_soli', app.updateCSoliFon, app);
@@ -130,6 +134,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       // without updating computed properties first time
       app.updateCSoliFon();
       app.updateCRealFon();
+      app.updateCSoli();
+      app.updateCReal();
     });
     this.get('fontes').on('reset', function(collection, options){
       collection.forEach(function(model){
@@ -139,6 +145,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         // without updating computed properties first time
         app.updateCSoliFon();
         app.updateCRealFon();
+        app.updateCSoli();
+        app.updateCReal();
       });
       collection.previousModels.forEach(function(license){
         model.off('change:c_soli', app.updateCSoliFon, app);
@@ -152,8 +160,13 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
     // actividade
     this.get('actividade').on('change', app.updateCEstimado, app);
-    this.on('change:actividade', app.updateCEstimado, app);
+    this.on('change:actividade', app.changedActivity, app);
 
+  },
+
+  changedActivity: function() {
+    this.get('actividade').on('change', this.updateCEstimado, this);
+    this.updateCEstimado();
   },
 
   updateCEstimado: function(){
@@ -203,7 +216,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   getCRealTot: function(){
     var c_real = null;
     this.get('licencias').forEach(function(license){
-      c_real += license.get('c_real_tot');
+      c_real += license.get('c_real_int');
     });
     this.get('fontes').forEach(function(fonte){
       c_real += fonte.get('c_real');
@@ -283,20 +296,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     }
 
     if (_.has(response, 'actividade')) {
-      response.actividade = new Backbone.Model(response.actividade)
-      if (response.actividade.has('cultivos')) {
-        var cultivos = new Backbone.GeoJson.FeatureCollection(response.actividade.get('cultivos'), {
-          parse:true,
-          model: Backbone.SIXHIARA.ActividadeCultivo,
-        });
-        response.actividade.set('cultivos', cultivos);
-      };
-      if (response.actividade.has('reses')) {
-        var reses = new Backbone.Collection(response.actividade.get('reses'), {
-          model: Backbone.SIXHIARA.ActividadeRes
-        });
-        response.actividade.set('reses', reses);
-      };
+      response.actividade = new Backbone.SIXHIARA.ActividadesFactory[response.actividade.tipo](response.actividade, {parse:true});
     }
 
     return response;
