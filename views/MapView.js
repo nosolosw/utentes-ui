@@ -52,6 +52,8 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       maxBounds: maxBounds,
       minZoom: 6,
     });
+
+    this.mapEvents();
   },
 
   leafletStyle: function style(feature) {
@@ -93,5 +95,14 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       this.map.setZoom(8);
     }
   },
+
+  mapEvents: function() {
+    var self = this;
+    this.map.on('moveend', function(e){
+      // user or programatic event? https://github.com/Leaflet/Leaflet/issues/2267
+      if (e.hard) return;
+      where.set('mapBounds', self.map.getBounds());
+    });
+  }
 
 });

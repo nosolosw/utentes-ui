@@ -2,14 +2,22 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.Where = Backbone.Model.extend({
 
   defaults: {
-    'loc_provin': '',
-    'loc_distri': '',
-    'loc_posto':  '',
-    'utente':     '',
-    'lic_tipo':   '',
-    'estado':     '',
-    'pagos':      '',
-    'actividade': '',
+    'loc_provin': null,
+    'loc_distri': null,
+    'loc_posto':  null,
+    'utente':     null,
+    'lic_tipo':   null,
+    'estado':     null,
+    'pagos':      null,
+    'actividade': null,
+    'mapBounds': null,
+  },
+
+  initialize: function() {
+    var changes = 'change:loc_provin change:loc_distri change:loc_posto change:utente change:lic_tipo change:estado change:actividade';
+    this.on(changes, function(e){
+      this.set('mapBounds', null, {silent:true});
+    });
   },
 
   values: function(){

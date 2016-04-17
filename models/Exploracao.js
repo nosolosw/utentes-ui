@@ -409,7 +409,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   contains: function(where){
-    var values = _.omit(where.values(), 'utente', 'lic_tipo', 'estado', 'actividade');
+    var values = _.omit(where.values(), 'utente', 'lic_tipo', 'estado', 'actividade', 'mapBounds');
     var properties = this.pick(_.keys(values));
     var containsAttrs = _.isEqual(properties, values);
     var containsUtente = true;
@@ -430,7 +430,15 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       containsActividade = (this.get('actividade').get('tipo') === where.attributes.actividade);
     }
 
-    return containsAttrs && containsUtente && containsLic && containsActividade;
+    var containsBounds = true;
+    if (where.get('mapBounds')) {
+      var bounds = L.GeoJSON.geometryToLayer(this.toGeoJSON()).getBounds()
+      if (! where.get('mapBounds').intersects(bounds)) {
+        containsBounds = false;
+      }
+    }
+
+    return containsAttrs && containsUtente && containsLic && containsActividade && containsBounds;
   },
 
   getActividadeTipo: function() {

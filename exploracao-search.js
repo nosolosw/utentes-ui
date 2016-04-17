@@ -12,11 +12,20 @@ domains.fetch({
       model: where,
       domains: domains,
     }).render();
-
     exploracaos.listenTo(where, 'change', function(model, options){
-      exploracaosFiltered = exploracaos.filterBy(where);
-      listView.update(exploracaosFiltered);
-      mapView.update(exploracaosFiltered);
+      if (!model) return;
+      var keys = _.keys(model.changed);
+
+      if ((keys.length === 1) && (keys.indexOf('mapBounds') !== -1)) {
+          exploracaosFiltered = exploracaos.filterBy(where);
+          listView.update(exploracaosFiltered);
+      } else {
+        // Reset geo filter if the user use any other filter
+        where.set('mapBounds', null, {silent:true});
+        exploracaosFiltered = exploracaos.filterBy(where);
+        listView.update(exploracaosFiltered);
+        mapView.update(exploracaosFiltered);
+      }
     });
   }
 });
