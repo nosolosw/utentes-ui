@@ -5,6 +5,17 @@ var domains = new Backbone.UILib.DomainCollection();
 var listView, mapView;
 domains.url = Backbone.SIXHIARA.Config.apiDomains;
 
+var myLeafletEvent = function(e) {
+  if (e.type === 'mouseover') {
+    var item = this.$('#exp_id-' + e.exp_id).parent();
+    item[0].scrollIntoView();
+    item.addClass('leaflet-mouseover');
+  } else {
+    var item = this.$('#exp_id-' + e.exp_id).parent();
+    item.removeClass('leaflet-mouseover')
+  }
+}
+
 domains.fetch({
   success: function(collection, response, options) {
     new Backbone.SIXHIARA.FiltersView({
@@ -18,11 +29,13 @@ domains.fetch({
 
       if ((keys.length === 1) && (keys.indexOf('mapBounds') !== -1)) {
           exploracaosFiltered = exploracaos.filterBy(where);
+          listView.listenTo(exploracaosFiltered, 'leaflet', myLeafletEvent);
           listView.update(exploracaosFiltered);
       } else {
         // Reset geo filter if the user use any other filter
         where.set('mapBounds', null, {silent:true});
         exploracaosFiltered = exploracaos.filterBy(where);
+        listView.listenTo(exploracaosFiltered, 'leaflet', myLeafletEvent);
         listView.update(exploracaosFiltered);
         mapView.update(exploracaosFiltered);
       }
@@ -42,11 +55,13 @@ exploracaos.fetch({
       subviewTemplate: _.template($('#exploracao-li-tmpl').html())
     });
 
+
     mapView = new Backbone.SIXHIARA.MapView({
       el: $('#map'),
       collection: exploracaosFiltered,
       where: where,
     });
+    listView.listenTo(exploracaosFiltered, 'leaflet', myLeafletEvent);
     listView.update(exploracaosFiltered);
     mapView.update(exploracaosFiltered);
   }

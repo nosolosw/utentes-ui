@@ -432,9 +432,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
     var containsBounds = true;
     if (where.get('mapBounds')) {
-      var bounds = L.GeoJSON.geometryToLayer(this.toGeoJSON()).getBounds()
-      if (! where.get('mapBounds').intersects(bounds)) {
-        containsBounds = false;
+      var feature = this.toGeoJSON();
+      if (! _.isEmpty(feature.geometry)) {
+        var bounds = L.GeoJSON.geometryToLayer(feature).getBounds()
+        if (! where.get('mapBounds').intersects(bounds)) {
+          containsBounds = false;
+        }
       }
     }
 
