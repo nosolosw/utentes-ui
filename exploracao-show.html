@@ -416,12 +416,12 @@
     <script type="text/template" id="Abastecimento">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
         </span>
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span> / <span class="title">Dotaçâo:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
+          <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span> / <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
         </span>
       </div>
     </script>
@@ -439,7 +439,7 @@
               <th>Estimado</th>
               <th>Tipo de cultivo</th>
               <th>Tipo de rega</th>
-              <th>Área</th>
+              <th>Área <i class="units">(ha)</i></th>
               <th>Observações</th>
               <th></th>
               <th></th>
@@ -474,7 +474,7 @@
                 </div>
 
                 <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="area">Área</label>
+                  <label for="area">Área <i class="units">(ha)</i></label>
                   <input type="text" class="form-control widget-number" id="area" />
                 </div>
 
@@ -497,7 +497,7 @@
     <script type="text/template" id="Indústria">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
         </span>
       </div>
       <div class="row">
@@ -533,7 +533,7 @@
         <table class="table" id="reses">
           <thead>
             <tr>
-              <th>Estimado</th>
+              <th>Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
               <th>Tipo de reses</th>
               <th>Nro de reses</th>
               <th>Observações</th>
@@ -589,12 +589,12 @@
     <script type="text/template" id="Piscicultura">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
         </span>
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Área:</span> <span><%- formatter().formatNumber(area) || '-' %></span> / <span class="title">Reservas:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
+          <span class="title">Área <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span> / <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
         </span>
       </div>
     </script>
@@ -603,7 +603,7 @@
     <script type="text/template" id="Producção de energia">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
         </span>
       </div>
       <div class="row">
@@ -631,7 +631,7 @@
     <script type="text/template" id="Saneamento">
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
         </span>
       </div>
       <div class="row">
@@ -675,15 +675,15 @@
               </div>
               <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="c_soli_int">C. solicitado intermedio</label>
+                  <label for="c_soli_int">C. solicitado intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
                   <input type="text" class="form-control widget-number" id="c_soli_int">
                 </div>
                 <div class="form-group col-xs-3">
-                  <label for="c_real_int">C. licenciado</label>
+                  <label for="c_real_int">C. licenciado <i class="units">(m<sup>3</sup>/més)</i></label>
                   <input type="text" class="form-control widget-number" id="c_licencia">
                 </div>
                 <div class="form-group col-xs-3">
-                  <label for="c_real_int">C. real intermedio</label>
+                  <label for="c_real_int">C. real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
                   <input type="text" class="form-control widget-number" id="c_real_int">
                 </div>
               </div>
@@ -729,8 +729,8 @@
         </div>
         <div class="col-xs-4">
           <br>
-          <span class="title">Intermedio:</span> <%- formatter().formatNumber(c_real_int) || '-' %><br>
-          <span class="title">Fontes:</span> <%- formatter().formatNumber(c_real_fon) || '-' %>
+          <span class="title">Intermedio <i class="units">(m<sup>3</sup>/més)</i>:</span> <%- formatter().formatNumber(c_real_int) || '-' %><br>
+          <span class="title">Fontes <i class="units">(m<sup>3</sup>/més)</i>:</span> <%- formatter().formatNumber(c_real_fon) || '-' %>
         </div>
       </div>
       <div class="row">
@@ -742,8 +742,8 @@
         </div>
         <div class="col-xs-4">
           <br>
-          <span class="title">Intermedio:</span> <%- formatter().formatNumber(c_soli_int) || '-' %><br>
-          <span class="title">Fontes:</span> <%- formatter().formatNumber(c_soli_fon) || '-' %>
+          <span class="title">Intermedio <i class="units">(m<sup>3</sup>/més)</i>:</span> <%- formatter().formatNumber(c_soli_int) || '-' %><br>
+          <span class="title">Fontes <i class="units">(m<sup>3</sup>/més)</i>:</span> <%- formatter().formatNumber(c_soli_fon) || '-' %>
         </div>
       </div>
     </script>

@@ -62,3 +62,8 @@ td.edit:focus {
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
+
+.units {
+  font-size: 90%;
+  font-style: italic;
+}
