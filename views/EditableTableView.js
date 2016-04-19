@@ -187,6 +187,11 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
   customConfiguration: function() {
 
+    this.widgetModel = this.model;
+    if (this.options.editing) {
+      this.widgetModel = this.model.clone();
+    }
+
     // FIXME
     new Backbone.UILib.SelectView({
       el: this.$('#reses_tipo'),
@@ -202,18 +207,28 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
       el: this.$('#rega'),
       collection: this.options.domains.byCategory('rega_tipo')
     }).render();
+
+
+    this.listenTo(this.widgetModel, 'change:rega', function() {
+      var efi = this.widgetModel.eficienciaByRega();
+      var efiWidget = this.$('.modal').find('#eficiencia');
+      if (! efi) {
+        efiWidget.prop('disabled', true);
+        efiWidget.val(null);
+      } else {
+        efiWidget.prop('disabled', false);
+        efiWidget.val(formatter().formatNumber(efi));
+      }
+    });
     // /FIXME
 
-
-    this.widgetModel = this.model;
-    if (this.options.editing) {
-      this.widgetModel = this.model.clone();
-    }
 
     new Backbone.UILib.WidgetsView({
       el: this.$el,
       model: this.widgetModel
     }).render()
+
+    this.$('.modal').find('#eficiencia').prop('disabled', _.isNull(this.widgetModel.get('eficiencia')));
 
   },
 

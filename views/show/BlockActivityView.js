@@ -47,7 +47,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelectorTpl: '#cultivoModalTpl',
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
-        rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %></td><td><%- rega %> </td><td><% print(formatter().formatNumber(area)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
         collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
         domains: this.options.domains,
       })
@@ -175,7 +175,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelectorTpl: '#cultivoModalTpl',
           tableSelector: 'table#cultivos',
           collection: self.model.get('actividade').get('cultivos'),
-          rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %></td><td><%- rega %></td><td><% print(formatter().formatNumber(area)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
           collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
           domains: self.options.domains,
         })
