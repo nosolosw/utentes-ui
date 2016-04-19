@@ -43,24 +43,29 @@ domains.fetch({
   }
 });
 
-
-
 exploracaos.fetch({
   parse: true,
   success: function() {
+
     exploracaosFiltered = new Backbone.SIXHIARA.ExploracaoCollection(exploracaos.models);
+
     listView = new Backbone.UILib.ListView({
       el: $('#project_list'),
       collection: exploracaosFiltered,
       subviewTemplate: _.template($('#exploracao-li-tmpl').html())
     });
 
+    new Backbone.SIXHIARA.ButtonExportView({
+      el: $('#projects h1'),
+      listView: listView,
+    }).render();
 
     mapView = new Backbone.SIXHIARA.MapView({
       el: $('#map'),
       collection: exploracaosFiltered,
       where: where,
     });
+    
     listView.listenTo(exploracaosFiltered, 'leaflet', myLeafletEvent);
     listView.update(exploracaosFiltered);
     mapView.update(exploracaosFiltered);

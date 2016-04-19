@@ -85,27 +85,6 @@ body,
   margin-bottom:16px;
 }
 
-/* Buttons */
-
-.btn-primary {
-  color: #fff;
-  background-color: #FE8433;
-  border-color:#FE8433;
-  padding:10px 24px;
-  border-radius: 24px;
-  margin-top: 20px;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #EF7430;
-  border-color: #EF7430;
-}
-
 
 /* ----- TYPOGRAPHY ----- */
 
