@@ -2,11 +2,11 @@
 <script type="text/template" id="Abastecimento_edit">
   <input type="hidden" id="id">
   <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="habitantes">Nro de habitantes</label>
       <input type="text" class="form-control widget-number" id="habitantes">
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="dotacao">Dotaçâo</label>
       <input type="text" class="form-control widget-number" id="dotacao">
     </div>
@@ -56,23 +56,27 @@
       <select class="form-control widget" id="tipo_indus">
       </select>
     </div>
-    <div class="form-group col-xs-4">
-      <label for="eval_impac">Evaluación impacto</label>
+    <div class="form-group col-xs-6">
+      <label for="eval_impac">Evaluação Impacto</label>
       <select class="form-control widget-boolean" id="eval_impac"></select>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-xs-offset-1  col-xs-3">
+    <div class="form-group col-xs-offset-1 col-xs-9">
       <label for="instalacio">Instalaçôes</label>
-      <input type="text" class="form-control widget" id="instalacio">
+      <textarea class="form-control widget" id="instalacio" rows="4"></textarea>
     </div>
-    <div class="form-group col-xs-3">
-      <label for="efluente">Efluente</label>
-      <input type="text" class="form-control widget" id="efluente">
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-9">
+      <label for="efluente">Efluente producido</label>
+      <textarea class="form-control widget" id="efluente" rows="4"></textarea>
     </div>
-    <div class="form-group col-xs-3">
-      <label for="tratamento">Tratamento</label>
-      <input type="text" class="form-control widget" id="tratamento">
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-9">
+      <label for="tratamento">Medios tratamento água</label>
+      <textarea class="form-control widget" id="tratamento" rows="4"></textarea>
     </div>
   </div>
 </script>
@@ -104,15 +108,17 @@
 <script type="text/template" id="Piscicultura_edit">
   <input type="hidden" id="id">
   <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="area">C. estimado</label>
       <input type="text" class="form-control widget-number" id="c_estimado">
     </div>
-    <div class="form-group col-xs-3">
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="area">Área</label>
       <input type="text" class="form-control widget-number" id="area">
     </div>
-    <div class="form-group col-xs-3">
+    <div class="form-group col-xs-4">
       <label for="v_reservas">Reservas</label>
       <input type="text" class="form-control widget-number" id="v_reservas">
     </div>
@@ -124,47 +130,53 @@
 <script type="text/template" id="Producção de energia_edit">
   <input type="hidden" id="id">
   <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="c_estimado">C. estimado</label>
       <input type="text" class="form-control widget-number" id="c_estimado">
     </div>
-    <div class="form-group col-xs-3">
-      <label for="energia_tipo">Tipo de energía</label>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-4">
+      <label for="energia_tipo">Tipo de produção</label>
       <select class="form-control widget" id="energia_tipo">
       </select>
     </div>
-    <div class="form-group col-xs-3">
-      <label for="potencia">Potencia</label>
-      <input type="text" class="form-control widget-number" id="potencia">
+    <div class="form-group col-xs-4">
+      <label for="alt_agua">Altura de água</label>
+      <input type="text" class="form-control widget-number" id="alt_agua">
     </div>
   </div>
 
   <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
-      <label for="alt_agua">Altura água</label>
-      <input type="text" class="form-control widget-number" id="alt_agua">
+    <div class="form-group col-xs-offset-1 col-xs-4">
+      <label for="potencia">Potência a instalar</label>
+      <input type="text" class="form-control widget-number" id="potencia">
     </div>
-    <div class="form-group col-xs-3">
-      <label for="equipo">Equipo</label>
-      <input type="text" class="form-control widget" id="equipo">
-    </div>
-
     <div class="form-group col-xs-4">
-      <label for="eval_impac">Evaluación impacto</label>
+      <label for="eval_impac">Evaluação Impacto</label>
       <select class="form-control widget-boolean" id="eval_impac"></select>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-8">
+      <label for="equipo">Tipo de equipamento</label>
+      <textarea class="form-control widget" id="equipo" rows="4"></textarea>
+    </div>
+  </div>
+
 </script>
 
 <!-- tmpl actividade saneamento -->
 <script type="text/template" id="Saneamento_edit">
   <input type="hidden" id="id">
   <div class="row">
-    <div class="form-group col-xs-offset-1 col-xs-3">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="c_estimado">C. estimado:</label>
       <input type="text" class="form-control widget-number" id="c_estimado">
     </div>
-    <div class="form-group col-xs-offset-1 col-xs-3">
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-offset-1 col-xs-4">
       <label for="habitantes">Nro de habitantes:</label>
       <input type="text" class="form-control widget-number" id="habitantes">
     </div>

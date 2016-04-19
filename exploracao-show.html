@@ -270,7 +270,7 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-10">
                 <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
-                <textarea class="form-control widget" id="observacio" rows="2"></textarea>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
               </div>
             </div>
           </div>
@@ -403,7 +403,7 @@
               <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-10">
                   <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control widget widget-utente" id="observacio" rows="3"></textarea>
+                  <textarea class="form-control widget widget-utente" id="observacio" rows="4"></textarea>
                 </div>
               </div>
             </div>
@@ -480,7 +480,7 @@
 
                 <div class="form-group col-xs-offset-1 col-xs-9">
                   <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control widget" id="observacio" rows="3"></textarea>
+                  <textarea class="form-control widget" id="observacio" rows="4"></textarea>
                 </div>
               </div>
             </div>
@@ -502,12 +502,24 @@
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span> / <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
+          <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span>
+          /
+          <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
         </span>
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Efluente:</span> <span><%- efluente || '-' %></span> / <span class="title">Tratamento:</span> <span><%- tratamento || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
+          <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Efluente:</span> <span><%- efluente || '-' %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Medios tratamento água:</span> <span><%- tratamento || '-' %></span>
         </span>
       </div>
     </script>
@@ -559,7 +571,7 @@
 
                 <div class="form-group col-xs-offset-1 col-xs-9">
                   <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control widget" id="observacio" rows="3"></textarea>
+                  <textarea class="form-control widget" id="observacio" rows="4"></textarea>
                 </div>
               </div>
             </div>
@@ -596,12 +608,21 @@
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Tipo de energía:</span> <span><%- energia_tipo || '-' %></span> / <span class="title">Potencia:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
+          <span class="title">Tipo de produção:</span> <span><%- energia_tipo || '-' %></span>
+          /
+          <span class="title">Altura água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span>
         </span>
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Altura água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span> / <span class="title">Equipo:</span> <span><%- equipo || '-' %></span> / <span class="title">Evaluación impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
+          <span class="title">Potencia:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
+          /
+          <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <span class="title">Equipo:</span> <span><%- equipo || '-' %></span>
         </span>
       </div>
     </script>
