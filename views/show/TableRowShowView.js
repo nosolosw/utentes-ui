@@ -3,7 +3,19 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
 
   tagName: 'tr',
 
-  template: _.template('<td class="tipo_agua"><%- tipo_agua %></td><td class="tipo_fonte"><%- tipo_fonte %></td><td class="lat_lon"><%- lat_lon %></td><td class="c_soli"><% print(formatter().formatNumber(c_soli)) %></td><td class="c_max"><% print(formatter().formatNumber(c_max)) %></td><td class="c_real"><% print(formatter().formatNumber(c_real)) %></td><td class="d_dado"><% print(formatter().formatDate(d_dado)) %></td><td class="contador"><% print(formatter().formatBoolean(contador)) %></td><td class="metodo_est"><%- metodo_est %></td><td class="observacio"><%- observacio %></td><td><button type="button" class="edit-fonte btn btn-default btn-xs">Editar</button> <button type="button" class="delete-fonte btn btn-default btn-xs">Eliminar</button></td>'),
+  template: _.template(`
+    <td class="tipo_agua"><%- tipo_agua %></td>
+    <td class="tipo_fonte"><%- tipo_fonte %></td>
+    <td class="c_soli"><% print(formatter().formatNumber(c_soli)) %></td>
+    <td class="c_real"><% print(formatter().formatNumber(c_real)) %></td>
+    <td class="c_max"><% print(formatter().formatNumber(c_max)) %></td>
+    <td class="contador"><% print(formatter().formatBoolean(contador)) %></td>
+    <td class="metodo_est"><%- metodo_est %></td>
+    <td class="d_dado"><% print(formatter().formatDate(d_dado)) %></td>
+    <td class="lat_lon"><%- lat_lon %></td>
+    <td class="observacio"><%- observacio %></td>
+    <td><button type="button" class="edit-fonte btn btn-default btn-xs">Editar</button> <button type="button" class="delete-fonte btn btn-default btn-xs">Eliminar</button></td>
+  `),
 
   events: {
     'click .delete-fonte': 'modelDestroy',

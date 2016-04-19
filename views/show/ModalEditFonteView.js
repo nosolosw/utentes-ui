@@ -10,6 +10,7 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
           <h4 class="modal-title" id="fonteModalLabel">Fonte</h4>
         </div>
         <div class="modal-body">
+
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="tipo_agua">Tipo de água</label>
@@ -20,30 +21,22 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
               <select class="form-control widget" id="tipo_fonte"></select>
             </div>
           </div>
+
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="lat_lon">Lat/Lon</label>
-              <input type="text" class="form-control widget" id="lat_lon" />
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="d_dado">Data toma de dados</label>
-              <input type="text" class="form-control widget-date" id="d_dado" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_soli">Consumo mensal solicitado (m3/mes)</label>
+              <label for="c_soli">Consumo mensal solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
               <input type="text" class="form-control widget-number" id="c_soli" />
             </div>
             <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_max">Máximo caudal extraíble (m3/mes)</label>
-              <input type="text" class="form-control widget-number" id="c_max" />
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_real">Consumo mensal real (m3/mes)</label>
+              <label for="c_real">Consumo mensal real <i class="units">(m<sup>3</sup>/més)</i></label>
               <input type="text" class="form-control widget-number" id="c_real" />
             </div>
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="c_max">Máximo caudal extraíble <i class="units">(m<sup>3</sup>/més)</i></label>
+              <input type="text" class="form-control widget-number" id="c_max" />
+            </div>
           </div>
+
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="contador">Contador</label>
@@ -52,6 +45,17 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="metodo_est">Método estimação volume</label>
               <input type="text" class="form-control widget" id="metodo_est" />
+            </div>
+          </div>
+
+          <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-4">
+            <label for="d_dado">Data toma de dados</label>
+            <input type="text" class="form-control widget-date" id="d_dado" />
+          </div>
+            <div class="form-group col-xs-offset-1 col-xs-4">
+              <label for="lat_lon">Lat / Lon</label>
+              <input type="text" class="form-control widget" id="lat_lon" />
             </div>
           </div>
           <div class="row">
