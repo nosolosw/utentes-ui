@@ -5,6 +5,13 @@ Backbone.SIXHIARA.ButtonRefreshView = Backbone.View.extend({
     "click": "doClick"
   },
 
+  initialize: function() {
+    this.$el.prop('disabled', true);
+    this.listenTo(this.model, 'aChangeHappens', function(){
+      this.$el.prop('disabled', false)
+    }, this);
+  },
+
   doClick: function(){
     var refreshConfirmation = confirm('Se ele aceita perder alterações');
     if (refreshConfirmation) {

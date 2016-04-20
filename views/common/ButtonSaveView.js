@@ -5,6 +5,13 @@ Backbone.SIXHIARA.ButtonSaveView = Backbone.View.extend({
     "click": "save"
   },
 
+  initialize: function() {
+    this.$el.prop('disabled', true);
+    this.listenTo(this.model, 'aChangeHappens', function(){
+      this.$el.prop('disabled', false)
+    }, this);
+  },
+
   save: function(){
 
     if(this.model.isValid()){
