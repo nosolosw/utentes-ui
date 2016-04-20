@@ -21,7 +21,15 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     domains.url = Backbone.SIXHIARA.Config.apiDomains;
     domains.fetch({
       success: function(collection, response, options) {
-        console.log('domains loaded');
+
+        view.listenTo(exploracao, 'aChangeHappens', function(){
+          this.$('menu a').not(':last').on('click', function(evt){
+            var refreshConfirmation = confirm('Hai mudanzas sem gardar. Desea sair igualmente');
+            if (!refreshConfirmation) {
+              evt.preventDefault();
+            }
+          })
+        });
 
         /** Buttons View are here, because after the domains are loaded,
         'change' events are triggered in the model. If a button like refresh

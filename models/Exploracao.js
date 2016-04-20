@@ -162,6 +162,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.get('actividade').on('change', app.updateCEstimado, app);
     this.on('change:actividade', app.changedActivity, app);
 
+    this.once('change', app.aChangeHappens, app);
+    this.get('utente').once('change', app.aChangeHappens, app);
+    this.get('actividade').once('change', app.aChangeHappens, app);
+    this.get('fontes').once('change', app.aChangeHappens, app);
+    this.get('licencias').once('change', app.aChangeHappens, app);
   },
 
   changedActivity: function() {
@@ -455,6 +460,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       tipo = this.get('actividade').get('tipo') || tipo;
     }
     return tipo;
+  },
+
+  aChangeHappens: function() {
+    this.trigger('aChangeHappens');
   },
 
 });
