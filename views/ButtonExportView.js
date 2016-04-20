@@ -9,8 +9,7 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
   /* http://sheetjs.com/demos/Export2Excel.js */
 
   events: {
-    "click #export-button": "export",
-    // "change #fileinput": "export",
+    "click #export-button": "exportXLS",
   },
 
   initialize: function(options) {
@@ -19,19 +18,27 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
 
   render: function() {
     this.$el.append($('<button id="export-button" type="button" class="btn btn-default btn-sm pull-right">Exportação</button>'));
-    // var html = `<form>
-    //     <input id="fileinput" type="file" style="display:none;"/>
-    //   </form>
-    //   <button id="export-button" type="button" class="btn btn-default btn-sm pull-right">Exportação</button>`
-    //   // this.$el.append($('<input type="file" id="export-button" name=files[] class="btn btn-default btn-sm pull-right">Exportação</input>'));
-    //   this.$el.append($(html));
   },
 
-  // doClick: function() {
-  //    $("#fileinput").click();
-  // },
+  getFile: function() {
+    var file = 'exploracaos.xlsx';
+    if (window.nodeRequire) {
+      var remote = nodeRequire('remote');
+      var dialog = remote.require('dialog');
+      var file = dialog.showSaveDialog({
+        filters: [
+          { name: 'Excel', extensions: ['xlsx'] },
+          { name: 'Todos', extensions: ['*'] }
+        ],
+      });
+    }
 
-  export: function(evt){
+    return file;
+  },
+
+  exportXLS: function(evt){
+    var file = this.getFile();
+    if (!file) return;
 
     var exploracaos = this.options.listView.collection.sortBy(function(exp){
       return exp.get('utente').get('nome');
@@ -59,6 +66,7 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
         exp.get('c_estimado'),
       ]
     });
+    data.unshift(['Nome', 'Nuit', 'Entidade', 'R. Comercial', 'R. Zona', 'Provincia', 'Distrito', 'Posto', 'Núcleo', 'Observações', 'Id Exp', 'Nome exploraçõe', 'Actividade', 'C. licenciado', 'C. solicitado', 'C. real', 'C. estimado']);
 
     var wb = new Workbook();
     var ws = this.sheet_from_array_of_arrays(data);
@@ -71,7 +79,7 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
     wb.SheetNames.push(ws_name);
     wb.Sheets[ws_name] = ws;
     var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:false, type: 'binary'});
-    saveAs(new Blob([this.s2ab(wbout)],{type:"application/octet-stream"}), "exploracoes.xlsx")
+    saveAs(new Blob([this.s2ab(wbout)],{type:"application/octet-stream"}), file);
 
   },
 
