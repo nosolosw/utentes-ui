@@ -10,7 +10,6 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
       new Backbone.SIXHIARA.ModalTableView({
         // el: $(this.options.modalSelector),
         modalSelectorTpl: self.options.modalSelectorTpl,
-        modalSelector: self.options.modalSelector,
         collection: self.collection,
         collectionModel: self.options.collectionModel,
         model: new self.options.collectionModel(),
@@ -54,6 +53,7 @@ Backbone.SIXHIARA.TableView = Backbone.View.extend({
 
   initialize: function(options){
     this.options = options || {}
+    this.options.noDataText = options.noDataText || 'NON HAI ELEMENTOS'
     this._subviews = [];
   },
 
@@ -75,7 +75,7 @@ Backbone.SIXHIARA.TableView = Backbone.View.extend({
     // Update DOM and _subviews array at once.
     // This would minimize reflows to only 1 instead of one per subview.
     if(this.collection.length === 0){
-      this.$('tbody').html('<tr><td colspan="5" class="TableView-nodata text-center">NON HAI ELEMENTOS</td></tr>');
+      this.$('tbody').html(`<tr><td colspan="5" class="TableView-nodata text-center">${this.options.noDataText}</td></tr>`);
     } else{
       this.$('tbody').html(content);
     }
