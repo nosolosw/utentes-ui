@@ -274,7 +274,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   getSummaryConsumo: function(){
-    return (this.get('c_licencia') >= this.get('c_real'));
+    var c_licencia = this.get('c_licencia'),
+        c_real = this.get('c_real'),
+        c_estimado = this.get('c_estimado');
+    return ( c_licencia >= c_real && c_licencia >= c_estimado);
   },
 
   getSummaryPagos: function(){
