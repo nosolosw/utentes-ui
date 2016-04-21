@@ -20,24 +20,8 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
     this.$el.append($('<button id="export-button" type="button" class="btn btn-default btn-sm pull-right">Exportação</button>'));
   },
 
-  getFile: function() {
-    var file = 'exploracaos.xlsx';
-    if (window.nodeRequire) {
-      var remote = nodeRequire('remote');
-      var dialog = remote.require('dialog');
-      var file = dialog.showSaveDialog({
-        filters: [
-          { name: 'Excel', extensions: ['xlsx'] },
-          { name: 'Todos', extensions: ['*'] }
-        ],
-      });
-    }
-
-    return file;
-  },
-
   exportXLS: function(evt){
-    var file = this.getFile();
+    var file = 'exploracaos.xlsx';
     if (!file) return;
 
     var exploracaos = this.options.listView.collection.sortBy(function(exp){
