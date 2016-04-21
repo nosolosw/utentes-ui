@@ -68,12 +68,36 @@ var MyImportGPX = ImportGPX.extend({
 
 });
 
+var MyMakePolygon = MakePolygon.extend({
+  initialize: function() {
+    this.options.toolbarIcon.tooltip = 'Críar polígono';
+  }
+});
+
+var MyClear = Clear.extend({
+  initialize: function() {
+    this.options.toolbarIcon.tooltip = 'Eliminar seleção';
+  }
+});
+
+var MyMoveToTop = MoveToTop.extend({
+  initialize: function() {
+    this.options.toolbarIcon.tooltip = 'Mover acima';
+  }
+});
+
+var MyDeleteSelected = DeleteSelected.extend({
+  initialize: function() {
+    this.options.toolbarIcon.tooltip = 'Eliminar selecionados';
+  }
+});
+
 var actionsToolbar = new L.Toolbar.Control({
   position: 'topright',
-  actions: [MyImportGPX, MakePolygon, Clear, MoveToTop, DeleteSelected, MySaveToAPI]
+  actions: [MyImportGPX, MyMakePolygon, MyClear, MyMoveToTop, MyDeleteSelected, MySaveToAPI]
 }).addTo(map);
 
-var table = L.control.table(geoJsonLayer).addTo(map);
+var table = L.control.table(geoJsonLayer, {featOrderTitle: 'Ordem'}).addTo(map);
 
 var exploracaos = new Backbone.SIXHIARA.ExploracaoCollection();
 exploracaos.fetch();

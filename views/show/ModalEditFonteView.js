@@ -24,11 +24,11 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
 
           <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_soli">Consumo mensal solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
+              <label for="c_soli">C. solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
               <input type="text" class="form-control widget-number" id="c_soli" />
             </div>
             <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="c_real">Consumo mensal real <i class="units">(m<sup>3</sup>/més)</i></label>
+              <label for="c_real">C. real <i class="units">(m<sup>3</sup>/més)</i></label>
               <input type="text" class="form-control widget-number" id="c_real" />
             </div>
             <div class="form-group col-xs-offset-1 col-xs-4">

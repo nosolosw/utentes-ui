@@ -35,11 +35,11 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   initialize: function(){
     // set some computed properties
     this.set('summary_licencia_val', this.getSummaryEstado());
-    this.set('summary_licencia_msg', 'Licencia');
+    this.set('summary_licencia_msg', 'Licença');
     this.set('summary_consumo_val',  this.getSummaryConsumo());
     this.set('summary_consumo_msg',  'Consumo');
     this.set('summary_pagos_val',    this.getSummaryPagos());
-    this.set('summary_pagos_msg',    'Pagos');
+    this.set('summary_pagos_msg',    'Pagamentos');
 
     this.setListeners();
     this.on('sync', function(model, response, options){

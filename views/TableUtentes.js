@@ -218,28 +218,28 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
   },
 
   language: {
-    "sProcessing":     "Procesando...",
-    "sLengthMenu":     "Mostrar _MENU_ registros",
-    "sZeroRecords":    "No se encontraron resultados",
-    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sProcessing":     "A processar...",
+    "sLengthMenu":     "Mostrar _MENU_ registos",
+    "sZeroRecords":    "Não foram encontrados resultados",
+    "sEmptyTable":     "Não há dados disponíveis sobre esta tabela",
     // "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
     "sInfo":           "_START_/_END_ de _TOTAL_",
     "sInfoEmpty":      "0/0 de 0",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoFiltered":   "(filtrado de _MAX_ registos no total)",
     "sInfoPostFix":    "",
-    "sSearch":         "Buscar:",
+    "sSearch":         "Procurar::",
     "sUrl":            "",
     "sInfoThousands":  ",",
     "sLoadingRecords": "Cargando...",
     "oPaginate": {
-      "sFirst":    "Primero",
+      "sFirst":    "Primeiro",
       "sLast":     "Último",
-      "sNext":     "Siguiente",
+      "sNext":     "Seguinte",
       "sPrevious": "Anterior"
     },
     "oAria": {
-      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      "sSortAscending":  ": Para classificar a coluna em ordem crescente",
+      "sSortDescending": ": Para classificar a coluna em ordem decrescente",
     },
   },
 

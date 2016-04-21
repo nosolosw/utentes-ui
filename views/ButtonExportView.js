@@ -50,7 +50,7 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
         exp.get('c_estimado'),
       ]
     });
-    data.unshift(['Nome', 'Nuit', 'Entidade', 'R. Comercial', 'R. Zona', 'Provincia', 'Distrito', 'Posto', 'Núcleo', 'Observações', 'Id Exp', 'Nome exploraçõe', 'Actividade', 'C. licenciado', 'C. solicitado', 'C. real', 'C. estimado']);
+    data.unshift(['Nome', 'Nuit', 'Tipo de entidade', 'Nº Registro comercial', 'Registrado em', 'Provincia', 'Distrito', 'Posto', 'Núcleo', 'Observações', 'Id Exp', 'Nome exploraçõe', 'Actividade', 'C. licenciado', 'C. solicitado', 'C. real', 'C. estimado']);
 
     var wb = new Workbook();
     var ws = this.sheet_from_array_of_arrays(data);
