@@ -51,7 +51,7 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
           <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-4">
             <label for="d_dado">Data toma de dados</label>
-            <input type="text" class="form-control widget-date" id="d_dado" />
+            <input type="text" class="form-control widget-date" id="d_dado" placeholder="dd/mm/yyyy"/>
           </div>
             <div class="form-group col-xs-offset-1 col-xs-4">
               <label for="lat_lon">Lat / Lon</label>
