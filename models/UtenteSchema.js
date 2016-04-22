@@ -1,5 +1,5 @@
 var UTENTE_SCHEMA = [{
   'fieldname': 'nome',
-  'message':   'Nome de utente non pode estar vacío',
+  'message':   'Nome de utente não pode estar vazio',
   'rules':     ['NOT_NULL']
 }];
