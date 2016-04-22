@@ -2,13 +2,23 @@
 
 menu {
   border-bottom: 1px solid #ddd;
-  padding: .5em 0 .5em 0;
+  padding: 0;
   margin: 0em;
+}
+
+menu img {
+  margin: 2px 0 2px 0;
 }
 
 .app-name{
   color: #666;
   font-weight: bold;
+}
+
+menu > a,
+menu > div,
+menu > span {
+  margin: .5em 0 .5em;
 }
 
 menu a,
