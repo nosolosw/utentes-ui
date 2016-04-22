@@ -666,15 +666,9 @@
               <input type="hidden" id="lic_tipo">
               <input type="hidden" class="form-control widget" id="lic_nro">
               <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10">
+                <div class="form-group col-xs-offset-1 col-xs-7">
                   <label for="estado">Estado</label> <span id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></span>
                   <select type="text" class="form-control widget estado-subterranea" id="estado" aria-describedby="info-estado-licencia"></select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="c_real_int">C. licenciado <i class="units">(m<sup>3</sup>/més)</i></label>
-                  <input type="text" class="form-control widget-number" id="c_licencia">
                 </div>
                 <div class="form-group col-xs-3">
                   <label for="cadastro">Nro de cadastro</label>
@@ -683,8 +677,8 @@
               </div>
               <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="c_real_int">C. real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
-                  <input type="text" class="form-control widget-number" id="c_real_int">
+                  <label for="c_real_int">C. licenciado <i class="units">(m<sup>3</sup>/més)</i></label>
+                  <input type="text" class="form-control widget-number" id="c_licencia">
                 </div>
                 <div class="form-group col-xs-3">
                   <label for="d_emissao">Data emissão</label>
@@ -695,8 +689,18 @@
                   <input type="text" class="form-control widget-date" id="d_validade" placeholder="dd/mm/yyyy">
                 </div>
               </div>
+              <br/>
               <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
+                <div class="form-group col-xs-offset-1 col-xs-10">
+                  <label class="title">CONSUMOS INTERMEDIOS</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-offset-1 col-xs-5">
+                  <label for="c_real_int">C. real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
+                  <input type="text" class="form-control widget-number" id="c_real_int">
+                </div>
+                <div class="form-group col-xs-5">
                   <label for="c_soli_int">C. solicitado intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
                   <input type="text" class="form-control widget-number" id="c_soli_int">
                 </div>
