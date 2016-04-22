@@ -5,30 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <title>Adicionar Exploração</title>
-  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="exploracao-new.css" />
-  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="exploracao-new.css" />
+  <link rel="stylesheet" type="text/css" href="base.css" />
 </head>
 <body>
 
   <div class="container-fluid">
 
-    <menu class="row text-center">
-      <a href="exploracao-search.html" class="col-xs-1">
-        <strong id="search">EXPLORAÇÕES</strong>
-      </a>
-      <a href="utentes.html" class="col-xs-1">
-        <strong id="utentes">UTENTES</strong>
-      </a>
-      <a href="#" class="col-xs-1">
+    <menu class="row">
+      <span class="col-xs-3 app-name">SIXHIARA - Gestão utentes</span>
+      <div class="col-xs-1 pull-right text-center">
+        <div class="row">
+          <a href="#" class="col-xs-offset-6 col-xs-6 ">
+            <strong id="settings"><i class="fa fa-cog"></i></strong>
+          </a>
+        </div>
+      </div>
+      <a href="exploracao-new.html" class="col-xs-1 pull-right text-center">
         <strong id="new">ADICIONAR</strong>
       </a>
-      <a href="exploracao-gps.html" class="col-xs-1">
+      <a href="exploracao-gps.html" class="col-xs-1 pull-right text-center">
         <strong id="gps">GPS</strong>
       </a>
-      <a href="#" class="col-xs-1 pull-right text-right">
-        <strong id="settings" class="glyphicon glyphicon-cog"></strong>
+      <a href="utentes.html" class="col-xs-1 pull-right text-center">
+        <strong id="utentes">UTENTES</strong>
+      </a>
+      <a href="exploracao-search.html" class="col-xs-2 pull-right text-center">
+        <strong id="search">EXPLORAÇÕES</strong>
       </a>
     </menu>
 

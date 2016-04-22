@@ -1,41 +1,36 @@
+/* MENU */
+
+menu {
+  border-bottom: 1px solid #ddd;
+  padding: .5em 0 .5em 0;
+  margin: 0em;
+}
+
+.app-name{
+  color: #666;
+  font-weight: bold;
+}
+
 menu a,
-menu a:hover,
-menu a:visited,
-menu a:link,
-menu a:active{
+menu span {
+  padding: 0.25em 0 0.25em 0;
+}
+
+menu a {
+  color: #023858;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+menu a:hover{
+  background-color: #045a8d;
   color: white;
   text-decoration: none;
 }
 
-menu{
-  border-bottom: 1px solid #ddd;
-  padding: 1em;
-  padding-top: 0em;
-  margin-bottom: 0em;
-  height: 4%;
-}
 
-#search,
-#utentes,
-#new,
-#gps,
-#settings {
-  color: #023858;
-  padding: 0.5em;
-  border-radius: 5px;
-}
+/* EDITABLE TABLE VIEW */
 
-#new:hover,
-#utentes:hover,
-#search:hover,
-#gps:hover,
-#settings:hover {
-  background-color: #045a8d;
-  color: white;
-}
-
-
-/* EditableTableView css */
 .TableView-nodata,
 .no-fontes{
   color: #bbb;
