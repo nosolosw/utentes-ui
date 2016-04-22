@@ -265,8 +265,6 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   getSummaryEstado: function(){
     var valid = false;
-    // TODO: define when should be green
-    // right now, if it has some license with 'Licenciada' estado, it passes
     this.get('licencias').forEach(function(licencia){
       valid = valid || (licencia.get('estado') === 'Licenciada');
     });
