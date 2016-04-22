@@ -34,7 +34,7 @@ ActividadeSchema['Agricultura-Regadia'] = [{
 
 ActividadeSchema['Cultivos'] = [{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado do cultivo não tem o formato correcto ou está vazio',
   'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }, {
   'fieldname': 'cultivo',
@@ -51,7 +51,7 @@ ActividadeSchema['Cultivos'] = [{
 }, {
   'fieldname': 'area',
   'message':   'Área não tem o formato correcto',
-  'rules':     ['IS_NUMERIC']
+  'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }];
 
 ActividadeSchema['Indústria'] = [{

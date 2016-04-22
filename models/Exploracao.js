@@ -348,7 +348,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     expValidator.validate(this.toJSON()).forEach(function(msg){
       messages.push(msg);
     });
-    this.validateActividade(messages);
+    messages = messages.concat(this.validateActividade());
 
     // licencia rules
     var licValidator = validator(LICENCIA_SCHEMA);
@@ -383,7 +383,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   },
 
-  validateActividade: function(messages) {
+  validateActividade: function() {
+    var messages = [];
     var tipo = this.getActividadeTipo();
     if(tipo !== 'Actividade non declarada'){
       // only validate activities for a subset of estados
@@ -410,8 +411,24 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
           messages.push(msg);
         });
+        if (tipo === 'Agricultura-Regadia') {
+          this.get('actividade').get('cultivos').forEach(function(cultivo){
+            var msgs = cultivo.validate();
+            if (msgs) {
+              messages = messages.concat(msgs);
+            }
+          });
+        } else if (tipo === 'Pecuária') {
+          this.get('actividade').get('reses').forEach(function(cultivo){
+            var msgs = cultivo.validate();
+            if (msgs) {
+              messages = messages.concat(msgs);
+            }
+          });
+        }
       }
     }
+    return messages;
   },
 
   contains: function(where){

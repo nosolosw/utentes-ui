@@ -16,6 +16,14 @@ Backbone.SIXHIARA.ActividadeRes = Backbone.Model.extend({
     this.on('change:reses_nro change:c_res', this.updateCEstimado, this);
   },
 
+  validate: function(attrs, options){
+    var messages = [];
+    validator(ActividadeSchema['Reses']).validate(this.toJSON()).forEach(function(msg){
+      messages.push(msg);
+    });
+    if (messages.length > 0) return messages;
+  },
+
   updateCRes: function() {
     var c_res = 0;
     switch (this.get('reses_tipo')) {

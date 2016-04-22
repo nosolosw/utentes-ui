@@ -5,11 +5,11 @@ Backbone.SIXHIARA.ActividadeCultivo = Backbone.GeoJson.Feature.extend({
     'id':         null,
     'cult_id': null,
     'actividade': null,
-    'c_estimado': null,
+    'c_estimado': 0,
     'cultivo': null,
     'rega': null,
     'eficiencia': null,
-    'area': null,
+    'area': 0,
     'observacio': null,
     'geometry': new Backbone.Model(),
   },
@@ -17,6 +17,14 @@ Backbone.SIXHIARA.ActividadeCultivo = Backbone.GeoJson.Feature.extend({
   initialize: function() {
     this.on('change:rega', this.updateEficiencia, this);
     this.on('change:area', this.updateCEstimado, this);
+  },
+
+  validate: function(attrs, options){
+    var messages = [];
+    validator(ActividadeSchema['Cultivos']).validate(this.toJSON()).forEach(function(msg){
+      messages.push(msg);
+    });
+    if (messages.length > 0) return messages;
   },
 
   eficienciaByRega: function() {
