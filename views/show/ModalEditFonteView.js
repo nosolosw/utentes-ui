@@ -67,7 +67,7 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="confirm">Aceptar</button>
+          <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
         </div>
       </div>
     </div>
@@ -75,18 +75,24 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
   `,
 
   events: {
-    'click #confirm': 'confirm',
+    'click #okbutton': 'okButtonClicked',
   },
 
-  initialize: function(options) {
+  initialize:function(options) {
     this.options = options || {};
-    this.template = _.template(this.html);
+    if (this.options.modalSelectorTpl) {
+      this.template = _.template($(this.options.modalSelectorTpl).html());
+    } else if (this.html) {
+      this.template = _.template(this.html);
+    } else {
+        throw 'Bad configuration';
+    }
   },
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     if (this.options.textConfirmBt) {
-      this.$('#confirm').text(this.options.textConfirmBt);
+      this.$('#okbutton').text(this.options.textConfirmBt);
     }
     return this;
   },
@@ -95,7 +101,17 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
     $(document.body).append(this.render().el);
     var self = this;
 
+    this.widgetModel = this.model;
+    if (this.options.editing) {
+      this.widgetModel = this.model.clone();
+    }
+
     this.customConfiguration();
+
+    new Backbone.UILib.WidgetsView({
+      el: this.$el,
+      model: this.widgetModel
+    }).render()
 
     this.$('.modal').on('hidden.bs.modal', function(){
       self._close();
@@ -109,13 +125,19 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
     this.remove();
   },
 
-  confirm: function() {
+  okButtonClicked: function() {
     if (this.options.editing) {
       this.model.set(this.widgetModel.toJSON());
     } else {
       this.collection.add(this.model);
     }
     this.$('.modal').modal('hide');
+  },
+
+  remove: function() {
+    this.$el.unbind();
+    this.off();
+    Backbone.View.prototype.remove.call(this);
   },
 
   customConfiguration: function() {
@@ -130,16 +152,6 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
       collection: this.options.domains.byCategory('contador')
     }).render();
     // /FIXME
-
-    this.widgetModel = this.model;
-    if (this.options.editing) {
-      this.widgetModel = this.model.clone();
-    }
-
-    new Backbone.UILib.WidgetsView({
-      el: this.$el,
-      model: this.widgetModel
-    }).render()
 
     this.$('#tipo_agua').prop('disabled', true)
   },

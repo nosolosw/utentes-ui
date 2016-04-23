@@ -25,7 +25,7 @@ Backbone.SIXHIARA.GPSModalView = Backbone.View.extend({
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="save">Salvar</button>
+          <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
         </div>
       </div>
     </div>
@@ -33,17 +33,25 @@ Backbone.SIXHIARA.GPSModalView = Backbone.View.extend({
   `,
 
   events: {
-    'click .close': 'close',
-    'click #save': 'saveGeom',
+    'click #okbutton': 'saveGeom',
   },
 
-  initialize: function() {
-    // this.template = _.template($('#modal-template').html());
-    this.template = _.template(this.html);
+  initialize: function(options) {
+    this.options = options || {};
+    if (this.options.modalSelectorTpl) {
+      this.template = _.template($(this.options.modalSelectorTpl).html());
+    } else if (this.html) {
+      this.template = _.template(this.html);
+    } else {
+        throw 'Bad configuration';
+    }
   },
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    if (this.options.textConfirmBt) {
+      this.$('#okbutton').text(this.options.textConfirmBt);
+    }
     return this;
   },
 
@@ -95,10 +103,6 @@ Backbone.SIXHIARA.GPSModalView = Backbone.View.extend({
       self._close();
     });
     $('#gpsModalView').modal('show');
-  },
-
-  close: function() {
-    $('#gpsModalView').modal('hide');
   },
 
   _close: function() {

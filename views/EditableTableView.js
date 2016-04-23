@@ -147,17 +147,25 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
 
   events: {
-    'click #saveRow': 'saveRow'
+    'click #okbutton': 'okButtonClicked'
   },
 
   initialize:function(options) {
     this.options = options || {};
-    this.template = _.template($(this.options.modalSelectorTpl).html());
-    // this.template = _.template(this.html);
+    if (this.options.modalSelectorTpl) {
+      this.template = _.template($(this.options.modalSelectorTpl).html());
+    } else if (this.html) {
+      this.template = _.template(this.html);
+    } else {
+        throw 'Bad configuration';
+    }
   },
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    if (this.options.textConfirmBt) {
+      this.$('#okbutton').text(this.options.textConfirmBt);
+    }
     return this;
   },
 
@@ -165,18 +173,22 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
     $(document.body).append(this.render().el);
     var self = this;
 
+    this.widgetModel = this.model;
+    if (this.options.editing) {
+      this.widgetModel = this.model.clone();
+    }
+
     this.customConfiguration();
-    // $(this.idModal).on('hide.bs.modal', function(){
-    //   self.s.save(null);
-    // });
+
+    new Backbone.UILib.WidgetsView({
+      el: this.$el,
+      model: this.widgetModel
+    }).render()
+
     this.$('.modal').on('hidden.bs.modal', function(){
       self._close();
     });
     this.$('.modal').modal('show');
-  },
-
-  close: function() {
-    this.$('.modal').modal('hide');
   },
 
   _close: function() {
@@ -185,13 +197,22 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
     this.remove();
   },
 
-  customConfiguration: function() {
-
-    this.widgetModel = this.model;
+  okButtonClicked: function(){
     if (this.options.editing) {
-      this.widgetModel = this.model.clone();
+      this.model.set(this.widgetModel.toJSON());
+    } else {
+      this.collection.add(this.model);
     }
+    this.$('.modal').modal('hide');
+  },
 
+  remove: function() {
+    this.$el.unbind();
+    this.off();
+    Backbone.View.prototype.remove.call(this);
+  },
+
+  customConfiguration: function() {
     // FIXME
     new Backbone.UILib.SelectView({
       el: this.$('#reses_tipo'),
@@ -222,29 +243,7 @@ Backbone.SIXHIARA.ModalTableView = Backbone.View.extend({
     });
     // /FIXME
 
-
-    new Backbone.UILib.WidgetsView({
-      el: this.$el,
-      model: this.widgetModel
-    }).render()
-
     this.$('.modal').find('#eficiencia').prop('disabled', _.isNull(this.widgetModel.get('eficiencia')));
-
   },
-
-  saveRow: function(){
-    if (this.options.editing) {
-      this.model.set(this.widgetModel.toJSON());
-    } else {
-      this.collection.add(this.model);
-    }
-    this.$('.modal').modal('hide');
-  },
-
-  remove: function() {
-    // Don't remove $el here
-    this.$el.unbind();
-    this.off();
-  }
 
 });
