@@ -127,19 +127,6 @@
           </div>
         </section>
 
-        <section id="block-activity">
-          <div class="row">
-            <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
-            <h3 class="col-xs-11">
-              <span class="widget" id="actividade">Actividade non declarada</span>
-              <button type="button" class="btn btn-default btn-xs" id="editActividade">Editar</button>
-            </h3>
-          </div>
-          <div class="actividade-render">
-            <!-- each activity needs to render itself here, so it needs to declare as many divs.row component as it needs -->
-          </div>
-        </section>
-
       </section>
 
       <section id="map-section" class="col-xs-6">
@@ -166,6 +153,23 @@
       <div class="col-xs-3">
         <h3><span class="widget-number" id="c_estimado">-</span> </h3>
         <span>ESTIMADOS</span>
+      </div>
+    </section>
+
+    <section id="block-activity">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="row">
+            <h3 class="col-xs-1"><i class="fa fa-wrench"></i></h3>
+            <h3 class="col-xs-11">
+              <span class="widget" id="actividade">Actividade non declarada</span>
+              <button type="button" class="btn btn-default btn-xs" id="editActividade">Editar</button>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="actividade-render">
+        <!-- each activity needs to render itself here, so it needs to declare as many divs.row component as it needs -->
       </div>
     </section>
 
@@ -424,39 +428,50 @@
     <!-- tmpl actividade abastecimento -->
     <script type="text/template" id="Abastecimento">
       <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-        </span>
+        <span class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+              <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
+              <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
+            </span>
+          </div>
+        </div>
       </div>
       <div class="row">
         <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span> / <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
         </span>
       </div>
     </script>
 
     <!-- tmpl actividade agricultura -->
     <script type="text/template" id="Agricultura-Regadia">
-      <div class="form-group">
-        <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+          </div>
+        </div>
       </div>
       <div class="row">
-        <table class="table" id="cultivos">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-              <th>Tipo de cultivo / rega</th>
-              <th>Eficiencia del riego</th>
-              <th>Área <i class="units">(ha)</i></th>
-              <th>Observações</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+        <div class="col-xs-12">
+          <table class="table" id="cultivos">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+                <th>Tipo de cultivo / rega</th>
+                <th>Eficiencia del riego</th>
+                <th>Área <i class="units">(ha)</i></th>
+                <th>Observações</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </script>
 
@@ -512,54 +527,65 @@
     <!-- tmpl actividade industria -->
     <script type="text/template" id="Indústria">
       <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span>
-          /
-          <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Efluente:</span> <span><%- efluente || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Medios tratamento água:</span> <span><%- tratamento || '-' %></span>
-        </span>
+        <div class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+              <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Efluente:</span> <span><%- efluente || '-' %></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Medios tratamento água:</span> <span><%- tratamento || '-' %></span>
+            </span>
+          </div>
+        </div>
       </div>
     </script>
 
     <!-- tmpl actividade pecuaria -->
     <script type="text/template" id="Pecuária">
-      <div class="form-group">
-        <button class="btn btn-default pull-right" id="newRow">Nova res</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <button class="btn btn-default pull-right" id="newRow">Nova res</button>
+          </div>
+        </div>
       </div>
       <div class="row">
-        <table class="table" id="reses">
-          <thead>
-            <tr>
-              <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-              <th>Tipo de reses</th>
-              <th>Nro de reses</th>
-              <th>Observações</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+        <div class="col-xs-12">
+          <table class="table" id="reses">
+            <thead>
+              <tr>
+                <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+                <th>Tipo de reses</th>
+                <th>Nro de reses</th>
+                <th>Observações</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </script>
 
@@ -604,56 +630,61 @@
     <!-- tmpl actividade piscicultura -->
     <script type="text/template" id="Piscicultura">
       <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Área <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span> / <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
-        </span>
+        <div class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+              <span class="title">Área <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
+              <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
+            </span>
+          </div>
+        </div>
       </div>
     </script>
 
     <!-- tmpl actividade produccao energia -->
     <script type="text/template" id="Producção de energia">
       <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Tipo de produção:</span> <span><%- energia_tipo || '-' %></span>
-          /
-          <span class="title">Altura de água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Potência a instalar:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
-          /
-          <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Tipo de equipamento:</span> <span><%- equipo || '-' %></span>
-        </span>
+        <div class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+              <span class="title">Tipo de produção:</span> <span><%- energia_tipo || '-' %></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Altura de água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span>
+              <span class="title">Potência a instalar:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
+            </span>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Tipo de equipamento:</span> <span><%- equipo || '-' %></span>
+            </span>
+          </div>
+        </div>
       </div>
     </script>
 
     <!-- tmpl actividade saneamento -->
     <script type="text/template" id="Saneamento">
       <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-        </span>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
-        </span>
+        <div class="col-xs-6">
+          <div class="row">
+            <span class="col-xs-offset-1 col-xs-11">
+              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+              <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
+            </span>
+          </div>
+        </div>
       </div>
     </script>
 
