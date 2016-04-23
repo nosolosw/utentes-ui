@@ -54,7 +54,7 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   },
 
   renderAddFonteModal: function (event) {
-    new Backbone.SIXHIARA.ModalEditFonteView({
+    new Backbone.SIXHIARA.FonteShowModalView({
       textConfirmBt: 'Adicionar',
       domains: this.options.domains,
       editing: false,

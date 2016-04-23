@@ -58,7 +58,7 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
 
   modelUpdate: function(e){
     e.preventDefault();
-    new Backbone.SIXHIARA.ModalEditFonteView({
+    new Backbone.SIXHIARA.FonteShowModalView({
       textConfirmBt: 'Actualizar',
       domains: this.options.domains,
       editing: true,

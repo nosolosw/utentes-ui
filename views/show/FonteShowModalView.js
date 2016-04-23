@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
+Backbone.SIXHIARA.FonteShowModalView = Backbone.SIXHIARA.ModalView.extend({
 
   html: `
   <div class="modal fade" id="editFonteModal" tabindex="-1" role="dialog" aria-labelledby="fonteModalLabel" aria-hidden="true">
@@ -74,74 +74,7 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
   </div>
   `,
 
-  events: {
-    'click #okbutton': 'okButtonClicked',
-  },
-
-  initialize:function(options) {
-    this.options = options || {};
-    if (this.options.modalSelectorTpl) {
-      this.template = _.template($(this.options.modalSelectorTpl).html());
-    } else if (this.html) {
-      this.template = _.template(this.html);
-    } else {
-        throw 'Bad configuration';
-    }
-  },
-
-  render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
-    if (this.options.textConfirmBt) {
-      this.$('#okbutton').text(this.options.textConfirmBt);
-    }
-    return this;
-  },
-
-  show: function() {
-    $(document.body).append(this.render().el);
-    var self = this;
-
-    this.widgetModel = this.model;
-    if (this.options.editing) {
-      this.widgetModel = this.model.clone();
-    }
-
-    this.customConfiguration();
-
-    new Backbone.UILib.WidgetsView({
-      el: this.$el,
-      model: this.widgetModel
-    }).render()
-
-    this.$('.modal').on('hidden.bs.modal', function(){
-      self._close();
-    });
-    this.$('.modal').modal('show');
-  },
-
-  _close: function() {
-    this.$('.modal').unbind();
-    this.$('.modal').remove();
-    this.remove();
-  },
-
-  okButtonClicked: function() {
-    if (this.options.editing) {
-      this.model.set(this.widgetModel.toJSON());
-    } else {
-      this.collection.add(this.model);
-    }
-    this.$('.modal').modal('hide');
-  },
-
-  remove: function() {
-    this.$el.unbind();
-    this.off();
-    Backbone.View.prototype.remove.call(this);
-  },
-
   customConfiguration: function() {
-    // FIXME
     new Backbone.UILib.SelectView({
       el: this.$('#tipo_fonte'),
       collection: this.options.domains.byCategory('fonte_tipo').byParent(this.model.get('tipo_agua'))
@@ -151,7 +84,6 @@ Backbone.SIXHIARA.ModalEditFonteView = Backbone.View.extend({
       el: this.$('#contador'),
       collection: this.options.domains.byCategory('contador')
     }).render();
-    // /FIXME
 
     this.$('#tipo_agua').prop('disabled', true)
   },
