@@ -1,3 +1,8 @@
+#block-location {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
 #tooltipEstadoLicenciaModalView .done {
   background-color: #eee;
 }
