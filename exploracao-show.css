@@ -2,7 +2,6 @@
 #block-location,
 #block-utente {
   border-top: 1px solid #ddd;
-  /*border-bottom: 1px solid #ddd;*/
 }
 
 #map{
@@ -10,7 +9,6 @@
   margin-left: 1em;
   width: 95%;
   margin-bottom: 1em;
-  /*border-radius: 10px;*/
 }
 
 label{ /*override bootstrap settings*/
