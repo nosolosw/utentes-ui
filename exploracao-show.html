@@ -38,28 +38,32 @@
       </a>
     </menu>
 
+    <section class="row">
+      <section id="block-title" class="col-xs-12">
+        <h3>
+          <button id="delete-button" type="button" class="btn btn-default btn-sm">Eliminar</button>
+          <button id="documentos" type="button" class="btn btn-default btn-sm">Documentos</button>
+          <button id="refresh-button" type="button" class="btn btn-default btn-sm">Refrescar</button>
+          <button id="save-button" type="button" class="btn btn-primary btn-sm">Guardar</button>
+        </h3>
+      </section>
+    </section>
+
     <section id="intro-section" class="row">
 
-      <section id="info-section" class="col-xs-6">
+      <section id="map-section" class="col-xs-6">
+        <div class="row">
+          <div id="map" class="col-xs-12"></div>
+        </div>
+      </section>
 
-        <section id="block-title" class="row">
-          <span class="col-xs-12">
-            <h3>
-              <span class="pull-right">
-                <button id="documentos" type="button" class="btn btn-default btn-sm">Documentos</button>
-                <button id="save-button" type="button" class="btn btn-primary btn-sm">Guardar</button>
-                <button id="delete-button" type="button" class="btn btn-default btn-sm">Eliminar</button>
-                <button id="refresh-button" type="button" class="btn btn-default btn-sm">Refrescar</button>
-              </span>
-            </h3>
-          </span>
-        </section>
+      <section id="info-section" class="col-xs-6">
 
         <section id="block-info">
           <div class="row">
             <h3 class="col-xs-1"><i class="fa fa-info"></i></h3>
             <h3 class="col-xs-11"> <span class="widget" id="exp_id"></span> <span class="widget" id="exp_name"></span>
-              <button type="button" class="btn btn-default btn-xs" id="editBlockInfo">Editar</button>
+              <button type="button" class="btn btn-default btn-xs pull-right" id="editBlockInfo">Editar</button>
             </h3>
           </div>
           <div class="row">
@@ -87,7 +91,7 @@
           <div class="row">
             <h3 class="col-xs-1"><i class="fa fa-map-marker"></i></h3>
             <h3 class="col-xs-11"><span class="widget" id="loc_provin"></span> / <span class="widget" id="loc_distri"></span>
-              <button type="button" class="btn btn-default btn-xs" id="editBlockLocation">Editar</button>
+              <button type="button" class="btn btn-default btn-xs pull-right" id="editBlockLocation">Editar</button>
             </h3>
           </div>
           <div class="row">
@@ -108,7 +112,7 @@
             <h3 class="col-xs-1"><i class="fa fa-user"></i></h3>
             <h3 class="col-xs-11">
               <span class="widget" id="nome"></span>
-              <button type="button" class="btn btn-default btn-xs" id="editBlockUtente">Editar</button>
+              <button type="button" class="btn btn-default btn-xs pull-right" id="editBlockUtente">Editar</button>
             </h3>
           </div>
           <div class="row">
@@ -132,13 +136,6 @@
             </span>
           </div>
         </section>
-
-      </section>
-
-      <section id="map-section" class="col-xs-6">
-        <div class="row">
-          <div id="map" class="col-xs-12"></div>
-        </div>
       </section>
 
     </section>
