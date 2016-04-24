@@ -35,7 +35,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelectorTpl: '#resModalTpl',
         tableSelector: 'table#reses',
         collection: this.model.get('actividade').get('reses'),
-        rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
         collectionModel: Backbone.SIXHIARA.ActividadeRes,
         domains: this.options.domains,
       })
@@ -47,7 +47,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
         modalSelectorTpl: '#cultivoModalTpl',
         tableSelector: 'table#cultivos',
         collection: this.model.get('actividade').get('cultivos'),
-        rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area, "0[,]000[.]0000")) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+        rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area, "0[,]000[.]0000")) %></td><td><%- observacio %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
         collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
         domains: this.options.domains,
       })
@@ -163,7 +163,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelectorTpl: '#resModalTpl',
           tableSelector: 'table#reses',
           collection: self.model.get('actividade').get('reses'),
-          rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
           collectionModel: Backbone.SIXHIARA.ActividadeRes,
           domains: self.options.domains,
         })
@@ -175,7 +175,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
           modalSelectorTpl: '#cultivoModalTpl',
           tableSelector: 'table#cultivos',
           collection: self.model.get('actividade').get('cultivos'),
-          rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area, "0[,]000[.]0000")) %></td><td><%- observacio %></td><td class="glyphicon glyphicon-edit edit"></td><td class="glyphicon glyphicon-trash close"></td>',
+          rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area, "0[,]000[.]0000")) %></td><td><%- observacio %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
           collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
           domains: self.options.domains,
         })

@@ -14,12 +14,13 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     <td class="d_dado"><% print(formatter().formatDate(d_dado)) %></td>
     <td class="lat_lon"><%- lat_lon %></td>
     <td class="observacio"><%- observacio %></td>
-    <td><button type="button" class="edit-fonte btn btn-default btn-xs">Editar</button> <button type="button" class="delete-fonte btn btn-default btn-xs">Eliminar</button></td>
+    <td class="edit"><i class="fa fa-pencil-square-o"></i></td>
+    <td class="delete"><i class="fa fa-trash"></i></td>
   `),
 
   events: {
-    'click .delete-fonte': 'modelDestroy',
-    'click .edit-fonte': 'modelUpdate',
+    'click .delete': 'modelDestroy',
+    'click .edit': 'modelUpdate',
   },
 
   initialize: function(options){

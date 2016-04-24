@@ -29,10 +29,6 @@ label{ /*override bootstrap settings*/
 
 /* blocks: colors, margins, paddings */
 
-#title{
-  /*border-bottom: 1px solid #ddd;*/
-}
-
 #map{
   background-color: #eee;
 }

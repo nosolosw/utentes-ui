@@ -107,7 +107,7 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   tagName: 'tr',
 
   events:{
-    'click .close': 'modelDestroy',
+    'click .delete': 'modelDestroy',
     'click .edit': 'modelEdit',
   },
 
