@@ -33,7 +33,7 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
       model: exploracao
     });
     summaryConsumoView.listenTo(exploracao, 'change:c_licencia change:c_real change:c_estimado', summaryConsumoView.render);
-    
+
     this.subViews.push(summaryConsumoView);
 
     var summaryPagosView = new Backbone.SIXHIARA.SummaryPagosView({
@@ -60,39 +60,21 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
   },
 
   renderModal: function (event) {
-
     if(!this.domainsFilled) return;
-
-    // add modal to DOM
-    var node = $(document.body).append($('#block-info-modal-tmpl').html());
-
-    // take it from DOM and connect events, fill components, etc
-    var modalEl = $('#editInfoModal');
-    var modalViews = [];
-
-    var selectPagos = new Backbone.UILib.SelectView({
-      el: $('#editInfoModal #pagos'),
-      collection: this.options.domains.byCategory('pagamentos'),
-    }).render();
-    modalViews.push(selectPagos);
-
-    var widgetsView = new Backbone.UILib.WidgetsView({
-      el: modalEl,
-      model: this.model
-    }).render();
-    modalViews.push(widgetsView);
-
-    // remove modal from DOM on hide
-    modalEl.on('hidden.bs.modal', function () {
-      // this is the modal itself
-      $(this).remove();
-      _.invoke(modalViews, 'remove');
-      modalViews = [];
+    event.preventDefault();
+    var modalView = new Backbone.SIXHIARA.ModalView({
+      modalSelectorTpl: '#block-info-modal-tmpl',
+      model: this.model,
+      domains: this.options.domains,
+      editing: true,
     });
-
-    // do open modal
-    modalEl.modal('show');
-
+    modalView.customConfiguration = function() {
+      new Backbone.UILib.SelectView({
+        el: this.$('#pagos'),
+        collection: this.options.domains.byCategory('pagamentos'),
+      }).render();
+    };
+    modalView.show();
   },
 
   remove: function () {
