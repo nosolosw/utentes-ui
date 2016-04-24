@@ -64,96 +64,61 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   },
 
   renderEditLicenseModal: function (event) {
-
-    // add modal to DOM
-    var node = $(document.body).append($('#block-license-modal-tmpl').html());
-    var subViewsModal = [];
-
-    // take it from DOM and connect events, fill components, etc
-    var modalEl = $('#licenciaModal');
-    var estadoView = new Backbone.UILib.SelectView({
-      el: $('#licenciaModal #estado'),
-      collection: this.options.domains.byCategory('licencia_estado')
-    }).render();
-    subViewsModal.push(estadoView);
-
-    var modelView = new Backbone.UILib.WidgetsView({
-      el: modalEl,
+    event.preventDefault();
+    var modalView = new Backbone.SIXHIARA.ModalView({
+      modalSelectorTpl: '#block-license-modal-tmpl',
       model: this.license,
-    }).render();
-    subViewsModal.push(modelView);
-
-    // remove modal from DOM on hide
-    modalEl.on('hidden.bs.modal', function () {
-      // this is the modal itself
-      // should we unbind the events too?
-      $(this).remove();
-      subViewsModal.forEach(function (view) {
-        view.remove();
+      domains: this.options.domains,
+      editing: true,
+    });
+    modalView.customConfiguration = function() {
+      new Backbone.UILib.SelectView({
+        el: this.$('#estado'),
+        collection: this.options.domains.byCategory('licencia_estado')
+      }).render();
+      var self = this;
+      this.$('#info-estado-licencia').on('click', function() {
+        new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+            collection: self.options.domains.byCategory('licencia_estado'),
+            actual_state: self.model.get('estado'),
+        }).show();
       });
-
-    });
-    var self = this;
-    modalEl.find('#info-estado-licencia').on('click', function() {
-      new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
-          collection: self.options.domains.byCategory('licencia_estado'),
-          actual_state: self.license.get('estado'),
-      }).show();
-    });
-
-    // do open modal
-    modalEl.modal('show');
-
+    }
+    modalView.show();
   },
 
   renderAddLicenseModal: function (event) {
+    event.preventDefault();
 
-    // add modal to DOM
-    var node = $(document.body).append($('#block-license-modal-tmpl').html());
-    var subViewsModal = [];
+    // FIXME Probably we should use the editing=false mode
     this.license = new Backbone.SIXHIARA.Licencia({
       'lic_tipo': this.options.lic_tipo,
     });
+
     this.model.get('licencias').add(this.license);
     this.listenTo(this.license, 'change', this.render);
     this.render();
 
-    // take it from DOM and connect events, fill components, etc
-    var modalEl = $('#licenciaModal');
-    var estadosView = new Backbone.UILib.SelectView({
-      el: $('#licenciaModal #estado'),
-      collection: this.options.domains.byCategory('licencia_estado')
-    }).render();
-    subViewsModal.push(estadosView);
-
-    var modalView = new Backbone.UILib.WidgetsView({
-      el: modalEl,
+    var modalView = new Backbone.SIXHIARA.ModalView({
+      modalSelectorTpl: '#block-license-modal-tmpl',
       model: this.license,
-    }).render();
-    subViewsModal.push(modalView);
-
-    // remove modal from DOM on hide
-    modalEl.on('hidden.bs.modal', function () {
-      // this is the modal itself
-      // should we unbind the events too?
-      $(this).remove();
-      subViewsModal.forEach(function (view) {
-        view.remove();
+      domains: this.options.domains,
+      editing: true,
+    });
+    modalView.customConfiguration = function() {
+      new Backbone.UILib.SelectView({
+        el: this.$('#estado'),
+        collection: this.options.domains.byCategory('licencia_estado')
+      }).render();
+      var self = this;
+      this.$('#info-estado-licencia').on('click', function() {
+        new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+            collection: self.options.domains.byCategory('licencia_estado'),
+            actual_state: self.model.get('estado'),
+        }).show();
       });
-    });
-
-    var self = this;
-    modalEl.find('#info-estado-licencia').on('click', function() {
-      new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
-          collection: self.options.domains.byCategory('licencia_estado'),
-          actual_state: self.license.get('estado'),
-      }).show();
-    });
-
-
-    // do open modal
-    modalEl.modal('show');
-
+    }
+    modalView.show();
   },
 
   showModalEstadoLicencia: function(){
