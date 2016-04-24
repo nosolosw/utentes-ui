@@ -46,6 +46,7 @@ menu a:hover{
   color: #bbb;
 }
 
+i.edit, i.delete,
 td.edit, td.delete {
   /* float: right; */
   font-size: 15px;
@@ -57,10 +58,11 @@ td.edit, td.delete {
   filter: alpha(opacity=20);
   width: 4px;
 }
-td.edit:hover,
-td.delete:hover,
-td.edit:focus,
-td.delete:focus {
+
+i.edit:hover, i.delete:hover,
+i.edit:focus, i.delete:focus,
+td.edit:hover, td.delete:hover,
+td.edit:focus, td.delete:focus {
   color: #000000;
   text-decoration: none;
   cursor: pointer;

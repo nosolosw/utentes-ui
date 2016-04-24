@@ -14,8 +14,10 @@ var formatValue = function(k, v, rowData) {
     v = v.map(function(e){
       return '<a href="' + urlShow + e.gid + '" >' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade.tipo;
     }).join('<br>');
-  } else if (k === 'actions') {
-    v = '<i class="glyphicon glyphicon-edit edit"></i><i class="glyphicon glyphicon-trash delete"></i>'
+  } else if (k === 'edit') {
+    v = '<i class="edit fa fa-pencil-square-o"></i>';
+  } else if (k === 'delete'){
+    v = '<i class="delete fa fa-trash"></i>';
   } else if (k === 'registro'){
     var com = rowData.get('reg_comerc'),
         zon = rowData.get('reg_zona');
@@ -56,12 +58,12 @@ var formatValue = function(k, v, rowData) {
 var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
   collection: utentes,
   el: $('#the_utentes_table'),
-  columnNames: ['nome', 'entidade', 'registro', 'localizacion', 'exploracaos', 'observacio', 'actions'],
-  // 'actions' column is used to render the buttons
+  columnNames: ['nome', 'entidade', 'registro', 'localizacion', 'exploracaos', 'observacio', 'edit', 'delete'],
+  // 'edit' & 'delete' column are used to render the buttons
   // 'nuit', Is show with 'nome' and not it its own column
   // 'reg_comerc', 'reg_zona' are shown as 'registro'
   // 'loc_provin', 'loc_distri', 'loc_posto', 'loc_nucleo' are shown as 'localizacion'
-  columnsWithOutTitle: ['actions'],
+  columnsWithOutTitle: ['edit', 'delete'],
   columnTitles: {
     'id':          'ID',
     'nome':        'Nome / Nuit',
@@ -77,7 +79,8 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
     'loc_nucleo':  'Núcleo',
     'exploracaos': 'Exploraçôes',
     'observacio':  'Observaçôes',
-    'actions':     '',
+    'edit':        '',
+    'delete':      '',
   },
   formatValue: formatValue,
   colReorderOptions: false,
