@@ -1,107 +1,51 @@
+i.delete, i.edit {
+  /* float: right; */
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  width: 4px;
+}
+i.delete:hover,
+i.edit:hover,
+i.delete:focus,
+i.edit:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
 
-.btn-xs{ /*override bootstrap settings*/
-  color: #bbb !important;
+i.delete {
+  margin-left: 20px;
 }
 
 .title{
   color: #999;
 }
 
-/* ---- STRUCTURE ---- */
-
-/* height system to have scrolly panels */
-
 html,
 body,
-.container-fluid{
-  height: 100%;
-}
-
-.main-content{
-  height: 94%;
-}
-
-#projects {
-  height: 100%;
-}
-
-#projects {
-  overflow-y: scroll;
-}
-
-
-/* sections micro-space */
-
-nav{
-  padding: 2em 0 2em 0;
-}
-
-
-#projects h2{
-  margin: 0;
-  padding-bottom: .5em;
-}
-
-
-
-
-/* ----- MODULES ----- */
-
-/* buttons style for links */
-nav a {
-  padding: .3em .9em .3em .9em;
-  border-radius: 20px;
-  margin: .4% .7% 0% .7%;
-  float: right;
-}
-
-/* project and agency summaries */
-#projects > div{
-  border-bottom: 1px solid #f3f3f3;
-  margin-bottom: 1em;
-}
-
-
-/* each project stands for itself */
-#projects li {
-  border-bottom: 1px solid #f3f3f3;
-  margin-bottom: 0em;
-  /* padding-bottom: 0.1em; */
-  padding: 1em 0 .75em 0;
-}
-
-
-
-nav {
-  background-color: #36537d;
-}
-
 main {
-  background-color: #f3f3f3;
+  height: 100%;
 }
-
 
 #projects {
-  background-color: white;
+  padding-top: 1em;
 }
 
-
-
-nav a:hover,
-.footer-nav a:hover{
-  background-color: #486fa6;
-}
-
-header {
-  color: white;
+a:hover{
+  text-decoration: none;
 }
 
 a {
   color: #00a2da;
 }
 
-
-nav a,
-nav a:hover {
-  color: white;
+a:hover {
+  color: #FE8433;
 }

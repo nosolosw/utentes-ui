@@ -2,7 +2,7 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
 
 
-  template: '<table class="table table-hover table-bordered table-condensed"> <thead style="display: table-header-group;">  <tr id="header"> </tr> </thead> <tfoot style="display: table-header-group;"> <tr id="column-filter"> </tr> </tfoot> <tbody> </tbody> </table>',
+  template: '<table class="table table-hover"> <thead style="display: table-header-group;">  <tr id="header"> </tr> </thead> <tfoot style="display: table-header-group;"> <tr id="column-filter"> </tr> </tfoot> <tbody> </tbody> </table>',
 
   initialize: function(options){
     this.options = options || {};
@@ -133,7 +133,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       self.renderModal(u, self);
     });
 
-    $('#the_utentes_table table').on('click', 'button.delete', function() {
+    $('#the_utentes_table table').on('click', 'i.delete', function() {
       // table.row ( rowSelector ) http://datatables.net/reference/type/row-selector
       var id = self.table.row(this.parentElement).id().split('-')[1];
       var u = self.collection.filter({id:parseInt(id)})[0];
@@ -154,7 +154,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     });
 
 
-    $('#the_utentes_table table').on('click', 'button.edit', function() {
+    $('#the_utentes_table table').on('click', 'i.edit', function() {
       // table.row ( rowSelector ) http://datatables.net/reference/type/row-selector
       var id = self.table.row(this.parentElement).id().split('-')[1];
       var u = self.collection.filter({id:parseInt(id)})[0];

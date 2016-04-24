@@ -15,9 +15,7 @@ var formatValue = function(k, v, rowData) {
       return '<a href="' + urlShow + e.gid + '" >' + e.exp_id + ' ' + e.exp_name + '</a>: ' + e.actividade.tipo;
     }).join('<br>');
   } else if (k === 'actions') {
-    v = '<button type="button" class="btn btn-default btn-xs edit">Editar</button>';
-    v += '<br><br>';
-    v += '<button type="button" class="btn btn-default btn-xs delete">Eliminar</button>';
+    v = '<i class="glyphicon glyphicon-edit edit"></i><i class="glyphicon glyphicon-trash delete"></i>'
   } else if (k === 'registro'){
     var com = rowData.get('reg_comerc'),
         zon = rowData.get('reg_zona');
