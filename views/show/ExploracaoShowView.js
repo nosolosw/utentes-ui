@@ -129,34 +129,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
     }).render();
     this.subViews.push(blockFontesView);
 
-    domains.on('sync', function(){
-      new Backbone.UILib.SelectView({
-        el: $('#resModal #reses_tipo'),
-        collection: domains.byCategory('animal_tipo'),
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#cultivoModal #cultivo'),
-        collection: domains.byCategory('cultivo_tipo'),
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#cultivoModal #rega'),
-        collection: domains.byCategory('rega_tipo'),
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#resModalEdit #reses_tipo'),
-        collection: domains.byCategory('animal_tipo'),
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#cultivoModalEdit #cultivo'),
-        collection: domains.byCategory('cultivo_tipo'),
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#cultivoModalEdit #rega'),
-        collection: domains.byCategory('rega_tipo'),
-      }).render();
-    });
-
-
     return this;
   },
 
