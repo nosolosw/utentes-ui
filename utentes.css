@@ -1,29 +1,3 @@
-i.delete, i.edit {
-  /* float: right; */
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 1;
-  color: #000000;
-  text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-  width: 4px;
-}
-i.delete:hover,
-i.edit:hover,
-i.delete:focus,
-i.edit:focus {
-  color: #000000;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
-
-i.delete {
-  margin-left: 20px;
-}
-
 .title{
   color: #999;
 }
