@@ -57,20 +57,20 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
 
   renderModal: function (event) {
     if(!this.domainsFilled) return;
+
     event.preventDefault();
-    var modalView = new Backbone.SIXHIARA.ModalView({
-      modalSelectorTpl: '#block-info-modal-tmpl',
+
+    var modalView = new Backbone.UILib.ModalView({
       model: this.model,
-      domains: this.options.domains,
-      editing: true,
+      selectorTmpl: '#block-info-modal-tmpl',
     });
-    modalView.customConfiguration = function() {
-      new Backbone.UILib.SelectView({
-        el: this.$('#pagos'),
-        collection: this.options.domains.byCategory('pagamentos'),
-      }).render();
-    };
-    modalView.show();
+    var selectView = new Backbone.UILib.SelectView({
+      el: modalView.$('#pagos'),
+      collection: this.options.domains.byCategory('pagamentos'),
+    }).render();
+    modalView.addAuxView(selectView);
+
+    modalView.render();
   },
 
   remove: function () {
