@@ -36,7 +36,7 @@ Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
   },
 
   setDomainsFilled: function () {
-      this.domainsFilled = true;
+    this.domainsFilled = true;
   },
 
   render: function () {
@@ -49,30 +49,36 @@ Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
 
     if(!this.domainsFilled) return;
 
-    // add modal to DOM
-    var node = $(document.body).append($('#block-utente-modal-tmpl').html());
+    // we do not want SelectUtenteView to update base model
+    // so we work with a clone and update the model on okButtonClicked
+    var exploracao = this.model.clone();
+    var utente = exploracao.get('utente').clone();
 
-    // take it from DOM and connect events, fill components, etc
-    var modalEl = $('#editUtenteModal');
-    var modalViews = [];
-
-    var selectUtente = new Backbone.SIXHIARA.SelectUtenteView({
-      el: modalEl,
-      model: this.model,
-      collection: this.utentes,
-    }).render();
-    modalViews.push(selectUtente);
-
-    // remove modal from DOM on hide
-    modalEl.on('hidden.bs.modal', function () {
-      // this is the modal itself
-      $(this).remove();
-      _.invoke(modalViews, 'remove');
-      modalViews = [];
+    // override default action for okButtonClicked
+    var self = this;
+    var UtenteModalView = Backbone.UILib.ModalView.extend({
+      okButtonClicked: function () {
+        // in this context, this is the backbone modalView
+        var newUtente = self.utentes.findWhere({'nome': this.draftModel.get('nome')});
+        self.model.set('utente', newUtente);
+        this.$('.modal').modal('hide');
+      }
     });
 
-    // do open modal
-    modalEl.modal('show');
+    var modalView = new UtenteModalView({
+      model: utente,
+      selectorTmpl: '#block-utente-modal-tmpl'
+    });
+
+    // connect auxiliary views
+    var selectUtente = new Backbone.SIXHIARA.SelectUtenteView({
+      el: modalView.el,
+      model: exploracao,
+      collection: this.utentes,
+    }).render();
+    modalView.addAuxView(selectUtente);
+
+    modalView.render();
 
   },
 
