@@ -54,13 +54,42 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   },
 
   renderAddFonteModal: function (event) {
-    new Backbone.SIXHIARA.FonteShowModalView({
-      textConfirmBt: 'Adicionar',
-      domains: this.options.domains,
-      editing: false,
-      collection: this.model.get('fontes'),
-      model: new Backbone.SIXHIARA.Fonte({tipo_agua: this.options.lic_tipo}),
-    }).show();
+    event.preventDefault();
+
+    // override default action for okButtonClicked
+    var self = this;
+    var AddFonteModalView = Backbone.UILib.ModalView.extend({
+      okButtonClicked: function () {
+        // in this context, this is the backbone modalView
+        this.model.set(this.draftModel.toJSON());
+        self.model.get('fontes').add(this.model);
+        this.$('.modal').modal('hide');
+      }
+    });
+
+    var fonte = new Backbone.SIXHIARA.Fonte({tipo_agua: this.options.lic_tipo})
+    var modalView = new AddFonteModalView({
+      model: fonte,
+      selectorTmpl: '#block-fonte-modal-tmpl'
+    });
+    modalView.$('#tipo_agua').prop('disabled', true)
+    modalView.$('#okButton').text('Adicionar');
+
+    // connect auxiliary views
+    var fonteTipoView = new Backbone.UILib.SelectView({
+      el: modalView.$('#tipo_fonte'),
+      collection: this.options.domains.byCategory('fonte_tipo').byParent(fonte.get('tipo_agua'))
+    }).render();
+    modalView.addAuxView(fonteTipoView);
+
+    var contadorView = new Backbone.UILib.SelectView({
+      el: modalView.$('#contador'),
+      collection: this.options.domains.byCategory('contador')
+    }).render();
+    modalView.addAuxView(contadorView);
+
+    modalView.render();
+
   },
 
   renderEditLicenseModal: function (event) {
@@ -100,9 +129,8 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
     });
 
     // override default action for okButtonClicked
-    // only for addLicense modal
     var self = this;
-    var ModalViewAdd = Backbone.UILib.ModalView.extend({
+    var AddLicenseModalView = Backbone.UILib.ModalView.extend({
       okButtonClicked: function () {
         // in this context, this is the backbone modalView
         self.license.set(this.draftModel.toJSON());
@@ -112,7 +140,7 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
         this.$('.modal').modal('hide');
       }
     });
-    var modalView = new ModalViewAdd({
+    var modalView = new AddLicenseModalView({
       model: this.license,
       selectorTmpl: '#block-license-modal-tmpl',
     });

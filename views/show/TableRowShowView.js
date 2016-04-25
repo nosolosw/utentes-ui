@@ -59,13 +59,29 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
 
   modelUpdate: function(e){
     e.preventDefault();
-    new Backbone.SIXHIARA.FonteShowModalView({
-      textConfirmBt: 'Actualizar',
-      domains: this.options.domains,
-      editing: true,
-      collection: null,
+
+    var fonte = this.model;
+
+    var modalView = new Backbone.UILib.ModalView({
       model: this.model,
-    }).show();
+      selectorTmpl: '#block-fonte-modal-tmpl'
+    });
+    modalView.$('#tipo_agua').prop('disabled', true)
+
+    // connect auxiliary views
+    var fonteTipoView = new Backbone.UILib.SelectView({
+      el: modalView.$('#tipo_fonte'),
+      collection: this.options.domains.byCategory('fonte_tipo').byParent(fonte.get('tipo_agua'))
+    }).render();
+    modalView.addAuxView(fonteTipoView);
+
+    var contadorView = new Backbone.UILib.SelectView({
+      el: modalView.$('#contador'),
+      collection: this.options.domains.byCategory('contador')
+    }).render();
+    modalView.addAuxView(contadorView);
+
+    modalView.render();
   },
 
 });
