@@ -246,7 +246,8 @@
     </div>
   </div>
 
-
+  <!-- ACTIVITIES TEMPLATES -->
+  <div id="templates"></div>
 
   <!-- TEMPLATES -->
 
@@ -292,6 +293,7 @@
               <div class="col-xs-offset-1 col-xs-10">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="okButton">Aceptar</button>
+              </div>
             </div>
           </div>
         </div>
@@ -316,583 +318,580 @@
               </div>
               <div class="form-group col-xs-offset-2 col-xs-4">
                 <label for="loc_bacia">Bacia</label>
-                <select class="form-control widget" id="loc_bacia"><select>
-                </div>
+                <select class="form-control widget" id="loc_bacia"></select>
               </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_distri">Distrito</label>
-                  <select class="form-control widget" id="loc_distri"></select>
-                </div>
-                <div class="form-group col-xs-offset-2 col-xs-4">
-                  <label for="loc_subaci">Sub-bacia</label>
-                  <select class="form-control widget" id="loc_subaci"></select>
-                </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_distri">Distrito</label>
+                <select class="form-control widget" id="loc_distri"></select>
               </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_posto">Posto administrativo</label>
-                  <select class="form-control widget" id="loc_posto"></select>
-                </div>
-                <div class="form-group col-xs-offset-2 col-xs-4">
-                  <label for="loc_rio">Rio</label>
-                  <input type="text" class="form-control widget" id="loc_rio">
-                </div>
+              <div class="form-group col-xs-offset-2 col-xs-4">
+                <label for="loc_subaci">Sub-bacia</label>
+                <select class="form-control widget" id="loc_subaci"></select>
               </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_nucleo">Núcleo</label>
-                  <input type="text" class="form-control widget" id="loc_nucleo">
-                </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_posto">Posto administrativo</label>
+                <select class="form-control widget" id="loc_posto"></select>
               </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10">
-                  <label for="loc_endere">Endereço</label>
-                  <input type="text" class="form-control widget" id="loc_endere">
-                </div>
+              <div class="form-group col-xs-offset-2 col-xs-4">
+                <label for="loc_rio">Rio</label>
+                <input type="text" class="form-control widget" id="loc_rio">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_nucleo">Núcleo</label>
+                <input type="text" class="form-control widget" id="loc_nucleo">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="loc_endere">Endereço</label>
+                <input type="text" class="form-control widget" id="loc_endere">
               </div>
             </div>
           </div>
         </div>
       </div>
-    </script>
+    </div>
+  </script>
 
-    <!-- tmpl block utente modal -->
-    <script type="text/template" id="block-utente-modal-tmpl">
-      <div class="modal fade" id="editUtenteModal" tabindex="-1" role="dialog" aria-labelledby="editUtenteModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="editUtenteModalLabel">Utente</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10">
-                  <select id="select-utente" class="form-control">
-                    <!-- <option value="novo"> - Novo utente - </option> -->
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10">
-                  <label for="nome">Nome do utente</label>
-                  <input type="text" class="form-control widget widget-utente" id="nome">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_provin">Província</label>
-                  <input type="text" class="form-control widget widget-utente" id="loc_provin">
-                </div>
-                <div class="form-group col-xs-offset-2 col-xs-4">
-                  <label for="nuit">NUIT</label>
-                  <input type="text" class="form-control widget widget-utente" id="nuit">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_distri">Distrito</label>
-                  <input type="text" class="form-control widget widget-utente" id="loc_distri">
-                </div>
-                <div class="form-group col-xs-offset-2 col-xs-4">
-                  <label for="entidade">Tipo de entidade</label>
-                  <input type="text" class="form-control widget widget-utente" id="entidade">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_posto">Posto administrativo</label>
-                  <input type="text" class="form-control widget widget-utente" id="loc_posto">
-                </div>
-                <div class="form-group col-xs-offset-2 col-xs-4">
-                  <label for="reg_comerc">Nro de registro comercial</label>
-                  <input type="text" class="form-control widget widget-utente" id="reg_comerc">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="loc_nucleo">Núcleo</label>
-                  <input type="text" class="form-control widget widget-utente" id="loc_nucleo">
-                </div>
-                <div class="form-group col-xs-offset-2 col-xs-4">
-                  <label for="reg_zona">Registrado em</label>
-                  <input type="text" class="form-control widget widget-utente" id="reg_zona">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10">
-                  <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control widget widget-utente" id="observacio" rows="4"></textarea>
-                </div>
+  <!-- tmpl block utente modal -->
+  <script type="text/template" id="block-utente-modal-tmpl">
+    <div class="modal fade" id="editUtenteModal" tabindex="-1" role="dialog" aria-labelledby="editUtenteModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="editUtenteModalLabel">Utente</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <select id="select-utente" class="form-control">
+                  <!-- <option value="novo"> - Novo utente - </option> -->
+                </select>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <!-- tmpl actividade abastecimento -->
-    <script type="text/template" id="Abastecimento">
-      <div class="row">
-        <span class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-              <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
-              <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-        </span>
-      </div>
-    </script>
-
-    <!-- tmpl actividade agricultura -->
-    <script type="text/template" id="Agricultura-Regadia">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <table class="table table-bordered" id="cultivos">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-                <th>Tipo de cultivo / rega</th>
-                <th>Eficiencia del riego</th>
-                <th>Área <i class="units">(ha)</i></th>
-                <th>Observações</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </script>
-
-    <!-- modal engadir cultivo -->
-    <script type="text/template" id="cultivoModalTpl">
-      <div class="modal fade" id="cultivoModal" tabindex="-1" role="dialog" aria-labelledby="cultivoModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="cultivoModalLabel">Cultivo</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="cultivo">Tipo de cultivo</label>
-                  <select class="form-control widget" id="cultivo">
-                  </select>
-                </div>
-                <div class="form-group col-xs-4">
-                  <label for="rega">Tipo de rega</label>
-                  <select class="form-control widget" id="rega">
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="eficiencia">Eficiencia del riego</label>
-                  <input type="text" class="form-control widget-number" id="eficiencia" />
-                </div>
-
-                <div class="form-group col-xs-4">
-                  <label for="area">Área <i class="units">(ha)</i></label>
-                  <input type="text" class="form-control widget-number" id="area" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-8">
-                  <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control widget" id="observacio" rows="4"></textarea>
-                </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="nome">Nome do utente</label>
+                <input type="text" class="form-control widget widget-utente" id="nome">
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <!-- tmpl actividade industria -->
-    <script type="text/template" id="Indústria">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-              <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
-            </span>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Efluente:</span> <span><%- efluente || '-' %></span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Medios tratamento água:</span> <span><%- tratamento || '-' %></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <!-- tmpl actividade pecuaria -->
-    <script type="text/template" id="Pecuária">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <button class="btn btn-default pull-right" id="newRow">Nova res</button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <table class="table table-bordered" id="reses">
-            <thead>
-              <tr>
-                <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-                <th>Tipo de reses</th>
-                <th>Nro de reses</th>
-                <th>Observações</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </script>
-
-    <!-- modal engadir res -->
-    <script type="text/template" id="resModalTpl">
-      <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="resModalLabel">Res</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="reses_tipo">Tipo de reses</label>
-                  <select class="form-control widget" id="reses_tipo">
-                  </select>
-                </div>
-
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="reses_nro">Nro de reses</label>
-                  <input type="text" class="form-control widget-number" id="reses_nro" />
-                </div>
-
-                <div class="form-group col-xs-offset-1 col-xs-9">
-                  <label for="observacio">Observaçôes</label>
-                  <textarea class="form-control widget" id="observacio" rows="4"></textarea>
-                </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_provin">Província</label>
+                <input type="text" class="form-control widget widget-utente" id="loc_provin">
+              </div>
+              <div class="form-group col-xs-offset-2 col-xs-4">
+                <label for="nuit">NUIT</label>
+                <input type="text" class="form-control widget widget-utente" id="nuit">
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </script>
-
-
-    <!-- tmpl actividade piscicultura -->
-    <script type="text/template" id="Piscicultura">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-              <span class="title">Área <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
-              <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <!-- tmpl actividade produccao energia -->
-    <script type="text/template" id="Producção de energia">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-              <span class="title">Tipo de produção:</span> <span><%- energia_tipo || '-' %></span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Altura de água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span>
-              <span class="title">Potência a instalar:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
-            </span>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Tipo de equipamento:</span> <span><%- equipo || '-' %></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <!-- tmpl actividade saneamento -->
-    <script type="text/template" id="Saneamento">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-              <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <!-- block license modal tmpl -->
-    <script type="text/template" id="block-license-modal-tmpl">
-      <div class="modal fade" id="licenciaModal" tabindex="-1" role="dialog" aria-labelledby="licenciaModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="licenciaModalLabel">Licencia <span id="lic_tipo"></span></h4>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="lic_tipo">
-              <input type="hidden" class="form-control widget" id="lic_nro">
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-7">
-                  <label for="estado">Estado</label> <span id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></span>
-                  <select type="text" class="form-control widget estado-subterranea" id="estado" aria-describedby="info-estado-licencia"></select>
-                </div>
-                <div class="form-group col-xs-3">
-                  <label for="cadastro">Nro de cadastro</label>
-                  <input type="text" class="form-control widget" id="cadastro">
-                </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_distri">Distrito</label>
+                <input type="text" class="form-control widget widget-utente" id="loc_distri">
               </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-4">
-                  <label for="c_real_int">C. licenciado <i class="units">(m<sup>3</sup>/més)</i></label>
-                  <input type="text" class="form-control widget-number" id="c_licencia">
-                </div>
-                <div class="form-group col-xs-3">
-                  <label for="d_emissao">Data emissão</label>
-                  <input type="text" class="form-control widget-date" id="d_emissao" placeholder="dd/mm/yyyy">
-                </div>
-                <div class="form-group col-xs-3">
-                  <label for="d_validade">Data validade</label>
-                  <input type="text" class="form-control widget-date" id="d_validade" placeholder="dd/mm/yyyy">
-                </div>
-              </div>
-              <br/>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10">
-                  <label class="title">CONSUMOS INTERMEDIOS</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-5">
-                  <label for="c_real_int">C. real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
-                  <input type="text" class="form-control widget-number" id="c_real_int">
-                </div>
-                <div class="form-group col-xs-5">
-                  <label for="c_soli_int">C. solicitado intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
-                  <input type="text" class="form-control widget-number" id="c_soli_int">
-                </div>
+              <div class="form-group col-xs-offset-2 col-xs-4">
+                <label for="entidade">Tipo de entidade</label>
+                <input type="text" class="form-control widget widget-utente" id="entidade">
               </div>
             </div>
-            <div class="modal-footer">
-              <div class="row">
-                <div class="col-xs-offset-1 col-xs-10">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary" id="okButton">Aceptar</button>
-                </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_posto">Posto administrativo</label>
+                <input type="text" class="form-control widget widget-utente" id="loc_posto">
+              </div>
+              <div class="form-group col-xs-offset-2 col-xs-4">
+                <label for="reg_comerc">Nro de registro comercial</label>
+                <input type="text" class="form-control widget widget-utente" id="reg_comerc">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="loc_nucleo">Núcleo</label>
+                <input type="text" class="form-control widget widget-utente" id="loc_nucleo">
+              </div>
+              <div class="form-group col-xs-offset-2 col-xs-4">
+                <label for="reg_zona">Registrado em</label>
+                <input type="text" class="form-control widget widget-utente" id="reg_zona">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget widget-utente" id="observacio" rows="4"></textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </script>
+    </div>
+  </script>
 
-    <!-- template licencia -->
-    <script type="text/template" id="licencia-tmpl">
-      <div class="row">
-        <h4 class="col-xs-offset-1 col-xs-11">Licença <%- lic_tipo + ': ' + (lic_nro || '-') %>
-          <button type="button" class="btn btn-default btn-xs hidden" id="addLicense">Adicionar</button>
-          <button type="button" class="btn btn-default btn-xs" id="editLicense">Editar</button>
-          <button type="button" class="btn btn-default btn-xs" id="addFonte">Nova fonte</button>
-          <button type="button" class="btn btn-default btn-xs" id="removeLicense">Eliminar</button>
-        </h4>
+  <!-- tmpl actividade abastecimento -->
+  <script type="text/template" id="Abastecimento">
+    <div class="row">
+      <span class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
+            <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
+          </span>
+        </div>
       </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Estado:</span> <%- estado || '-' %> <i id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></i>
-        </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11">
+      </span>
+    </div>
+  </script>
+
+  <!-- tmpl actividade agricultura -->
+  <script type="text/template" id="Agricultura-Regadia">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+        </div>
       </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-11">
-          <span class="title">Nro de cadastro:</span> <%- cadastro || '-' %>
-          <span class="title">Data emissão:</span> <%- formatter().formatDate(d_emissao) || '-' %>
-          <span class="title">Data validade:</span> <%- formatter().formatDate(d_validade) || '-' %>
-        </span>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-bordered" id="cultivos">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+              <th>Tipo de cultivo / rega</th>
+              <th>Eficiencia del riego</th>
+              <th>Área <i class="units">(ha)</i></th>
+              <th>Observações</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-1 text-right"><%- formatter().formatNumber(c_licencia) || '-' %> </span>
-        <span class="col-xs-10">
-          <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo licenciado</span>
-        </span>
+    </div>
+  </script>
+
+  <!-- modal engadir cultivo -->
+  <script type="text/template" id="cultivoModalTpl">
+    <div class="modal fade" id="cultivoModal" tabindex="-1" role="dialog" aria-labelledby="cultivoModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="cultivoModalLabel">Cultivo</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="cultivo">Tipo de cultivo</label>
+                <select class="form-control widget" id="cultivo">
+                </select>
+              </div>
+              <div class="form-group col-xs-4">
+                <label for="rega">Tipo de rega</label>
+                <select class="form-control widget" id="rega">
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="eficiencia">Eficiencia del riego</label>
+                <input type="text" class="form-control widget-number" id="eficiencia" />
+              </div>
+
+              <div class="form-group col-xs-4">
+                <label for="area">Área <i class="units">(ha)</i></label>
+                <input type="text" class="form-control widget-number" id="area" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-8">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-1 text-right"><%- formatter().formatNumber(c_soli_tot) || '-' %> </span>
-        <span class="col-xs-10">
-          <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo solicitado</span> <span class="title">(<%- formatter().formatNumber(c_soli_int) || '-' %> intermedio / <%- formatter().formatNumber(c_soli_fon) || '-' %> fontes)</span>
-        </span>
+    </div>
+  </script>
+
+  <!-- tmpl actividade industria -->
+  <script type="text/template" id="Indústria">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span>
+          </span>
+        </div>
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : ( eval_impac === false ? 'Não' : '-') %></span>
+          </span>
+        </div>
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Instalaçôes:</span> <span><%- instalacio || '-' %></span>
+          </span>
+        </div>
       </div>
-      <div class="row">
-        <span class="col-xs-offset-1 col-xs-1 text-right"><%- formatter().formatNumber(c_real_tot) || '-' %> </span>
-        <span class="col-xs-10">
-          <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo real</span> <span class="title">(<%- formatter().formatNumber(c_real_int) || '-' %> intermedio / <%- formatter().formatNumber(c_real_fon) || '-' %> fontes)</span>
-        </span>
+      <div class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Efluente:</span> <span><%- efluente || '-' %></span>
+          </span>
+        </div>
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Medios tratamento água:</span> <span><%- tratamento || '-' %></span>
+          </span>
+        </div>
       </div>
-    </script>
+    </div>
+  </script>
 
-    <!-- ACTIVITIES TEMPLATES -->
-    <div id="templates"></div>
+  <!-- tmpl actividade pecuaria -->
+  <script type="text/template" id="Pecuária">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <button class="btn btn-default pull-right" id="newRow">Nova res</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-bordered" id="reses">
+          <thead>
+            <tr>
+              <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+              <th>Tipo de reses</th>
+              <th>Nro de reses</th>
+              <th>Observações</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </script>
 
-    <!-- JAVASCRIPT -->
-    <script src="node-interaction.js"></script>
-    <script src="lib/jquery/jquery-1.12.0.min.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="lib/json2.js"></script>
-    <script src="lib/underscore/underscore-min.js"></script>
-    <script src="lib/backbone/backbone-min.js"></script>
+  <!-- modal engadir res -->
+  <script type="text/template" id="resModalTpl">
+    <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="resModalLabel">Res</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="reses_tipo">Tipo de reses</label>
+                <select class="form-control widget" id="reses_tipo">
+                </select>
+              </div>
 
-    <script src="lib/leaflet/leaflet.js"></script>
-    <script src="lib/leaflet-draw/dist/leaflet.draw.js"></script>
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="reses_nro">Nro de reses</label>
+                <input type="text" class="form-control widget-number" id="reses_nro" />
+              </div>
 
-    <script src="lib/moment-2.11.2/moment-with-locales.js"></script>
-    <script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
-    <script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
-    <script src="lib/formatter/formatter.js"></script>
+              <div class="form-group col-xs-offset-1 col-xs-9">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
 
-    <script src="lib/schema-validator/validator.js"></script>
 
-    <script src="lib/backbone-geojson/Feature.js"></script>
-    <script src="lib/backbone-geojson/FeatureCollection.js"></script>
+  <!-- tmpl actividade piscicultura -->
+  <script type="text/template" id="Piscicultura">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Área <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
+            <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </script>
 
-    <script src="lib/backbone-uilib/models/Domain.js"></script>
-    <script src="lib/backbone-uilib/models/DomainCollection.js"></script>
-    <script src="lib/backbone-uilib/views/OptionView.js"></script>
-    <script src="lib/backbone-uilib/views/SelectView.js"></script>
-    <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
-    <script src="lib/backbone-uilib/views/BaseView.js"></script>
-    <script src="lib/backbone-uilib/views/ModalView.js"></script>
+  <!-- tmpl actividade produccao energia -->
+  <script type="text/template" id="Producção de energia">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Tipo de produção:</span> <span><%- energia_tipo || '-' %></span>
+          </span>
+        </div>
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Altura de água:</span> <span><%-  formatter().formatNumber(alt_agua) || '-' %></span>
+            <span class="title">Potência a instalar:</span> <span><%-  formatter().formatNumber(potencia) || '-' %></span>
+          </span>
+        </div>
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Evaluação Impacto:</span> <span><%- eval_impac === true ? 'Sim' : (eval_impac === false ? 'Não' : '-') %></span>
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Tipo de equipamento:</span> <span><%- equipo || '-' %></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </script>
 
-    <script src="Config.js"></script>
+  <!-- tmpl actividade saneamento -->
+  <script type="text/template" id="Saneamento">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="row">
+          <span class="col-xs-offset-1 col-xs-11">
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </script>
 
-    <script src="models/ActividadeCultivo.js"></script>
-    <script src="models/CultivoCollection.js"></script>
-    <script src="models/Fonte.js"></script>
-    <script src="models/FonteSchema.js"></script>
-    <script src="models/FonteCollection.js"></script>
-    <script src="models/Licencia.js"></script>
-    <script src="models/LicenciaSchema.js"></script>
-    <script src="models/LicenciaCollection.js"></script>
-    <script src="models/Utente.js"></script>
-    <script src="models/UtenteSchema.js"></script>
-    <script src="models/UtenteCollection.js"></script>
-    <script src="models/ActividadeRes.js"></script>
-    <script src="models/ResCollection.js"></script>
-    <script src="models/ActividadeAbastecimento.js"></script>
-    <script src="models/ActividadeEnergia.js"></script>
-    <script src="models/ActividadeIndustria.js"></script>
-    <script src="models/ActividadePecuaria.js"></script>
-    <script src="models/ActividadePiscicultura.js"></script>
-    <script src="models/ActividadeRegadia.js"></script>
-    <script src="models/ActividadeSaneamento.js"></script>
-    <script src="models/ActividadesSchema.js"></script>
-    <script src="models/Exploracao.js"></script>
-    <script src="models/ExploracaoSchema.js"></script>
+  <!-- block license modal tmpl -->
+  <script type="text/template" id="block-license-modal-tmpl">
+    <div class="modal fade" id="licenciaModal" tabindex="-1" role="dialog" aria-labelledby="licenciaModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="licenciaModalLabel">Licencia <span id="lic_tipo"></span></h4>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="lic_tipo">
+            <input type="hidden" class="form-control widget" id="lic_nro">
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-7">
+                <label for="estado">Estado</label> <span id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></span>
+                <select type="text" class="form-control widget estado-subterranea" id="estado" aria-describedby="info-estado-licencia"></select>
+              </div>
+              <div class="form-group col-xs-3">
+                <label for="cadastro">Nro de cadastro</label>
+                <input type="text" class="form-control widget" id="cadastro">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-4">
+                <label for="c_real_int">C. licenciado <i class="units">(m<sup>3</sup>/més)</i></label>
+                <input type="text" class="form-control widget-number" id="c_licencia">
+              </div>
+              <div class="form-group col-xs-3">
+                <label for="d_emissao">Data emissão</label>
+                <input type="text" class="form-control widget-date" id="d_emissao" placeholder="dd/mm/yyyy">
+              </div>
+              <div class="form-group col-xs-3">
+                <label for="d_validade">Data validade</label>
+                <input type="text" class="form-control widget-date" id="d_validade" placeholder="dd/mm/yyyy">
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label class="title">CONSUMOS INTERMEDIOS</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-5">
+                <label for="c_real_int">C. real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
+                <input type="text" class="form-control widget-number" id="c_real_int">
+              </div>
+              <div class="form-group col-xs-5">
+                <label for="c_soli_int">C. solicitado intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
+                <input type="text" class="form-control widget-number" id="c_soli_int">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-xs-offset-1 col-xs-10">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="okButton">Aceptar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
 
-    <script src="views/common/ModalTooltipEstadoLicenciaView.js"></script>
-    <script src="views/common/SelectBaciaView.js"></script>
-    <script src="views/common/SelectLocationView.js"></script>
-    <script src="views/show/OpenFolderButtonView.js"></script>
-    <script src="views/common/ButtonSaveView.js"></script>
-    <script src="views/show/ButtonDeleteView.js"></script>
-    <script src="views/show/ButtonRefreshView.js"></script>
-    <script src="views/show/SummaryConsumoView.js"></script>
-    <script src="views/show/SummaryLicenseView.js"></script>
-    <script src="views/show/SummaryPagosView.js"></script>
-    <script src="views/show/CEstimadoComputedView.js"></script>
-    <script src="views/show/BlockInfoView.js"></script>
-    <script src="views/show/BlockMapView.js"></script>
-    <script src="views/show/BlockLocationView.js"></script>
-    <script src="views/common/SelectUtenteView.js"></script>
-    <script src="views/show/BlockUtenteView.js"></script>
-    <script src="views/common/ModalView.js"></script>
-    <script src="views/show/CultivoResModalView.js"></script>
-    <script src="views/EditableTableView.js"></script>
-    <script src="views/ActividadeView.js"></script>
-    <script src="views/SelectActividadeView.js"></script>
-    <script src="views/show/BlockActivityView.js"></script>
-    <script src="views/show/FonteShowModalView.js"></script>
-    <script src="views/show/BlockLicenseView.js"></script>
-    <script src="views/show/TableRowShowView.js"></script>
-    <script src="views/show/TableShowView.js"></script>
-    <script src="views/show/BlockFontesView.js"></script>
-    <script src="views/show/ExploracaoShowView.js"></script>
-    <script src="models/Setting.js"></script>
-    <script src="views/common/ConfigModalView.js"></script>
+  <!-- template licencia -->
+  <script type="text/template" id="licencia-tmpl">
+    <div class="row">
+      <h4 class="col-xs-offset-1 col-xs-11">Licença <%- lic_tipo + ': ' + (lic_nro || '-') %>
+        <button type="button" class="btn btn-default btn-xs hidden" id="addLicense">Adicionar</button>
+        <button type="button" class="btn btn-default btn-xs" id="editLicense">Editar</button>
+        <button type="button" class="btn btn-default btn-xs" id="addFonte">Nova fonte</button>
+        <button type="button" class="btn btn-default btn-xs" id="removeLicense">Eliminar</button>
+      </h4>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11">
+        <span class="title">Estado:</span> <%- estado || '-' %> <i id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></i>
+      </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-11">
+        <span class="title">Nro de cadastro:</span> <%- cadastro || '-' %>
+        <span class="title">Data emissão:</span> <%- formatter().formatDate(d_emissao) || '-' %>
+        <span class="title">Data validade:</span> <%- formatter().formatDate(d_validade) || '-' %>
+      </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-1 text-right"><%- formatter().formatNumber(c_licencia) || '-' %> </span>
+      <span class="col-xs-10">
+        <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo licenciado</span>
+      </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-1 text-right"><%- formatter().formatNumber(c_soli_tot) || '-' %> </span>
+      <span class="col-xs-10">
+        <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo solicitado</span> <span class="title">(<%- formatter().formatNumber(c_soli_int) || '-' %> intermedio / <%- formatter().formatNumber(c_soli_fon) || '-' %> fontes)</span>
+      </span>
+    </div>
+    <div class="row">
+      <span class="col-xs-offset-1 col-xs-1 text-right"><%- formatter().formatNumber(c_real_tot) || '-' %> </span>
+      <span class="col-xs-10">
+        <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo real</span> <span class="title">(<%- formatter().formatNumber(c_real_int) || '-' %> intermedio / <%- formatter().formatNumber(c_real_fon) || '-' %> fontes)</span>
+      </span>
+    </div>
+  </script>
 
-    <script src="exploracao-show.js"></script>
+  <!-- JAVASCRIPT -->
+  <script src="node-interaction.js"></script>
+  <script src="lib/jquery/jquery-1.12.0.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/json2.js"></script>
+  <script src="lib/underscore/underscore-min.js"></script>
+  <script src="lib/backbone/backbone-min.js"></script>
 
-  </body>
-  </html>
+  <script src="lib/leaflet/leaflet.js"></script>
+  <script src="lib/leaflet-draw/dist/leaflet.draw.js"></script>
+
+  <script src="lib/moment-2.11.2/moment-with-locales.js"></script>
+  <script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
+  <script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
+  <script src="lib/formatter/formatter.js"></script>
+
+  <script src="lib/schema-validator/validator.js"></script>
+
+  <script src="lib/backbone-geojson/Feature.js"></script>
+  <script src="lib/backbone-geojson/FeatureCollection.js"></script>
+
+  <script src="lib/backbone-uilib/models/Domain.js"></script>
+  <script src="lib/backbone-uilib/models/DomainCollection.js"></script>
+  <script src="lib/backbone-uilib/views/OptionView.js"></script>
+  <script src="lib/backbone-uilib/views/SelectView.js"></script>
+  <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
+  <script src="lib/backbone-uilib/views/BaseView.js"></script>
+  <script src="lib/backbone-uilib/views/ModalView.js"></script>
+
+  <script src="Config.js"></script>
+
+  <script src="models/ActividadeCultivo.js"></script>
+  <script src="models/CultivoCollection.js"></script>
+  <script src="models/Fonte.js"></script>
+  <script src="models/FonteSchema.js"></script>
+  <script src="models/FonteCollection.js"></script>
+  <script src="models/Licencia.js"></script>
+  <script src="models/LicenciaSchema.js"></script>
+  <script src="models/LicenciaCollection.js"></script>
+  <script src="models/Utente.js"></script>
+  <script src="models/UtenteSchema.js"></script>
+  <script src="models/UtenteCollection.js"></script>
+  <script src="models/ActividadeRes.js"></script>
+  <script src="models/ResCollection.js"></script>
+  <script src="models/ActividadeAbastecimento.js"></script>
+  <script src="models/ActividadeEnergia.js"></script>
+  <script src="models/ActividadeIndustria.js"></script>
+  <script src="models/ActividadePecuaria.js"></script>
+  <script src="models/ActividadePiscicultura.js"></script>
+  <script src="models/ActividadeRegadia.js"></script>
+  <script src="models/ActividadeSaneamento.js"></script>
+  <script src="models/ActividadesSchema.js"></script>
+  <script src="models/Exploracao.js"></script>
+  <script src="models/ExploracaoSchema.js"></script>
+
+  <script src="views/common/ModalTooltipEstadoLicenciaView.js"></script>
+  <script src="views/common/SelectBaciaView.js"></script>
+  <script src="views/common/SelectLocationView.js"></script>
+  <script src="views/show/OpenFolderButtonView.js"></script>
+  <script src="views/common/ButtonSaveView.js"></script>
+  <script src="views/show/ButtonDeleteView.js"></script>
+  <script src="views/show/ButtonRefreshView.js"></script>
+  <script src="views/show/SummaryConsumoView.js"></script>
+  <script src="views/show/SummaryLicenseView.js"></script>
+  <script src="views/show/SummaryPagosView.js"></script>
+  <script src="views/show/CEstimadoComputedView.js"></script>
+  <script src="views/show/BlockInfoView.js"></script>
+  <script src="views/show/BlockMapView.js"></script>
+  <script src="views/show/BlockLocationView.js"></script>
+  <script src="views/common/SelectUtenteView.js"></script>
+  <script src="views/show/BlockUtenteView.js"></script>
+  <script src="views/common/ModalView.js"></script>
+  <script src="views/show/CultivoResModalView.js"></script>
+  <script src="views/EditableTableView.js"></script>
+  <script src="views/ActividadeView.js"></script>
+  <script src="views/SelectActividadeView.js"></script>
+  <script src="views/show/BlockActivityView.js"></script>
+  <script src="views/show/FonteShowModalView.js"></script>
+  <script src="views/show/BlockLicenseView.js"></script>
+  <script src="views/show/TableRowShowView.js"></script>
+  <script src="views/show/TableShowView.js"></script>
+  <script src="views/show/BlockFontesView.js"></script>
+  <script src="views/show/ExploracaoShowView.js"></script>
+  <script src="models/Setting.js"></script>
+  <script src="views/common/ConfigModalView.js"></script>
+
+  <script src="exploracao-show.js"></script>
+
+</body>
+</html>
