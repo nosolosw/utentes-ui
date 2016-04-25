@@ -24,16 +24,12 @@ Backbone.SIXHIARA.BlockInfoView = Backbone.View.extend({
       el: $('#summary_licencia_msg'),
       model: exploracao
     });
-    summaryLicenseView.listenTo(licSup, 'change', summaryLicenseView.render);
-    summaryLicenseView.listenTo(licSub, 'change', summaryLicenseView.render);
     this.subViews.push(summaryLicenseView);
 
     var summaryConsumoView = new Backbone.SIXHIARA.SummaryConsumoView({
       el: $('#summary_consumo_msg'),
       model: exploracao
     });
-    summaryConsumoView.listenTo(exploracao, 'change:c_licencia change:c_real change:c_estimado', summaryConsumoView.render);
-
     this.subViews.push(summaryConsumoView);
 
     var summaryPagosView = new Backbone.SIXHIARA.SummaryPagosView({

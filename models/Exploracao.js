@@ -34,16 +34,19 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   initialize: function(){
     // set some computed properties
-    this.set('summary_licencia_val', this.getSummaryEstado());
+    this.set('summary_licencia_val', this.updateSummaryEstado());
     this.set('summary_licencia_msg', 'Licença');
-    this.set('summary_consumo_val',  this.getSummaryConsumo());
+    this.set('summary_consumo_val',  this.updateSummaryConsumo());
     this.set('summary_consumo_msg',  'Consumo');
-    this.set('summary_pagos_val',    this.getSummaryPagos());
+    this.set('summary_pagos_val',    this.updateSummaryPagos());
     this.set('summary_pagos_msg',    'Pagamentos');
 
     this.setListeners();
     this.on('sync', function(model, response, options){
       // TODO: on sync, how to off old listeners for licenses, if any?
+      this.set('summary_licencia_val', this.updateSummaryEstado());
+      this.set('summary_consumo_val',  this.updateSummaryConsumo());
+      this.set('summary_pagos_val',    this.updateSummaryPagos());
       this.setListeners();
     }, this);
 
@@ -57,6 +60,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
+      model.on('change:estado', app.updateSummaryEstado, app)
       // TODO: data should be shown as it is,
       // without updating computed properties first time
       app.updateCSoli();
@@ -67,6 +71,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
+      model.on('change:estado', app.updateSummaryEstado, app)
       // TODO: data should be shown as it is,
       // without updating computed properties first time
       app.updateCSoli();
@@ -77,6 +82,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       model.off('change:c_soli_tot', app.updateCSoli, app);
       model.off('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.off('change:c_licencia', app.updateCLicencia, app);
+      model.off('change:estado', app.updateSummaryEstado, app)
       // TODO: data should be shown as it is,
       // without updating computed properties first time
       app.updateCSoli();
@@ -88,6 +94,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         model.on('change:c_soli_tot', app.updateCSoli, app);
         model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
         model.on('change:c_licencia', app.updateCLicencia, app);
+        model.on('change:estado', app.updateSummaryEstado)
         // TODO: data should be shown as it is,
         // without updating computed properties first time
         app.updateCSoli();
@@ -98,6 +105,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         model.off('change:c_soli_tot', app.updateCSoli, app);
         model.off('change:c_real_tot', app.updateCReal, app);
         model.off('change:c_licencia', app.updateCLicencia, app);
+        model.off('change:estado', app.updateSummaryEstado, app)
         // TODO: data should be shown as it is,
         // without updating computed properties first time
         app.updateCSoli();
@@ -167,6 +175,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.get('actividade').once('change', app.aChangeHappens, app);
     this.get('fontes').once('change', app.aChangeHappens, app);
     this.get('licencias').once('change', app.aChangeHappens, app);
+
+    this.on('change:c_licencia change:c_real change:c_estimado', app.updateSummaryConsumo)
+    this.on('change:pagos:', app.updateSummaryPagos)
   },
 
   changedActivity: function() {
@@ -263,22 +274,26 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     return c_lic;
   },
 
-  getSummaryEstado: function(){
+  updateSummaryEstado: function(){
     var valid = false;
     this.get('licencias').forEach(function(licencia){
       valid = valid || (licencia.get('estado') === 'Licenciada');
     });
+    this.set('summary_licencia_val', valid);
     return valid;
   },
 
-  getSummaryConsumo: function(){
+  updateSummaryConsumo: function(){
     var c_licencia = this.get('c_licencia'),
         c_real = this.get('c_real'),
-        c_estimado = this.get('c_estimado');
-    return ( c_licencia >= c_real && c_licencia >= c_estimado);
+        c_estimado = this.get('c_estimado'),
+        valid = c_licencia >= c_real && c_licencia >= c_estimado;
+        this.set('summary_consumo_val', valid);
+    return valid;
   },
 
-  getSummaryPagos: function(){
+  updateSummaryPagos: function(){
+    this.set('summary_pagos_val', this.get('pagos'));
     return this.get('pagos');
   },
 
