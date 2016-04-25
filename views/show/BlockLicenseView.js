@@ -65,26 +65,31 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
 
   renderEditLicenseModal: function (event) {
     event.preventDefault();
-    var modalView = new Backbone.SIXHIARA.ModalView({
-      modalSelectorTpl: '#block-license-modal-tmpl',
+
+    var modalView = new Backbone.UILib.ModalView({
       model: this.license,
-      domains: this.options.domains,
-      editing: true,
+      selectorTmpl: '#block-license-modal-tmpl',
     });
-    modalView.customConfiguration = function() {
-      new Backbone.UILib.SelectView({
-        el: this.$('#estado'),
-        collection: this.options.domains.byCategory('licencia_estado')
-      }).render();
-      var self = this;
-      this.$('#info-estado-licencia').on('click', function() {
-        new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
-          collection: self.options.domains.byCategory('licencia_estado'),
-          actual_state: self.model.get('estado'),
-        }).show();
-      });
-    }
-    modalView.show();
+
+    var estadosLicencia = this.options.domains.byCategory('licencia_estado');
+
+    // connect auxiliary views, which would be removed when the modal is closed
+    var selectView = new Backbone.UILib.SelectView({
+      el: modalView.$('#estado'),
+      collection: estadosLicencia
+    }).render();
+    modalView.addAuxView(selectView);
+
+    var selfModal = modalView;
+    modalView.$('#info-estado-licencia').on('click', function() {
+      var tooltipView = new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
+        collection: estadosLicencia,
+        actual_state: selfModal.model.get('estado'),
+      }).show();
+      selfModal.addAuxView(tooltipView);
+    });
+
+    modalView.render();
   },
 
   renderAddLicenseModal: function (event) {
@@ -95,16 +100,19 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
     });
 
     // override default action for okButtonClicked
+    // only for addLicense modal
     var self = this;
-    Backbone.UILib.ModalView.prototype.okButtonClicked = function () {
-      // in this context, this is the backbone modalView
-      self.license.set(this.draftModel.toJSON());
-      self.model.get('licencias').add(self.license);
-      self.listenTo(self.license, 'change', self.render);
-      self.render();
-      this.$('.modal').modal('hide');
-    };
-    var modalView = new Backbone.UILib.ModalView({
+    var ModalViewAdd = Backbone.UILib.ModalView.extend({
+      okButtonClicked: function () {
+        // in this context, this is the backbone modalView
+        self.license.set(this.draftModel.toJSON());
+        self.model.get('licencias').add(self.license);
+        self.listenTo(self.license, 'change', self.render);
+        self.render();
+        this.$('.modal').modal('hide');
+      }
+    });
+    var modalView = new ModalViewAdd({
       model: this.license,
       selectorTmpl: '#block-license-modal-tmpl',
     });
