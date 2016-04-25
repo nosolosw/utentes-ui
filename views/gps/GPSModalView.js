@@ -1,124 +1,66 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.GPSModalView = Backbone.View.extend({
-
-
-  html: `
-  <div class="modal fade" id="gpsModalView" tabindex="-1" role="dialog" aria-labelledby="editInfoModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="editInfoModalLabel">Selecione o item</h4>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="entidade">Entidade</label>
-              <select class="form-control widget" id="entidade"></select>
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-4">
-              <label for="identificador">Identificador</label>
-              <select class="form-control widget" id="identificador"></select>
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="okbutton">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  `,
-
-  events: {
-    'click #okbutton': 'saveGeom',
-  },
-
-  initialize: function(options) {
-    this.options = options || {};
-    if (this.options.modalSelectorTpl) {
-      this.template = _.template($(this.options.modalSelectorTpl).html());
-    } else if (this.html) {
-      this.template = _.template(this.html);
-    } else {
-        throw 'Bad configuration';
-    }
-  },
+Backbone.SIXHIARA.GPSModalView = Backbone.UILib.ModalView.extend({
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
-    if (this.options.textConfirmBt) {
-      this.$('#okbutton').text(this.options.textConfirmBt);
-    }
-    return this;
-  },
 
-  show: function() {
-    $(document.body).append(this.render().el);
+    // connect auxiliary views
+    var tiposEntidade = new Backbone.UILib.DomainCollection();
+    tiposEntidade.add([
+      new Backbone.UILib.Domain({'alias':null, 'text':null, order: 0}),
+      new Backbone.UILib.Domain({'alias':'Cultivo', 'text':'Cultivo', order: 1}),
+      new Backbone.UILib.Domain({'alias':'Exploracao', 'text':'Exploracao', order: 2}),
+    ]);
 
-    bl = new Backbone.UILib.Domain({'alias':null, 'text':null});
-    exp = new Backbone.UILib.Domain({'alias':'Exploracao', 'text':'Exploracao'});
-    cul = new Backbone.UILib.Domain({'alias':'Cultivo', 'text':'Cultivo'});
-    col = new Backbone.Collection([bl, exp,cul]);
-
-    new Backbone.UILib.WidgetsView({
+    var widgetsView = new Backbone.UILib.WidgetsView({
       el: $('#gpsModalView'),
       model: this.model
     }).render()
+    this.addAuxView(widgetsView);
 
     var selectEntidade = new Backbone.UILib.SelectView({
       el: $('#entidade'),
-      collection: col
+      collection: tiposEntidade
     }).render();
+    this.addAuxView(selectEntidade);
 
     var selectIdentificador = new Backbone.UILib.SelectView({
       el: this.$('#identificador'),
       collection: [],
     });
+    this.addAuxView(selectIdentificador);
 
-    var cul_y_exp = new Backbone.Collection();
-    cul_y_exp.add(cultivos.slice(0, cultivos.length));
-    cul_y_exp.add(exploracaos.slice(0, exploracaos.length));
-    cul_y_exp.forEach(function(v){
-
+    // this would store exploracaos and cultivos
+    var entidades = new Backbone.Collection();
+    entidades.add(cultivos.slice(0, cultivos.length));
+    entidades.add(exploracaos.slice(0, exploracaos.length));
+    entidades.forEach(function(v){
       if (v.has('exp_id')) {
         v.set('parent', 'Exploracao');
-        v.set('alias', v.get('exp_id'));
-        v.set('text', v.get('exp_id'));
+        v.set('alias',  v.get('exp_id'));
+        v.set('text',   v.get('exp_id'));
       } else {
-        v.set('alias', v.get('cult_id'));
-        v.set('text', v.get('cult_id'));
         v.set('parent', 'Cultivo');
+        v.set('alias',  v.get('cult_id'));
+        v.set('text',   v.get('cult_id'));
       }
     });
 
     var self = this;
     selectIdentificador.listenTo(this.model, 'change:entidade', function(model, value, options){
-      this.update(cul_y_exp.where({'parent': self.model.get('entidade')}));
+      this.update(entidades.where({'parent': self.model.get('entidade')}));
     });
 
-    $('#gpsModalView').on('hidden.bs.modal', function(){
-      self._close();
-    });
-    $('#gpsModalView').modal('show');
+    this.$('.modal').modal('show');
   },
 
-  _close: function() {
-    $('#gpsModalView').unbind();
-    $('#gpsModalView').remove();
-    this.remove();
-  },
-
-  saveGeom: function() {
+  okButtonClicked: function() {
     var entidade = this.model.get('entidade');
     var identificador = this.model.get('identificador');
 
     if (entidade === 'Cultivo') {
       e = cultivos.filter({'cult_id': identificador});
     } else {
-      e = exploracaos.filter({'exp_id':identificador});
+      e = exploracaos.filter({'exp_id': identificador});
     }
     if (e.length != 1) {
       alert('O arquivo de código não existe');
@@ -126,7 +68,8 @@ Backbone.SIXHIARA.GPSModalView = Backbone.View.extend({
     }
 
     this.saveModelToAPI(e[0], feat.geometry)
-    this.close();
+
+    this.$('.modal').modal('hide');
   },
 
   saveModelToAPI: function(model, geometry) {

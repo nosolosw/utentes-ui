@@ -42,8 +42,12 @@ var MySaveToAPI = SaveToAPI.extend({
 
     var model = new Backbone.Model({'entidade':null, 'identificador':null});
 
-    var view = new Backbone.SIXHIARA.GPSModalView({ model: model });
-    view.show();
+    var modalView = new Backbone.SIXHIARA.GPSModalView({
+      model: model,
+      selectorTmpl: '#modal-gps-tmpl'
+    });
+    modalView.render();
+
     return;
   }
 });
