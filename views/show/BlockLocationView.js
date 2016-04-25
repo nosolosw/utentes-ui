@@ -2,7 +2,7 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
 
   events: {
-      'click #editBlockLocation': 'renderModal',
+    'click #editBlockLocation': 'renderModal',
   },
 
   initialize: function (options) {
@@ -24,7 +24,7 @@ Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
   },
 
   setDomainsFilled: function () {
-      this.domainsFilled = true;
+    this.domainsFilled = true;
   },
 
   render: function () {
@@ -37,47 +37,27 @@ Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
 
     if(!this.domainsFilled) return;
 
-    // add modal to DOM
-    var node = $(document.body).append($('#block-location-modal-tmpl').html());
-
-    // take it from DOM and connect components, fill selects, etc
-    var modalEl = $('#editLocModal');
-    var modalViews = [];
-
-    var exploracao = this.model;
-    var domains    = this.options.domains;
-    modalViews.push(
-      new Backbone.SIXHIARA.SelectLocationView({
-        domains: domains,
-        model: exploracao,
-        el: $('#editLocModal'),
-      }).render()
-    );
-    modalViews.push(
-      new Backbone.SIXHIARA.SelectBaciaView({
-        domains: domains,
-        model: exploracao,
-        el: $('#editLocModal'),
-      }).render()
-    );
-
-    // TODO: this does not update the chained selects properly
-    var widgetsView = new Backbone.UILib.WidgetsView({
-      el: modalEl,
-      model: exploracao
-    }).render();
-    modalViews.push(widgetsView);
-
-    // remove modal from DOM on hide
-    modalEl.on('hidden.bs.modal', function () {
-      // this is the modal itself
-      $(this).remove();
-      _.invoke(modalViews, 'remove');
-      modalViews = [];
+    var modalView = new Backbone.UILib.ModalView({
+      model: this.model,
+      selectorTmpl: '#block-location-modal-tmpl'
     });
 
-    // do open modal
-    modalEl.modal('show');
+    // connect auxiliary views
+    var selectLocation = new Backbone.SIXHIARA.SelectLocationView({
+      el: modalView.$('#editLocModal'),
+      model: modalView.draftModel,
+      domains: this.options.domains,
+    }).render()
+    modalView.addAuxView(selectLocation);
+
+    var selectBacia = new Backbone.SIXHIARA.SelectBaciaView({
+      el: modalView.$('#editLocModal'),
+      model: modalView.draftModel,
+      domains: this.options.domains,
+    }).render()
+    modalView.addAuxView(selectBacia);
+
+    modalView.render();
 
   },
 
