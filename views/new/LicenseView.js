@@ -8,7 +8,8 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
 
   initialize: function (options) {
     Backbone.UILib.BaseView.prototype.initialize.call(this);
-    this.lic_tipo = options.lic_tipo;
+    this.options = options || {};
+    this.lic_tipo = this.options.lic_tipo;
 
     this.license = new Backbone.SIXHIARA.Licencia({'lic_tipo': this.lic_tipo});
     this.updateModelView = new Backbone.UILib.WidgetsView({
@@ -17,36 +18,23 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
     });
     this.addView(this.updateModelView);
 
-    options.elModalFonteButton.on('click', function (e) {
-      e.preventDefault();
-      options.elModalFonte.modal('toggle');
+    var self = this;
+    this.$(this.options.selectorButtonAddFonte).on('click', function (e) {
+      self.renderModal(e);
     });
-    var modalFonte = new Backbone.SIXHIARA.ModalNovaFonteView({
-      el: options.elModalFonte,
-      collection: exploracao.get('fontes')
-    });
-    this.addView(modalFonte);
 
     this.isDisabled = true;
     var app = this;
-    options.domains.on('sync', function () {
-      app.estadosLicencia = options.domains.byCategory('licencia_estado');
-      var fonteTipos = options.domains.byCategory('fonte_tipo');
-
+    this.domainsFilled = false;
+    this.options.domains.on('sync', function () {
+      app.domainsFilled = true;
+      app.estadosLicencia = app.options.domains.byCategory('licencia_estado');
       var estadosView = new Backbone.UILib.SelectView({
         el: app.$('#estado'),
         collection: app.estadosLicencia
       });
       app.addView(estadosView);
-
-      var tipoFontesView = new Backbone.UILib.SelectView({
-        el: options.elModalFonteSelect,
-        collection: fonteTipos.byParent(app.lic_tipo)
-      });
-      app.addView(tipoFontesView);
-
       app.render();
-
       estadosView.$el.prop('disabled', app.isDisabled);
     });
   },
@@ -95,5 +83,38 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
       actual_state: this.license.get('estado'),
     }).show();
   },
+
+  renderModal: function (e) {
+
+    if(!this.domainsFilled) return;
+
+    e.preventDefault();
+
+    // override default action for okButtonClicked
+    var self = this;
+    var AddFonteModal = Backbone.UILib.ModalView.extend({
+      okButtonClicked: function () {
+        self.model.get('fontes').add(this.draftModel);
+        this.$('.modal').modal('hide');
+      }
+    });
+
+    var modalView = new AddFonteModal({
+      model: new Backbone.SIXHIARA.Fonte({
+        'tipo_agua': this.lic_tipo
+      }),
+      selectorTmpl: this.options.selectorModalFonte
+    });
+
+    var fonteTipos = this.options.domains.byCategory('fonte_tipo');
+    var tipoFontesView = new Backbone.UILib.SelectView({
+      el: modalView.$('#tipo_fonte'),
+      collection: fonteTipos.byParent(this.lic_tipo)
+    }).render();
+    modalView.addAuxView(tipoFontesView);
+
+    modalView.render();
+  },
+
 
 });

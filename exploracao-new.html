@@ -346,85 +346,95 @@
 
 <!-- modals -->
 
-<!-- modal fonte subterránea -->
-<div class="modal fade" id="fonteSubModal" tabindex="-1" role="dialog" aria-labelledby="fonteSubModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <input type="hidden" id="tipo_agua" value="Subterrânea" class="col-xs-12"/>
-          </div>
-          <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-5">
-              <label for="tipo_fonte">Tipo de fonte</label>
-              <select class="form-control" id="fonte_tipo">
-              </select>
+<script type="text/template" id="fonte-subterranea-modal">
+  <!-- modal fonte subterránea -->
+  <div class="modal fade" id="fonteSubModal" tabindex="-1" role="dialog" aria-labelledby="fonteSubModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <input type="hidden" id="tipo_agua" value="Subterrânea" class="col-xs-12 widget"/>
             </div>
-            <div class="form-group col-xs-5">
-              <label for="c_requerid">Consumo solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
-              <input type="text" class="form-control" id="c_soli" />
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-5">
+                <label for="tipo_fonte">Tipo de fonte</label>
+                <select class="form-control widget" id="tipo_fonte"></select>
+              </div>
+              <div class="form-group col-xs-5">
+                <label for="c_requerid">Consumo solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
+                <input type="text" class="form-control widget-number" id="c_soli" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="modal-footer">
           <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-10">
-              <label for="observacio">Observaçôes</label>
-              <textarea class="form-control" id="observacio" rows="4"></textarea>
+            <div class="col-xs-offset-1 col-xs-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" id="okButton">Aceptar</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
-      </div>
     </div>
   </div>
-</div>
+</script>
 
-<!-- modal fonte superficial -->
-<div class="modal fade" id="fonteSupModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <input type="hidden" id="tipo_agua" value="Superficial" class="col-xs-1"/>
-          </div>
-          <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-5">
-              <label for="tipo_fonte">Tipo de fonte</label>
-              <select class="form-control" id="fonte_tipo">
-              </select>
+<script type="text/template" id="fonte-superficial-modal">
+  <!-- modal fonte superficial -->
+  <div class="modal fade" id="fonteSupModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <input type="hidden" id="tipo_agua" value="Superficial" class="col-xs-1 widget"/>
             </div>
-            <div class="form-group col-xs-5">
-              <label for="c_requerid">Consumo solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
-              <input type="text" class="form-control" id="c_soli" />
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-5">
+                <label for="tipo_fonte">Tipo de fonte</label>
+                <select class="form-control widget" id="tipo_fonte"></select>
+              </div>
+              <div class="form-group col-xs-5">
+                <label for="c_requerid">Consumo solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
+                <input type="text" class="form-control widget-number" id="c_soli" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="modal-footer">
           <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-10">
-              <label for="observacio">Observaçôes</label>
-              <textarea class="form-control" id="observacio" rows="4"></textarea>
+            <div class="col-xs-offset-1 col-xs-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" id="okButton">Aceptar</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="addFonte">Engadir</button>
-      </div>
     </div>
   </div>
-</div>
+</script>
 
 <!-- javascript -->
 <script src="node-interaction.js"></script>
@@ -451,6 +461,7 @@
 <script src="lib/backbone-uilib/views/SelectView.js"></script>
 <script src="lib/backbone-uilib/views/WidgetsView.js"></script>
 <script src="lib/backbone-uilib/views/BaseView.js"></script>
+<script src="lib/backbone-uilib/views/ModalView.js"></script>
 
 <script src="Config.js"></script>
 
@@ -486,11 +497,9 @@
 <script src="views/common/ButtonSaveView.js"></script>
 <script src="views/SelectActividadeView.js"></script>
 <script src="views/common/SelectUtenteView.js"></script>
-<script src="views/new/ModalNovaFonteView.js"></script>
 <script src="views/RowFonteView.js"></script>
 <script src="views/TableFontesView.js"></script>
 <script src="views/new/LicenseView.js"></script>
-<script src="views/common/ModalView.js"></script>
 <script src="views/EditableTableView.js"></script>
 
 <script src="models/Setting.js"></script>

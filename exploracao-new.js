@@ -68,9 +68,8 @@ var licenseSupView = new Backbone.SIXHIARA.LicenseView({
   model: exploracao,
   domains: domains,
   lic_tipo: 'Superficial',
-  elModalFonte: $('#fonteSupModal'),
-  elModalFonteButton: $('#fonte-superficial'),
-  elModalFonteSelect: $('#fonteSupModal #fonte_tipo')
+  selectorButtonAddFonte: '#fonte-superficial',
+  selectorModalFonte: '#fonte-superficial-modal',
 }).render();
 
 // page licencias & fontes: subterranea
@@ -79,9 +78,8 @@ var licenseSubView = new Backbone.SIXHIARA.LicenseView({
   model: exploracao,
   domains: domains,
   lic_tipo: 'Subterrânea',
-  elModalFonte: $('#fonteSubModal'),
-  elModalFonteButton: $('#fonte-subterranea'),
-  elModalFonteSelect: $('#fonteSubModal #fonte_tipo'),
+  selectorButtonAddFonte: '#fonte-subterranea',
+  selectorModalFonte: '#fonte-subterranea-modal',
 }).render();
 
 // page licencias & fontes: fontes table
