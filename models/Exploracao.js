@@ -497,6 +497,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   aChangeHappens: function() {
     this.trigger('aChangeHappens');
+
+    this.off('change', this.aChangeHappens, this);
+    this.get('utente').off('change', this.aChangeHappens, this);
+    this.get('actividade').off('change', this.aChangeHappens, this);
+    this.get('fontes').off('change', this.aChangeHappens, this);
+    this.get('licencias').off('change', this.aChangeHappens, this);
   },
 
 });
