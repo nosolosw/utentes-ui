@@ -13,6 +13,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     this.customFiltering = this.options.customFiltering || [];
     this.colReorderOptions = this.options.colReorderOptions || false;
     this.columnsWithOutTitle = this.options.columnsWithOutTitle || [];
+
   },
 
   reset: function() {
@@ -22,9 +23,9 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
 
   unrender: function() {
     if (this.table) {
-	     this.table.destroy('true')
-	  }
-	  this.$el.empty();
+      this.table.destroy('true')
+    }
+    this.$el.empty();
   },
 
   render: function() {
@@ -129,8 +130,8 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     var self = this;
     $('.dataTables_length').append($('<button id="create-button" type="button" class="btn btn-primary col-xs-1 pull-right">Criar</button>'));
     $('#create-button').on('click', function(){
-      var u = new Backbone.SIXHIARA.Utente();
-      self.renderModal(u, self);
+      var utente = new Backbone.SIXHIARA.Utente();
+      self.renderModal(utente);
     });
 
     $('#the_utentes_table table').on('click', 'i.delete', function() {
@@ -138,12 +139,11 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       var id = self.table.row(this.parentElement).id().split('-')[1];
       var u = self.collection.filter({id:parseInt(id)})[0];
 
-      // FIXME. Don't reload page
       if (confirm('Tem certeza de que deseja excluir e as exploracaos asociadas: ' + u.get('nome'))) {
         u.destroy({
           wait: true,
           success: function(model, resp, options) {
-            window.location = Backbone.SIXHIARA.Config.urlUtentes;
+            self.reset();
           },
           error: function(xhr, textStatus, errorThrown) {
             alert(textStatus.statusText);
@@ -157,64 +157,59 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     $('#the_utentes_table table').on('click', 'i.edit', function() {
       // table.row ( rowSelector ) http://datatables.net/reference/type/row-selector
       var id = self.table.row(this.parentElement).id().split('-')[1];
-      var u = self.collection.filter({id:parseInt(id)})[0];
-      self.renderModal(u, self);
+      var utente = self.collection.filter({id:parseInt(id)})[0];
+      self.renderModal(utente);
     });
 
   },
 
-  renderModal: function(u, self) {
-    var node = $(document.body).append($('#block-utente-modal-tmpl').html());
-    var modalEl = $('#editUtenteModal');
+  renderModal: function(utente) {
 
-    modalEl.on('show.bs.modal', function(e){
-      self.selectLocationView = new Backbone.SIXHIARA.SelectLocationView({
-        domains: domains,
-        model: u,
-        el: $('#editUtenteModal'),
-      }).render();
-
-      self.utenteView = new Backbone.UILib.WidgetsView({
-        el: $('#editUtenteModal'),
-        model: u,
-      }).render();
-    });
-
-
-    modalEl.on('hidden.bs.modal', function(e){
-      $(this).unbind();
-      $(this).remove();
-      self.utenteView.remove();
-      delete self.utenteView;
-      self.selectLocationView.remove();
-      delete self.selectLocationView;
-    });
-
-
-    modalEl.find('#saveRow').on('click', function() {
-      if(! u.isValid()) {
-        alert(u.validationError);
-        return;
-      }
-
-      self.collection.create(u, {
-        merge: true,
-        wait: true,
-        success: function(model, resp, options) {
-          modalEl.modal('hide');
-          self.reset();
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          if (textStatus && textStatus.responseJSON && textStatus.responseJSON.error) {
-            alert(textStatus.responseJSON.error.join('\n'));
-          } else {
-            alert(textStatus.statusText);
-          }
+    // override default action for okButtonClicked
+    var self = this;
+    var UtenteModal = Backbone.UILib.ModalView.extend({
+      okButtonClicked: function () {
+        var atts = this.draftModel.pick(this.getAttsChanged());
+        this.model.set(atts);
+        if(!this.model.isValid()){
+          alert(this.model.validationError);
+          return;
         }
-      });
+
+        // update in server
+        var selfModal = this;
+        self.collection.create(this.model, {
+          merge: true,
+          wait: true,
+          success: function(model, resp, options) {
+            selfModal.$('.modal').modal('hide');
+            self.reset();
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            if (textStatus && textStatus.responseJSON && textStatus.responseJSON.error) {
+              alert(textStatus.responseJSON.error.join('\n'));
+            } else {
+              alert(textStatus.statusText);
+            }
+          }
+        });
+      }
     });
 
-    modalEl.modal('show');
+    var modalView = new UtenteModal({
+      model: utente,
+      selectorTmpl: '#block-utente-modal-tmpl'
+    });
+
+    // connect auxiliary views
+    var selectLocationView = new Backbone.SIXHIARA.SelectLocationView({
+      el: $('#editUtenteModal'),
+      model: modalView.draftModel,
+      domains: this.options.domains,
+    }).render();
+    modalView.addAuxView(selectLocationView);
+
+    modalView.render();
   },
 
   language: {

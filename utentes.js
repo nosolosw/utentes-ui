@@ -56,8 +56,9 @@ var formatValue = function(k, v, rowData) {
 };
 
 var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
-  collection: utentes,
   el: $('#the_utentes_table'),
+  collection: utentes,
+  domains: domains,
   columnNames: ['nome', 'entidade', 'registro', 'localizacion', 'exploracaos', 'observacio', 'edit', 'delete'],
   // 'edit' & 'delete' column are used to render the buttons
   // 'nuit', Is show with 'nome' and not it its own column
