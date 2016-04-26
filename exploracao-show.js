@@ -1,15 +1,19 @@
 $(document).ready(function() {
-  $('#templates').load('templates.html', function() {
-    exploracaoModel.fetch({
-      parse: true,
-      success: function(){
-        showView.render()
-      },
-      error: function(){
-        window.location = Backbone.SIXHIARA.Config.urlSearch;
-      }
-    });
+  exploracaoModel.fetch({
+    parse: true,
+    success: function(){
+      showView.render()
+    },
+    error: function(){
+      window.location = Backbone.SIXHIARA.Config.urlSearch;
+    }
   });
+});
+
+$('#settings').on('click', function(e){
+  e.preventDefault();
+  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
+  configModalView.show();
 });
 
 function idIsNotValid(id){
@@ -30,10 +34,4 @@ var showView = new Backbone.SIXHIARA.ExploracaoShowView({
 
 exploracaoModel.on('destroy', function (model, collection, options) {
   showView.remove();
-});
-
-$('#settings').on('click', function(e){
-  e.preventDefault();
-  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
-  configModalView.show();
 });
