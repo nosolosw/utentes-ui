@@ -173,7 +173,7 @@
           </div>
         </div>
       </div>
-      <div class="actividade-render">
+      <div id="actividade-render">
         <!-- each activity needs to render itself here, so it needs to declare as many divs.row component as it needs -->
       </div>
     </section>
@@ -219,34 +219,6 @@
     </section>
 
   </main>
-
-  <!-- STATIC MODALS (the ones which are already in the DOM)  -->
-
-  <!-- modal actividade -->
-  <div class="modal fade" id="editActividadeModal" tabindex="-1" role="dialog" aria-labelledby="editActividadeModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="editActividadeModalLabel">Actividade</h4>
-        </div>
-        <div class="modal-body">
-          <div id="actividade-explotacion" class="row">
-            <div class="form-group col-xs-offset-1 col-xs-5">
-              <label for="actividade">Tipo de actividade</label>
-              <select id="actividade" class="form-control widget"></select>
-            </div>
-          </div>
-          <section id="info-actividade">
-            <div class="row">
-              <h3 class="col-xs-offset-1 col-xs-11">Dados da actividade</h3>
-            </div>
-            <!-- <div class="actividade-render"></div> -->
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- TEMPLATES -->
 
@@ -449,6 +421,51 @@
     </div>
   </script>
 
+  <!-- modal for actividades -->
+  <script type="text/template" id="modal-actividades">
+    <div class="modal fade" id="editActividadeModal" tabindex="-1" role="dialog" aria-labelledby="editActividadeModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="editActividadeModalLabel">Actividade</h4>
+          </div>
+          <div class="modal-body">
+            <div id="actividade-explotacion" class="row">
+              <div class="form-group col-xs-offset-1 col-xs-5">
+                <label for="actividade">Tipo de actividade</label>
+                <select id="tipo" class="form-control widget"></select>
+              </div>
+            </div>
+            <!-- <section id="info-actividade">
+              <div class="row">
+                <h3 class="col-xs-offset-1 col-xs-10">Dados da actividade</h3>
+              </div> -->
+              <div id="actividade-render-modal"></div>
+            <!-- </section> -->
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-xs-offset-1 col-xs-10">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="okButton">Aceptar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- tmpl no activity -->
+  <script type="text/template" id="Actividade non declarada">
+  </script>
+
+  <!-- template no activity (inside modal) -->
+  <script type="text/template" id="Actividade non declarada_edit">
+    <input type="hidden" id="id">
+  </script>
+
   <!-- tmpl actividade abastecimento -->
   <script type="text/template" id="Abastecimento">
     <div class="row">
@@ -463,8 +480,7 @@
       </div>
     </div>
     <div class="row">
-      <span class="col-xs-offset-1 col-xs-11">
-      </span>
+      <span class="col-xs-offset-1 col-xs-11"></span>
     </div>
   </script>
 
@@ -472,7 +488,7 @@
   <script type="text/template" id="Abastecimento_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="habitantes">Nro de habitantes</label>
         <input type="text" class="form-control widget-number" id="habitantes">
       </div>
@@ -517,27 +533,6 @@
   <!-- tmpl actividade agricultura (inside modal)-->
   <script type="text/template" id="Agricultura-Regadia_edit">
     <input type="hidden" id="id">
-    <div class="form-group">
-      <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
-    </div>
-    <div class="row">
-      <table class="col-xs-offset-1 table" id="cultivos">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</th>
-            <th>Tipo de cultivo / rega</th>
-            <th>Eficiencia del riego</th>
-            <th>Área <i class="units">(ha)</i></th>
-            <th>Observações</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
   </script>
 
   <!-- modal engadir cultivo -->
@@ -633,40 +628,40 @@
   <script type="text/template" id="Indústria_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-3">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
         <input type="text" class="form-control widget-number" id="c_estimado">
       </div>
-      <div class="form-group col-xs-6">
-        <label for="c_estimado_computed">C. estimado (autocalculado dende área)</label>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="c_estimado_computed">Consumo autocalculado</label>
         <input type="text" class="form-control" id="c_estimado_computed" disabled>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-3">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="tipo_indus">Tipo de indústria</label>
         <select class="form-control widget" id="tipo_indus">
         </select>
       </div>
-      <div class="form-group col-xs-6">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="eval_impac">Evaluação Impacto</label>
         <select class="form-control widget-boolean" id="eval_impac"></select>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-9">
+      <div class="form-group col-xs-offset-1 col-xs-10">
         <label for="instalacio">Instalaçôes</label>
         <textarea class="form-control widget" id="instalacio" rows="4"></textarea>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-9">
+      <div class="form-group col-xs-offset-1 col-xs-10">
         <label for="efluente">Efluente producido</label>
         <textarea class="form-control widget" id="efluente" rows="4"></textarea>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-9">
+      <div class="form-group col-xs-offset-1 col-xs-10">
         <label for="tratamento">Medios tratamento água</label>
         <textarea class="form-control widget" id="tratamento" rows="4"></textarea>
       </div>
@@ -705,24 +700,6 @@
   <!-- tmpl actividade pecuaria (inside modal) -->
   <script type="text/template" id="Pecuária_edit">
     <input type="hidden" id="id">
-    <div class="form-group">
-      <button class="btn btn-default pull-right" id="newRow">Nova res</button>
-    </div>
-    <div class="row">
-      <table class="col-xs-offset-1 table" id="reses">
-        <thead>
-          <tr>
-            <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-            <th>Tipo de reses</th>
-            <th>Nro de reses</th>
-            <th>Observações</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
   </script>
 
   <!-- modal engadir res -->
@@ -786,17 +763,17 @@
   <script type="text/template" id="Piscicultura_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="area">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
         <input type="text" class="form-control widget-number" id="c_estimado">
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="area">Área <i class="units">(ha)</i></label>
         <input type="text" class="form-control widget-number" id="area">
       </div>
-      <div class="form-group col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="v_reservas">Reservas <i class="units">(m<sup>3</sup>)</i></label>
         <input type="text" class="form-control widget-number" id="v_reservas">
       </div>
@@ -839,34 +816,34 @@
   <script type="text/template" id="Producção de energia_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
         <input type="text" class="form-control widget-number" id="c_estimado">
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="energia_tipo">Tipo de produção</label>
         <select class="form-control widget" id="energia_tipo">
         </select>
       </div>
-      <div class="form-group col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="alt_agua">Altura de água</label>
         <input type="text" class="form-control widget-number" id="alt_agua">
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="potencia">Potência a instalar</label>
         <input type="text" class="form-control widget-number" id="potencia">
       </div>
-      <div class="form-group col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="eval_impac">Evaluação Impacto</label>
         <select class="form-control widget-boolean" id="eval_impac"></select>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-8">
+      <div class="form-group col-xs-offset-1 col-xs-10">
         <label for="equipo">Tipo de equipamento</label>
         <textarea class="form-control widget" id="equipo" rows="4"></textarea>
       </div>
@@ -891,12 +868,10 @@
   <script type="text/template" id="Saneamento_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
         <input type="text" class="form-control widget-number" id="c_estimado">
       </div>
-    </div>
-    <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="habitantes">Nro de habitantes</label>
         <input type="text" class="form-control widget-number" id="habitantes">
@@ -1121,6 +1096,7 @@
 
   <script src="Config.js"></script>
 
+  <script src="models/ActividadeNull.js"></script>
   <script src="models/ActividadeCultivo.js"></script>
   <script src="models/CultivoCollection.js"></script>
   <script src="models/Fonte.js"></script>
@@ -1162,6 +1138,7 @@
   <script src="views/common/SelectUtenteView.js"></script>
   <script src="views/show/BlockUtenteView.js"></script>
   <script src="views/show/ModalView.js"></script>
+  <script src="views/show/ModalViewActivity.js"></script>
   <script src="views/show/CultivoResModalView.js"></script>
   <script src="views/show/EditableTableView.js"></script>
   <script src="views/show/ActividadeView.js"></script>

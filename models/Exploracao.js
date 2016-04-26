@@ -285,10 +285,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
   updateSummaryConsumo: function(){
     var c_licencia = this.get('c_licencia'),
-        c_real = this.get('c_real'),
-        c_estimado = this.get('c_estimado'),
-        valid = c_licencia >= c_real && c_licencia >= c_estimado;
-        this.set('summary_consumo_val', valid);
+    c_real = this.get('c_real'),
+    c_estimado = this.get('c_estimado'),
+    valid = c_licencia >= c_real && c_licencia >= c_estimado;
+    this.set('summary_consumo_val', valid);
     return valid;
   },
 
@@ -340,7 +340,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     json.utente     = this.get('utente').toJSON();
     json.licencias  = this.get('licencias').toJSON();
     json.fontes     = this.get('fontes').toJSON();
-    if (this.getActividadeTipo() === 'Actividade non declarada') {
+    if (this.getActividadeTipo() === Backbone.SIXHIARA.MSG.NO_ACTIVITY) {
       json.actividade = null;
     } else {
       json.actividade = this.get('actividade').toJSON();
@@ -401,7 +401,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   validateActividade: function() {
     var messages = [];
     var tipo = this.getActividadeTipo();
-    if(tipo !== 'Actividade non declarada'){
+    if(tipo !== Backbone.SIXHIARA.MSG.NO_ACTIVITY){
       // only validate activities for a subset of estados
       var notValidatableStatus = [
         'Irregular',
@@ -413,13 +413,13 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       ];
       var estados = [];
       this.get('licencias').forEach(function (licencia) {
-          estados.push(licencia.get('estado'));
+        estados.push(licencia.get('estado'));
       });
       var toValidateActivity = false;
       estados.forEach(function (estado) {
-          if(!notValidatableStatus.includes(estado)){
-            toValidateActivity = true;
-          }
+        if(!notValidatableStatus.includes(estado)){
+          toValidateActivity = true;
+        }
       })
       if(toValidateActivity){
         var actividadeSchema = ActividadeSchema[tipo];
@@ -488,7 +488,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   getActividadeTipo: function() {
-    var tipo = 'Actividade non declarada';
+    var tipo = Backbone.SIXHIARA.NO_ACTIVITY;
     if (this.get('actividade')) {
       tipo = this.get('actividade').get('tipo') || tipo;
     }

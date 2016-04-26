@@ -3,44 +3,56 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
 
   initialize: function(options){
     this.options = options || {};
-    if(this.options.template){
-      this.template = this.options.template;
-    } else {
-      // throw {message: 'no template provided'};
-    }
-    this.options.domains = options.domains;
+    this.template = this.options.template;
+    this.options.domains = this.options.domains;
+    this.subViews = [];
   },
 
   render: function(){
-    var actividade = this.model.get('actividade');
-    if(actividade){
-      this.$('#actividade').text(this.model.get('actividade').get('tipo') || 'Actividade non declarada');
-    } else{
-      this.$('#actividade').text('Actividade non declarada');
-    }
 
-    this.$('.actividade-render').html('');
-    if(this.template){
-      this.$('.actividade-render').append(this.template(this.model.get('actividade').toJSON()));
-    }
+    var tipo = this.model.getActividadeTipo();
+    var atts = (this.model.get('actividade') && this.model.get('actividade').toJSON()) || {};
 
-    if(this.options.domains){
-      // TODO create as subviews
-      new Backbone.UILib.SelectView({
-        el: $('#tipo_indus'),
-        collection: this.options.domains.byCategory('industria_tipo')
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#energia_tipo'),
-        collection: this.options.domains.byCategory('energia_tipo')
-      }).render();
-      new Backbone.UILib.SelectView({
-        el: $('#eval_impac'),
-        collection: this.options.domains.byCategory('boolean')
-      }).render();
+    _.invoke(this.subViews, 'remove');
+    this.subViews = [];
+
+    this.$('#actividade').text(tipo);
+
+    this.$('#actividade-render').html('');
+    this.$('#actividade-render').append(this.template(atts));
+
+    if (tipo === 'Pecuária') {
+      var table = new Backbone.SIXHIARA.EditableTableView({
+        el: this.$el,
+        newRowBtSelector: '#newRow',
+        modalSelectorTpl: '#resModalTpl',
+        tableSelector: 'table#reses',
+        collection: this.model.get('actividade').get('reses'),
+        rowTemplate: '<td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- reses_tipo %></td><td><% print(formatter().formatNumber(reses_nro)) %></td><td><%- observacio %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
+        collectionModel: Backbone.SIXHIARA.ActividadeRes,
+        domains: this.options.domains,
+      });
+      this.subViews.push(table);
+    } else if (tipo === 'Agricultura-Regadia') {
+      var table = new Backbone.SIXHIARA.EditableTableView({
+        el: this.$el,
+        newRowBtSelector: '#newRow',
+        modalSelectorTpl: '#cultivoModalTpl',
+        tableSelector: 'table#cultivos',
+        collection: this.model.get('actividade').get('cultivos'),
+        rowTemplate: '<td><%- cult_id %></td><td><% print(formatter().formatNumber(c_estimado)) %></td><td><%- cultivo %> / <%- rega %> </td><td> <% print(formatter().formatNumber(eficiencia)) %> </td><td><% print(formatter().formatNumber(area, "0[,]000[.]0000")) %></td><td><%- observacio %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
+        collectionModel: Backbone.SIXHIARA.ActividadeCultivo,
+        domains: this.options.domains,
+      });
+      this.subViews.push(table);
     }
 
     return this;
-  }
+  },
+
+  remove: function () {
+    Backbone.View.prototype.remove.call(this);
+    _.invoke(this.subViews, 'remove');
+  },
 
 });

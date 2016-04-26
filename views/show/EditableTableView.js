@@ -39,6 +39,7 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
   },
 
   remove: function(){
+    this.off();
     _.invoke(this._subviews, 'off');
     _.invoke(this._subviews, 'remove');
     Backbone.View.prototype.remove.call(this);
