@@ -1,16 +1,9 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
-  initialize: function(){
-    var base = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    });
+  initialize: function(options){
 
-    this.map = L.map('map', {
-      center: [-13.3030, 38.5050],
-      zoom: 7,
-      layers: [base]
-    });
+    this.map = Backbone.SIXHIARA.mapConfig('map', options);
 
     var drawnItems = new L.FeatureGroup();
 
@@ -71,6 +64,8 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     this.renderCultivos();
 
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
+
+    Backbone.SIXHIARA.offline(this.map);
   },
 
   renderCultivos: function() {

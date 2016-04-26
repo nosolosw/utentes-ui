@@ -12,10 +12,13 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
   background = '#1f78b4';
 
   var mapOptions = {
+    zoom: 7,
+    center: [-13.3030, 38.5050],
     maxBounds: maxBounds,
     minZoom: 6,
     maxZoom: 19,
   };
+  
   if (options.online) {
     mapOptions.layers = [base]
   }
