@@ -23,7 +23,7 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
 
     if (tipo === 'Pecuária') {
       var table = new Backbone.SIXHIARA.EditableTableView({
-        el: this.$el,
+        el: this.$('#block-pecuaria'),
         newRowBtSelector: '#newRow',
         modalSelectorTpl: '#resModalTpl',
         tableSelector: 'table#reses',
@@ -35,7 +35,7 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
       this.subViews.push(table);
     } else if (tipo === 'Agricultura-Regadia') {
       var table = new Backbone.SIXHIARA.EditableTableView({
-        el: this.$el,
+        el: this.$('#block-regadia'),
         newRowBtSelector: '#newRow',
         modalSelectorTpl: '#cultivoModalTpl',
         tableSelector: 'table#cultivos',

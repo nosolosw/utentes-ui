@@ -351,7 +351,6 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-10">
                 <select id="select-utente" class="form-control">
-                  <!-- <option value="novo"> - Novo utente - </option> -->
                 </select>
               </div>
             </div>
@@ -437,12 +436,7 @@
                 <select id="tipo" class="form-control widget"></select>
               </div>
             </div>
-            <!-- <section id="info-actividade">
-              <div class="row">
-                <h3 class="col-xs-offset-1 col-xs-10">Dados da actividade</h3>
-              </div> -->
-              <div id="actividade-render-modal"></div>
-            <!-- </section> -->
+            <div id="actividade-render-modal"></div>
           </div>
           <div class="modal-footer">
             <div class="row">
@@ -501,31 +495,33 @@
 
   <!-- tmpl actividade agricultura -->
   <script type="text/template" id="Agricultura-Regadia">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
-          <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+    <div id="block-regadia">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <button class="btn btn-default pull-right" id="newRow">Novo cultivo</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <table class="table table-bordered" id="cultivos">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-              <th>Tipo de cultivo / rega</th>
-              <th>Eficiencia del riego</th>
-              <th>Área <i class="units">(ha)</i></th>
-              <th>Observações</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-bordered" id="cultivos">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+                <th>Tipo de cultivo / rega</th>
+                <th>Eficiencia del riego</th>
+                <th>Área <i class="units">(ha)</i></th>
+                <th>Observações</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </script>
@@ -670,29 +666,31 @@
 
   <!-- tmpl actividade pecuaria -->
   <script type="text/template" id="Pecuária">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
-          <button class="btn btn-default pull-right" id="newRow">Nova res</button>
+    <div id="block-pecuaria">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <button class="btn btn-default pull-right" id="newRow">Nova res</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <table class="table table-bordered" id="reses">
-          <thead>
-            <tr>
-              <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
-              <th>Tipo de reses</th>
-              <th>Nro de reses</th>
-              <th>Observações</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-bordered" id="reses">
+            <thead>
+              <tr>
+                <th>C. Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+                <th>Tipo de reses</th>
+                <th>Nro de reses</th>
+                <th>Observações</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </script>
@@ -742,7 +740,6 @@
       </div>
     </div>
   </script>
-
 
   <!-- tmpl actividade piscicultura -->
   <script type="text/template" id="Piscicultura">
@@ -1020,7 +1017,6 @@
       </div>
     </div>
   </script>
-
 
   <!-- template licencia -->
   <script type="text/template" id="licencia-tmpl">
