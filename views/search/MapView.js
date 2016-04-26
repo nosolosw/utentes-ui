@@ -1,14 +1,7 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.MapView = Backbone.View.extend({
 
-  initialize: function(){
-    var base = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-    var southWest = L.latLng(-23, 31),
-    northEast = L.latLng(-9, 43),
-    maxBounds = L.latLngBounds(southWest, northEast);
+  initialize: function(options){
 
     var self = this;
     this.geoJSONLayer = L.geoJson(this.collection.toGeoJSON(), {
@@ -47,13 +40,12 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       }
     });
 
-    this.map = L.map(this.el.id, {
-      layers: [base, this.geoJSONLayer],
-      maxBounds: maxBounds,
-      minZoom: 6,
-    });
+
+    this.map = Backbone.SIXHIARA.mapConfig(this.el.id, options);
 
     this.mapEvents();
+    this.geoJSONLayer.addTo(this.map);
+    Backbone.SIXHIARA.offline(this.map);
   },
 
   leafletStyle: function style(feature) {
