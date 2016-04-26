@@ -11,14 +11,16 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
   maxBounds = L.latLngBounds(southWest, northEast),
   background = '#1f78b4';
 
-  var mapOptions = {
+  var defaultMapOptions = {
     zoom: 7,
-    center: [-13.3030, 38.5050],
+    center: [-13, 38.5050],
     maxBounds: maxBounds,
     minZoom: 6,
     maxZoom: 19,
   };
-  
+
+  var mapOptions = _.defaults(_.extend({}, defaultMapOptions, options.mapOptions || {}), defaultMapOptions);
+
   if (options.online) {
     mapOptions.layers = [base]
   }

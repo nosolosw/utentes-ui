@@ -1,7 +1,8 @@
-var map = L.map('map-pane').setView([-12.965, 40.508], 16);
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+
+var options = {mapOptions:{
+  zoom:8,
+}};
+var map = Backbone.SIXHIARA.mapConfig('map-pane', options);
 
 // TODO: take it from leaflet-table
 var unselectedFeature = {
@@ -114,3 +115,5 @@ $('#settings').on('click', function(e){
   var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
   configModalView.show();
 });
+
+Backbone.SIXHIARA.offline(this.map);
