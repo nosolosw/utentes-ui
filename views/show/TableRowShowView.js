@@ -42,9 +42,12 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     this.$('td.tipo_agua').text(fonte.get('tipo_agua') || displayNull);
     this.$('td.tipo_fonte').text(fonte.get('tipo_fonte') || displayNull);
     this.$('td.lat_lon').text(fonte.get('lat_lon') || displayNull);
-    this.$('td.c_soli').text(fonte.get('c_soli') || displayNull);
-    this.$('td.c_max').text(fonte.get('c_max') || displayNull);
-    this.$('td.c_real').text(fonte.get('c_real') || displayNull);
+    var c_soli = formatter().formatNumber(fonte.get('c_soli'));
+    this.$('td.c_soli').text(c_soli || displayNull);
+    var c_max = formatter().formatNumber(fonte.get('c_max'));
+    this.$('td.c_max').text(c_max || displayNull);
+    var c_real = formatter().formatNumber(fonte.get('c_real'));
+    this.$('td.c_real').text(c_real || displayNull);
     var d_dado = formatter().formatDate(fonte.get('d_dado'));
     this.$('td.d_dado').text( d_dado || displayNull);
     var contador = formatter().formatBoolean(fonte.get('contador'));
