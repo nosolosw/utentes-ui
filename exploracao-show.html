@@ -235,17 +235,17 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-3">
                 <label for="exp_name">Nro / Id</label>
-                <input type="text" class="form-control widget" id="exp_id">
+                <input type="text" class="form-control widget" id="exp_id" pattern="[0-9]{4}[-][0-9]{3}" required>
               </div>
               <div class="form-group col-xs-7">
                 <label for="exp_name">Nome da exploração</label>
-                <input type="text" class="form-control widget" id="exp_name">
+                <input type="text" class="form-control widget" id="exp_name" required>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-3">
                 <label for="d_soli">Data de solicitação</label>
-                <input type="text" class="form-control widget-date" id="d_soli" placeholder="dd/mm/yyyy">
+                <input type="text" class="form-control widget-date" id="d_soli" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
               </div>
               <div class="form-group col-xs-7">
                 <label for="pagos">Pagamentos</label>
@@ -357,7 +357,7 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-10">
                 <label for="nome">Nome do utente</label>
-                <input type="text" class="form-control widget widget-utente" id="nome">
+                <input type="text" class="form-control widget widget-utente" id="nome" required>
               </div>
             </div>
             <div class="row">
@@ -484,11 +484,11 @@
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="habitantes">Nro de habitantes</label>
-        <input type="text" class="form-control widget-number" id="habitantes">
+        <input type="text" class="form-control widget-number" id="habitantes" pattern="[0-9]+([,][0-9]{1,2})?" required>
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="dotacao">Dotaçâo <i class="units">(l/pessoa/dia)</i></label>
-        <input type="text" class="form-control widget-number" id="dotacao" value="20">
+        <input type="text" class="form-control widget-number" id="dotacao" value="20" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
     </div>
   </script>
@@ -544,24 +544,22 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="cultivo">Tipo de cultivo</label>
-                <select class="form-control widget" id="cultivo">
-                </select>
+                <select class="form-control widget" id="cultivo"></select>
               </div>
               <div class="form-group col-xs-offset-2 col-xs-4">
                 <label for="rega">Tipo de rega</label>
-                <select class="form-control widget" id="rega">
-                </select>
+                <select class="form-control widget" id="rega"></select>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="eficiencia">Eficiencia del riego</label>
-                <input type="text" class="form-control widget-number" id="eficiencia" />
+                <input type="text" class="form-control widget-number" id="eficiencia" pattern="[0-9]+([,][0-9]{1,2})?" />
               </div>
 
               <div class="form-group col-xs-offset-2 col-xs-4">
                 <label for="area">Área <i class="units">(ha)</i></label>
-                <input type="text" class="form-control widget-number" id="area" />
+                <input type="text" class="form-control widget-number" id="area" pattern="[0-9]+([,][0-9]{1,4})?" required />
               </div>
             </div>
             <div class="row">
@@ -626,7 +624,7 @@
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
-        <input type="text" class="form-control widget-number" id="c_estimado">
+        <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]+([,][0-9]{1,2})?" required>
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="c_estimado_computed">Consumo autocalculado</label>
@@ -713,13 +711,12 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="reses_tipo">Tipo de reses</label>
-                <select class="form-control widget" id="reses_tipo">
-                </select>
+                <select class="form-control widget" id="reses_tipo"></select>
               </div>
 
               <div class="form-group col-xs-offset-2 col-xs-4">
                 <label for="reses_nro">Nro de reses</label>
-                <input type="text" class="form-control widget-number" id="reses_nro" />
+                <input type="text" class="form-control widget-number" id="reses_nro" pattern="[0-9]+([,][0-9]{1,2})?" required />
               </div>
 
               <div class="form-group col-xs-offset-1 col-xs-10">
@@ -762,17 +759,17 @@
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="area">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
-        <input type="text" class="form-control widget-number" id="c_estimado">
+        <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="area">Área <i class="units">(ha)</i></label>
-        <input type="text" class="form-control widget-number" id="area">
+        <input type="text" class="form-control widget-number" id="area" pattern="[0-9]+([,][0-9]{1,4})?">
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="v_reservas">Reservas <i class="units">(m<sup>3</sup>)</i></label>
-        <input type="text" class="form-control widget-number" id="v_reservas">
+        <input type="text" class="form-control widget-number" id="v_reservas" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
     </div>
   </script>
@@ -815,24 +812,23 @@
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
-        <input type="text" class="form-control widget-number" id="c_estimado">
+        <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="energia_tipo">Tipo de produção</label>
-        <select class="form-control widget" id="energia_tipo">
-        </select>
+        <select class="form-control widget" id="energia_tipo"></select>
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="alt_agua">Altura de água</label>
-        <input type="text" class="form-control widget-number" id="alt_agua">
+        <input type="text" class="form-control widget-number" id="alt_agua" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="potencia">Potência a instalar</label>
-        <input type="text" class="form-control widget-number" id="potencia">
+        <input type="text" class="form-control widget-number" id="potencia" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="eval_impac">Evaluação Impacto</label>
@@ -867,11 +863,11 @@
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
-        <input type="text" class="form-control widget-number" id="c_estimado">
+        <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="habitantes">Nro de habitantes</label>
-        <input type="text" class="form-control widget-number" id="habitantes">
+        <input type="text" class="form-control widget-number" id="habitantes" pattern="[0-9]+([,][0-9]{1,2})?">
       </div>
     </div>
   </script>
@@ -891,7 +887,7 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-7">
                 <label for="estado">Estado</label> <span id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></span>
-                <select type="text" class="form-control widget estado-subterranea" id="estado" aria-describedby="info-estado-licencia"></select>
+                <select type="text" class="form-control widget" id="estado" aria-describedby="info-estado-licencia"></select>
               </div>
               <div class="form-group col-xs-3">
                 <label for="cadastro">Nro de cadastro</label>
@@ -901,15 +897,15 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="c_real_int">C. licenciado <i class="units">(m<sup>3</sup>/més)</i></label>
-                <input type="text" class="form-control widget-number" id="c_licencia">
+                <input type="text" class="form-control widget-number" id="c_licencia" pattern="[0-9]+([,][0-9]{1,2})?">
               </div>
               <div class="form-group col-xs-3">
                 <label for="d_emissao">Data emissão</label>
-                <input type="text" class="form-control widget-date" id="d_emissao" placeholder="dd/mm/yyyy">
+                <input type="text" class="form-control widget-date" id="d_emissao" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
               </div>
               <div class="form-group col-xs-3">
                 <label for="d_validade">Data validade</label>
-                <input type="text" class="form-control widget-date" id="d_validade" placeholder="dd/mm/yyyy">
+                <input type="text" class="form-control widget-date" id="d_validade" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
               </div>
             </div>
             <br/>
@@ -921,11 +917,11 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-5">
                 <label for="c_real_int">C. real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
-                <input type="text" class="form-control widget-number" id="c_real_int">
+                <input type="text" class="form-control widget-number" id="c_real_int" pattern="[0-9]+([,][0-9]{1,2})?">
               </div>
               <div class="form-group col-xs-5">
                 <label for="c_soli_int">C. solicitado intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
-                <input type="text" class="form-control widget-number" id="c_soli_int">
+                <input type="text" class="form-control widget-number" id="c_soli_int" pattern="[0-9]+([,][0-9]{1,2})?">
               </div>
             </div>
           </div>
@@ -955,7 +951,7 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-5">
                 <label for="tipo_agua">Tipo de água</label>
-                <input type="text" class="form-control widget disabled" id="tipo_agua" />
+                <input type="text" class="form-control widget disabled" id="tipo_agua" required>
               </div>
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="tipo_fonte">Tipo de fonte</label>
@@ -965,17 +961,17 @@
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-5">
                 <label for="c_soli">C. solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
-                <input type="text" class="form-control widget-number" id="c_soli" />
+                <input type="text" class="form-control widget-number" id="c_soli" pattern="[0-9]+([,][0-9]{1,2})?">
               </div>
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="c_real">C. real <i class="units">(m<sup>3</sup>/més)</i></label>
-                <input type="text" class="form-control widget-number" id="c_real" />
+                <input type="text" class="form-control widget-number" id="c_real" pattern="[0-9]+([,][0-9]{1,2})?">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-5">
                 <label for="c_max">Máximo caudal extraíble <i class="units">(m<sup>3</sup>/més)</i></label>
-                <input type="text" class="form-control widget-number" id="c_max" />
+                <input type="text" class="form-control widget-number" id="c_max" pattern="[0-9]+([,][0-9]{1,2})?">
               </div>
             </div>
             <div class="row">
@@ -985,17 +981,17 @@
               </div>
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="metodo_est">Método estimação volume</label>
-                <input type="text" class="form-control widget" id="metodo_est" />
+                <input type="text" class="form-control widget" id="metodo_est">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-5">
                 <label for="d_dado">Data toma de dados</label>
-                <input type="text" class="form-control widget-date" id="d_dado" placeholder="dd/mm/yyyy"/>
+                <input type="text" class="form-control widget-date" id="d_dado" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
               </div>
               <div class="form-group col-xs-offset-1 col-xs-4">
                 <label for="lat_lon">Lat / Lon</label>
-                <input type="text" class="form-control widget" id="lat_lon" />
+                <input type="text" class="form-control widget" id="lat_lon">
               </div>
             </div>
             <div class="row">
