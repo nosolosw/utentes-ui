@@ -74,3 +74,8 @@ td.edit:focus, td.delete:focus {
   font-size: 90%;
   font-style: italic;
 }
+
+input:invalid {
+  border: 1px solid #A94442 !important;
+  box-shadow: 0 0 4px #A94442 !important;
+}
