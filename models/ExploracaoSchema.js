@@ -4,7 +4,7 @@ var EXPLORACAO_SCHEMA = [{
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'exp_id',
-  'message':   'Nro de exploracão não tem o formato correcto',
+  'message':   'Nro de exploracão não tem o formato correto',
   'rules':     ['EXP_ID_FORMAT']
 }, {
   'fieldname': 'exp_name',
@@ -12,7 +12,7 @@ var EXPLORACAO_SCHEMA = [{
   'rules':     ['NOT_NULL']
 }, {
   'fieldname': 'd_soli',
-  'message':   'Data de solicitação não tem o formato correcto',
+  'message':   'Data de solicitação não tem o formato correto',
   'rules':     ['IS_DATE']
 }, {
   'fieldname': 'loc_provin',
@@ -28,31 +28,31 @@ var EXPLORACAO_SCHEMA = [{
   'rules':     ['NOT_NULL']
 }, {
   'fieldname': 'c_soli',
-  'message':   'Consumo solicitado não tem o formato correcto',
+  'message':   'Consumo solicitado não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'c_licencia',
-  'message':   'Consumo licenciado não tem o formato correcto',
+  'message':   'Consumo licenciado não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'c_real',
-  'message':   'Consumo real não tem o formato correcto',
+  'message':   'Consumo real não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado não tem o formato correcto',
+  'message':   'Consumo estimado não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'area',
-  'message':   'Área não tem o formato correcto',
+  'message':   'Área não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'utente',
-  'message':   'A exploracão debe ter uma utente',
+  'message':   'A exploracão debe ter um utemte',
   'rules':     ['NOT_NULL']
 }, {
   'fieldname': 'pagos',
-  'message':   'Pagamentos não tem o formato correcto',
+  'message':   'Pagamentos não tem o formato correto',
   'rules':     ['IS_BOOLEAN']
 }, {
   'fieldname': 'actividade',

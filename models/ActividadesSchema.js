@@ -2,29 +2,29 @@ var ActividadeSchema = {};
 
 ActividadeSchema['Abastecimento'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC', 'NOT_NULL']
 }, {
   'fieldname': 'habitantes',
-  'message':   'O nro de habitantes da actividade não tem o formato correcto ou está vazio',
+  'message':   'O nro de habitantes da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC', 'NOT_NULL']
 }, {
   'fieldname': 'dotacao',
-  'message':   'A dotaçâo da actividade não tem o formato correcto ou está vazio',
+  'message':   'A dotaçâo da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC', 'NOT_NULL']
 }];
 
 ActividadeSchema['Agricultura-Regadia'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC', 'NOT_NULL']
 },{
   'fieldname': 'cultivos',
@@ -34,7 +34,7 @@ ActividadeSchema['Agricultura-Regadia'] = [{
 
 ActividadeSchema['Cultivos'] = [{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado do cultivo não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado do cultivo não tem o formato correto o está vazio',
   'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }, {
   'fieldname': 'cultivo',
@@ -46,35 +46,35 @@ ActividadeSchema['Cultivos'] = [{
   'rules':     ['NOT_NULL']
 }, {
   'fieldname': 'eficiencia',
-  'message':   'Eficiencia não tem o formato correcto',
+  'message':   'Eficiencia não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'area',
-  'message':   'Área não tem o formato correcto',
+  'message':   'Área não tem o formato correto',
   'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }];
 
 ActividadeSchema['Indústria'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC', 'NOT_NULL']
 }, {
   'fieldname': 'eval_impac',
-  'message':   'Evaluação impacto não tem o formato correcto',
+  'message':   'Evaluação impacto não tem o formato correto',
   'rules':     ['IS_BOOLEAN']
 }];
 
 ActividadeSchema['Pecuária'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC', 'NOT_NULL']
 }, {
   'fieldname': 'reses',
@@ -84,7 +84,7 @@ ActividadeSchema['Pecuária'] = [{
 
 ActividadeSchema['Reses'] = [{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }, {
   'fieldname': 'reses_tipo',
@@ -92,21 +92,21 @@ ActividadeSchema['Reses'] = [{
   'rules':     ['NOT_NULL']
 }, {
   'fieldname': 'reses_nro',
-  'message':   'Nro de reses não tem o formato correcto ou está vazio',
+  'message':   'Nro de reses não tem o formato correto o está vazio',
   'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }, {
   'fieldname': 'c_res',
-  'message':   'Consumo por res não tem o formato correcto ou está vazio',
+  'message':   'Consumo por res não tem o formato correto o está vazio',
   'rules':     ['NOT_NULL', 'IS_NUMERIC']
 }];
 
 ActividadeSchema['Piscicultura'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'area',
@@ -114,17 +114,17 @@ ActividadeSchema['Piscicultura'] = [{
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'v_reservas',
-  'message':   'Reservas não tem o formato correcto',
+  'message':   'Reservas não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }];
 
 ActividadeSchema['Producção de energia'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'alt_agua',
@@ -132,24 +132,24 @@ ActividadeSchema['Producção de energia'] = [{
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'potencia',
-  'message':   'Potência a instalar não tem o formato correcto',
+  'message':   'Potência a instalar não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'eval_impac',
-  'message':   'Evaluação impacto não tem o formato correcto',
+  'message':   'Evaluação impacto não tem o formato correto',
   'rules':     ['IS_BOOLEAN']
 }];
 
 ActividadeSchema['Saneamento'] = [{
   'fieldname': 'tipo',
-  'message':   'Tipo da actividade não pode estar vazio',
+  'message':   'Tipo de actividade não pode estar vazio',
   'rules':     ['NOT_NULL']
 },{
   'fieldname': 'c_estimado',
-  'message':   'Consumo estimado da actividade não tem o formato correcto ou está vazio',
+  'message':   'Consumo estimado da actividade não tem o formato correto o está vazio',
   'rules':     ['IS_NUMERIC']
 }, {
   'fieldname': 'habitantes',
-  'message':   'O nro de habitantes da actividade não tem o formato correcto',
+  'message':   'O nro de habitantes da actividade não tem o formato correto',
   'rules':     ['IS_NUMERIC']
 }];
