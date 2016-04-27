@@ -151,9 +151,22 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
 
   okButtonClicked: function () {
     // // overwritten in BlockActivityView
+    // if(this.isSomeWidgetInvalid()) return;
     // var atts = this.draftModel.pick(this.getAttsChanged());
     // this.model.set(atts);
     // this.$('.modal').modal('hide');
+  },
+
+  isSomeWidgetInvalid: function () {
+    // we only use Constraint API with input elements, so check only those
+    var widgets = this.$('.modal').find('input.widget, input.widget-number, input.widget-date');
+    var someInvalid = false;
+    widgets.each(function (index, widget) {
+      if(!widget.validity.valid) {
+        someInvalid = true;
+      }
+    });
+    return someInvalid;
   },
 
   getAttsChanged: function () {

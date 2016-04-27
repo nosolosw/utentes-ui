@@ -61,6 +61,7 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
     var AddFonteModalView = Backbone.UILib.ModalView.extend({
       okButtonClicked: function () {
         // in this context, this is the backbone modalView
+        if(this.isSomeWidgetInvalid()) return;
         var atts = this.draftModel.pick(this.getAttsChanged());
         this.model.set(atts);
         self.model.get('fontes').add(this.model);
@@ -134,6 +135,7 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
     var AddLicenseModalView = Backbone.UILib.ModalView.extend({
       okButtonClicked: function () {
         // in this context, this is the backbone modalView
+        if(this.isSomeWidgetInvalid()) return;
         var atts = this.draftModel.pick(this.getAttsChanged());
         self.license.set(atts);
         self.model.get('licencias').add(self.license);

@@ -59,6 +59,7 @@ Backbone.SIXHIARA.BlockUtenteView = Backbone.View.extend({
     var UtenteModalView = Backbone.UILib.ModalView.extend({
       okButtonClicked: function () {
         // in this context, this is the backbone modalView
+        if(this.isSomeWidgetInvalid()) return;
         var newUtente = self.utentes.findWhere({'nome': this.draftModel.get('nome')});
         self.model.set('utente', newUtente);
         this.$('.modal').modal('hide');

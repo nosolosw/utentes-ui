@@ -35,6 +35,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     var ModalActivity = Backbone.SIXHIARA.ModalViewActivity.extend({
       okButtonClicked: function () {
         // in this context, this is the backbone modalView
+        if(this.isSomeWidgetInvalid()) return;
         var tipoOld = self.model.get('actividade').get('tipo');
         var tipoNew = this.draftModel.get('tipo');
         if(tipoOld === tipoNew){
