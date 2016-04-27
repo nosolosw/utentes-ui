@@ -94,6 +94,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
     var self = this;
     var AddFonteModal = Backbone.UILib.ModalView.extend({
       okButtonClicked: function () {
+        if(this.isSomeWidgetInvalid()) return;
         self.model.get('fontes').add(this.draftModel);
         this.$('.modal').modal('hide');
       }
