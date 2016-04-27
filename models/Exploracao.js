@@ -360,6 +360,19 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         return (value && (! re.test(value)));
       }
     });
+    expValidator.addRule('ACTIVITY_NOT_NULL', {
+      fails: function (value) {
+        return (
+          (value === null) ||
+          (value === undefined) ||
+          (value === '') ||
+          (value.tipo === null) ||
+          (value.tipo === undefined) ||
+          (value.tipo === '') || 
+          (value.tipo === Backbone.SIXHIARA.MSG.NO_ACTIVITY)
+        );
+      }
+    });
     expValidator.validate(this.toJSON()).forEach(function(msg){
       messages.push(msg);
     });

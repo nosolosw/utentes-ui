@@ -17,13 +17,8 @@ Backbone.SIXHIARA.SelectActividadeView = Backbone.View.extend({
     //
     // model.get('example') would return "Some text", not "1"
     var widgetSelected = this.$('#' + attr + ' option:selected');
-    var value = widgetSelected.text().trim() || null;
-    if (Backbone.SIXHIARA.ActividadesFactory[value]) {
-        this.model.set(attr, new Backbone.SIXHIARA.ActividadesFactory[value]());
-    } else {
-      this.model.set(attr, null);
-    }
-
+    var value = widgetSelected.text().trim() || Backbone.SIXHIARA.MSG.NO_ACTIVITY;
+    this.model.set(attr, new Backbone.SIXHIARA.ActividadesFactory[value]());
   },
 
 });
