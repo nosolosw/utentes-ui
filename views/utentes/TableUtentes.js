@@ -169,6 +169,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     var self = this;
     var UtenteModal = Backbone.UILib.ModalView.extend({
       okButtonClicked: function () {
+        if(this.isSomeWidgetInvalid()) return;
         var atts = this.draftModel.pick(this.getAttsChanged());
         this.model.set(atts);
         if(!this.model.isValid()){
