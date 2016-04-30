@@ -16,7 +16,7 @@ Backbone.SIXHIARA.ActividadeCultivo = Backbone.GeoJson.Feature.extend({
 
   initialize: function() {
     this.on('change:rega', this.updateEficiencia, this);
-    this.on('change:area', this.updateCEstimado, this);
+    this.on('change:area change:eficiencia', this.updateCEstimado, this);
   },
 
   validate: function(attrs, options){
@@ -49,7 +49,6 @@ Backbone.SIXHIARA.ActividadeCultivo = Backbone.GeoJson.Feature.extend({
   updateEficiencia: function() {
     var eficiencia = this.eficienciaByRega();
     this.set('eficiencia', eficiencia);
-    this.updateCEstimado();
   },
 
   updateCEstimado: function () {
