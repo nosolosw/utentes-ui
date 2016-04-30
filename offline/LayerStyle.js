@@ -192,7 +192,7 @@ Backbone.SIXHIARA.LayerStyle = {
     doPointToLayerPaisesPunto: function (feature, latlng) {
       return L.circleMarker(latlng, Backbone.SIXHIARA.LayerStyle.doStyleInvisibleMarker()).bindLabel(feature.properties.Nome, {
         noHide: true,
-        offset: [-0, -0],
+        offset: [-20, -15],
         className: 'sixhiara-leaflet-label-paises',
         opacity: 1,
         zoomAnimation: true,
@@ -203,7 +203,7 @@ Backbone.SIXHIARA.LayerStyle = {
     doPointToLayerPostosPunto: function (feature, latlng) {
       return L.circleMarker(latlng, Backbone.SIXHIARA.LayerStyle.doStyleInvisibleMarker()).bindLabel(feature.properties.Nome, {
         noHide: true,
-        offset: [-0, -0],
+        offset: [-20, -10],
         className: 'sixhiara-leaflet-label-postos',
         opacity: 1,
         zoomAnimation: true,
@@ -214,7 +214,7 @@ Backbone.SIXHIARA.LayerStyle = {
     doPointToLayerProvinciasPunto: function (feature, latlng) {
       return L.circleMarker(latlng, Backbone.SIXHIARA.LayerStyle.doStyleInvisibleMarker()).bindLabel(feature.properties.Nome, {
         noHide: true,
-        offset: [-0, -0],
+        offset: [-20, -15],
         className: 'sixhiara-leaflet-label-provincias',
         opacity: 1,
         zoomAnimation: true,
