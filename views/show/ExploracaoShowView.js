@@ -24,7 +24,7 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
 
         view.listenTo(exploracao, 'aChangeHappens', function(){
           this.$('menu a').not(':first').on('click', function(evt){
-            var refreshConfirmation = confirm('Hai mudanzas sem gardar. Desea sair igualmente');
+            var refreshConfirmation = confirm('Hai mudanzas sem gardar. ¿Deseja sair igualmente?');
             if (!refreshConfirmation) {
               evt.preventDefault();
             }
