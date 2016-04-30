@@ -4,7 +4,7 @@ Backbone.SIXHIARA.LayerConfig = {
     layer: L.geoJson(null, {style:Backbone.SIXHIARA.LayerStyle.doStyleAlbufeiras}),
     initialOrder: 6,
     scaleDependent: {
-      farZoom: 9,
+      farZoom: 11, // 500.000
     }
   },
   json_CidadesVilas:{
@@ -15,9 +15,8 @@ Backbone.SIXHIARA.LayerConfig = {
     layer: L.geoJson(null, {style:Backbone.SIXHIARA.LayerStyle.doStyleEstradas}),
     initialOrder: 4,
     scaleDependent: {
-      // 10 ~ 1:500.000
       // http://wiki.openstreetmap.org/wiki/Zoom_levels
-      farZoom: 9,
+      farZoom: 11, // 500.000
     }
   },
   json_Lagos:{
@@ -50,7 +49,7 @@ Backbone.SIXHIARA.LayerConfig = {
     layer: L.geoJson(null, {style:Backbone.SIXHIARA.LayerStyle.doStyleRios}),
     initialOrder: 7,
     scaleDependent: {
-      farZoom: 9,
+      farZoom: 11, // 500.000
     }
   },
   json_PaisesPunto:{
@@ -61,7 +60,7 @@ Backbone.SIXHIARA.LayerConfig = {
     layer: L.geoJson(null, {pointToLayer: Backbone.SIXHIARA.LayerStyle.doPointToLayerPostosPunto}),
     initialOrder: 9,
     scaleDependent: {
-      farZoom: 8,
+      farZoom: 9, // 1.000.000
     }
   },
   json_ProvinciasPunto:{
