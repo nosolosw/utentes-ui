@@ -45,7 +45,8 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
 
     this.mapEvents();
     this.geoJSONLayer.addTo(this.map);
-    Backbone.SIXHIARA.offline(this.map);
+
+    Backbone.SIXHIARA.offline(this.map, Backbone.SIXHIARA.LayerConfig);
   },
 
   leafletStyle: function style(feature) {

@@ -1,27 +1,24 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.LayerStyle = {
-  // doStyleOceano: function (feature) {
-  //     return {
-  //         weight: 0.26,
-  //         color: '#1f78b4',
-  //         fillColor: '#1f78b4',
-  //         dashArray: null,
-  //         lineCap: null,
-  //         lineJoin: null,
-  //         opacity: 1.0,
-  //         fillOpacity: 1.0,
-  //         clickable: false,
-  //     };
-  // },
+  doStyleOceano: function (feature) {
+      return {
+          weight: 0.26,
+          color: '#1f78b4',
+          fillColor: '#1f78b4',
+          dashArray: null,
+          lineCap: null,
+          lineJoin: null,
+          opacity: 1.0,
+          fillOpacity: 1.0,
+          clickable: false,
+      };
+  },
 
   doStylePais: function (feature) {
       return {
           weight: 0.52,
           color: '#000000',
           fillColor: '#787878',
-          // dashArray: '',
-          // lineCap: 'square',
-          // lineJoin: 'bevel',
           opacity: 1.0,
           fillOpacity: 1.0,
           clickable: false,
@@ -34,9 +31,6 @@ Backbone.SIXHIARA.LayerStyle = {
           color: '#6c6c6c',
           fillColor: '#f1f4c7',
           dashArray: '5, 5, 1, 5',
-          // lineCap: 'square',
-          // lineJoin: 'bevel',
-          // opacity: 1.0,
           fillOpacity: 1.0,
           clickable: false,
       };
@@ -84,9 +78,6 @@ Backbone.SIXHIARA.LayerStyle = {
           weight: 0.52,
           color: '#00537d',
           fillColor: '#00537d',
-          // dashArray: '',
-          // lineCap: 'square',
-          // lineJoin: 'bevel',
           opacity: 1.0,
           fillOpacity: 1.0,
           clickable: false,
@@ -99,9 +90,6 @@ Backbone.SIXHIARA.LayerStyle = {
               return {
               color: '#7d7d7d',
               weight: 0.2,
-              // dashArray: '',
-              // lineCap: 'square',
-              // lineJoin: 'bevel',
               opacity: '1.0',
               clickable: false,
           };
@@ -124,9 +112,6 @@ Backbone.SIXHIARA.LayerStyle = {
               return {
               color: '#940518',
               weight: 0.6,
-              // dashArray: '',
-              // lineCap: 'square',
-              // lineJoin: 'bevel',
               opacity: '1.0',
               clickable: false,
           };
@@ -136,9 +121,6 @@ Backbone.SIXHIARA.LayerStyle = {
               return {
               color: '#11370f',
               weight: 0.52,
-              // dashArray: '',
-              // lineCap: 'square',
-              // lineJoin: 'bevel',
               opacity: '1.0',
               clickable: false,
           };
@@ -148,9 +130,6 @@ Backbone.SIXHIARA.LayerStyle = {
               return {
               color: '#5f4b0f',
               weight: 0.3,
-              // dashArray: '',
-              // lineCap: 'square',
-              // lineJoin: 'bevel',
               opacity: '1.0',
               clickable: false,
           };
@@ -227,9 +206,6 @@ Backbone.SIXHIARA.LayerStyle = {
             weight: 0.52,
             color: '#304b8a',
             fillColor: '#304b8a',
-            // dashArray: '',
-            // lineCap: 'square',
-            // lineJoin: 'bevel',
             opacity: 1.0,
             fillOpacity: 1.0,
             clickable: false,

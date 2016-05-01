@@ -2,7 +2,8 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
   initialize: function(options){
-
+    var options = options || {};
+    // options.mapBackground = '#f1f4c7'; '#1f78b4';
     this.map = Backbone.SIXHIARA.mapConfig('map', options);
 
     var drawnItems = new L.FeatureGroup();

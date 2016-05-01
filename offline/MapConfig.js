@@ -8,8 +8,7 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
 
   var southWest = L.latLng(-23, 31),
   northEast = L.latLng(-9, 43),
-  maxBounds = L.latLngBounds(southWest, northEast),
-  background = '#1f78b4';
+  maxBounds = L.latLngBounds(southWest, northEast);
 
   var defaultMapOptions = {
     zoom: 7,
@@ -24,7 +23,9 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
   if (options.online) {
     mapOptions.layers = [base]
   }
-  $('#'+ mapId).css('background-color', background);
+  if (options.mapBackground) {
+    $('#'+ mapId).css('background-color', options.mapBackground);
+  }
   return L.map(mapId, mapOptions);
 
 }

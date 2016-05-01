@@ -1,4 +1,4 @@
-Backbone.SIXHIARA.offline = function(map){
+Backbone.SIXHIARA.offline = function(map, layersConfig){
 
   // TODO. The inital load newLayers2, and the two call to restackLayers should
   // be improved
@@ -39,13 +39,11 @@ Backbone.SIXHIARA.offline = function(map){
     return null;
   }
 
-  var config = Backbone.SIXHIARA.LayerConfig
-
   var layerOrder = [];
   var feature_group = new L.featureGroup([]).addTo(map);
   var newLayers2 = [];
-  for (layerConfig in config) {
-    var helper = config[layerConfig];
+  for (layerConfig in layersConfig) {
+    var helper = layersConfig[layerConfig];
     if (helper['scaleDependent']) {
       // Commonly closeZoom = 18, farZoom = 1
       helper['scaleDependent'].farZoom = helper['scaleDependent']['farZoom'] || -1;
@@ -71,9 +69,9 @@ Backbone.SIXHIARA.offline = function(map){
   }
 
 
-  for (layerConfig in config) {
+  for (layerConfig in layersConfig) {
     var url = '/static/utentes-ui/offline/data/' + layerConfig + '.js';
-    addLayerData(url, config[layerConfig]);
+    addLayerData(url, layersConfig[layerConfig]);
   }
 
   var self = this;
@@ -87,8 +85,8 @@ Backbone.SIXHIARA.offline = function(map){
     var zoom = map.getZoom();
     // TODO. Uses scales instead of zoom
     // console.log(map.getScaleZoom());
-    for (layerConfig in config) {
-      var helper = config[layerConfig];
+    for (layerConfig in layersConfig) {
+      var helper = layersConfig[layerConfig];
       var scaleDependent = helper['scaleDependent'];
       if (scaleDependent) {
         if ((scaleDependent.farZoom <= zoom) && (zoom <= scaleDependent.closeZoom)) {
