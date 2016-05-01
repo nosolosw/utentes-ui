@@ -26,6 +26,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
             drawnItems.addLayer(layer);
           }
         },
+        style: {fillOpacity: 0.5}
       });
 
       var bounds = exploracaoLeaflet.getBounds().pad(0.1);
@@ -61,12 +62,18 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     });
 
     drawnItems.addTo(this.map);
-
     this.renderCultivos();
+
 
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
 
-    Backbone.SIXHIARA.offline(this.map);
+    var layersConfig = {};
+    for (i in Backbone.SIXHIARA.LayerConfig) {
+      if (i !== 'json_Pais' && i !== 'json_Provincias' && i!=='json_PaisesPunto' && i!=='json_ProvinciasPunto') {
+        layersConfig[i] = Backbone.SIXHIARA.LayerConfig[i];
+      }
+    }
+    Backbone.SIXHIARA.offline(this.map, layersConfig);
   },
 
   renderCultivos: function() {
@@ -90,11 +97,11 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
       },
       style: {
         stroke: true,
-        color: '#05a',
+        color: '#00b300',
         weight: 1,
-        opacity: 0.4,
-        fillColor: '#05a',
-        fillOpacity: 0.1,
+        opacity: 1,
+        fillColor: '#00b300',
+        fillOpacity: 0.5,
       }
     });
     this.cultivosLayer.addTo(this.map);

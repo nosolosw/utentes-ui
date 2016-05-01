@@ -49,13 +49,11 @@ Backbone.SIXHIARA.LayerStyle = {
 
   doStyleProvincias:function (feature) {
       return {
-          weight: 1.12,
+          weight: 1.2,
           color: '#000000',
           fillColor: '#33a02c',
           dashArray: '5, 5, 1, 5',
-          // lineCap: 'square',
-          // lineJoin: 'bevel',
-          opacity: 0.3,
+          opacity: 0.4,
           fillOpacity: 0.3,
           clickable: false,
       };
@@ -98,10 +96,7 @@ Backbone.SIXHIARA.LayerStyle = {
           case 'Primary':
               return {
               color: '#770514',
-              weight: 1.5,
-              // dashArray: '',
-              // lineCap: 'square',
-              // lineJoin: 'bevel',
+              weight: 1.6,
               opacity: '1.0',
               clickable: false,
               fillColor: '#fff',
@@ -214,11 +209,8 @@ Backbone.SIXHIARA.LayerStyle = {
 
     doStyleRios: function (feature) {
         return {
-            weight: 0.4,
-            color: '#0a2577',
-            // dashArray: '',
-            // lineCap: 'square',
-            // lineJoin: 'bevel',
+            weight: 0.6,
+            color: '#304b8a',
             opacity: 1.0,
             clickable: false,
         };
