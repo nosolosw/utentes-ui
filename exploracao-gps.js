@@ -116,4 +116,4 @@ $('#settings').on('click', function(e){
   configModalView.show();
 });
 
-Backbone.SIXHIARA.offline(this.map, Backbone.SIXHIARA.LayerConfig);
+Backbone.SIXHIARA.offline(this.map, allLayers);

@@ -67,10 +67,14 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
 
-    var layersConfig = {};
-    for (i in Backbone.SIXHIARA.LayerConfig) {
-      if (i !== 'json_Pais' && i !== 'json_Provincias' && i!=='json_PaisesPunto' && i!=='json_ProvinciasPunto') {
-        layersConfig[i] = Backbone.SIXHIARA.LayerConfig[i];
+    var layersConfig = [];
+    for (var i =0 ; i< allLayers.length; i++) {
+      if (allLayers[i].id !== 'Pais' &&
+      allLayers[i].id!== 'Provincias' &&
+      allLayers[i].id!=='PaisesPunto' &&
+      allLayers[i].id!=='ProvinciasPunto' &&
+      allLayers[i].id!=='Oceano') {
+        layersConfig.push(allLayers[i]);
       }
     }
     Backbone.SIXHIARA.offline(this.map, layersConfig);
