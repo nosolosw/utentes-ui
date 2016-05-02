@@ -39,6 +39,9 @@ menu a:hover{
 }
 
 
+thead th {
+  text-align: center;
+}
 /* EDITABLE TABLE VIEW */
 
 .TableView-nodata,
