@@ -177,7 +177,7 @@ Backbone.SIXHIARA.LayerStyle = {
     doPointToLayerPostosPunto: function (feature, latlng) {
       return L.circleMarker(latlng, Backbone.SIXHIARA.LayerStyle.doStyleInvisibleMarker()).bindLabel(feature.properties.Nome, {
         noHide: true,
-        offset: [-20, -10],
+        offset: [-25, -10],
         className: 'sixhiara-leaflet-label-postos',
         opacity: 1,
         zoomAnimation: true,

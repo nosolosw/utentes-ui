@@ -5,7 +5,7 @@
   color: #000;
 }
 .sixhiara-leaflet-label-postos {
-  font: 8px/16px 'Calibri', "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 9px/18px 'Calibri', "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-style: italic;
   color: #7d7d7d;
@@ -18,7 +18,7 @@
   text-shadow: 0px 0px 4px #ffffff, 0px 0px 4px #ffffff, 0px 0px 4px #ffffff, 0px 0px 4px #ffffff;
 }
 .sixhiara-leaflet-label-cidades {
-  font: 8px/16px 'Calibri', "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 9px/18px 'Calibri', "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
   color: #000;
   font-style: italic;
