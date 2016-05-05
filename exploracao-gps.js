@@ -57,6 +57,7 @@ var MySaveToAPI = SaveToAPI.extend({
 var MyImportGPX = ImportGPX.extend({
 
     initialize: function(){
+      this.options.toolbarIcon.tooltip = 'Gardar';
       var action = this;
       $('#input-importgpx').on('change', function(e){
         action.convertToGeoJSON(e.target.files, geoJsonLayer, map);
