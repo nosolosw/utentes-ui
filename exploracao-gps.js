@@ -10,7 +10,7 @@ var unselectedFeature = {
   fillColor: "#ff7800",
   color: "#000",
   weight: 1,
-  opacity: .4,
+  opacity: 0.4,
   fillOpacity: 0.4
 };
 
