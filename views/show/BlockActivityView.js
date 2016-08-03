@@ -19,7 +19,6 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
       template: template
     });
     this.subViews.push(this.actividadeView);
-
   },
 
   render: function () {

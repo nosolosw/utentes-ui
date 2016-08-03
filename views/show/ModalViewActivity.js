@@ -132,6 +132,8 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
     }).render();
     this.addModalSubview(selectView);
 
+    this.updateActivitySubviews();
+    
     this.widgetsView = new Backbone.UILib.WidgetsView({
       el: this.$el,
       model: this.draftModel

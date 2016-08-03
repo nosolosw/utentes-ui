@@ -47,7 +47,6 @@ Backbone.SIXHIARA.ExploracaoShowView = Backbone.View.extend({
         });
         view.subViews.push(buttonSaveView);
 
-        // TODO: ask before delete it
         var buttonDeleteView = new Backbone.SIXHIARA.ButtonDeleteView({
           el: $('#delete-button'),
           model: exploracao
