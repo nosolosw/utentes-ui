@@ -10,7 +10,7 @@ Backbone.SIXHIARA.OpenFolderButtonView = Backbone.View.extend({
     setting.fetch({
       success: function() {
         var docPath = setting.get('docPath');
-        nodeRequire('shell').showItemInFolder(docPath);
+        nodeRequire('shell').openItem(docPath);
       }
     });
   },
