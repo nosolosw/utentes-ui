@@ -26,6 +26,11 @@ var geoJsonLayer = L.geoJson([],
 ).addTo(map);
 
 var MySaveToAPI = SaveToAPI.extend({
+
+  initialize: function() {
+    this.options.toolbarIcon.tooltip = 'Gardar';
+  },
+
   addHooks: function () {
     var polygonLayer = table.polygonLayer.toGeoJSON();
     // TODO. Probably save button should be desactivated if the validations
@@ -57,7 +62,7 @@ var MySaveToAPI = SaveToAPI.extend({
 var MyImportGPX = ImportGPX.extend({
 
     initialize: function(){
-      this.options.toolbarIcon.tooltip = 'Gardar';
+      this.options.toolbarIcon.tooltip = 'Abrir';
       var action = this;
       $('#input-importgpx').on('change', function(e){
         action.convertToGeoJSON(e.target.files, geoJsonLayer, map);
