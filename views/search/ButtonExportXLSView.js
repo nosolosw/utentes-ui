@@ -5,11 +5,11 @@ function Workbook() {
 };
 
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
+Backbone.SIXHIARA.ButtonExportXLSView = Backbone.View.extend({
   /* http://sheetjs.com/demos/Export2Excel.js */
 
   events: {
-    "click #export-button": "exportXLS",
+    "click #export-button-xls": "exportXLS",
   },
 
   initialize: function(options) {
@@ -17,7 +17,7 @@ Backbone.SIXHIARA.ButtonExportView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.append($('<button id="export-button" type="button" class="btn btn-default btn-sm pull-right">Exportação</button>'));
+    this.$el.append($('<button id="export-button-xls" type="button" class="btn btn-default btn-sm pull-right">XLS</button>'));
   },
 
   exportXLS: function(evt){

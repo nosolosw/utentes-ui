@@ -10,6 +10,31 @@ Backbone.SIXHIARA.ExploracaoCollection = Backbone.GeoJson.FeatureCollection.exte
         return element.contains(where);
       });
       return new Backbone.SIXHIARA.ExploracaoCollection(a);
-    }
+    },
+
+    downloadSHP: function() {
+      var options = {
+        folder: 'exploracaos',
+        types: {
+          polygon: 'exploracaos',
+        }
+      }
+      var features = this.toSHP();
+      shpwrite.download(features, options);
+    },
+
+    toSHP: function() {
+        var features = [];
+        this.models.forEach(function(model){
+          var feature = model.toSHP();
+          if (! _.isEmpty(feature.geometry)) {
+            features.push(feature);
+          }
+        });
+        return {
+          'type': 'FeatureCollection',
+          'features': features
+        };
+      },
 
 });

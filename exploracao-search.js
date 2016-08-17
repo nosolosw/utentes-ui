@@ -55,9 +55,14 @@ exploracaos.fetch({
       subviewTemplate: _.template($('#exploracao-li-tmpl').html())
     });
 
-    new Backbone.SIXHIARA.ButtonExportView({
+    new Backbone.SIXHIARA.ButtonExportXLSView({
       el: $('#projects h1'),
       listView: listView,
+    }).render();
+
+    new Backbone.SIXHIARA.ButtonExportSHPView({
+      el: $('#projects h1'),
+      collection: exploracaos,
     }).render();
 
     mapView = new Backbone.SIXHIARA.MapView({
@@ -65,7 +70,7 @@ exploracaos.fetch({
       collection: exploracaosFiltered,
       where: where,
     });
-    
+
     listView.listenTo(exploracaosFiltered, 'leaflet', myLeafletEvent);
     listView.update(exploracaosFiltered);
     mapView.update(exploracaosFiltered);
