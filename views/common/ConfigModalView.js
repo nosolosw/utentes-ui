@@ -12,12 +12,24 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
         </div>
         <div class="modal-body">
           <div class="row">
-            <label class="col-xs-offset-1" for="docPath">Ruta aos documentos</label>
-            <div class="input-group col-xs-offset-1 col-xs-10">
-              <input type="text" class="form-control" id="docPath" aria-describedby="openFile" disabled>
-              <span class="input-group-addon btn btn-default" id="openFile">...</span>
+            <div class="form-group">
+              <label class="col-xs-offset-1" for="docPath">Ruta aos documentos</label>
+              <div class="input-group col-xs-offset-1 col-xs-10">
+                <input type="text" class="form-control" id="docPath" aria-describedby="openFile" disabled>
+                <span class="input-group-addon btn btn-default" id="openFile">...</span>
+              </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="form-group">
+              <div class="input-group col-xs-offset-1 col-xs-10">
+                <input style="display:none" id="import-fountains" type="file" accept=".zip, application/zip, application/x-zip, application/x-zip-compressed"></input>
+                <button id="import-fountains-bt" class="btn btn-primary">Carregar fontes</button>
+              </div>
+            </div>
+          </div>
+
         </div> <!-- /modal-body -->
       </div>
     </div>
@@ -26,6 +38,8 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
 
   events: {
     'click #openFile': 'openFile',
+    'change #import-fountains': 'importFountains',
+    'click #import-fountains-bt': 'importFountainsBt'
   },
 
   initialize: function(options) {
@@ -83,4 +97,51 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
     this.$('#docPath').val(docPath);
   },
 
+  importFountainsBt: function() {
+    document.getElementById("import-fountains").click();
+  },
+
+  importFountains: function(e) {
+    var file = e.currentTarget.files[0];
+    this.$('.modal').modal('hide');
+    this.handleFile(file);
+  },
+
+  handleFile: function(file) {
+      if (file.name.slice(-3) !== 'zip') {
+        alert("Error carregando ficheiro");
+        this.$('.modal').modal('hide');
+        return;
+      }
+      var self = this;
+      $.getScript("lib/shp.js", function(){
+        var reader = new FileReader();
+        reader.onload = self.readerLoad;
+        reader.readAsArrayBuffer(file);
+      });
+    },
+
+    readerLoad: function() {
+      if (this.readyState !== 2 || this.error) {
+          alert("Error carregando ficheiro");
+          return;
+        } else {
+          shp(this.result).then(function(geojson){
+            $.ajax({
+              url: '/api/base/fountains',
+              type: "POST",
+              data: JSON.stringify(geojson),
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              success: function(data){
+                alert(data['msg']);
+              },
+              error: function(err) {
+                var msg = JSON.parse(err.responseText)['error'];
+                alert('Error: ' + msg);
+              }
+            });
+          });
+        }
+    },
 });
