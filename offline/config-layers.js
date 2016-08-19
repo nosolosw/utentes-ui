@@ -40,19 +40,27 @@ var allLayers = [
     farZoom: 11, // 500.000
   },
   {
+    id: 'Fontes',
+    initialOrder: 9,
+    farZoom: 13, // 150.000
+    // onEachFeature: pop_Fontes4,
+    pointToLayer: Backbone.SIXHIARA.LayerStyle.doPointToLayerFontes,
+    almostOver: true,
+  },
+  {
     id: 'PaisesPunto',
     pointToLayer: Backbone.SIXHIARA.LayerStyle.doPointToLayerPaisesPunto,
-    initialOrder: 9,
+    initialOrder: 10,
   },
   {
     id: 'PostosPunto',
     pointToLayer: Backbone.SIXHIARA.LayerStyle.doPointToLayerPostosPunto,
-    initialOrder: 10,
+    initialOrder: 11,
     farZoom: 9, // 1.000.000
   },
   {
     id: 'ProvinciasPunto',
     pointToLayer: Backbone.SIXHIARA.LayerStyle.doPointToLayerProvinciasPunto,
-      initialOrder: 11,
+      initialOrder: 12,
   },
 ]

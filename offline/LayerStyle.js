@@ -215,4 +215,59 @@ Backbone.SIXHIARA.LayerStyle = {
             clickable: false,
         };
     },
+
+    doPointToLayerFontes: function(feature, latlng) {
+      return L.circleMarker(latlng, Backbone.SIXHIARA.LayerStyle.doStyleFontes(feature));
+    },
+
+    doStyleFontes: function doStyleFontes(feature) {
+      switch (feature.properties.RED_MONIT) {
+        case 'NO':
+        return {
+          radius: 3,
+          fillColor: '#1f78b4',
+          color: '#1f78b4',
+          weight: 0,
+          opacity: 0,
+          fillOpacity: 1.0,
+          clickable: false,
+        };
+        break;
+        case 'Velho-Sustituído':
+        return {
+          radius: 3,
+          fillColor: '#1f78b4',
+          color: '#1f78b4',
+          weight: 0,
+          opacity: 0,
+          fillOpacity: 1.0,
+          clickable: false,
+        };
+        break;
+        case 'Base e qualidade':
+        return {
+          radius: 6,
+          fillColor: '#a51215',
+          color: '#a51215',
+          weight: 0,
+          opacity: 0,
+          fillOpacity: 1.0,
+          clickable: false,
+        };
+        break;
+        case 'Base':
+        return {
+          radius: 6,
+          fillColor: '#4c9322',
+          color: '#4c9322',
+          weight: 0,
+          opacity: 0,
+          fillOpacity: 1.0,
+          clickable: false,
+        };
+        break;
+      }
+    }
+
+
 };
