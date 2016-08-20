@@ -135,6 +135,7 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
               dataType: "json",
               success: function(data){
                 alert(data['msg']);
+                window.location.reload(true);
               },
               error: function(err) {
                 var msg = JSON.parse(err.responseText)['error'];
