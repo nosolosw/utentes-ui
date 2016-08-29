@@ -221,7 +221,7 @@ Backbone.SIXHIARA.LayerStyle = {
     },
 
     doStyleFontes: function doStyleFontes(feature) {
-      switch (feature.properties.RED_MONIT) {
+      switch (feature.properties.red_monit) {
         case 'NO':
         return {
           radius: 3,
