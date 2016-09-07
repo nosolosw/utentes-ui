@@ -221,18 +221,8 @@ Backbone.SIXHIARA.LayerStyle = {
     },
 
     doStyleFontes: function doStyleFontes(feature) {
-      switch (feature.properties.red_monit) {
-        case 'NO':
-        return {
-          radius: 3,
-          fillColor: '#1f78b4',
-          color: '#1f78b4',
-          weight: 0,
-          opacity: 0,
-          fillOpacity: 1.0,
-          clickable: false,
-        };
-        break;
+      var red_monit = feature.properties.red_monit || feature.properties.RED_MONIT;
+      switch (red_monit) {
         case 'Velho-Sustituído':
         return {
           radius: 3,
@@ -260,6 +250,18 @@ Backbone.SIXHIARA.LayerStyle = {
           radius: 6,
           fillColor: '#4c9322',
           color: '#4c9322',
+          weight: 0,
+          opacity: 0,
+          fillOpacity: 1.0,
+          clickable: false,
+        };
+        break;
+        case 'NO':
+        default:
+        return {
+          radius: 3,
+          fillColor: '#1f78b4',
+          color: '#1f78b4',
           weight: 0,
           opacity: 0,
           fillOpacity: 1.0,
