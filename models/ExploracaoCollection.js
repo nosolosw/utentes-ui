@@ -14,9 +14,9 @@ Backbone.SIXHIARA.ExploracaoCollection = Backbone.GeoJson.FeatureCollection.exte
 
     downloadSHP: function() {
       var options = {
-        folder: 'exploracaos',
+        folder: 'exploracoes',
         types: {
-          polygon: 'exploracaos',
+          polygon: 'exploracoes',
         }
       }
       var features = this.toSHP();
