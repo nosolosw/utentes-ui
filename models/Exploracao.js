@@ -542,9 +542,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
           }
 
           pagamento = 'No';
-          if (_.isNull(json.pagamento)){
-            pagamento == null;
-          } else if (json.pagamento === true) {
+          if (_.isNull(json.pagos)){
+            pagamento = null;
+          } else if (json.pagos === true) {
             pagamento = 'Si';
           }
         }
