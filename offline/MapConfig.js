@@ -1,3 +1,5 @@
+Backbone.SIXHIARA.CENTER = [-13, 38.5050];
+
 Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
   var options = initOptions || {};
   if (options.online) {
@@ -12,7 +14,7 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
 
   var defaultMapOptions = {
     zoom: 7,
-    center: [-13, 38.5050],
+    center: Backbone.SIXHIARA.CENTER,
     maxBounds: maxBounds,
     minZoom: 7,
     maxZoom: 19,
@@ -27,5 +29,4 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
     $('#'+ mapId).css('background-color', options.mapBackground);
   }
   return L.map(mapId, mapOptions);
-
 }

@@ -84,8 +84,8 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       var zoom = this.map.getZoom();
       if (zoom > 15) this.map.setZoomAround(center, 15);
     } else{
-      this.map.fitBounds([[-13, 39.25]]);
-      this.map.setZoom(8);
+      this.map.fitBounds([Backbone.SIXHIARA.CENTER]);
+      this.map.setZoom(7);
     }
   },
 
