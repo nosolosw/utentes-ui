@@ -41,7 +41,7 @@ var formatValue = function(k, v, rowData) {
   }
 
   if (post) v += '<br><span class="title">Posto:</span> ' + post;
-  if (nucl) v += '<br><span class="title">Núcleo:</span> ' + nucl;
+  if (nucl) v += '<br><span class="title">Bairro:</span> ' + nucl;
 
   } else if (_.isEmpty(v)) {
     v = '';
@@ -77,7 +77,7 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
     'loc_provin':  'Província',
     'loc_distri':  'Distrito',
     'loc_posto':   'Posto',
-    'loc_nucleo':  'Núcleo',
+    'loc_nucleo':  'Bairro',
     'exploracaos': 'Exploraçôes',
     'observacio':  'Observaçôes',
     'edit':        '',

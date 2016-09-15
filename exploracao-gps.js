@@ -28,7 +28,7 @@ var geoJsonLayer = L.geoJson([],
 var MySaveToAPI = SaveToAPI.extend({
 
   initialize: function() {
-    this.options.toolbarIcon.tooltip = 'Gardar';
+    this.options.toolbarIcon.tooltip = 'Gravar';
   },
 
   addHooks: function () {
@@ -62,7 +62,7 @@ var MySaveToAPI = SaveToAPI.extend({
 var MyImportGPX = ImportGPX.extend({
 
     initialize: function(){
-      this.options.toolbarIcon.tooltip = 'Abrir';
+      this.options.toolbarIcon.tooltip = 'Carregar';
       var action = this;
       $('#input-importgpx').on('change', function(e){
         action.convertToGeoJSON(e.target.files, geoJsonLayer, map);
