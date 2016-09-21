@@ -7,3 +7,6 @@
 [submodule "lib/backbone-geojson"]
 	path = lib/backbone-geojson
 	url = git@github.com:iCarto/backbone-geojson.git
+[submodule "lib/backbone-uilib"]
+	path = lib/backbone-uilib
+	url = git@github.com:iCarto/backbone-uilib.git
