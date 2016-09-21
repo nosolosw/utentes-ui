@@ -10,3 +10,6 @@
 [submodule "lib/backbone-uilib"]
 	path = lib/backbone-uilib
 	url = git@github.com:iCarto/backbone-uilib.git
+[submodule "lib/formatter"]
+	path = lib/formatter
+	url = git@github.com:iCarto/formatter.git
