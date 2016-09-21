@@ -1,3 +1,6 @@
 [submodule "lib/leaflet-table"]
 	path = lib/leaflet-table
 	url = https://github.com/iCarto/leaflet-table
+[submodule "lib/schema-validator"]
+	path = lib/schema-validator
+	url = git@github.com:iCarto/schema-validator.git
