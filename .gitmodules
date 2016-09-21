@@ -4,3 +4,6 @@
 [submodule "lib/schema-validator"]
 	path = lib/schema-validator
 	url = git@github.com:iCarto/schema-validator.git
+[submodule "lib/backbone-geojson"]
+	path = lib/backbone-geojson
+	url = git@github.com:iCarto/backbone-geojson.git
