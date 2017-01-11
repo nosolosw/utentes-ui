@@ -49,4 +49,19 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
     return this.get('c_real_int') + this.get('c_real_fon');
   },
 
+  impliesValidateActivity: function() {
+    return ! [
+      'Irregular',
+      'Não aprovada',
+      'Pendente de solicitação do utente',
+      'Pendente de revisão da solicitação (Direcção)',
+      'Pendente de revisão da solicitação (D. Jurídico)',
+      'Pendente de aprovação tecnica (R. Cadastro)',
+    ].includes(this.get('estado'));
+  },
+
+  isLicensed: function() {
+    return this.get('estado') === 'Licenciada';
+  },
+
 });

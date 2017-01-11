@@ -275,10 +275,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   updateSummaryEstado: function(){
-    var valid = false;
-    this.get('licencias').forEach(function(licencia){
-      valid = valid || (licencia.get('estado') === 'Licenciada');
-    });
+    var valid = this.get('licencias').some(function(lic) { return lic.isLicensed() });
     this.set('summary_licencia_val', valid);
     return valid;
   },
@@ -415,25 +412,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     var messages = [];
     var tipo = this.getActividadeTipo();
     if(tipo !== Backbone.SIXHIARA.MSG.NO_ACTIVITY){
-      // only validate activities for a subset of estados
-      var notValidatableStatus = [
-        'Irregular',
-        'Denegada',
-        'Pendente solicitação utente',
-        'Pendente revisão solicitação (Direcção)',
-        'Pendente revisão solicitação (D. Jurídico)',
-        'Pendente aprobação tecnica (D. Cadastro)'
-      ];
-      var estados = [];
-      this.get('licencias').forEach(function (licencia) {
-        estados.push(licencia.get('estado'));
-      });
-      var toValidateActivity = false;
-      estados.forEach(function (estado) {
-        if(!notValidatableStatus.includes(estado)){
-          toValidateActivity = true;
-        }
-      })
+
+      var toValidateActivity = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
       if(toValidateActivity){
         var actividadeSchema = ActividadeSchema[tipo];
         validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
