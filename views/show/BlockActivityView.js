@@ -54,6 +54,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
     });
     var modalView = new ModalActivity({
       model: this.model.get('actividade'),
+      areaExp: this.model.get('area'),
       selectorTmpl: '#modal-actividades',
       domains: this.options.domains,
     });

@@ -107,6 +107,12 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
         collection: impactos
       }).render();
       this.addActivitySubview(selectImpacto);
+      var cEstimadoView = new Backbone.SIXHIARA.CEstimadoComputedView({
+        el: this.$('#c_estimado_computed'),
+        areaExp: this.options.areaExp,
+      }).render();
+      this.addActivitySubview(cEstimadoView);
+
     } else if (tipo === 'Producção de energia'){
       var energias = this.options.domains.byCategory('energia_tipo');
       var selectImpacto = new Backbone.UILib.SelectView({
@@ -133,7 +139,7 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
     this.addModalSubview(selectView);
 
     this.updateActivitySubviews();
-    
+
     this.widgetsView = new Backbone.UILib.WidgetsView({
       el: this.$el,
       model: this.draftModel
