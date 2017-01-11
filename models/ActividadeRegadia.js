@@ -24,6 +24,7 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.Model.extend({
       c_estimado = c_estimado + cultivo.get('c_estimado');
     });
     this.set('c_estimado', c_estimado);
+    this.trigger('change', this.model);
   },
 
   toJSON: function () {
