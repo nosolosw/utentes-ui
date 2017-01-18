@@ -6,6 +6,16 @@ Backbone.SIXHIARA.SelectLocationView = Backbone.UILib.BaseView.extend({
 
     var domains = options.domains;
     var provincias = domains.byCategory('provincia');
+    if (options.ara) {
+      provincias = provincias.byParent(options.ara);
+    } else {
+      // Workaround. As blank spaces are introducied at db level for each
+      // ara, it must be removed here
+      provincias = provincias.filter(function(p) {
+        return !(p.get('parent') && p.get('order') === 0);
+      });
+    }
+
     var distritos = domains.byCategory('distrito');
     var postos = domains.byCategory('posto');
 

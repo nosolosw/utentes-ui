@@ -25,6 +25,7 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
       new Backbone.SIXHIARA.SelectLocationView({
         domains: domains,
         model: this.model,
+        ara: domains.byCategory('ara').at(0).get('text'),
         el: this.$el,
       })
     );

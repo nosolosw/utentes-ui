@@ -47,6 +47,7 @@ Backbone.SIXHIARA.BlockLocationView = Backbone.View.extend({
       el: modalView.$('#editLocModal'),
       model: modalView.draftModel,
       domains: this.options.domains,
+      ara: this.options.domains.byCategory('ara').at(0).get('text'),
     }).render()
     modalView.addAuxView(selectLocation);
 

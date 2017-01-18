@@ -109,6 +109,7 @@ function fillComponentsWithDomains(){
   new Backbone.SIXHIARA.SelectLocationView({
     domains: domains,
     model: exploracao,
+    ara: domains.byCategory('ara').at(0).get('text'),
     el: $('#info'),
   }).render();
   new Backbone.SIXHIARA.SelectBaciaView({
@@ -121,6 +122,7 @@ function fillComponentsWithDomains(){
   new Backbone.SIXHIARA.SelectLocationView({
     domains: domains,
     model: exploracao.get('utente'),
+    ara: '',
     el: $('#utente'),
   }).render();
 

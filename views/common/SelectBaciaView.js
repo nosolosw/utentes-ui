@@ -5,7 +5,8 @@ Backbone.SIXHIARA.SelectBaciaView = Backbone.UILib.BaseView.extend({
     Backbone.UILib.BaseView.prototype.initialize.call(this);
 
     var domains = options.domains;
-    var bacias = domains.byCategory('bacia');
+    var ara = domains.byCategory('ara').first().get('text')
+    var bacias = domains.byCategory('bacia').byParent(ara);
     var subacias = domains.byCategory('subacia');
 
     var selectBacias = new Backbone.UILib.SelectView({

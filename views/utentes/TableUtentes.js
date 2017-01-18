@@ -207,6 +207,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       el: $('#editUtenteModal'),
       model: modalView.draftModel,
       domains: this.options.domains,
+      ara: '',
     }).render();
     modalView.addAuxView(selectLocationView);
 
