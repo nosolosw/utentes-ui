@@ -97,77 +97,45 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
   renderEditLicenseModal: function (event) {
     event.preventDefault();
 
-    var modalView = new Backbone.UILib.ModalView({
+    var modalView = new Backbone.SIXHIARA.LicenseModalView({
+      modalSelectorTpl: '#block-license-modal-tmpl',
+      collection: this.model.get('licencias'),
+      collectionModel: Backbone.SIXHIARA.Licencia,
       model: this.license,
-      selectorTmpl: '#block-license-modal-tmpl',
+      domains: this.options.domains,
+      editing: true,
     });
 
-    var estadosLicencia = this.options.domains.byCategory('licencia_estado');
-
-    // connect auxiliary views, which would be removed when the modal is closed
-    var selectView = new Backbone.UILib.SelectView({
-      el: modalView.$('#estado'),
-      collection: estadosLicencia
-    }).render();
-    modalView.addAuxView(selectView);
-
-    var selfModal = modalView;
-    modalView.$('#info-estado-licencia').on('click', function() {
-      var tooltipView = new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
-        collection: estadosLicencia,
-        actual_state: selfModal.model.get('estado'),
-      }).show();
-      selfModal.addAuxView(tooltipView);
-    });
-
-    modalView.render();
+    modalView.show();
   },
 
   renderAddLicenseModal: function (event) {
     event.preventDefault();
-
-    this.license = new Backbone.SIXHIARA.Licencia({
-      'lic_tipo': this.options.lic_tipo,
-    });
-
-    // override default action for okButtonClicked
     var self = this;
-    var AddLicenseModalView = Backbone.UILib.ModalView.extend({
+    var AddLicenseModalView = Backbone.SIXHIARA.LicenseModalView.extend({
       okButtonClicked: function () {
         // in this context, this is the backbone modalView
         if(this.isSomeWidgetInvalid()) return;
-        var atts = this.draftModel.pick(this.getAttsChanged());
-        self.license.set(atts);
-        self.model.get('licencias').add(self.license);
+        this.collection.add(this.model);
+        self.license = self.model.get('licencias').where({'lic_tipo': self.options.lic_tipo})[0];
         self.listenTo(self.license, 'change', self.render);
         self.render();
         this.$('.modal').modal('hide');
       }
     });
+
     var modalView = new AddLicenseModalView({
-      model: this.license,
-      selectorTmpl: '#block-license-modal-tmpl',
+      modalSelectorTpl: '#block-license-modal-tmpl',
+      collection: this.model.get('licencias'),
+      collectionModel: Backbone.SIXHIARA.Licencia,
+      model: new Backbone.SIXHIARA.Licencia({
+        'lic_tipo': this.options.lic_tipo,
+      }),
+      domains: this.options.domains,
+      editing: false,
     });
 
-    var estadosLicencia = this.options.domains.byCategory('licencia_estado');
-
-    // connect auxiliary views, which would be removed when the modal is closed
-    var selectView = new Backbone.UILib.SelectView({
-      el: modalView.$('#estado'),
-      collection: estadosLicencia
-    }).render();
-    modalView.addAuxView(selectView);
-
-    var selfModal = modalView;
-    modalView.$('#info-estado-licencia').on('click', function() {
-      var tooltipView = new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
-        collection: estadosLicencia,
-        actual_state: selfModal.model.get('estado'),
-      }).show();
-      selfModal.addAuxView(tooltipView);
-    });
-
-    modalView.render();
+    modalView.show();
   },
 
   showModalEstadoLicencia: function(){

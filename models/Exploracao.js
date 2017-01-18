@@ -30,6 +30,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'fontes':     new Backbone.SIXHIARA.FonteCollection(),
     'geometry':   new Backbone.Model(),
     'geometry_edited': false,
+    'summary_pago_iva': 37810,
   },
 
   initialize: function(){
@@ -45,8 +46,9 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.on('sync', function(model, response, options){
       // TODO: on sync, how to off old listeners for licenses, if any?
       this.set('summary_licencia_val', this.updateSummaryEstado());
-      this.set('summary_consumo_val',  this.updateSummaryConsumo());
-      this.set('summary_pagos_val',    this.updateSummaryPagos());
+      this.set('summary_consumo_val', this.updateSummaryConsumo());
+      this.set('summary_pagos_val', this.updateSummaryPagos());
+      this.set('summary_pago_iva', this.updateSummaryPagoIva());
       this.setListeners();
     }, this);
 
@@ -60,57 +62,67 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
-      model.on('change:estado', app.updateSummaryEstado, app)
+      model.on('change:estado', app.updateSummaryEstado, app);
+      model.on('change:pago_iva', app.updateSummaryPagoIva, app);
       // TODO: data should be shown as it is,
       // without updating computed properties first time
       app.updateCSoli();
       app.updateCReal();
       app.updateCLicencia();
+      app.updateSummaryPagoIva();
     });
     this.get('licencias').on('add', function(model, collection, options){
       model.on('change:c_soli_tot', app.updateCSoli, app);
       model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.on('change:c_licencia', app.updateCLicencia, app);
-      model.on('change:estado', app.updateSummaryEstado, app)
+      model.on('change:estado', app.updateSummaryEstado, app);
+      model.on('change:pago_iva', app.updateSummaryPagoIva, app);
       // TODO: data should be shown as it is,
       // without updating computed properties first time
       app.updateCSoli();
       app.updateCReal();
       app.updateCLicencia();
+      app.updateSummaryPagoIva();
     });
     this.get('licencias').on('remove', function(model, collection, options){
       model.off('change:c_soli_tot', app.updateCSoli, app);
       model.off('change:c_real_tot change:c_real_int', app.updateCReal, app);
       model.off('change:c_licencia', app.updateCLicencia, app);
-      model.off('change:estado', app.updateSummaryEstado, app)
+      model.off('change:estado', app.updateSummaryEstado, app);
+      model.off('change:pago_iva', app.updateSummaryPagoIva, app);
       // TODO: data should be shown as it is,
       // without updating computed properties first time
       app.updateCSoli();
       app.updateCReal();
       app.updateCLicencia();
+      app.updateSummaryPagoIva();
     });
     this.get('licencias').on('reset', function(collection, options){
       collection.forEach(function(model){
         model.on('change:c_soli_tot', app.updateCSoli, app);
         model.on('change:c_real_tot change:c_real_int', app.updateCReal, app);
         model.on('change:c_licencia', app.updateCLicencia, app);
-        model.on('change:estado', app.updateSummaryEstado)
+        model.on('change:estado', app.updateSummaryEstado);
+        model.on('change:pago_iva', app.updateSummaryPagoIva, app);
         // TODO: data should be shown as it is,
         // without updating computed properties first time
         app.updateCSoli();
         app.updateCReal();
         app.updateCLicencia();
+        app.updateSummaryPagoIva();
       });
       collection.previousModels.forEach(function(model){
         model.off('change:c_soli_tot', app.updateCSoli, app);
         model.off('change:c_real_tot', app.updateCReal, app);
         model.off('change:c_licencia', app.updateCLicencia, app);
         model.off('change:estado', app.updateSummaryEstado, app)
+        model.off('change:pago_iva', app.updateSummaryPagoIva, app);
         // TODO: data should be shown as it is,
         // without updating computed properties first time
         app.updateCSoli();
         app.updateCReal();
         app.updateCLicencia();
+        app.updateSummaryPagoIva();
       });
     });
 
@@ -177,7 +189,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.get('licencias').once('change', app.aChangeHappens, app);
 
     this.on('change:c_licencia change:c_real change:c_estimado', app.updateSummaryConsumo)
-    this.on('change:pagos:', app.updateSummaryPagos)
+    this.on('change:pagos:', app.updateSummaryPagos);
   },
 
   changedActivity: function() {
@@ -287,6 +299,15 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     valid = c_licencia >= c_real && c_licencia >= c_estimado;
     this.set('summary_consumo_val', valid);
     return valid;
+  },
+
+  updateSummaryPagoIva: function() {
+    var summary_pago_iva = 0;
+    this.get('licencias').forEach(function(lic) {
+      summary_pago_iva += lic.get('pago_iva');
+    });
+    this.set('summary_pago_iva', summary_pago_iva);
+    return summary_pago_iva;
   },
 
   updateSummaryPagos: function(){
