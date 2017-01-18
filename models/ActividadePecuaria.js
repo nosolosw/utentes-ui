@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ActividadePecuaria = Backbone.Model.extend({
+Backbone.SIXHIARA.ActividadePecuaria = Backbone.SIXHIARA.ActividadeNull.extend({
 
   defaults: {
     'id':         null,
@@ -29,6 +29,17 @@ Backbone.SIXHIARA.ActividadePecuaria = Backbone.Model.extend({
     var json   =  _.clone(this.attributes);
     json.reses = this.get('reses').toJSON();
     return json;
+  },
+
+  validateSubActivity: function() {
+    var messages = [];
+    this.get('reses').forEach(function(cultivo){
+      var msgs = cultivo.validate();
+      if (msgs) {
+        messages = messages.concat(msgs);
+      }
+    });
+    return messages;
   },
 
 });

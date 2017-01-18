@@ -62,7 +62,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     });
 
     drawnItems.addTo(this.map);
-    this.renderCultivos();
+    this.renderActividade();
 
 
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
@@ -80,36 +80,24 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     Backbone.SIXHIARA.offline(this.map, layersConfig);
   },
 
-  renderCultivos: function() {
-    if (this.cultivosLayer) this.cultivosLayer.clearLayers();
-    var tipo = this.model.get('actividade') && this.model.get('actividade').get('tipo');
-    if (tipo !== "Agricultura-Regadia") return;
-    var cultivos = this.model.get('actividade').get('cultivos');
-    if (! cultivos) return;
-    var geojson = cultivos.toGeoJSON();
-    if (geojson.features.length == 0) return;
-    var self = this;
-    this.cultivosLayer = L.geoJson(geojson, {
-      onEachFeature: function(feature, layer) {
-        var label = L.marker(layer.getBounds().getCenter(), {
-          icon: L.divIcon({
-            className: 'label',
-            html: feature.properties.cult_id,
-            iconSize: [100, 40]
-          })
-        }).addTo(self.map);
-      },
-      style: {
-        stroke: true,
-        color: '#00b300',
-        weight: 1,
-        opacity: 1,
-        fillColor: '#00b300',
-        fillOpacity: 0.5,
-      }
-    });
-    this.cultivosLayer.addTo(this.map);
-    var bounds = this.map.getBounds().extend(this.cultivosLayer.getBounds()).pad(0.1);
+  /*
+    If the activity should render any geometry, like the cultivos for Regadio
+    activities it's done in this method
+  */
+  renderActividade: function() {
+    if (this.actividadeLayer) this.actividadeLayer.clearLayers();
+    var act = this.model.get('actividade');
+    if (! act) {
+      return;
+    }
+
+    this.actividadeLayer = act.getActividadeLayer(this.map);
+    if (! this.actividadeLayer) {
+      return;
+    }
+
+    this.actividadeLayer.addTo(this.map);
+    var bounds = this.map.getBounds().extend(this.actividadeLayer.getBounds()).pad(0.1);
     this.map.fitBounds(bounds).setMaxBounds(bounds);
   },
 

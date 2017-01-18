@@ -419,20 +419,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
           messages.push(msg);
         });
-        if (tipo === 'Agricultura-Regadia') {
-          this.get('actividade').get('cultivos').forEach(function(cultivo){
-            var msgs = cultivo.validate();
-            if (msgs) {
-              messages = messages.concat(msgs);
-            }
-          });
-        } else if (tipo === 'Pecuária') {
-          this.get('actividade').get('reses').forEach(function(cultivo){
-            var msgs = cultivo.validate();
-            if (msgs) {
-              messages = messages.concat(msgs);
-            }
-          });
+
+        var act = this.get('actividade');
+
+        var subActivityMsgs = act.validateSubActivity();
+        if (subActivityMsgs) {
+          messages = messages.concat(subActivityMsgs);
         }
       }
     }
@@ -549,12 +541,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
                   'utente': json.utente.nome,
                   'uten_nuit': json.utente.nuit,
                   'abastecem': json.actividade.tipo === 'Abastecimento',
-                  'saneament': json.actividade.tipo === 'Agricultura-Regadia',
-                  'agricultu': json.actividade.tipo === 'Indústria',
+                  'saneament': json.actividade.tipo === 'Saneamento',
+                  'agricultu': json.actividade.tipo === 'Agricultura de Regadio',
                   'pecuaria': json.actividade.tipo === 'Pecuária',
                   'piscicult': json.actividade.tipo === 'Piscicultura',
-                  'industria': json.actividade.tipo === 'Producção de energia',
-                  'pro_energ': json.actividade.tipo === 'Saneamento',
+                  'industria': json.actividade.tipo === 'Indústria',
+                  'pro_energ': json.actividade.tipo === 'Producção de energia',
                   'tipo_subt': tipo_subt,
                   'tipo_supe': tipo_supe,
                   'con_l_su': con_lic_su,

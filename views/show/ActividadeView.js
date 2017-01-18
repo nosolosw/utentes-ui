@@ -33,7 +33,7 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
         domains: this.options.domains,
       });
       this.subViews.push(table);
-    } else if (tipo === 'Agricultura-Regadia') {
+    } else if (tipo === 'Agricultura de Regadio') {
       var table = new Backbone.SIXHIARA.EditableTableView({
         el: this.$('#block-regadia'),
         newRowBtSelector: '#newRow',

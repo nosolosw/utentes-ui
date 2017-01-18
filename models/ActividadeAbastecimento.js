@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ActividadeAbastecimento = Backbone.Model.extend({
+Backbone.SIXHIARA.ActividadeAbastecimento = Backbone.SIXHIARA.ActividadeNull.extend({
 
   defaults: {
     'id':         null,

@@ -6,6 +6,14 @@ Backbone.SIXHIARA.ActividadeNull = Backbone.Model.extend({
     'tipo': 'Actividade non declarada',
   },
 
+  getActividadeLayer: function(map) {
+    // nothing to do here
+  },
+
+  validateSubActivity: function() {
+    // nothing to do here
+  },
+
 });
 
 // declare activity for dinamic discovery
