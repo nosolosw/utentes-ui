@@ -4,11 +4,7 @@ $(document).ready(function() {
   });
 });
 
-$('#settings').on('click', function(e){
-  e.preventDefault();
-  var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
-  configModalView.show();
-});
+
 
 var domains = new Backbone.UILib.DomainCollection();
 domains.url = Backbone.SIXHIARA.Config.apiDomains;

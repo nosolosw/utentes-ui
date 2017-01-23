@@ -13,3 +13,16 @@ Backbone.SIXHIARA.Config = {
 Backbone.SIXHIARA.MSG = {
   NO_ACTIVITY: 'Actividade non declarada',
 }
+
+$(document).ready(function() {
+  var navBar = new Backbone.SIXHIARA.NavBarView({
+    model: new Backbone.Model(),
+    el: $('menu'),
+  }).render();
+
+  $('#settings').on('click', function(e){
+    e.preventDefault();
+    var configModalView = new Backbone.SIXHIARA.ConfigModalView({model: new Backbone.Model()});
+    configModalView.show();
+  });
+});

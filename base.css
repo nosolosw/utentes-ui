@@ -31,13 +31,17 @@ menu a {
   border-radius: 5px;
   text-decoration: none;
 }
-
+menu a.active:hover,
 menu a:hover{
   background-color: #045a8d;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
 }
 
+menu a.active {
+  color: #ffffff;
+  background-color: #337ab7;
+}
 
 thead th {
   text-align: center;
