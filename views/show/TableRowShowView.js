@@ -19,7 +19,6 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
   `),
 
   events: {
-    'click .delete': 'modelDestroy',
     'click .edit': 'modelUpdate',
   },
 
@@ -32,7 +31,11 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
 
   render: function() {
     this.$el.append(this.template(this.model.toJSON()));
-
+    new Backbone.SIXHIARA.RowDeleteButtonView({
+      model: this.model,
+      el: this.$('.delete'),
+      question: 'Tem certeza de que deseja excluir',
+    });
     return this;
   },
 
@@ -54,10 +57,6 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
     this.$('td.contador').text(contador || displayNull);
     this.$('td.metodo_est').text(fonte.get('metodo_est') || displayNull);
     this.$('td.observacio').text(fonte.get('observacio') || displayNull);
-  },
-
-  modelDestroy: function(e){
-    this.model.collection.remove(this.model);
   },
 
   modelUpdate: function(e){

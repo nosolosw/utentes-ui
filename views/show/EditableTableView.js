@@ -108,7 +108,6 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   tagName: 'tr',
 
   events:{
-    'click .delete': 'modelDestroy',
     'click .edit': 'modelEdit',
   },
 
@@ -119,14 +118,12 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
 
   render: function(){
     this.$el.append(this.template(this.model.toJSON()));
-
+    new Backbone.SIXHIARA.RowDeleteButtonView({
+      model: this.model,
+      el: this.$('.delete'),
+      question: 'Tem certeza de que deseja excluir',
+    });
     return this;
-  },
-
-  modelDestroy: function(){
-    // Unsets id to avoid send DELETE to server
-    this.model.unset('id', {silent:true});
-    this.model.destroy();
   },
 
   modelEdit: function(){
