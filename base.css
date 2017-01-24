@@ -48,8 +48,7 @@ thead th {
 }
 /* EDITABLE TABLE VIEW */
 
-.TableView-nodata,
-.no-fontes{
+.TableView-nodata {
   color: #bbb;
 }
 

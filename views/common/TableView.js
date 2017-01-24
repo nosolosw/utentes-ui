@@ -1,18 +1,22 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.TableShowView = Backbone.View.extend({
+Backbone.SIXHIARA.TableView = Backbone.View.extend({
 
   initialize: function(options){
+    this.options = options || {}
+    this.options.noDataText = options.noDataText || 'NON HAI ELEMENTOS';
+    this.options.rowViewModel = options.rowViewModel || Backbone.SIXHIARA.RowView;
     this._subviews = [];
-    this.options = options;
   },
 
   render: function(){
     var subviews = [];
     var content = document.createDocumentFragment();
-
+    self = this;
     this.collection.forEach(function(model){
-      var rowView = new Backbone.SIXHIARA.TableRowShowView({
+      var rowView = new self.options.rowViewModel({
         model: model,
+        rowTemplate: this.options.rowTemplate,
+        modalSelectorTpl: this.options.modalSelectorTpl,
         domains: this.options.domains,
       });
       content.appendChild(rowView.render().el);
@@ -22,7 +26,7 @@ Backbone.SIXHIARA.TableShowView = Backbone.View.extend({
     // Update DOM and _subviews array at once.
     // This would minimize reflows to only 1 instead of one per subview.
     if(this.collection.length === 0){
-      this.$('tbody').html('<tr><td colspan="100%" class="no-fontes text-center">NON HAI FONTES</td></tr>');
+      this.$('tbody').html(`<tr><td colspan="100%" class="TableView-nodata text-center">${this.options.noDataText}</td></tr>`);
     } else{
       this.$('tbody').html(content);
     }
@@ -42,8 +46,8 @@ Backbone.SIXHIARA.TableShowView = Backbone.View.extend({
   // Remove the container element and then clean up its managed subviews
   // as to minimize document reflows.
   remove: function(){
-    Backbone.View.prototype.remove.call(this);
+    _.invoke(this._subviews, 'off');
     _.invoke(this._subviews, 'remove');
-  }
-
+    Backbone.View.prototype.remove.call(this);
+  },
 });

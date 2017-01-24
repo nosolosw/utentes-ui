@@ -79,9 +79,12 @@ var licenseSubView = new Backbone.SIXHIARA.LicenseView({
 }).render();
 
 // page licencias & fontes: fontes table
-var tableFontesView = new Backbone.SIXHIARA.TableFontesView({
+var tableFontesView = new Backbone.SIXHIARA.TableView({
   el: $('#fontes'),
-  collection: exploracao.get('fontes')
+  collection: exploracao.get('fontes'),
+  domains: domains,
+  rowViewModel: Backbone.SIXHIARA.RowFonteView,
+  noDataText: 'NON HAI FONTES',
 }).render();
 tableFontesView.listenTo(exploracao.get('fontes'), 'update', function(model, collection, options){
   this.update(exploracao.get('fontes'));
