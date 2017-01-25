@@ -1,7 +1,7 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.NavBarView = Backbone.View.extend({
 
-html: `<img class="col-xs-2" src="img/Logo_ARA_Norte_reducido.png" alt="Logo ARA Norte" />
+html: `<img class="col-xs-2" src="img/logo.png" alt="Logo" />
     <div class="col-xs-1 pull-right text-center">
       <div class="row">
         <a id="settings" href="#" class="col-xs-offset-6 col-xs-6 ">

@@ -395,20 +395,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
       messages.push(msg);
     });
     messages = messages.concat(this.validateActividade());
-
-    // licencia rules
-    var licValidator = validator(LICENCIA_SCHEMA);
-    licValidator.addRule('LIC_NRO_FORMAT', {
-      fails: function (value) {
-        var re = /^\d{4}-\d{3}-\d{3}$/;
-        return (value && (! re.test(value)));
-      }
-    });
-    this.get('licencias').forEach(function(licencia){
-      licValidator.validate(licencia.toJSON()).forEach(function(msg){
-        messages.push(msg);
-      });
-    })
+    messages = messages.concat(this.validateLicencia());
 
     // fonte rules
     var fonValidator = validator(FONTE_SCHEMA);
@@ -434,8 +421,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     var tipo = this.getActividadeTipo();
     if(tipo !== Backbone.SIXHIARA.MSG.NO_ACTIVITY){
 
-      var toValidateActivity = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
-      if(toValidateActivity){
+      var toValidate = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
+      if(toValidate){
         var actividadeSchema = ActividadeSchema[tipo];
         validator(actividadeSchema).validate(this.get('actividade').toJSON()).forEach(function(msg){
           messages.push(msg);
@@ -448,6 +435,33 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
           messages = messages.concat(subActivityMsgs);
         }
       }
+    }
+    return messages;
+  },
+
+  validateLicencia: function() {
+    var messages = [];
+    /*
+    La validación a los campos de la licencia en función del estado, se introdujo
+    al meter taxa_fixa, tasa_uso, ... Hay que plantearse un renaming de
+    impliesValidateActivity a algo más genérico. Y también si tiene sentido introducir
+    en el schema de validación condicionales, del tipo este campo y concición sólo
+    se valida para tal estado
+    */
+    var toValidate = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
+    if (toValidate) {
+      var licValidator = validator(LICENCIA_SCHEMA);
+      licValidator.addRule('LIC_NRO_FORMAT', {
+        fails: function (value) {
+          var re = /^\d{4}-\d{3}-\d{3}$/;
+          return (value && (! re.test(value)));
+        }
+      });
+      this.get('licencias').forEach(function(licencia){
+        licValidator.validate(licencia.toJSON()).forEach(function(msg){
+          messages.push(msg);
+        });
+      });
     }
     return messages;
   },

@@ -84,8 +84,9 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
       'Não aprovada',
       'Pendente de solicitação do utente',
       'Pendente de revisão da solicitação (Direcção)',
+      'Pendente de revisão da solicitação (Chefe DT)',
       'Pendente de revisão da solicitação (D. Jurídico)',
-      'Pendente de aprovação tecnica (R. Cadastro)',
+      'Pendente de aprovação técnica (R. Cadastro)',
     ].includes(this.get('estado'));
   },
 
