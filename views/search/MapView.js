@@ -40,13 +40,13 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       }
     });
 
-
+    options = options || {};
+    options.offline = {layers: allLayers};
     this.map = Backbone.SIXHIARA.mapConfig(this.el.id, options);
 
     this.mapEvents();
     this.geoJSONLayer.addTo(this.map);
 
-    Backbone.SIXHIARA.offline(this.map, allLayers);
   },
 
   leafletStyle: function style(feature) {

@@ -1,6 +1,12 @@
-var options = {mapOptions:{
-  zoom:8,
-}};
+var options = {
+  mapOptions: {
+    zoom:8,
+  },
+  offline: {
+    layers: allLayers,
+  }
+};
+
 var map = Backbone.SIXHIARA.mapConfig('map-pane', options);
 
 // TODO: take it from leaflet-table
@@ -114,5 +120,3 @@ exploracaos.fetch();
 
 var cultivos = new Backbone.SIXHIARA.CultivoCollection();
 cultivos.fetch();
-
-Backbone.SIXHIARA.offline(this.map, allLayers);

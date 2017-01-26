@@ -3,9 +3,12 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
   initialize: function(options){
     var options = options || {};
-    // options.mapBackground = '#f1f4c7'; '#1f78b4';
+    var baseOfflineLayers = allLayers.filter(function(l) {
+      return ! ['Pais', 'Provincias', 'PaisesPunto', 'ProvinciasPunto', 'Oceano'].includes(l.id);
+    });
+    options.offline = {layers: baseOfflineLayers};
     this.map = Backbone.SIXHIARA.mapConfig('map', options);
-
+    
     var drawnItems = new L.FeatureGroup();
 
     var geom = this.model.get('geometry').toJSON();
@@ -67,17 +70,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
 
-    var layersConfig = [];
-    for (var i =0 ; i< allLayers.length; i++) {
-      if (allLayers[i].id !== 'Pais' &&
-      allLayers[i].id!== 'Provincias' &&
-      allLayers[i].id!=='PaisesPunto' &&
-      allLayers[i].id!=='ProvinciasPunto' &&
-      allLayers[i].id!=='Oceano') {
-        layersConfig.push(allLayers[i]);
-      }
-    }
-    Backbone.SIXHIARA.offline(this.map, layersConfig);
+
   },
 
   /*

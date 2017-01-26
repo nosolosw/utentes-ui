@@ -1,6 +1,8 @@
 Backbone.SIXHIARA.offline = function(map, layersConfig){
 
   function restackLayers() {
+    if (! map.hasLayer(feature_group)) return;
+    if (! self.initiallayersloaded) return;
     /*
     Una solución a explorar sería crear un container para cada capa
     y aplicar .hide() / .show() al container
@@ -35,17 +37,32 @@ Backbone.SIXHIARA.offline = function(map, layersConfig){
     collection.add(layersConfig[i]);
   }
 
+  self = this;
   collection.on('initiallayersloaded', function() {
-    feature_group.addTo(map);
-    restackLayers();
-    map.on('zoomend', function(e) {
+    self.initiallayersloaded = true;
+    if (self.addToMap) {  
+      feature_group.addTo(map);
       restackLayers();
+    }
+
+  });
+
+  map.on('zoomend', function(e) {
+    restackLayers();
+  });
+
+  map.on('baselayerchange', function(e) {
+    if (e.name === 'Offline') {
+      restackLayers();
+    }
+  });
+
+  feature_group.loadOffline = function(addToMap) {
+    self.addToMap = addToMap;
+    collection.load({
+      loadType: 'zoom',
+      zoom: map.getZoom(),
     });
-  });
-
-  collection.load({
-    loadType: 'zoom',
-    zoom: map.getZoom(),
-  });
-
+  }
+  return feature_group;
 }
