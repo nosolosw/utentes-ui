@@ -1,16 +1,10 @@
-Backbone.SIXHIARA.CENTER = [-13, 38.5050];
-
 Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
   var options = initOptions || {};
 
-  var southWest = L.latLng(-23, 31),
-  northEast = L.latLng(-9, 43),
-  maxBounds = L.latLngBounds(southWest, northEast);
-
   var defaultMapOptions = {
     zoom: 7,
-    center: Backbone.SIXHIARA.CENTER,
-    maxBounds: maxBounds,
+    center: SIXHIARA.center,
+    maxBounds: [SIXHIARA.southWest, SIXHIARA.northEast],
     minZoom: 7,
     maxZoom: 19,
   };
