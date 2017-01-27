@@ -1,5 +1,5 @@
 Backbone.SIXHIARA.offline = function(map, layersConfig){
-
+  var self = this;
   function restackLayers() {
     if (! map.hasLayer(feature_group)) return;
     if (! self.initiallayersloaded) return;
@@ -37,23 +37,43 @@ Backbone.SIXHIARA.offline = function(map, layersConfig){
     collection.add(layersConfig[i]);
   }
 
-  self = this;
+
   collection.on('initiallayersloaded', function() {
     self.initiallayersloaded = true;
-    if (self.addToMap) {  
+    self.fontes = collection.get('Fontes');
+    if (self.addToMap) {
       feature_group.addTo(map);
       restackLayers();
+    } else {
+      restackFontes();
     }
 
   });
 
+  function restackFontes() {
+    var fontesLayer = self.fontes.get('layer');
+    feature_group.removeLayer(fontesLayer);
+    if (self.fontes.isVisible(map.getZoom())) {
+        map.addLayer(fontesLayer);
+        fontesLayer.bringToFront();
+    } else {
+        map.removeLayer(fontesLayer);
+    }
+  }
+
   map.on('zoomend', function(e) {
     restackLayers();
+    if ( (! map.hasLayer(feature_group)) && (self.initiallayersloaded) ) {
+      restackFontes();
+    }
+
   });
 
   map.on('baselayerchange', function(e) {
     if (e.name === 'Offline') {
       restackLayers();
+    } else {
+      restackFontes();
     }
   });
 
