@@ -8,7 +8,12 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     });
     options.offline = {layers: baseOfflineLayers};
     this.map = Backbone.SIXHIARA.mapConfig('map', options);
-    
+
+    var self = this;
+    self.map.scrollWheelZoom.disable();
+    self.map.on('focus', function() { self.map.scrollWheelZoom.enable(); });
+    self.map.on('blur', function() { self.map.scrollWheelZoom.disable(); });
+
     var drawnItems = new L.FeatureGroup();
 
     var geom = this.model.get('geometry').toJSON();
