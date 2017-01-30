@@ -41,6 +41,7 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
     });
 
     options = options || {};
+    options.mapOptions = options.mapOptions || {zoom:SIXHIARA.search.zoom};
     options.offline = {layers: allLayers};
     this.map = Backbone.SIXHIARA.mapConfig(this.el.id, options);
 
@@ -79,13 +80,12 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
   updateMapView: function() {
     if(this.geoJSONLayer.getLayers().length > 0){
       var bounds = this.geoJSONLayer.getBounds();
-      this.map.fitBounds(bounds.pad(0.1))
+      this.map.fitBounds(bounds.pad(0.05))
       var center = this.map.getCenter();
       var zoom = this.map.getZoom();
       if (zoom > 15) this.map.setZoomAround(center, 15);
     } else{
-      this.map.fitBounds(SIXHIARA.center);
-      this.map.setZoom(7);
+      this.map.setView(SIXHIARA.center, SIXHIARA.search.zoom);
     }
   },
 
