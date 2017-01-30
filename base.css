@@ -85,3 +85,10 @@ input:invalid {
   border: 1px solid #A94442 !important;
   box-shadow: 0 0 4px #A94442 !important;
 }
+
+
+.leaflet-control-layers-toggle {
+  width: 26px;
+  height: 26px;
+  background-size: 20px 20px;
+}
