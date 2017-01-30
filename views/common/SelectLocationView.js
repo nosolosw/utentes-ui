@@ -5,19 +5,24 @@ Backbone.SIXHIARA.SelectLocationView = Backbone.UILib.BaseView.extend({
     Backbone.UILib.BaseView.prototype.initialize.call(this);
 
     var domains = options.domains;
-    var provincias = domains.byCategory('provincia');
+    var provincias = undefined,
+        distritos = undefined,
+        postos = undefined;
     if (options.ara) {
-      provincias = provincias.byParent(options.ara);
+      provincias = domains.byCategory('provincia').byParent(options.ara);
+      distritos = domains.byCategory('distrito');
+      postos = domains.byCategory('posto');
     } else {
       // Workaround. As blank spaces are introducied at db level for each
       // ara, it must be removed here
-      provincias = provincias.filter(function(p) {
+      provincias = domains.byCategory('provincia').filter(function(p) {
         return !(p.get('parent') && p.get('order') === 0);
       });
+      distritos = domains.byCategory('utentes-distrito');
+      postos = domains.byCategory('utentes-posto');
     }
 
-    var distritos = domains.byCategory('distrito');
-    var postos = domains.byCategory('posto');
+
 
     var selectProvincias = new Backbone.UILib.SelectView({
       el: this.$('#loc_provin'),
