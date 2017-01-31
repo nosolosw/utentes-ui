@@ -70,7 +70,7 @@ Backbone.SIXHIARA.offline = function(map, layersConfig){
   });
 
   map.on('baselayerchange', function(e) {
-    if (e.name === 'Offline') {
+    if (e.name === 'Sem rede') {
       restackLayers();
     } else {
       restackFontes();
