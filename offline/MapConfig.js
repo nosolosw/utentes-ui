@@ -43,22 +43,22 @@ Backbone.SIXHIARA.mapConfig = function(mapId, initOptions) {
 
   }
 
-  var baseMap = window.localStorage.getItem('baseMap') || 'Offline';
-  if (baseMap === 'Offline') {
+  var baseMap = window.localStorage.getItem('baseMap') || 'Sem rede';
+  if (baseMap === 'Sem rede') {
     offBaseLayer.loadOffline(true);
-  } else if (baseMap === 'HOT') {
+  } else if (baseMap === 'OSM-HOT') {
     hotLayer.addTo(map);
     offBaseLayer.loadOffline(false);
-  } else if (baseMap === 'iCarto') {
+  } else if (baseMap === 'OSM-Mapbox') {
     iCartoLayer.addTo(map);
     offBaseLayer.loadOffline(false);
   }
 
 
   var control = L.control.layers({}, {}, {position:'topleft'}).addTo(map);
-  control.addBaseLayer(offBaseLayer, "Offline");
-  control.addBaseLayer(hotLayer, "HOT");
-  control.addBaseLayer(iCartoLayer, "iCarto");
+  control.addBaseLayer(offBaseLayer, 'Sem rede');
+  control.addBaseLayer(hotLayer, "OSM-HOT");
+  control.addBaseLayer(iCartoLayer, "OSM-Mapbox");
 
 
 

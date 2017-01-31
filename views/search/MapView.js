@@ -80,7 +80,7 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
   updateMapView: function() {
     if(this.geoJSONLayer.getLayers().length > 0){
       var bounds = this.geoJSONLayer.getBounds();
-      this.map.fitBounds(bounds.pad(0.05))
+      this.map.fitBounds(bounds.pad(0.04))
       var center = this.map.getCenter();
       var zoom = this.map.getZoom();
       if (zoom > 15) this.map.setZoomAround(center, 15);
