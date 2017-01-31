@@ -77,13 +77,26 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
     }
   },
 
+  fitToBounds: function(map, bounds, boundsPadding, maxZoom, minZoom) {
+    maxZoom = maxZoom || Number.MAX_SAFE_INTEGER;
+    minZoom = minZoom || Number.MIN_SAFE_INTEGER;
+    map.fitBounds(bounds.pad(boundsPadding));
+    var zoom = this.map.getZoom();
+    if (zoom > maxZoom) {
+      var center = this.map.getCenter();
+      map.setZoomAround(center, maxZoom);
+    }
+    if (zoom < minZoom) {
+      var center = this.map.getCenter();
+      map.setZoomAround(center, minZoom);
+    }
+    return map.getBounds();
+  },
+
   updateMapView: function() {
     if(this.geoJSONLayer.getLayers().length > 0){
       var bounds = this.geoJSONLayer.getBounds();
-      this.map.fitBounds(bounds.pad(0.04))
-      var center = this.map.getCenter();
-      var zoom = this.map.getZoom();
-      if (zoom > 15) this.map.setZoomAround(center, 15);
+      this.fitToBounds(this.map, bounds, 0.04, null, 12);
     } else{
       this.map.setView(SIXHIARA.center, SIXHIARA.search.zoom);
     }

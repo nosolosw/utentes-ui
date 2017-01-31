@@ -37,8 +37,9 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
         style: {fillOpacity: 0.5}
       });
 
-      var bounds = exploracaoLeaflet.getBounds().pad(0.1);
-      this.map.fitBounds(bounds).setMaxBounds(bounds);
+      var bounds = exploracaoLeaflet.getBounds()
+      var mapBounds = this.fitToBounds(this.map, bounds, 0.1, 18, null);
+      this.map.setMaxBounds(mapBounds);
     }
 
     var drawControl = new L.Control.Draw({
@@ -74,8 +75,22 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
 
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
+  },
 
-
+  fitToBounds: function(map, bounds, boundsPadding, maxZoom, minZoom) {
+    maxZoom = maxZoom || Number.MAX_SAFE_INTEGER;
+    minZoom = minZoom || Number.MIN_SAFE_INTEGER;
+    map.fitBounds(bounds.pad(boundsPadding));
+    var zoom = this.map.getZoom();
+    if (zoom > maxZoom) {
+      var center = this.map.getCenter();
+      map.setZoomAround(center, maxZoom);
+    }
+    if (zoom < minZoom) {
+      var center = this.map.getCenter();
+      map.setZoomAround(center, minZoom);
+    }
+    return map.getBounds();
   },
 
   /*
