@@ -1,9 +1,9 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 
 Backbone.SIXHIARA.Config = {
-  urlSearch:      '/static/utentes-ui/exploracao-search.html',
-  urlShow:        '/static/utentes-ui/exploracao-show.html?id=',
-  urlUtentes:     '/static/utentes-ui/utentes.html',
+  urlSearch:      '/static/cetmar-ui/exploracao-search.html',
+  urlShow:        '/static/cetmar-ui/exploracao-show.html?id=',
+  urlUtentes:     '/static/cetmar-ui/utentes.html',
   apiDomains:     '/api/domains',
   apiExploracaos: '/api/exploracaos',
   apiUtentes:     '/api/utentes',
