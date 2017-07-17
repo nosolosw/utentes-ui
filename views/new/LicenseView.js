@@ -45,6 +45,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
 
   clickActive: function (e) {
     if(e.target.checked){
+      this.license.changeEstadoOnCheck();
       this.model.get('licencias').add(this.license);
       this.enableWidgets();
     } else {
@@ -55,7 +56,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
       this.license = new Backbone.SIXHIARA.Licencia({'lic_tipo': this.lic_tipo});
       this.updateModelView.model = this.license;
       this.updateModelView.render();
-
+      
       this.disableWidgets();
     }
   },

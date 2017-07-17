@@ -41,6 +41,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.set('summary_consumo_msg',  'Consumo');
     this.set('summary_pagos_val',    this.updateSummaryPagos());
     this.set('summary_pagos_msg',    'Pagamentos');
+    this.set("actividade", new Backbone.SIXHIARA.ActividadesFactory["Piscicultura"]());
 
     this.setListeners();
     this.on('sync', function(model, response, options){
@@ -447,7 +448,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     impliesValidateActivity a algo más genérico. Y también si tiene sentido introducir
     en el schema de validación condicionales, del tipo este campo y concición sólo
     se valida para tal estado
-    */
+    */ 
     var toValidate = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
     if (toValidate) {
       var licValidator = validator(LICENCIA_SCHEMA);

@@ -80,6 +80,7 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
 
   impliesValidateActivity: function() {
     return ! [
+      'Desconocido',
       'Irregular',
       'Não aprovada',
       'Pendente de solicitação do utente',
@@ -94,4 +95,8 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
     return this.get('estado') === 'Licenciada';
   },
 
+  // CAMBIAR POR DESCONOCIDO AL MODIFICAR LA VALIDACIÓN EN LA API!!
+  changeEstadoOnCheck: function() {
+    this.set("estado", "Irregular");
+  },
 });
