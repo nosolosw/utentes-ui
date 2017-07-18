@@ -34,10 +34,10 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
       collection: utentes
     }));
 
-    this.addView(new Backbone.UILib.SelectView({
-      el: this.$('#lic_tipo'),
-      collection: licenciaTipos
-    }));
+    // this.addView(new Backbone.UILib.SelectView({
+    //   el: this.$('#lic_tipo'),
+    //   collection: licenciaTipos
+    // }));
 
     // this.addView(new Backbone.UILib.SelectView({
     //   el: this.$('#estado'),

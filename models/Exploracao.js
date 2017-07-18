@@ -31,6 +31,10 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'geometry':   new Backbone.Model(),
     'geometry_edited': false,
     'summary_pago_iva': 37810,
+    'n_tanques': null,
+    'producao_anual': null,
+    'n_alevines_poboar': null,
+    'ano_inicio': null,
   },
 
   initialize: function(){
@@ -549,12 +553,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
             est_li_su = l.estado;
           }
 
-          pagamento = 'No';
-          if (_.isNull(json.pagos)){
-            pagamento = null;
-          } else if (json.pagos === true) {
-            pagamento = 'Si';
-          }
+          // pagamento = 'No';
+          // if (_.isNull(json.pagos)){
+          //   pagamento = null;
+          // } else if (json.pagos === true) {
+          //   pagamento = 'Si';
+          // }
         }
         if (! _.isEmpty(geojson.geometry)) {
           geojson.geometry.type = 'Polygon';
@@ -576,21 +580,21 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
                   'rio': json.rio,
                   'utente': json.utente.nome,
                   'uten_nuit': json.utente.nuit,
-                  'abastecem': json.actividade.tipo === 'Abastecimento',
-                  'saneament': json.actividade.tipo === 'Saneamento',
-                  'agricultu': json.actividade.tipo === 'Agricultura de Regadio',
-                  'pecuaria': json.actividade.tipo === 'Pecuária',
+                  // 'abastecem': json.actividade.tipo === 'Abastecimento',
+                  // 'saneament': json.actividade.tipo === 'Saneamento',
+                  // 'agricultu': json.actividade.tipo === 'Agricultura de Regadio',
+                  // 'pecuaria': json.actividade.tipo === 'Pecuária',
                   'piscicult': json.actividade.tipo === 'Piscicultura',
-                  'industria': json.actividade.tipo === 'Indústria',
-                  'pro_energ': json.actividade.tipo === 'Producção de energia',
+                  // 'industria': json.actividade.tipo === 'Indústria',
+                  // 'pro_energ': json.actividade.tipo === 'Producção de energia',
                   'tipo_subt': tipo_subt,
                   'tipo_supe': tipo_supe,
                   'con_l_su': con_lic_su,
                   'con_l_sb': con_lic_sb,
                   'con_l_to': json.c_licencia,
-                  'est_l_su': est_li_su,
-                  'est_l_sb': est_li_sb,
-                  'pagamento': pagamento,
+                  // 'est_l_su': est_li_su,
+                  // 'est_l_sb': est_li_sb,
+                  // 'pagamento': pagamento,
                   'observacio': json.observacio,
         },
       };
