@@ -43,21 +43,14 @@ Backbone.SIXHIARA.ButtonExportXLSView = Backbone.View.extend({
         utente.get('observacio'),
         exp.get('exp_id'),
         exp.get('exp_name'),
-        // exp.getActividadeTipo(),
+        exp.getActividadeTipo(),
         exp.get('c_licencia'),
         exp.get('c_soli'),
-        // exp.get('c_real'),
-        // exp.get('c_estimado'),
-        exp.get('n_tanques'),
-        exp.get('producao_anual'),
-        exp.get('n_alevines_poboar'),
-        exp.get('ano_inicio'),
+        exp.get('c_real'),
+        exp.get('c_estimado'),
       ]
     });
-    data.unshift(['Nome', 'Nuit', 'Tipo de entidade', 'Nº Registro comercial', 'Registrado em', 'Provincia',
-                   'Distrito', 'Posto', 'Bairro', 'Observações', 'Id Exp', 'Nome exploraçõe', /*'Actividade',*/ 
-                   'C. licenciado', 'C. solicitado', /*'C. real', 'C. estimado'*/ 'Nº Tanques', 'Produçao Anual',
-                   'Nº Alevines por poboar', 'Ano Inicio Actividade']);
+    data.unshift(['Nome', 'Nuit', 'Tipo de entidade', 'Nº Registro comercial', 'Registrado em', 'Provincia', 'Distrito', 'Posto', 'Bairro', 'Observações', 'Id Exp', 'Nome exploraçõe', 'Actividade', 'C. licenciado', 'C. solicitado', 'C. real', 'C. estimado']);
 
     var wb = new Workbook();
     var ws = this.sheet_from_array_of_arrays(data);

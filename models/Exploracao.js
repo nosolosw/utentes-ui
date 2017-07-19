@@ -31,10 +31,6 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     'geometry':   new Backbone.Model(),
     'geometry_edited': false,
     'summary_pago_iva': 37810,
-    'n_tanques': null,
-    'producao_anual': null,
-    'n_alevines_poboar': null,
-    'ano_inicio': null,
   },
 
   initialize: function(){
@@ -45,7 +41,6 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.set('summary_consumo_msg',  'Consumo');
     this.set('summary_pagos_val',    this.updateSummaryPagos());
     this.set('summary_pagos_msg',    'Pagamentos');
-    this.set("actividade", new Backbone.SIXHIARA.ActividadesFactory["Piscicultura"]());
 
     this.setListeners();
     this.on('sync', function(model, response, options){
@@ -452,7 +447,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     impliesValidateActivity a algo más genérico. Y también si tiene sentido introducir
     en el schema de validación condicionales, del tipo este campo y concición sólo
     se valida para tal estado
-    */ 
+    */
     var toValidate = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
     if (toValidate) {
       var licValidator = validator(LICENCIA_SCHEMA);
@@ -553,12 +548,12 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
             est_li_su = l.estado;
           }
 
-          // pagamento = 'No';
-          // if (_.isNull(json.pagos)){
-          //   pagamento = null;
-          // } else if (json.pagos === true) {
-          //   pagamento = 'Si';
-          // }
+          pagamento = 'No';
+          if (_.isNull(json.pagos)){
+            pagamento = null;
+          } else if (json.pagos === true) {
+            pagamento = 'Si';
+          }
         }
         if (! _.isEmpty(geojson.geometry)) {
           geojson.geometry.type = 'Polygon';
@@ -580,21 +575,21 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
                   'rio': json.rio,
                   'utente': json.utente.nome,
                   'uten_nuit': json.utente.nuit,
-                  // 'abastecem': json.actividade.tipo === 'Abastecimento',
-                  // 'saneament': json.actividade.tipo === 'Saneamento',
-                  // 'agricultu': json.actividade.tipo === 'Agricultura de Regadio',
-                  // 'pecuaria': json.actividade.tipo === 'Pecuária',
+                  'abastecem': json.actividade.tipo === 'Abastecimento',
+                  'saneament': json.actividade.tipo === 'Saneamento',
+                  'agricultu': json.actividade.tipo === 'Agricultura de Regadio',
+                  'pecuaria': json.actividade.tipo === 'Pecuária',
                   'piscicult': json.actividade.tipo === 'Piscicultura',
-                  // 'industria': json.actividade.tipo === 'Indústria',
-                  // 'pro_energ': json.actividade.tipo === 'Producção de energia',
+                  'industria': json.actividade.tipo === 'Indústria',
+                  'pro_energ': json.actividade.tipo === 'Producção de energia',
                   'tipo_subt': tipo_subt,
                   'tipo_supe': tipo_supe,
                   'con_l_su': con_lic_su,
                   'con_l_sb': con_lic_sb,
                   'con_l_to': json.c_licencia,
-                  // 'est_l_su': est_li_su,
-                  // 'est_l_sb': est_li_sb,
-                  // 'pagamento': pagamento,
+                  'est_l_su': est_li_su,
+                  'est_l_sb': est_li_sb,
+                  'pagamento': pagamento,
                   'observacio': json.observacio,
         },
       };

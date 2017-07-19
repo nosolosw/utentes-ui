@@ -6,8 +6,7 @@ Backbone.SIXHIARA.ActividadePiscicultura = Backbone.SIXHIARA.ActividadeNull.exte
     'tipo':       'Piscicultura',
     'c_estimado': null,
     'area':       null,
-    'v_reservas': null,
-    'tanques': new Backbone.SIXHIARA.TanqueCollection(),
+    'v_reservas': null
   },
 
 });
