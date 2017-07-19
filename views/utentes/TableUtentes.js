@@ -207,7 +207,7 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
       el: $('#editUtenteModal'),
       model: modalView.draftModel,
       domains: this.options.domains,
-      ara: '',
+      domainsKeys: ['utentes-provincia', 'utentes-distrito', 'utentes-posto'],
     }).render();
     modalView.addAuxView(selectLocationView);
 
