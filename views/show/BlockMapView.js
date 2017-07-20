@@ -37,9 +37,9 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
         style: {fillOpacity: 0.5}
       });
 
-      var bounds = exploracaoLeaflet.getBounds();
+      var bounds = exploracaoLeaflet.getBounds()
       var mapBounds = this.fitToBounds(this.map, bounds, 0.1, 18, null);
-      this.map.setMaxBounds(bounds);
+      this.map.setMaxBounds(mapBounds);
     }
 
     var drawControl = new L.Control.Draw({

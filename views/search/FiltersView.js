@@ -39,20 +39,20 @@ Backbone.SIXHIARA.FiltersView = Backbone.UILib.BaseView.extend({
       collection: licenciaTipos
     }));
 
-    // this.addView(new Backbone.UILib.SelectView({
-    //   el: this.$('#estado'),
-    //   collection: licenciaEstados
-    // }));
+    this.addView(new Backbone.UILib.SelectView({
+      el: this.$('#estado'),
+      collection: licenciaEstados
+    }));
 
-    // this.addView(new Backbone.UILib.SelectView({
-    //   el: this.$('#pagos'),
-    //   collection: exploracaoPagamento
-    // }));
+    this.addView(new Backbone.UILib.SelectView({
+      el: this.$('#pagos'),
+      collection: exploracaoPagamento
+    }));
 
-    // this.addView(new Backbone.UILib.SelectView({
-    //   el: this.$('#actividade'),
-    //   collection: actividades
-    // }));
+    this.addView(new Backbone.UILib.SelectView({
+      el: this.$('#actividade'),
+      collection: actividades
+    }));
   },
 
 });
