@@ -20,6 +20,25 @@ Backbone.SIXHIARA.ButtonExportXLSView = Backbone.View.extend({
     this.$el.append($('<button id="export-button-xls" type="button" class="btn btn-default btn-sm pull-right">XLS</button>'));
   },
 
+  getInnerValue: function(obj, key) {
+    return key.split(".").reduce(function(o, x) {
+        return (typeof o == "undefined" || o === null) ? o : o[x];
+    }, obj);
+  },
+
+  getData: function(exploracaos) {
+      var self = this;
+      var data = []
+      data.push(SIXHIARA.xlsFieldsToExport.map(function(e){ return e.header }));
+      exploracaos.forEach(function(exploracao) {
+            var dataRow = SIXHIARA.xlsFieldsToExport.map(function(field) {
+                return self.getInnerValue(exploracao.toJSON(), field.value)
+            });
+            data.push(dataRow);
+      });
+      return data;
+  },
+
   exportXLS: function(evt){
     var file = 'exploracaos.xlsx';
     if (!file) return;
@@ -28,29 +47,7 @@ Backbone.SIXHIARA.ButtonExportXLSView = Backbone.View.extend({
       return exp.get('utente').get('nome');
     });
 
-    var data = exploracaos.map(function(exp){
-      var utente = exp.get('utente');
-      return [
-        utente.get('nome'),
-        utente.get('nuit'),
-        utente.get('entidade'),
-        utente.get('reg_comerc'),
-        utente.get('reg_zona'),
-        utente.get('loc_provin'),
-        utente.get('loc_distri'),
-        utente.get('loc_posto'),
-        utente.get('loc_nucleo'),
-        utente.get('observacio'),
-        exp.get('exp_id'),
-        exp.get('exp_name'),
-        exp.getActividadeTipo(),
-        exp.get('c_licencia'),
-        exp.get('c_soli'),
-        exp.get('c_real'),
-        exp.get('c_estimado'),
-      ]
-    });
-    data.unshift(['Nome', 'Nuit', 'Tipo de entidade', 'Nº Registro comercial', 'Registrado em', 'Provincia', 'Distrito', 'Posto', 'Bairro', 'Observações', 'Id Exp', 'Nome exploraçõe', 'Actividade', 'C. licenciado', 'C. solicitado', 'C. real', 'C. estimado']);
+    var data = this.getData(exploracaos);
 
     var wb = new Workbook();
     var ws = this.sheet_from_array_of_arrays(data);
