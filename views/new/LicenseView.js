@@ -77,7 +77,6 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
   },
 
   showModalEstadoLicencia: function() {
-    console.log('clicked');
     new Backbone.SIXHIARA.ModalTooltipEstadoLicenciaView({
       collection: this.estadosLicencia,
       actual_state: this.license.get('estado'),

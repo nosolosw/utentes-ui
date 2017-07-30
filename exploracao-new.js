@@ -11,7 +11,6 @@ domains.url = Backbone.SIXHIARA.Config.apiDomains;
 
 domains.fetch({
   success: function(collection, response, options) {
-    console.log('success fetching domains');
     fillComponentsWithDomains();
   },
   error: function (collection, response, option) {
@@ -23,7 +22,6 @@ domains.fetch({
 var utentes = new Backbone.SIXHIARA.UtenteCollection();
 utentes.fetch({
   success: function(collection, response, options) {
-    console.log('success fetching utentes');
     fillSelectUtente();
   },
   error: function (collection, response, options) {
