@@ -525,73 +525,31 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     this.get('licencias').off('change', this.aChangeHappens, this);
   },
 
+  getInnerValue: function(obj, key) {
+      if (typeof key === 'function') {
+          return key(obj);
+      }
+    return key.split(".").reduce(function(o, x) {
+        return (typeof o == "undefined" || o === null) ? o : o[x];
+    }, obj);
+  },
+
   toSHP: function() {
-    var geojson = this.toGeoJSON(),
-        json = geojson.properties,
-        tipo_subt = false,
-        tipo_supe = false,
-        con_lic_sb = null,
-        con_lic_su = null,
-        est_li_sb = null,
-        est_li_su = null;
-        for (var i = 0; i < json.licencias.length; i++) {
-          var l = json.licencias[i];
-          if (l.lic_tipo === 'Subterrânea') {
-            tipo_subt = true;
-            con_lic_sb = l.c_licencia;
-            est_li_sb = l.estado;
-          }
+    var self = this;
+    var geojson = this.toGeoJSON();
+    var json = geojson.properties;
+    var properties = {};
+    window.SIXHIARA.shpFieldsToExport.forEach(function(field){
+        properties[field.header] = self.getInnerValue(json, field.value);
+    });
 
-          if (l.lic_tipo === 'Superficial') {
-            tipo_supe = true;
-            con_lic_su = l.c_licencia;
-            est_li_su = l.estado;
-          }
-
-          pagamento = 'No';
-          if (_.isNull(json.pagos)){
-            pagamento = null;
-          } else if (json.pagos === true) {
-            pagamento = 'Si';
-          }
-        }
         if (! _.isEmpty(geojson.geometry)) {
           geojson.geometry.type = 'Polygon';
         }
       return {
         "type": "Feature",
         "geometry": geojson.geometry,
-        "properties": {
-          'exp_name': json.exp_name,
-                  'exp_id': json.exp_id,
-                  'd_soli': json.d_soli,
-                  'loc_provin': json.loc_provin,
-                  'loc_distri': json.loc_distri,
-                  'loc_posto': json.loc_posto,
-                  'loc_nucleo': json.loc_nucleo,
-                  'loc_endere': json.loc_endere,
-                  'loc_bacia': json.loc_bacia,
-                  'loc_subaci': json.loc_subaci,
-                  'rio': json.rio,
-                  'utente': json.utente.nome,
-                  'uten_nuit': json.utente.nuit,
-                  'abastecem': json.actividade.tipo === 'Abastecimento',
-                  'saneament': json.actividade.tipo === 'Saneamento',
-                  'agricultu': json.actividade.tipo === 'Agricultura de Regadio',
-                  'pecuaria': json.actividade.tipo === 'Pecuária',
-                  'piscicult': json.actividade.tipo === 'Piscicultura',
-                  'industria': json.actividade.tipo === 'Indústria',
-                  'pro_energ': json.actividade.tipo === 'Producção de energia',
-                  'tipo_subt': tipo_subt,
-                  'tipo_supe': tipo_supe,
-                  'con_l_su': con_lic_su,
-                  'con_l_sb': con_lic_sb,
-                  'con_l_to': json.c_licencia,
-                  'est_l_su': est_li_su,
-                  'est_l_sb': est_li_sb,
-                  'pagamento': pagamento,
-                  'observacio': json.observacio,
-        },
+        "properties": properties,
       };
     },
 

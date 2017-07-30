@@ -21,6 +21,9 @@ Backbone.SIXHIARA.ButtonExportXLSView = Backbone.View.extend({
   },
 
   getInnerValue: function(obj, key) {
+      if (typeof key === 'function') {
+          return key(obj);
+      }
     return key.split(".").reduce(function(o, x) {
         return (typeof o == "undefined" || o === null) ? o : o[x];
     }, obj);
