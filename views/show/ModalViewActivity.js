@@ -126,7 +126,50 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
         collection: impactos
       }).render();
       this.addActivitySubview(selectImpacto);
-    }
+  } else if (tipo === 'Piscicultura') {
+      var tipo_proc = this.options.domains.byCategory('piscicultura_tipo_proc');
+      var select_tipo_proc = new Backbone.UILib.SelectView({
+        el: this.$('#tipo_proc'),
+        collection: tipo_proc
+      }).render();
+      this.addActivitySubview(select_tipo_proc);
+      var asis_aber = this.options.domains.byCategory('boolean');
+      var select_asis_aber = new Backbone.UILib.SelectView({
+        el: this.$('#asis_aber'),
+        collection: asis_aber
+      }).render();
+      this.addActivitySubview(select_asis_aber);
+      var asis_moni = this.options.domains.byCategory('boolean');
+      var select_asis_moni = new Backbone.UILib.SelectView({
+        el: this.$('#asis_moni'),
+        collection: asis_moni
+      }).render();
+      this.addActivitySubview(select_asis_moni);
+      var trat_t_en = this.options.domains.byCategory('boolean');
+      var select_trat_t_en = new Backbone.UILib.SelectView({
+        el: this.$('#trat_t_en'),
+        collection: trat_t_en
+      }).render();
+      this.addActivitySubview(select_trat_t_en);
+      var trat_a_sa = this.options.domains.byCategory('boolean');
+      var select_trat_a_sa = new Backbone.UILib.SelectView({
+        el: this.$('#trat_a_sa'),
+        collection: trat_a_sa
+      }).render();
+      this.addActivitySubview(select_trat_a_sa);
+      var gaio_subm = this.options.domains.byCategory('piscicultura_subm');
+      var select_gaio_subm = new Backbone.UILib.SelectView({
+        el: this.$('#gaio_subm'),
+        collection: gaio_subm
+      }).render();
+      this.addActivitySubview(select_gaio_subm);
+      var problemas = this.options.domains.byCategory('boolean');
+      var select_problemas = new Backbone.UILib.SelectView({
+        el: this.$('#problemas'),
+        collection: problemas
+      }).render();
+      this.addActivitySubview(select_problemas);
+  }
   },
 
   render: function () {

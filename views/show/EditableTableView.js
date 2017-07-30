@@ -7,7 +7,12 @@ Backbone.SIXHIARA.EditableTableView = Backbone.View.extend({
     var self = this;
     $(this.options.newRowBtSelector || '#newRow').on('click', function(e){
       e.preventDefault();
-      new Backbone.SIXHIARA.CultivoResModalView({
+
+      var MyModalView = Backbone.SIXHIARA.CultivoResModalView;
+      if (self.options.modalSelectorTpl === '#tanqueModalTpl') {
+          MyModalView = Backbone.SIXHIARA.TanquePiscicolaModalView;
+      }
+      new MyModalView({
         modalSelectorTpl: self.options.modalSelectorTpl,
         collection: self.collection,
         collectionModel: self.options.collectionModel,
@@ -74,11 +79,15 @@ Backbone.SIXHIARA.RowView = Backbone.View.extend({
   },
 
   modelEdit: function(){
-    new Backbone.SIXHIARA.CultivoResModalView({
+    var MyModalView = Backbone.SIXHIARA.CultivoResModalView;
+    if (this.options.modalSelectorTpl === '#tanqueModalTpl') {
+      MyModalView = Backbone.SIXHIARA.TanquePiscicolaModalView;
+    }
+    new MyModalView({
       modalSelectorTpl: this.options.modalSelectorTpl,
-      collection: this.collection,
-      collectionModel: this.options.collectionModel,
-      model: this.model,
+      collection: this.collection, // this.options.model.collection
+      collectionModel: this.options.collectionModel, // Backbone.SIXHIARA.TanquePiscicola
+      model: this.model, // this.options.model
       domains: this.options.domains,
       editing: true,
     }).show();

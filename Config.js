@@ -8,6 +8,7 @@ Backbone.SIXHIARA.Config = {
   apiExploracaos: '/api/exploracaos',
   apiUtentes:     '/api/utentes',
   apiCultivos:    '/api/cultivos',
+  apiTanquesPiscicolas:     '/api/tanques_piscicolas',
 };
 
 Backbone.SIXHIARA.MSG = {

@@ -45,6 +45,18 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
         domains: this.options.domains,
       });
       this.subViews.push(table);
+    } else if (tipo === 'Piscicultura') {
+      var table = new Backbone.SIXHIARA.EditableTableView({
+        el: this.$('#block-piscicultura'),
+        newRowBtSelector: '#newRow',
+        modalSelectorTpl: '#tanqueModalTpl',
+        tableSelector: 'table#tanques',
+        collection: this.model.get('actividade').get('tanques_piscicolas'),
+        rowTemplate: '<td><%- tanque_id %></td><td><%- tipo %></td><td><%- volume %></td><td><%- estado %></td><td><%- esp_culti %></td><td><%- tipo_alim %></td><td><%- n_ale_pov %></td><td><%- pro_anual %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
+        collectionModel: Backbone.SIXHIARA.TanquePiscicola,
+        domains: this.options.domains,
+      });
+      this.subViews.push(table);
     }
 
     return this;

@@ -179,6 +179,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
     });
 
     // actividade
+    this.get("actividade").on("tanque_added", app.aChangeHappens, app);
+    this.get("actividade").on("tanque_removed", app.aChangeHappens, app);
     this.get('actividade').on('change', app.updateCEstimado, app);
     this.on('change:actividade', app.changedActivity, app);
 

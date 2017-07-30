@@ -733,7 +733,7 @@
   <!-- tmpl actividade piscicultura -->
   <script type="text/template" id="Piscicultura">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-12">
         <div class="row">
           <span class="col-xs-offset-1 col-xs-11">
             <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
@@ -741,6 +741,35 @@
             <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
           </span>
         </div>
+        <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <button class="btn btn-default pull-right" id="newRow">Novo tanque</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <table class="table table-bordered" id="tanques">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Tipo</th>
+                    <th>Volume <i class="units">(m<sup>3</sup>/més)</i></th>
+                    <th>Estado</th>
+                    <th>Espécie cultivada</th>
+                    <th>Tipo de alimentação</th>
+                    <th>Nro de alevinos povoados</th>
+                    <th>Produção anual <i class="units">(Kg)</i></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
       </div>
     </div>
   </script>
@@ -760,8 +789,78 @@
         <input type="text" class="form-control widget-number" id="area" pattern="[0-9]{1,8}([,][0-9]{1,4})?">
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
-        <label for="v_reservas">Reservas <i class="units">(m<sup>3</sup>)</i></label>
-        <input type="text" class="form-control widget-number" id="v_reservas" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+        <label for="vol_tot_t">Reservas <i class="units">(m<sup>3</sup>)</i></label>
+        <input type="text" class="form-control widget-number" id="vol_tot_t" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="ano_i_ati">Ano inicio da atividade</label>
+        <input type="text" class="form-control widget-number" id="ano_i_ati" pattern="[0-9]{4}">
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="n_tanques">Nro de tanques/gaiolas</label>
+        <input type="text" class="form-control widget-number" id="n_tanques" pattern="[0-9]*">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="n_ale_pov">Nro de alevinos povoados</label>
+        <input type="text" class="form-control widget-number" id="n_ale_pov" pattern="[0-9]*">
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="produc_pi">Produção Anual <i class="units">(Kg)</i></label>
+        <input type="text" class="form-control widget-number" id="produc_pi" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="tipo_proc">Processamento do peixe</label>
+        <select class="form-control widget" id="tipo_proc"></select>
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="asis_aber">Durante a abertura dos tanques/gaiolas</label>
+        <select class="form-control widget" id="asis_aber"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="asis_moni">Na monitoria dos tanques/gaiolas</label>
+        <select class="form-control widget" id="asis_moni"></select>
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="asis_orig">Origem da assistência</label>
+        <input type="text" class="form-control widget" id="asis_orig">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="asis_or_o">Outros</label>
+        <input type="text" class="form-control widget" id="asis_or_o">
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="trat_t_en">Tratamento da água que entra nos tanques</label>
+        <select class="form-control widget" id="trat_t_en"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="trat_a_sa">Tratamento da água que sai dos tanques</label>
+        <select class="form-control widget" id="trat_a_sa"></select>
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="gaio_subm">As gaiolas estão submersas em</label>
+        <select class="form-control widget" id="gaio_subm"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-5">
+        <label for="problemas">A exploraçaõ tem problemas</label>
+        <select class="form-control widget" id="problemas"></select>
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="prob_prin">Principais problemas</label>
+        <input type="text" class="form-control widget" id="prob_prin">
       </div>
     </div>
   </script>
@@ -1113,8 +1212,11 @@
 
   <script src="views/common/NavBarView.js"></script>
   <script src="views/common/ConfigModalView.js"></script>
+  <script src="views/show/TemplateEditTanque.js"></script>
   <script src="Config.js"></script>
 
+  <script src="models/TanquePiscicola.js"></script>
+  <script src="models/TanquePiscicolaCollection.js"></script>
   <script src="models/ActividadeNull.js"></script>
   <script src="models/ActividadeCultivo.js"></script>
   <script src="models/CultivoCollection.js"></script>
@@ -1159,6 +1261,7 @@
   <script src="views/show/ModalView.js"></script>
   <script src="views/show/ModalViewActivity.js"></script>
   <script src="views/show/CultivoResModalView.js"></script>
+  <script src="views/show/TanquePiscicolaModalView.js"></script>
   <script src="views/show/LicenseModalView.js"></script>
   <script src="views/common/RowDeleteButtonView.js"></script>
   <script src="views/show/TableRowShowView.js"></script>

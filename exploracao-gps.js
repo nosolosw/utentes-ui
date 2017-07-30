@@ -120,3 +120,6 @@ exploracaos.fetch();
 
 var cultivos = new Backbone.SIXHIARA.CultivoCollection();
 cultivos.fetch();
+
+var tanques = new Backbone.SIXHIARA.TanquePiscicolaCollection();
+tanques.fetch();

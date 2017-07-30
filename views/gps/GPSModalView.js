@@ -7,8 +7,9 @@ Backbone.SIXHIARA.GPSModalView = Backbone.UILib.ModalView.extend({
     var tiposEntidade = new Backbone.UILib.DomainCollection();
     tiposEntidade.add([
       new Backbone.UILib.Domain({'alias':null, 'text':null, order: 0}),
-      new Backbone.UILib.Domain({'alias':'Cultivo', 'text':'Cultivo', order: 1}),
-      new Backbone.UILib.Domain({'alias':'Exploracao', 'text':'Exploracao', order: 2}),
+      new Backbone.UILib.Domain({'alias':'Exploracao', 'text':'Exploracao', order: 1}),
+      new Backbone.UILib.Domain({'alias':'Cultivo', 'text':'Cultivo', order: 2}),
+      new Backbone.UILib.Domain({'alias':'Tanque Piscícola', 'text':'Tanque Piscícola', order: 3}),
     ]);
 
     var widgetsView = new Backbone.UILib.WidgetsView({
@@ -29,19 +30,23 @@ Backbone.SIXHIARA.GPSModalView = Backbone.UILib.ModalView.extend({
     });
     this.addAuxView(selectIdentificador);
 
-    // this would store exploracaos and cultivos
     var entidades = new Backbone.Collection();
-    entidades.add(cultivos.slice(0, cultivos.length));
     entidades.add(exploracaos.slice(0, exploracaos.length));
+    entidades.add(cultivos.slice(0, cultivos.length));
+    entidades.add(tanques.slice(0, tanques.length));
     entidades.forEach(function(v){
       if (v.has('exp_id')) {
         v.set('parent', 'Exploracao');
         v.set('alias',  v.get('exp_id'));
         v.set('text',   v.get('exp_id'));
-      } else {
+      } else if (v.has('cult_id')) {
         v.set('parent', 'Cultivo');
         v.set('alias',  v.get('cult_id'));
         v.set('text',   v.get('cult_id'));
+      } else {
+        v.set('parent', 'Tanque Piscícola');
+        v.set('alias',  v.get('tanque_id'));
+        v.set('text',   v.get('tanque_id'));
       }
     });
 
@@ -57,10 +62,12 @@ Backbone.SIXHIARA.GPSModalView = Backbone.UILib.ModalView.extend({
     var entidade = this.model.get('entidade');
     var identificador = this.model.get('identificador');
 
-    if (entidade === 'Cultivo') {
+    if (entidade === 'Exploracao') {
+        e = exploracaos.filter({'exp_id': identificador});
+    } else if (entidade === 'Cultivo') {
       e = cultivos.filter({'cult_id': identificador});
     } else {
-      e = exploracaos.filter({'exp_id': identificador});
+      e = tanques.filter({'tanque_id': identificador});
     }
     if (e.length != 1) {
       alert('O arquivo de código não existe');
