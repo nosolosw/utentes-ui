@@ -25,21 +25,30 @@ Backbone.SIXHIARA.ActividadePiscicultura = Backbone.SIXHIARA.ActividadeNull.exte
   },
 
   initialize: function () {
-    this.listenTo(this.get("tanques_piscicolas"), 'add', this.onAddedTanquePiscicola);
-    this.listenTo(this.get("tanques_piscicolas"), 'remove', this.onRemovedTanquePiscicola);
-  },
-
-  onAddedTanquePiscicola: function() {
-    this.trigger("tanque_added");
-  },
-
-  onRemovedTanquePiscicola: function() {
-    this.trigger("tanque_removed");
+    this.get('tanques_piscicolas').on('all', this.updateChildBasedComputations, this);
   },
 
   parse: function(response) {
       response.tanques_piscicolas = new Backbone.SIXHIARA.TanquePiscicolaCollection(response.tanques_piscicolas, {parse: true});
       return response;
+  },
+
+  updateChildBasedComputations: function() {
+      var n_tanques = 0;
+      var vol_tot_t = 0;
+      var n_ale_pov = 0;
+      var produc_pi = 0;
+      this.get('tanques_piscicolas').forEach(function(child){
+          n_tanques += 1;
+          vol_tot_t += child.get('volume');
+          n_ale_pov += child.get('n_ale_pov');
+          produc_pi += child.get('pro_anual');
+      })
+      this.set('n_tanques', n_tanques);
+      this.set('vol_tot_t',vol_tot_t );
+      this.set('n_ale_pov', n_ale_pov);
+      this.set('produc_pi', produc_pi);
+      self.trigger('change', this.model);
   },
 
   toJSON: function () {
