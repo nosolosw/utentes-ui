@@ -34,6 +34,8 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
         if (value==="Outros") {
             inputEspCultiOutro.prop("disabled", false);
         } else {
+            model.set('esp_cul_o', null);
+            inputEspCultiOutro[0].value = null;
             inputEspCultiOutro.prop("disabled", true);
         }
     });
@@ -43,6 +45,8 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
         if (value==="Outros") {
             inputProvAlevinesOutro.prop("disabled", false);
         } else {
+            model.set('prov_al_o', null);
+            inputProvAlevinesOutro[0].value = null;
             inputProvAlevinesOutro.prop("disabled", true);
         }
     });
@@ -52,6 +56,8 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
         if (value==="Outros") {
             inputFertAguaOutros.prop("disabled", false);
         } else {
+            model.set('fert_a_o', null);
+            inputFertAguaOutros[0].value = null;
             inputFertAguaOutros.prop("disabled", true);
         }
     });
