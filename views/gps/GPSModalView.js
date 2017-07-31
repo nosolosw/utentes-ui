@@ -30,24 +30,29 @@ Backbone.SIXHIARA.GPSModalView = Backbone.UILib.ModalView.extend({
     });
     this.addAuxView(selectIdentificador);
 
-    var entidades = new Backbone.Collection();
-    entidades.add(exploracaos.slice(0, exploracaos.length));
-    entidades.add(cultivos.slice(0, cultivos.length));
-    entidades.add(tanques.slice(0, tanques.length));
-    entidades.forEach(function(v){
-      if (v.has('exp_id')) {
-        v.set('parent', 'Exploracao');
-        v.set('alias',  v.get('exp_id'));
-        v.set('text',   v.get('exp_id'));
-      } else if (v.has('cult_id')) {
-        v.set('parent', 'Cultivo');
-        v.set('alias',  v.get('cult_id'));
-        v.set('text',   v.get('cult_id'));
-      } else {
-        v.set('parent', 'Tanque Piscícola');
-        v.set('alias',  v.get('tanque_id'));
-        v.set('text',   v.get('tanque_id'));
-      }
+    var Entidades = Backbone.Collection.extend({
+        modelId: function(attrs) {
+            return attrs.parent + attrs.id;
+        }
+    });
+    var entidades = new Entidades();
+    exploracaos.forEach(function(e){
+        e.set('parent', 'Exploracao');
+        e.set('alias',  e.get('exp_id'));
+        e.set('text',   e.get('exp_id'));
+        entidades.add(e);
+    });
+    cultivos.forEach(function(e){
+        e.set('parent', 'Cultivo');
+        e.set('alias',  e.get('cult_id'));
+        e.set('text',   e.get('cult_id'));
+        entidades.add(e);
+    });
+    tanques.forEach(function(e){
+        e.set('parent', 'Tanque Piscícola');
+        e.set('alias',  e.get('tanque_id'));
+        e.set('text',   e.get('tanque_id'));
+        entidades.add(e);
     });
 
     var self = this;
