@@ -211,6 +211,13 @@ Backbone.SIXHIARA.TableUtentes = Backbone.View.extend({
     }).render();
     modalView.addAuxView(selectLocationView);
 
+    var selectUtenteTipo = new Backbone.UILib.SelectView({
+      el: $('#uten_tipo'),
+      collection: this.options.domains.byCategory('utentes_uten_tipo')
+     }).render();
+     modalView.addAuxView(selectUtenteTipo);
+
+
     modalView.render();
   },
 

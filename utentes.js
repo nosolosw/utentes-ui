@@ -59,7 +59,7 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
   el: $('#the_utentes_table'),
   collection: utentes,
   domains: domains,
-  columnNames: ['nome', 'entidade', 'registro', 'localizacion', 'exploracaos', 'observacio', 'edit', 'delete'],
+  columnNames: ['nome', 'uten_tipo', 'registro', 'localizacion', 'exploracaos', 'observacio', 'edit', 'delete'],
   // 'edit' & 'delete' column are used to render the buttons
   // 'nuit', Is show with 'nome' and not it its own column
   // 'reg_comerc', 'reg_zona' are shown as 'registro'
@@ -68,7 +68,7 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
   columnTitles: {
     'id':          'ID',
     'nome':        'Nome / Nuit',
-    'entidade':    'Tipo de entidade',
+    'uten_tipo':    'Tipo de entidade',
     'nuit':        'Nuit',
     'registro':    'Reg. (Comercial / Zona)',
     'reg_comerc':  'Nº Registro Comercial',

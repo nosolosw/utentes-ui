@@ -123,4 +123,9 @@ function fillComponentsWithDomains(){
     el: $('#utente'),
   }).render();
 
+  var selectUtenteTipo = new Backbone.UILib.SelectView({
+    el: this.$('#uten_tipo'),
+    collection: domains.byCategory('utentes_uten_tipo')
+  }).render();
+
 }
