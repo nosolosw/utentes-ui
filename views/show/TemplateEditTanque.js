@@ -13,126 +13,136 @@ html: `<!-- modal engadir tanque -->
       <div class="modal-body">
 
         <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="tipo">Tipo de tanque</label>
             <select class="form-control widget" id="tipo" required></select>
           </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="estado">Estado</label>
+            <select class="form-control widget" id="estado"></select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="cumprimen">Cumprimento<i class="units">(m)</i></label>
             <input type="text" class="form-control widget-number" id="cumprimen" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
           </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="largura">Largura<i class="units">(m)</i></label>
-            <input type="text" class="form-control widget-number" id="largura" pattern="[0-9]{1,8}([,][0-9]{1,4})?" />
+            <input type="text" class="form-control widget-number" id="largura" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
           </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="profundid">Profundidade<i class="units">(m)</i></label>
             <input type="text" class="form-control widget-number" id="profundid" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
           </div>
         </div>
 
         <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="area_gps">Área GPS</label>
+            <input type="text" class="form-control widget-number" id="area_gps" disabled/>
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="area">Área</label>
-            <input type="text" class="form-control widget-number" id="area"/>
+            <input type="text" class="form-control widget-number" id="area" pattern="[0-9]{1,8}([,][0-9]{1,4})?" />
           </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
-              <label for="area_gps">Área GPS</label>
-              <input type="text" class="form-control widget-number" id="area_gps" disabled/>
-          </div>
-          <div class="form-group col-xs-offset-1 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="volume">Volume</label>
-            <input type="text" class="form-control widget-number" id="volume"/>
+            <input type="text" class="form-control widget-number" id="volume" pattern="[0-9]{1,8}([,][0-9]{1,4})?"/>
           </div>
         </div>
 
         <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="estado">Estado</label>
-            <select class="form-control widget" id="estado"></select>
-          </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
+          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="esp_culti">Espécie Cultivada</label>
             <select class="form-control widget" id="esp_culti" required></select>
           </div>
+          <div class="form-group col-xs-offset-1 col-xs-7">
+            <label for="esp_cul_o">Espécie Cultivada (outros)</label>
+            <input type="text" class="form-control widget" id="esp_cul_o" disabled/>
+          </div>
+        </div>
+
+        <div id="tipo_alim" class="widget-external">
+        <label class="col-xs-offset-1" for="tipo_alim">Tipo de alimentaçao</label>
+        <div class="row">
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Farelo de milho">Farelo de milho</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Farelo de arroz">Farelo de arroz</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Folhas de amendoim">Folhas Amendoim</label></div>
+        </div>
+        <div class="row">
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Mapira">Mapira</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Meixoeira">Meixoeira</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Nada">Nada</label></div>
+        </div>
+        <div class="row">
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Ração comprada">Ração comprada</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Ração feita">Ração feita</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Restos de comida">Restos de comida</label></div>
+        </div>
+        <div class="row">
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Térmites">Térmites</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Verduras">Verduras</label></div>
         </div>
 
         <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="esp_cul_o">Espécie Cultivada (outros)</label>
-            <input type="text" class="form-control widget-number" id="esp_cul_o" disabled/>
+          <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="tipo_alim" value="Outros">Outros</label></div>
+          <div class="form-group col-xs-offset-1 col-xs-7">
+            <!-- <label for="tipo_al_o">Tipo de alimentaçao (outros)</label> -->
+            <input type="text" class="form-control widget" id="tipo_al_o" disabled/>
+          </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="n_ale_pov">Nº Alevines</label>
+            <input type="text" class="form-control widget-number" id="n_ale_pov" pattern="[0-9]{1,8}" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="prov_alev">Proveniencia</label>
+            <select class="form-control widget" id="prov_alev"></select>
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="prov_al_o">Proveniencia(outros)</label>
+            <input type="text" class="form-control widget" id="prov_al_o" disabled/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="venda">Venda <i class="units">(kg)</i></label>
+            <input type="text" class="form-control widget-number" id="venda" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="consumo">Consumo <i class="units">(kg)</i></label>
+            <input type="text" class="form-control widget-number" id="consumo" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="pro_anual">Produçao anual <i class="units">(kg)</i></label>
+            <input type="text" class="form-control widget-number" id="pro_anual" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="peso_med">Peso medio peixe <i class="units">(g)</i></label>
+            <input type="text" class="form-control widget-number" id="peso_med" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="fert_agua">Fertilizaçao água</label>
+            <select class="form-control widget" id="fert_agua"></select>
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="fert_a_o">Fertilizaçao(outros)</label>
+            <input type="text" class="form-control widget" id="fert_a_o" disabled/>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-11">
-             <label for="tipo_alim">Tipo de alimentaçao</label>
-             <div id="tipo_alim"></div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="tipo_al_o">Tipo de alimentaçao (outros)</label>
-            <input type="text" class="form-control widget-number" id="tipo_al_o" disabled/>
-          </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
-            <label for="n_ale_pov">Nº Alevines</label>
-            <input type="text" class="form-control widget-number" id="n_ale_pov" pattern="[0-9]{1,8}" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="prov_ale">Proveniencia alevines</label>
-            <select class="form-control widget" id="prov_ale"></select>
-          </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
-            <label for="prov_al_o">Proveniencia alevines (outros)</label>
-            <input type="text" class="form-control widget-number" id="prov_al_o" disabled/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="venda">Venda<i class="units">(kg)</i></label>
-            <input type="text" class="form-control widget-number" id="venda" pattern="[0-9]{1,8}([,][0-9]{1,4})?" />
-          </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
-            <label for="consumo">Consumo<i class="units">(kg)</i></label>
-            <input type="text" class="form-control widget-number" id="consumo" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="pro_anual">Produçao anual<i class="units">(kg)</i></label>
-            <input type="text" class="form-control widget-number" id="pro_anual" pattern="[0-9]{1,8}([,][0-9]{1,4})?" />
-          </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
-            <label for="peso_med">Peso medio peixes<i class="units">(g)</i></label>
-            <input type="text" class="form-control widget-number" id="peso_med" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-4">
-            <label for="fert_agua">Fertilizaçao água</label>
-            <select class="form-control widget" id="fert_agua"></select>
-          </div>
-          <div class="form-group col-xs-offset-2 col-xs-4">
-            <label for="fert_a_o">Fertilizaçao água (outros)</label>
-            <input type="text" class="form-control widget-number" id="fert_a_o" disabled/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-xs-offset-1 col-xs-10">
             <label for="observacio">Observaçôes</label>
-            <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+            <textarea class="form-control widget" id="observacio" rows="2"></textarea>
           </div>
         </div>
       </div>

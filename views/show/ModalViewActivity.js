@@ -169,6 +169,16 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
         collection: problemas
       }).render();
       this.addActivitySubview(select_problemas);
+
+      var checkboxList = new Backbone.SIXHIARA.CheckBoxList({
+          model: this.draftModel,
+          model_attr_name: 'asis_orig',
+          el: this.$('.modal').find('#asis_orig'),
+          enable_others: {
+              'childId': 'asis_or_o',
+              'enabledValues': 'Outros',
+          }
+      }).render();
   }
   },
 
@@ -221,7 +231,7 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
   },
 
   getAttsChanged: function () {
-    var widgets = this.$('.modal').find('.widget, .widget-number, .widget-date, .widget-boolean');
+    var widgets = this.$('.modal').find('.widget, .widget-number, .widget-date, .widget-boolean, .widget-external');
     var widgetsId = _.map(widgets, function(w){return w.id});
     return widgetsId;
   }

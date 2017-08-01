@@ -18,7 +18,7 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
     }).render();
 
     new Backbone.UILib.SelectView({
-      el: this.$('#prov_ale'),
+      el: this.$('#prov_alev'),
       collection: this.options.domains.byCategory('tanque_piscicola_prov_alev')
     }).render();
 
@@ -27,7 +27,15 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
       collection: this.options.domains.byCategory('tanque_piscicola_fert_agua')
     }).render();
 
-    this.addCheckBoxesTipoAlim();
+    var checkboxList = new Backbone.SIXHIARA.CheckBoxList({
+        model: this.widgetModel,
+        model_attr_name: 'tipo_alim',
+        el: this.$('.modal').find('#tipo_alim'),
+        enable_others: {
+            'childId': 'tipo_al_o',
+            'enabledValues': 'Outros',
+        }
+    }).render();
 
     var inputEspCultiOutro = this.$("#esp_cul_o");
     this.listenTo(this.widgetModel, "change:esp_culti", function(model, value, options){
@@ -41,7 +49,7 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
     });
 
     var inputProvAlevinesOutro = this.$("#prov_al_o");
-    this.listenTo(this.widgetModel, "change:prov_ale", function(model, value, options){
+    this.listenTo(this.widgetModel, "change:prov_alev", function(model, value, options){
         if (value==="Outros") {
             inputProvAlevinesOutro.prop("disabled", false);
         } else {
@@ -64,14 +72,6 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
 
     this.confUpdateAreaVol();
     this.confUpdateProdAnu();
-  },
-
-  addCheckBoxesTipoAlim: function() {
-    var elTipoAlim = this.$("#tipo_alim");
-    this.options.domains.byCategory('tanque_piscicola_tipo_alim').forEach(function(element) {
-      var $checkInputEl = $("<div class='checkbox col-xs-4'><label><input type='checkbox' value=''>"+element.get("text")+"</label></div>");
-      elTipoAlim.append($checkInputEl);
-    }, this);
   },
 
   confUpdateAreaVol: function() {

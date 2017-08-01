@@ -92,3 +92,12 @@ input:invalid {
   height: 26px;
   background-size: 20px 20px;
 }
+
+#tanqueModal .modal-dialog {
+    width: 660px;
+}
+
+#tanqueModal .checkbox,
+#editActividadeModal .checkbox {
+    padding-left: 35px;
+}

@@ -828,15 +828,23 @@
         <label for="asis_moni">Na monitoria dos tanques/gaiolas</label>
         <select class="form-control widget" id="asis_moni"></select>
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-4">
-        <label for="asis_orig">Origem da assistência</label>
-        <input type="text" class="form-control widget" id="asis_orig">
-      </div>
     </div>
+
+    <div id="asis_orig" class="widget-external">
+      <label class="col-xs-offset-1" for="asis_orig">Origem da assistência</label>
+        <div class="row">
+          <div><label class="checkbox col-xs-offset-1 col-xs-5"><input type="checkbox" name="asis_orig" value="SDAE">SDAE</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-4"><input type="checkbox" name="asis_orig" value="DPMAIP-CD">DPMAIP-CD</label></div>
+        </div>
+        <div class="row">
+          <div><label class="checkbox col-xs-offset-1 col-xs-5"><input type="checkbox" name="asis_orig" value="IDEPA">IDEPA</label></div>
+          <div><label class="checkbox col-xs-offset-1 col-xs-4"><input type="checkbox" name="asis_orig" value="Outros">Outros</label></div>
+        </div>
+
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="asis_or_o">Outros</label>
-        <input type="text" class="form-control widget" id="asis_or_o">
+        <input type="text" class="form-control widget" id="asis_or_o" disabled>
       </div>
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="trat_t_en">Tratamento da água que entra nos tanques</label>
@@ -1210,6 +1218,7 @@
   <script src="lib/backbone-uilib/views/BaseView.js"></script>
   <script src="lib/backbone-uilib/views/ModalView.js"></script>
 
+  <script src="views/common/CheckBoxList.js"></script>
   <script src="views/common/NavBarView.js"></script>
   <script src="views/common/ConfigModalView.js"></script>
   <script src="views/show/TemplateEditTanque.js"></script>
