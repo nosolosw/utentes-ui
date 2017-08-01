@@ -156,7 +156,7 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
 
   isSomeWidgetInvalid: function () {
     // we only use Constraint API with input elements, so check only those
-    var widgets = this.$('.modal').find('input.widget, input.widget-number, input.widget-date');
+    var widgets = this.$('.modal').find('input.widget, input.widget-number, input.widget-date, select.widget');
     var someInvalid = false;
     widgets.each(function (index, widget) {
       if(!widget.validity.valid) {
