@@ -52,6 +52,37 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
       self.remove();
     });
 
+    // Configuration of "disabled" prop of asis_or_o
+    var origenAsistenciaOutros = this.$("#asis_or_o");
+    if (this.draftModel.get("asis_orig")==="Outros"){
+      origenAsistenciaOutros.prop("disabled", false);
+    }
+
+    this.listenTo(this.draftModel, "change:asis_orig", function(model, value, options){
+        if (value==="Outros") {
+            origenAsistenciaOutros.prop("disabled", false);
+        } else {
+            model.set('asis_or_o', null);
+            origenAsistenciaOutros.prop("disabled", true);
+            origenAsistenciaOutros.val("");
+        }
+    });
+
+    // Configuration of "disabled" prop of prob_prin
+    var principaisProblemas = this.$("#prob_prin");
+    if (this.draftModel.get("problemas")==="Sim"){
+      principaisProblemas.prop("disabled", false);
+    }
+
+    this.listenTo(this.draftModel, "change:problemas", function(model, value, options){
+        if (value==="Sim") {
+            principaisProblemas.prop("disabled", false);
+        } else {
+            model.set('prob_prin', null);
+            principaisProblemas.prop("disabled", true);
+            principaisProblemas.val("");
+        }
+    });
   },
 
   addModalSubview: function (view) {
@@ -192,6 +223,8 @@ Backbone.SIXHIARA.ModalViewActivity = Backbone.View.extend({
     this.addModalSubview(selectView);
 
     this.updateActivitySubviews();
+    
+    
 
     this.widgetsView = new Backbone.UILib.WidgetsView({
       el: this.$el,

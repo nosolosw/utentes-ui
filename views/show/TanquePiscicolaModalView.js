@@ -38,6 +38,9 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
     }).render();
 
     var inputEspCultiOutro = this.$("#esp_cul_o");
+    if (this.widgetModel.get("esp_culti")==="Outros"){
+      inputEspCultiOutro.prop("disabled", false);
+    }
     this.listenTo(this.widgetModel, "change:esp_culti", function(model, value, options){
         if (value==="Outros") {
             inputEspCultiOutro.prop("disabled", false);
@@ -49,7 +52,10 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
     });
 
     var inputProvAlevinesOutro = this.$("#prov_al_o");
-    this.listenTo(this.widgetModel, "change:prov_alev", function(model, value, options){
+    if (this.widgetModel.get("prov_ale")==="Outros"){
+      inputProvAlevinesOutro.prop("disabled", false);
+    }
+    this.listenTo(this.widgetModel, "change:prov_ale", function(model, value, options){
         if (value==="Outros") {
             inputProvAlevinesOutro.prop("disabled", false);
         } else {
@@ -60,6 +66,9 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
     });
 
     var inputFertAguaOutros = this.$("#fert_a_o");
+    if (this.widgetModel.get("fert_agua")==="Outros"){
+      inputFertAguaOutros.prop("disabled", false);
+    }
     this.listenTo(this.widgetModel, "change:fert_agua", function(model, value, options){
         if (value==="Outros") {
             inputFertAguaOutros.prop("disabled", false);
