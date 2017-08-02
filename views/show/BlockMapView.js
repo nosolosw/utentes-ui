@@ -24,7 +24,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
         "geometry": geom
       };
 
-      var exploracaoLeaflet = L.geoJson(exploracaoGeoJSON, {
+      this.geoJSONLayer = L.geoJson(exploracaoGeoJSON, {
         onEachFeature: function (feature, layer) {
           if(feature.geometry.type=="MultiPolygon"){
             layer.eachLayer(function(child_layer){
@@ -42,9 +42,9 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
           fillOpacity: 0.2}
         });
 
-      var bounds = exploracaoLeaflet.getBounds();
-      var mapBounds = this.fitToBounds(this.map, bounds, 0.1, 18, null);
-      this.map.setMaxBounds(bounds);
+        var bounds = this.geoJSONLayer.getBounds();
+        this.fitToBounds(this.map, bounds, 0.1, 18, null);
+        this.setThisAsMaxBounds();
     }
 
     var drawControl = new L.Control.Draw({
@@ -98,6 +98,14 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     return map.getBounds();
   },
 
+  setThisAsMaxBounds: function() {
+      // el padding es para asegurarse de que entra
+      // si no intenta hacer un _panInsideMaxBounds y puede
+      // entrar en un bucle infinito
+      var bounds = this.map.getBounds().pad(0.15);
+      this.map.setMaxBounds(bounds)
+  },
+
   /*
     If the activity should render any geometry, like the cultivos for Regadio
     activities it's done in this method
@@ -115,8 +123,10 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     }
 
     this.actividadeLayer.addTo(this.map);
-    var bounds = this.map.getBounds().extend(this.actividadeLayer.getBounds()).pad(0.1);
-    this.map.fitBounds(bounds).setMaxBounds(bounds);
+
+    var bounds = this.geoJSONLayer.getBounds().extend(this.actividadeLayer.getBounds());
+    this.fitToBounds(this.map, bounds, 0.1, 18, null);
+    this.setThisAsMaxBounds();
   },
 
 });
