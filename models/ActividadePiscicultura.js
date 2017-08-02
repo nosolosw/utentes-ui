@@ -72,16 +72,31 @@ Backbone.SIXHIARA.ActividadePiscicultura = Backbone.SIXHIARA.ActividadeNull.exte
          })
        }).addTo(map);
      },
-     style: {
-       stroke: true,
-       color: '#00b300',
-       weight: 1,
-       opacity: 1,
-       fillColor: '#00b300',
-       fillOpacity: 0.5,
-     }
+     style: this.setStyleFeature,
    });
  },
+
+setStyleFeature: function(feature){
+  if (feature.properties.tipo === "Tanque") {
+            return {
+              stroke: true,
+              color: "#436eee",
+              weight: 1,
+              opacity: 1,
+              fillColor: "#436eee",
+              fillOpacity: 0.5,
+            };
+        } else if (feature.properties.tipo === "Gaiola") {
+            return {
+              stroke: true,
+              color: "#1a2c5f",
+              weight: 1,
+              opacity: 1,
+              fillColor: "#1a2c5f",
+              fillOpacity: 0.5,
+            };
+        } 
+},
 
  validateSubActivity: function() {
    var messages = [];

@@ -55,10 +55,10 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
     to pass a function to L.geojson */
     return {
       stroke: true,
-      color: '#03f',
+      color: '#00b300',
       weight: 4,
       opacity: 0.5,
-      fillColor: '#03f',
+      fillColor: '#00b300',
       fillOpacity: 0.2
     };
   },

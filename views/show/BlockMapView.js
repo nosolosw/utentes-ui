@@ -34,12 +34,17 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
             drawnItems.addLayer(layer);
           }
         },
-        style: {fillOpacity: 0.5}
-      });
+        style: {stroke: true,
+          color: '#00b300',
+          weight: 4,
+          opacity: 0.5,
+          fillColor: '#00b300',
+          fillOpacity: 0.2}
+        });
 
-      var bounds = exploracaoLeaflet.getBounds()
+      var bounds = exploracaoLeaflet.getBounds();
       var mapBounds = this.fitToBounds(this.map, bounds, 0.1, 18, null);
-      this.map.setMaxBounds(mapBounds);
+      this.map.setMaxBounds(bounds);
     }
 
     var drawControl = new L.Control.Draw({
