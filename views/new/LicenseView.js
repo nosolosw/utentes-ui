@@ -28,7 +28,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
     this.domainsFilled = false;
     this.options.domains.on('sync', function () {
       app.domainsFilled = true;
-      app.estadosLicencia = app.options.domains.byCategory('licencia_estado');
+      app.estadosLicencia = app.options.domains.byCategory('licencia_estado').byParent('precampo');
       var estadosView = new Backbone.UILib.SelectView({
         el: app.$('#estado'),
         collection: app.estadosLicencia
