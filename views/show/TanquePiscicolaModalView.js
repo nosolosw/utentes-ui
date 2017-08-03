@@ -52,10 +52,10 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
     });
 
     var inputProvAlevinesOutro = this.$("#prov_al_o");
-    if (this.widgetModel.get("prov_ale")==="Outros"){
+    if (this.widgetModel.get("prov_alev")==="Outros"){
       inputProvAlevinesOutro.prop("disabled", false);
     }
-    this.listenTo(this.widgetModel, "change:prov_ale", function(model, value, options){
+    this.listenTo(this.widgetModel, "change:prov_alev", function(model, value, options){
         if (value==="Outros") {
             inputProvAlevinesOutro.prop("disabled", false);
         } else {
