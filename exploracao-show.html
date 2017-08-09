@@ -785,9 +785,61 @@
       <div class="col-xs-12">
         <div class="row">
           <span class="col-xs-offset-1 col-xs-11">
-            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-            <span class="title">Área <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
-            <span class="title">Reservas <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
+            <div class="col-xs-4">
+              <div class="row">
+                <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Área de exploraçaõ <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Ano inicio da atividade :</span> <span><%- ano_i_ati || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Nº de tanques/gaiolas :</span> <span><%- n_tanques || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Volume total tanques/gaiolas (Reservas) <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(vol_tot_t) || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Nº de alevines povoados :</span> <span><%- n_ale_pov || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Produção anual <i class="units">(kg)</i>:</span> <span><%- produc_pi || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Processamento do peixe :</span> <span><%- tipo_proc || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Durante a abertura dos tanques/gaiolas :</span> <span><%- asis_aber || '-' %></span>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="row">
+                <span class="title">Na monitoria dos tanques/gaiolas :</span> <span><%- asis_moni || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Origem da assistência :</span> <span><%- asis_orig || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Origem (Outros) :</span> <span><%- asis_or_o || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Tratamento da água que entra nos tanques :</span> <span><%- trat_t_en || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Tratamento da água que sai dos tanques :</span> <span><%- trat_a_sa || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">As gaiolas estão submersas em :</span> <span><%- gaio_subm || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">A exploraçaõ tem problemas :</span> <span><%- problemas || '-' %></span>
+              </div>
+              <div class="row">
+                <span class="title">Principais problemas :</span> <span><%- prob_prin || '-' %></span>
+              </div>
+            </div>            
           </span>
         </div>
         <div class="row">
@@ -827,47 +879,48 @@
   <script type="text/template" id="Piscicultura_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="area">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
         <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-3">
         <label for="area">Área <i class="units">(ha)</i></label>
         <input type="text" class="form-control widget-number" id="area" pattern="[0-9]{1,8}([,][0-9]{1,4})?">
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-4">
+        <label for="ano_i_ati">Ano inicio atividade</label>
+        <input type="text" class="form-control widget-number" id="ano_i_ati" pattern="[0-9]{4}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-3">
+        <label for="n_tanques">Nº tanques/gaiolas</label>
+        <input type="text" class="form-control widget-number" id="n_tanques" pattern="[0-9]*">
+      </div>
+      <div class="form-group col-xs-offset-1 col-xs-3">
         <label for="vol_tot_t">Reservas <i class="units">(m<sup>3</sup>)</i></label>
         <input type="text" class="form-control widget-number" id="vol_tot_t" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-5">
-        <label for="ano_i_ati">Ano inicio da atividade</label>
-        <input type="text" class="form-control widget-number" id="ano_i_ati" pattern="[0-9]{4}">
-      </div>
-      <div class="form-group col-xs-offset-1 col-xs-4">
-        <label for="n_tanques">Nro de tanques/gaiolas</label>
-        <input type="text" class="form-control widget-number" id="n_tanques" pattern="[0-9]*">
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-5">
-        <label for="n_ale_pov">Nro de alevinos povoados</label>
+      <div class="form-group col-xs-4">
+        <label for="n_ale_pov">Nº alevinos povoados</label>
         <input type="text" class="form-control widget-number" id="n_ale_pov" pattern="[0-9]*">
       </div>
+    </div>
+    <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="produc_pi">Produção Anual <i class="units">(Kg)</i></label>
         <input type="text" class="form-control widget-number" id="produc_pi" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <hr class="col-xs-offset-1 col-xs-10"></hr>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="tipo_proc">Processamento do peixe</label>
         <select class="form-control widget" id="tipo_proc"></select>
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-4">
+      <div class="form-group col-xs-6">
         <label for="asis_aber">Durante a abertura dos tanques/gaiolas</label>
         <select class="form-control widget" id="asis_aber"></select>
       </div>
@@ -889,18 +942,20 @@
           <div><label class="checkbox col-xs-offset-1 col-xs-5"><input type="checkbox" name="asis_orig" value="IDEPA">IDEPA</label></div>
           <div><label class="checkbox col-xs-offset-1 col-xs-4"><input type="checkbox" name="asis_orig" value="Outros">Outros</label></div>
         </div>
-
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="asis_or_o">Outros</label>
         <input type="text" class="form-control widget" id="asis_or_o" disabled>
       </div>
+    </div>
+    <div class="row">
+      <hr class="col-xs-offset-1 col-xs-10"></hr>
+    </div>   
+    <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="trat_t_en">Tratamento da água que entra nos tanques</label>
         <select class="form-control widget" id="trat_t_en"></select>
       </div>
-    </div>
-    <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
         <label for="trat_a_sa">Tratamento da água que sai dos tanques</label>
         <select class="form-control widget" id="trat_a_sa"></select>
@@ -909,6 +964,9 @@
         <label for="gaio_subm">As gaiolas estão submersas em</label>
         <select class="form-control widget" id="gaio_subm"></select>
       </div>
+    </div>
+    <div class="row">
+      <hr class="col-xs-offset-1 col-xs-10"></hr>
     </div>
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
