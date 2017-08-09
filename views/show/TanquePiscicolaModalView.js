@@ -116,11 +116,11 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
       inputVolume.prop("disabled", false);
       inputArea.prop("disabled", false);
       if (cumprimen_exist && largura_exist && profundid_exist){
-        inputVolume.val(actualValueVolume);
-        inputArea.val(actualValueArea);
+        inputVolume.val(formatter().formatNumber(actualValueVolume));
+        inputArea.val(formatter().formatNumber(actualValueArea));
 
       } else if (cumprimen_exist && largura_exist) {
-        inputArea.val(actualValueArea);
+        inputArea.val(formatter().formatNumber(actualValueArea));
         inputVolume.val(null);
       } else {
         inputArea.val(null);
@@ -151,7 +151,7 @@ Backbone.SIXHIARA.TanquePiscicolaModalView = Backbone.SIXHIARA.ModalView.extend(
       var actualValueProAnual = this.widgetModel.get('pro_anual');
       inputProAnual.prop("disabled", false);
       if (venda_exist && consumo_exist) {
-        inputProAnual.val(actualValueProAnual);
+        inputProAnual.val(formatter().formatNumber(actualValueProAnual));
       } else {
         inputProAnual.val(null);
       }

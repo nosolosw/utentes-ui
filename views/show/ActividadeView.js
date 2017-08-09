@@ -52,7 +52,7 @@ Backbone.SIXHIARA.ActividadeView = Backbone.View.extend({
         modalSelectorTpl: '#tanqueModalTpl',
         tableSelector: 'table#tanques',
         collection: this.model.get('actividade').get('tanques_piscicolas'),
-        rowTemplate: '<td><%- tanque_id %></td><td><%- tipo %></td><td><%- volume %></td><td><%- estado %></td><td><%- esp_culti %></td><td><%- tipo_alim %></td><td><%- n_ale_pov %></td><td><%- pro_anual %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
+        rowTemplate: '<td><%- tanque_id %></td><td><%- tipo %></td><td><%- formatter().formatNumber(volume) %></td><td><%- estado %></td><td><%- esp_culti %></td><td><%- tipo_alim %></td><td><%- n_ale_pov %></td><td><%- formatter().formatNumber(pro_anual) %></td><td class="edit"><i class="fa fa-pencil-square-o"></i></td><td class="delete"><i class="fa fa-trash"></i></td>',
         collectionModel: Backbone.SIXHIARA.TanquePiscicola,
         domains: this.options.domains,
       });
