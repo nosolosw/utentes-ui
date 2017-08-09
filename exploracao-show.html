@@ -799,7 +799,7 @@
                 <span class="title">Nº de tanques/gaiolas :</span> <span><%- n_tanques || '-' %></span>
               </div>
               <div class="row">
-                <span class="title">Volume total tanques/gaiolas (Reservas) <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(vol_tot_t) || '-' %></span>
+                <span class="title">Volume total tanques/gaiolas (Reservas) <i class="units">(m<sup>3</sup>)</i>:</span> <span><%- formatter().formatNumber(v_reservas) || '-' %></span>
               </div>
               <div class="row">
                 <span class="title">Nº de alevines povoados :</span> <span><%- n_ale_pov || '-' %></span>
@@ -898,8 +898,8 @@
         <input type="text" class="form-control widget-number" id="n_tanques" pattern="[0-9]*">
       </div>
       <div class="form-group col-xs-offset-1 col-xs-3">
-        <label for="vol_tot_t">Reservas <i class="units">(m<sup>3</sup>)</i></label>
-        <input type="text" class="form-control widget-number" id="vol_tot_t" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+        <label for="v_reservas">Reservas <i class="units">(m<sup>3</sup>)</i></label>
+        <input type="text" class="form-control widget-number" id="v_reservas" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
       <div class="form-group col-xs-4">
         <label for="n_ale_pov">Nº alevinos povoados</label>
