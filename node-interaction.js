@@ -4,9 +4,9 @@ delete window.exports;
 delete window.module;
 
 SIXHIARA = window.SIXHIARA || {
-  center:[-13, 38.5050],
+  center:[-12.8, 39.0],
   southWest:[-23, 31],
-  northEast:[-9, 43],
+  northEast:[-9, 48],
   search: {
     zoom: 8,
   },
