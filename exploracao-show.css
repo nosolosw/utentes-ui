@@ -46,3 +46,7 @@ label{ /*override bootstrap settings*/
 #tooltipEstadoLicenciaModalView .done {
   background-color: #eee;
 }
+
+#modalContentTanque {
+  width: 680px;
+}

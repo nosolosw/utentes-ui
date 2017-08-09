@@ -5,7 +5,7 @@ html: `<!-- modal engadir tanque -->
 <script type="text/template" id="tanqueModalTpl">
 <div class="modal fade" id="tanqueModal" tabindex="-1" role="dialog" aria-labelledby="tanqueModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" id="modalContentTanque">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="tanqueModalLabel">Tanque</h4>
@@ -21,6 +21,9 @@ html: `<!-- modal engadir tanque -->
             <label for="estado">Estado</label>
             <select class="form-control widget" id="estado"></select>
           </div>
+        </div>
+        <div class="row">
+          <hr class="col-xs-offset-1 col-xs-10"></hr>
         </div>
         <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-3">
@@ -39,12 +42,12 @@ html: `<!-- modal engadir tanque -->
 
         <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-3">
-            <label for="area_gps">Área GPS</label>
-            <input type="text" class="form-control widget-number" id="area_gps" disabled/>
-          </div>
-          <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="area">Área</label>
             <input type="text" class="form-control widget-number" id="area" pattern="[0-9]{1,8}([,][0-9]{1,4})?" />
+          </div>
+          <div class="form-group col-xs-offset-1 col-xs-3">
+            <label for="area_gps">Área GPS</label>
+            <input type="text" class="form-control widget-number" id="area_gps" disabled/>
           </div>
           <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="volume">Volume</label>
@@ -53,6 +56,9 @@ html: `<!-- modal engadir tanque -->
         </div>
 
         <div class="row">
+          <hr class="col-xs-offset-1 col-xs-10"></hr>
+        </div>
+        <div class="row">       
           <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="esp_culti">Espécie Cultivada</label>
             <select class="form-control widget" id="esp_culti" required></select>
