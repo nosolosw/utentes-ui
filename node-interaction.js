@@ -4,7 +4,7 @@ delete window.exports;
 delete window.module;
 
 SIXHIARA = window.SIXHIARA || {
-  center:[-12.8, 39.0],
+  center:[-12.5, 39.0],
   southWest:[-23, 31],
   northEast:[-9, 48],
   search: {
