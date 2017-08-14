@@ -2,8 +2,13 @@ Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.MapView = Backbone.View.extend({
 
   initialize: function(options){
-
+    var options = options || {};
     var self = this;
+
+    options.mapOptions = options.mapOptions || {zoom:SIXHIARA.search.zoom};
+    options.offline = {layers: allLayers};
+    this.map = Backbone.SIXHIARA.mapConfig(this.el.id, options);
+
     this.geoJSONLayer = L.geoJson(this.collection.toGeoJSON(), {
       style: this.leafletStyle,
       onEachFeature: function(feature, layer) {
@@ -40,11 +45,6 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
       }
     });
 
-    options = options || {};
-    options.mapOptions = options.mapOptions || {zoom:SIXHIARA.search.zoom};
-    options.offline = {layers: allLayers};
-    this.map = Backbone.SIXHIARA.mapConfig(this.el.id, options);
-
     this.mapEvents();
     this.geoJSONLayer.addTo(this.map);
 
@@ -77,26 +77,9 @@ Backbone.SIXHIARA.MapView = Backbone.View.extend({
     }
   },
 
-  fitToBounds: function(map, bounds, boundsPadding, maxZoom, minZoom) {
-    maxZoom = maxZoom || Number.MAX_SAFE_INTEGER;
-    minZoom = minZoom || Number.MIN_SAFE_INTEGER;
-    map.fitBounds(bounds.pad(boundsPadding));
-    var zoom = this.map.getZoom();
-    if (zoom > maxZoom) {
-      var center = this.map.getCenter();
-      map.setZoomAround(center, maxZoom);
-    }
-    if (zoom < minZoom) {
-      var center = this.map.getCenter();
-      map.setZoomAround(center, minZoom);
-    }
-    return map.getBounds();
-  },
-
   updateMapView: function() {
     if(this.geoJSONLayer.getLayers().length > 0){
-      var bounds = this.geoJSONLayer.getBounds();
-      this.fitToBounds(this.map, bounds, 0.04, null, SIXHIARA.search.zoom);
+      FitToBounds.fit(this.map, 0.04, 16, SIXHIARA.search.zoom, false, this.geoJSONLayer);
     } else{
       this.map.setView(SIXHIARA.center, SIXHIARA.search.zoom);
     }

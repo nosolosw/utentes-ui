@@ -3,13 +3,14 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
 
   initialize: function(options){
     var options = options || {};
+    var self = this;
+
     var baseOfflineLayers = allLayers.filter(function(l) {
       return ! ['Pais', 'Provincias', 'PaisesPunto', 'ProvinciasPunto', 'Oceano'].includes(l.id);
     });
     options.offline = {layers: baseOfflineLayers};
     this.map = Backbone.SIXHIARA.mapConfig('map', options);
 
-    var self = this;
     self.map.scrollWheelZoom.disable();
     self.map.on('focus', function() { self.map.scrollWheelZoom.enable(); });
     self.map.on('blur', function() { self.map.scrollWheelZoom.disable(); });
@@ -42,9 +43,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
           fillOpacity: 0.2}
         });
 
-        var bounds = this.geoJSONLayer.getBounds();
-        this.fitToBounds(this.map, bounds, 0.1, 18, null);
-        this.setThisAsMaxBounds();
+        FitToBounds.fit(this.map, 0.1, 16, null, true, this.geoJSONLayer);
     }
 
     var drawControl = new L.Control.Draw({
@@ -82,30 +81,6 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     this.listenTo(this.model, 'change:actividade', this.renderCultivos);
   },
 
-  fitToBounds: function(map, bounds, boundsPadding, maxZoom, minZoom) {
-    maxZoom = maxZoom || Number.MAX_SAFE_INTEGER;
-    minZoom = minZoom || Number.MIN_SAFE_INTEGER;
-    map.fitBounds(bounds.pad(boundsPadding));
-    var zoom = this.map.getZoom();
-    if (zoom > maxZoom) {
-      var center = this.map.getCenter();
-      map.setZoomAround(center, maxZoom);
-    }
-    if (zoom < minZoom) {
-      var center = this.map.getCenter();
-      map.setZoomAround(center, minZoom);
-    }
-    return map.getBounds();
-  },
-
-  setThisAsMaxBounds: function() {
-      // el padding es para asegurarse de que entra
-      // si no intenta hacer un _panInsideMaxBounds y puede
-      // entrar en un bucle infinito
-      var bounds = this.map.getBounds().pad(0.15);
-      this.map.setMaxBounds(bounds)
-  },
-
   /*
     If the activity should render any geometry, like the cultivos for Regadio
     activities it's done in this method
@@ -123,10 +98,7 @@ Backbone.SIXHIARA.BlockMapView = Backbone.View.extend({
     }
 
     this.actividadeLayer.addTo(this.map);
-
-    var bounds = this.geoJSONLayer.getBounds().extend(this.actividadeLayer.getBounds());
-    this.fitToBounds(this.map, bounds, 0.1, 18, null);
-    this.setThisAsMaxBounds();
+    FitToBounds.fit(this.map, 0.1, 16, null, true, [this.geoJSONLayer, this.actividadeLayer]);
   },
 
 });
