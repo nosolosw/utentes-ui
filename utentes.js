@@ -68,9 +68,9 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
   columnTitles: {
     'id':          'ID',
     'nome':        'Nome / Nuit',
-    'uten_tipo':    'Tipo de entidade',
+    'uten_tipo':    'Tipo de utente',
     'nuit':        'Nuit',
-    'registro':    'Reg. (Comercial / Zona)',
+    'registro':    'Registro (Nro / em)',
     'reg_comerc':  'Nº Registro Comercial',
     'reg_zona':    'Registrado em',
     'localizacion':'Localizaçao',
