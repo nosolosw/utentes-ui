@@ -4,9 +4,9 @@ delete window.exports;
 delete window.module;
 
 SIXHIARA = window.SIXHIARA || {
-  center:[-12.5, 39.0],
+  center:[-13, 38.5050],
   southWest:[-23, 31],
-  northEast:[-9, 48],
+  northEast:[-9, 43],
   search: {
     zoom: 8,
   },
@@ -15,8 +15,8 @@ SIXHIARA = window.SIXHIARA || {
 window.SIXHIARA.xlsFieldsToExport = [
     {'header': 'Nome', 'value': 'utente.nome'},
     {'header': 'Nuit', 'value': 'utente.nuit'},
-    {'header': 'Tipo de entidade', 'value': 'utente.entidade'},
-    {'header': 'Nº Registro comercial', 'value': 'utente.reg_comerc'},
+    {'header': 'Tipo de utente', 'value': 'utente.uten_tipo'},
+    {'header': 'Nro registro comercial', 'value': 'utente.reg_comerc'},
     {'header': 'Registrado em', 'value': 'utente.reg_zona'},
     {'header': 'Provincia', 'value': 'utente.loc_provin'},
     {'header': 'Distrito', 'value': 'utente.loc_distri'},

@@ -512,7 +512,7 @@
             <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
           </span>
         </div>
-      </div>
+      </span>
     </div>
     <div class="row">
       <span class="col-xs-offset-1 col-xs-11"></span>
@@ -1088,6 +1088,7 @@
           <div class="modal-body">
             <input type="hidden" id="lic_tipo">
             <input type="hidden" class="form-control widget" id="lic_nro">
+
             <div class="row">
               <div class="form-group col-xs-offset-1 col-xs-7">
                 <label for="estado">Estado</label> <span id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></span>
@@ -1261,6 +1262,7 @@
         <button type="button" class="btn btn-default btn-xs" id="removeLicense">Eliminar</button>
       </h4>
     </div>
+
     <div class="row">
       <span class="col-xs-offset-1 col-xs-11">
         <span class="title">Estado:</span> <%- estado || '-' %> <i id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></i>
