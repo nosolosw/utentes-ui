@@ -419,7 +419,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   validateActividade: function() {
     var messages = [];
     var tipo = this.getActividadeTipo();
-    if(tipo !== Backbone.SIXHIARA.MSG.NO_ACTIVITY){
+    if(tipo && tipo !== Backbone.SIXHIARA.MSG.NO_ACTIVITY){
 
       var toValidate = this.get('licencias').some(function(lic) {return lic.impliesValidateActivity()});
       if(toValidate){
@@ -508,7 +508,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
   },
 
   getActividadeTipo: function() {
-    var tipo = Backbone.SIXHIARA.NO_ACTIVITY;
+    var tipo = Backbone.SIXHIARA.MSG.NO_ACTIVITY;
     if (this.get('actividade')) {
       tipo = this.get('actividade').get('tipo') || tipo;
     }
