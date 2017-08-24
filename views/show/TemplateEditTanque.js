@@ -58,7 +58,7 @@ html: `<!-- modal engadir tanque -->
         <div class="row">
           <hr class="col-xs-offset-1 col-xs-10"></hr>
         </div>
-        <div class="row">       
+        <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-3">
             <label for="esp_culti">Espécie Cultivada</label>
             <select class="form-control widget" id="esp_culti" required></select>
@@ -102,7 +102,7 @@ html: `<!-- modal engadir tanque -->
 
         <div class="row">
           <div class="form-group col-xs-offset-1 col-xs-3">
-            <label for="n_ale_pov">Nº Alevines</label>
+            <label for="n_ale_pov">Nro Alevines</label>
             <input type="text" class="form-control widget-number" id="n_ale_pov" pattern="[0-9]{1,8}" />
           </div>
           <div class="form-group col-xs-offset-1 col-xs-3">

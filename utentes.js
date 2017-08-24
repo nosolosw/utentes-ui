@@ -71,7 +71,7 @@ var tableUtentes = new Backbone.SIXHIARA.TableUtentes({
     'uten_tipo':    'Tipo de utente',
     'nuit':        'Nuit',
     'registro':    'Registro (Nro / em)',
-    'reg_comerc':  'Nº Registro Comercial',
+    'reg_comerc':  'Nro Registro Comercial',
     'reg_zona':    'Registrado em',
     'localizacion':'Localizaçao',
     'loc_provin':  'Província',
