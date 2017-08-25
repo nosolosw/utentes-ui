@@ -887,7 +887,7 @@
         <label for="area">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
         <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="area">Área <i class="units">(ha)</i></label>
         <input type="text" class="form-control widget-number" id="area" pattern="[0-9]{1,8}([,][0-9]{1,4})?">
       </div>
@@ -897,7 +897,7 @@
         <label for="ano_i_ati">Ano inicio atividade</label>
         <input type="text" class="form-control widget-number" id="ano_i_ati" pattern="[0-9]{4}">
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="n_tanques">Nro tanques/gaiolas</label>
         <input type="text" class="form-control widget-number" id="n_tanques" pattern="[0-9]*">
       </div>
@@ -907,7 +907,7 @@
         <label for="v_reservas">Reservas <i class="units">(m<sup>3</sup>)</i></label>
         <input type="text" class="form-control widget-number" id="v_reservas" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="n_ale_pov">Nro alevinos povoados</label>
         <input type="text" class="form-control widget-number" id="n_ale_pov" pattern="[0-9]*">
       </div>
@@ -917,7 +917,7 @@
         <label for="produc_pi">Produção Anual <i class="units">(Kg)</i></label>
         <input type="text" class="form-control widget-number" id="produc_pi" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="tipo_proc">Processamento do peixe</label>
         <select class="form-control widget" id="tipo_proc"></select>
       </div>
@@ -927,16 +927,16 @@
     </div>
     <div class="row">
       <div class="form-group col-xs-offset-1 col-xs-5">
-        <label for="asis_aber">Durante abertura tanques/gaiolas</label>
+        <label for="asis_aber">Assitência técnica durante abertura (tanques/gaiolas)</label>
         <select class="form-control widget" id="asis_aber"></select>
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
-        <label for="asis_moni">Na monitoria dos tanques/gaiolas</label>
+      <div class="form-group col-xs-offset-1 col-xs-4">
+        <label for="asis_moni">Assitência técnica na monitoria (tanques/gaiolas)</label>
         <select class="form-control widget" id="asis_moni"></select>
       </div>
     </div>
     <div id="asis_orig" class="widget-external">
-      <label class="col-xs-offset-1" for="asis_orig">Origem da assistência</label>
+      <label class="col-xs-offset-1" for="asis_orig">Origem da assistência técnica</label>
         <div class="row">
           <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="asis_orig" value="SDAE">SDAE</label></div>
           <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="asis_orig" value="DPMAIP-CD">DPMAIP-CD</label></div>
@@ -944,7 +944,7 @@
         </div>
          <div class="row">
           <div><label class="checkbox col-xs-offset-1 col-xs-3"><input type="checkbox" name="asis_orig" value="Outros">Outros</label></div>
-          <div class="form-group col-xs-offset-1 col-xs-7">
+          <div class="form-group col-xs-offset-1 col-xs-6">
             <input type="text" class="form-control widget" id="asis_or_o" disabled/>
           </div>
         </div>
@@ -956,7 +956,7 @@
         <label for="trat_t_en">Tratamento da água que entra nos tanques</label>
         <select class="form-control widget" id="trat_t_en"></select>
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
+      <div class="form-group col-xs-offset-1 col-xs-4">
         <label for="trat_a_sa">Tratamento da água que sai dos tanques</label>
         <select class="form-control widget" id="trat_a_sa"></select>
       </div>
@@ -975,9 +975,11 @@
         <label for="problemas">A exploraçaõ tem problemas</label>
         <select class="form-control widget" id="problemas"></select>
       </div>
-      <div class="form-group col-xs-offset-1 col-xs-5">
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-10">
         <label for="prob_prin">Principais problemas</label>
-        <input type="text" class="form-control widget" id="prob_prin" disabled>
+        <textarea class="form-control widget" id="prob_prin" rows="2" disabled></textarea>
       </div>
     </div>
   </script>
