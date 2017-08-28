@@ -95,8 +95,9 @@ input:invalid {
   background-size: 20px 20px;
 }
 
-#tanqueModal .modal-dialog {
-    width: 660px;
+.modal-dialog, .modal-content {
+  width: 80%!important;
+  margin: 0 10% 0 10%;
 }
 
 #tanqueModal .checkbox,
