@@ -104,3 +104,7 @@ input:invalid {
 #editActividadeModal .checkbox {
     padding-left: 35px;
 }
+
+.no-padding {
+   padding: 0 !important;
+}
