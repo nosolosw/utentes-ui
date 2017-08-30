@@ -50,3 +50,11 @@ label{ /*override bootstrap settings*/
 #modalContentTanque {
   width: 680px;
 }
+
+#panel-body-utente-outros {
+    margin-bottom: 3%;
+}
+
+#panel-body-piscicultura-consumos {
+    margin-bottom: 90%;
+}
