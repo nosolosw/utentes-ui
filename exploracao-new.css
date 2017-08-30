@@ -24,3 +24,18 @@ fieldset span {
     -moz-border-radius: 4px 0 4px 0;
     border-radius: 4px 0 4px 0;
 }
+
+
+#panel-body-loc-hidro {
+    margin-bottom: 10.5%;
+    padding-left: 3%;
+}
+
+#panel-body-outros {
+    margin-bottom: 1.5%;
+}
+
+fieldset {
+    border: 0;
+    padding-top: 0;
+}
