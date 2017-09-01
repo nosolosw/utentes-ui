@@ -1,25 +1,25 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.RowFonteView = Backbone.View.extend({
 
-  tagName: 'tr',
+    tagName: 'tr',
 
-  template: _.template(`
-    <td><%- tipo_agua %></td>
-    <td><%- tipo_fonte %></td>
-    <td><% print(formatter().formatNumber(c_soli)) %></td>
-    <td><%- observacio %></td>
-    <td class="delete"><i class="fa fa-trash"></i></td>
-  `),
+    template: _.template(`
+        <td><%- tipo_agua %></td>
+        <td><%- tipo_fonte %></td>
+        <td><% print(formatter().formatNumber(c_soli)) %></td>
+        <td><%- observacio %></td>
+        <td class="delete"><i class="fa fa-trash"></i></td>
+    `),
 
-  render: function(){
-    this.$el.append(this.template(this.model.toJSON()));
-    new Backbone.SIXHIARA.RowDeleteButtonView({
-      model: this.model,
-      el: this.$('.delete'),
-      question: 'Tem certeza de que deseja excluir',
-    });
+    render: function(){
+        this.$el.append(this.template(this.model.toJSON()));
+        new Backbone.SIXHIARA.RowDeleteButtonView({
+            model: this.model,
+            el: this.$('.delete'),
+            question: 'Tem certeza de que deseja excluir',
+        });
 
-    return this;
-  },
+        return this;
+    },
 
 });

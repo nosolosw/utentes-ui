@@ -1,38 +1,38 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.NavBarView = Backbone.View.extend({
 
-html: `<img src="img/logo.png" alt="Logo" />
+    html: `<img src="img/logo.png" alt="Logo" />
     <div class="col-xs-1 pull-right text-center">
-      <div class="row">
+    <div class="row">
         <a id="settings" href="#" class="col-xs-offset-6 col-xs-6 ">
-          <i class="fa fa-cog"></i>
+        <i class="fa fa-cog"></i>
         </a>
-      </div>
+    </div>
     </div>
     <a href="exploracao-new.html" class="col-xs-1 pull-right text-center">
-      <strong id="new">ADICIONAR</strong>
+    <strong id="new">ADICIONAR</strong>
     </a>
     <a href="exploracao-gps.html" class="col-xs-1 pull-right text-center">
-      <strong id="gps">GPS</strong>
+    <strong id="gps">GPS</strong>
     </a>
     <a href="utentes.html" class="col-xs-1 pull-right text-center">
-      <strong id="utentes">UTENTES</strong>
+    <strong id="utentes">UTENTES</strong>
     </a>
     <a href="exploracao-search.html" class="col-xs-2 pull-right text-center">
-      <strong id="search">EXPLORAÇÕES</strong>
+    <strong id="search">EXPLORAÇÕES</strong>
     </a>`,
 
-      initialize: function(options) {
+    initialize: function(options) {
         this.options = options || {};
         this.template = _.template(this.html);
-      },
+    },
 
-      render: function() {
+    render: function() {
         this.$el.html(this.template(this.model.toJSON()));
         var active = window.location.pathname.split("/").pop();
         this.$('a[href="' + active + '"]').addClass('active');
         return this;
-      },
+    },
 
 });
 /*

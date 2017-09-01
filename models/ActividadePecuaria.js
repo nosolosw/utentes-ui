@@ -1,46 +1,46 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.ActividadePecuaria = Backbone.SIXHIARA.ActividadeNull.extend({
 
-  defaults: {
-    'id':         null,
-    'tipo': 'Pecuária',
-    'reses': new Backbone.SIXHIARA.ResCollection()
-  },
+    defaults: {
+        'id':         null,
+        'tipo': 'Pecuária',
+        'reses': new Backbone.SIXHIARA.ResCollection()
+    },
 
-  initialize: function() {
-    this.get('reses').on('all', this.updateCEstimado, this);
-  },
+    initialize: function() {
+        this.get('reses').on('all', this.updateCEstimado, this);
+    },
 
-  parse: function(response) {
-      response.reses = new Backbone.SIXHIARA.ResCollection(response.reses, {parse: true});
-      return response;
-  },
+    parse: function(response) {
+        response.reses = new Backbone.SIXHIARA.ResCollection(response.reses, {parse: true});
+        return response;
+    },
 
-  updateCEstimado: function () {
-    var c_estimado = 0;
-    this.get('reses').forEach(function(res){
-      c_estimado = c_estimado + res.get('c_estimado');
-    });
-    this.set('c_estimado', c_estimado);
-    this.trigger('change', this.model);
-  },
+    updateCEstimado: function () {
+        var c_estimado = 0;
+        this.get('reses').forEach(function(res){
+            c_estimado = c_estimado + res.get('c_estimado');
+        });
+        this.set('c_estimado', c_estimado);
+        this.trigger('change', this.model);
+    },
 
-  toJSON: function () {
-    var json   =  _.clone(this.attributes);
-    json.reses = this.get('reses').toJSON();
-    return json;
-  },
+    toJSON: function () {
+        var json   =  _.clone(this.attributes);
+        json.reses = this.get('reses').toJSON();
+        return json;
+    },
 
-  validateSubActivity: function() {
-    var messages = [];
-    this.get('reses').forEach(function(cultivo){
-      var msgs = cultivo.validate();
-      if (msgs) {
-        messages = messages.concat(msgs);
-      }
-    });
-    return messages;
-  },
+    validateSubActivity: function() {
+        var messages = [];
+        this.get('reses').forEach(function(cultivo){
+            var msgs = cultivo.validate();
+            if (msgs) {
+                messages = messages.concat(msgs);
+            }
+        });
+        return messages;
+    },
 
 });
 

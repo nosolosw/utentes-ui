@@ -1,16 +1,16 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.ActividadeIndustria = Backbone.SIXHIARA.ActividadeNull.extend({
 
-  defaults: {
-    'id':         null,
-    'tipo':       'Indústria',
-    'c_estimado': null,
-    'tipo_indus': null,
-    'instalacio': null,
-    'efluente':   null,
-    'tratamento': null,
-    'eval_impac': null
-  },
+    defaults: {
+        'id':         null,
+        'tipo':       'Indústria',
+        'c_estimado': null,
+        'tipo_indus': null,
+        'instalacio': null,
+        'efluente':   null,
+        'tratamento': null,
+        'eval_impac': null
+    },
 
 });
 

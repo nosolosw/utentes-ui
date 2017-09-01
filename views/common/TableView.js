@@ -13,22 +13,22 @@ Backbone.SIXHIARA.TableView = Backbone.View.extend({
     var content = document.createDocumentFragment();
     self = this;
     this.collection.forEach(function(model){
-      var rowView = new self.options.rowViewModel({
+    var rowView = new self.options.rowViewModel({
         model: model,
         rowTemplate: this.options.rowTemplate,
         modalSelectorTpl: this.options.modalSelectorTpl,
         domains: this.options.domains,
-      });
-      content.appendChild(rowView.render().el);
-      subviews.push(rowView);
+    });
+    content.appendChild(rowView.render().el);
+    subviews.push(rowView);
     }, this);
 
     // Update DOM and _subviews array at once.
     // This would minimize reflows to only 1 instead of one per subview.
     if(this.collection.length === 0){
-      this.$('tbody').html(`<tr><td colspan="100%" class="TableView-nodata text-center">${this.options.noDataText}</td></tr>`);
+    this.$('tbody').html(`<tr><td colspan="100%" class="TableView-nodata text-center">${this.options.noDataText}</td></tr>`);
     } else{
-      this.$('tbody').html(content);
+    this.$('tbody').html(content);
     }
     _.invoke(this._subviews, 'remove');
     this._subviews = subviews;

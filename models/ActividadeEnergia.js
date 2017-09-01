@@ -1,16 +1,16 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.ActividadeEnergia = Backbone.SIXHIARA.ActividadeNull.extend({
 
-  defaults: {
-    'id':           null,
-    'tipo':         'Producção de energia',
-    'c_estimado':   null,
-    'energia_tipo': null,
-    'alt_agua':     null,
-    'potencia':     null,
-    'equipo':       null,
-    'eval_impac':   null
-  },
+    defaults: {
+        'id':           null,
+        'tipo':         'Producção de energia',
+        'c_estimado':   null,
+        'energia_tipo': null,
+        'alt_agua':     null,
+        'potencia':     null,
+        'equipo':       null,
+        'eval_impac':   null
+    },
 
 });
 

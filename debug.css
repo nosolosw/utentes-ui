@@ -1,5 +1,5 @@
 .row {
-  border: 1px solid red;
+    border: 1px solid red;
 }
 
 .col-xs-1,
@@ -14,5 +14,5 @@
 .col-xs-10,
 .col-xs-11,
 .col-xs-12{
-  border: 1px solid green;
+    border: 1px solid green;
 }
