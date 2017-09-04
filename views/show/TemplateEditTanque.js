@@ -81,11 +81,6 @@ Backbone.SIXHIARA.TemplateEditTanque = Backbone.View.extend({
                         <label for="estado">Estado</label>
                         <select class="form-control widget" id="estado"></select>
                     </div>
-                    </div>
-                    <div class="row">
-                    <hr>
-                    </div>
-                    <div class="row">
                     <div class="form-group col-xs-4">
                         <label for="esp_culti">Espécie Cultivada</label>
                         <select class="form-control widget" id="esp_culti" required></select>
@@ -171,7 +166,7 @@ Backbone.SIXHIARA.TemplateEditTanque = Backbone.View.extend({
                         <label for="fert_agua">Fertilização água</label>
                         <select class="form-control widget" id="fert_agua"></select>
                     </div>
-                    <div class="form-group col-xs-3">
+                    <div class="form-group col-xs-9">
                         <label for="fert_a_o">Fertilização(outros)</label>
                         <input type="text" class="form-control widget" id="fert_a_o" disabled/>
                     </div>
