@@ -20,19 +20,8 @@ Backbone.SIXHIARA.ConfigModalView = Backbone.View.extend({
                 </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="form-group">
-                <div class="input-group col-xs-offset-1 col-xs-10">
-                    <input style="display:none" id="import-fountains" type="file" accept=".zip, application/zip, application/x-zip, application/x-zip-compressed"></input>
-                    <button id="import-fountains-bt" class="btn btn-primary">Carregar fontes</button>
-                </div>
-                </div>
-            </div>
-
-            </div> <!-- /modal-body -->
-        </div>
-        </div>
+          </div>
+        </div> <!-- /modal-body -->
       </div>
     `,
 

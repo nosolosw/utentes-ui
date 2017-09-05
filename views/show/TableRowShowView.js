@@ -7,7 +7,6 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
         <td class="tipo_agua"><%- tipo_agua %></td>
         <td class="tipo_fonte"><%- tipo_fonte %></td>
         <td class="c_soli"><% print(formatter().formatNumber(c_soli)) %></td>
-        <td class="c_real"><% print(formatter().formatNumber(c_real)) %></td>
         <td class="c_max"><% print(formatter().formatNumber(c_max)) %></td>
         <td class="sist_med"><%- sist_med %></td>
         <td class="metodo_est"><%- metodo_est %></td>

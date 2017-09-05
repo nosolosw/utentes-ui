@@ -45,6 +45,7 @@ Backbone.SIXHIARA.LicenseView = Backbone.UILib.BaseView.extend({
 
     clickActive: function (e) {
         if(e.target.checked){
+            this.license.set("estado", "Desconhecido");
             this.model.get('licencias').add(this.license);
             this.enableWidgets();
         } else {

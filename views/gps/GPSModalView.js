@@ -8,7 +8,6 @@ Backbone.SIXHIARA.GPSModalView = Backbone.UILib.ModalView.extend({
         tiposEntidade.add([
             new Backbone.UILib.Domain({'alias':null, 'text':null, order: 0}),
             new Backbone.UILib.Domain({'alias':'Exploracao', 'text':'Exploracao', order: 1}),
-            new Backbone.UILib.Domain({'alias':'Cultivo', 'text':'Cultivo', order: 2}),
             new Backbone.UILib.Domain({'alias':'Tanque Piscícola', 'text':'Tanque Piscícola', order: 3}),
         ]);
 

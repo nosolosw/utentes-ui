@@ -51,23 +51,9 @@
           </div>
           <div class="row">
             <span class="col-xs-offset-1 col-xs-11">
-              <span class="label widget" id="summary_licencia_msg"></span>
-              <span class="label widget" id="summary_consumo_msg"></span>
-              <span class="label widget" id="summary_pagos_msg"></span>
-            </span>
-          </div>
-          <br>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Data de solicitação:</span> <span class="widget-date" id="d_soli">-</span>
-            </span>
-          </div>
-          <div class="row">
-            <span class="col-xs-offset-1 col-xs-11">
               <span class="title">Observações:</span> <span class="widget" id="observacio">-</span>
             </span>
           </div>
-          <br>
         </section>
 
         <section id="block-location">
@@ -84,7 +70,7 @@
           </div>
           <div class="row">
             <span class="col-xs-offset-1 col-xs-11">
-              <span class="title">Unidade:</span> <span class="widget" id="loc_unidad">-</span> <span class="title">Bacia:</span> <span class="widget" id="loc_bacia">-</span> <span class="title">Sub-bacia:</span> <span class="widget" id="loc_subaci">-</span> <span class="title">Río:</span> <span class="widget" id="loc_rio">-</span>
+              <span class="title">Bacia:</span> <span class="widget" id="loc_bacia">-</span> <span class="title">Sub-bacia:</span> <span class="widget" id="loc_subaci">-</span> <span class="title">Río:</span> <span class="widget" id="loc_rio">-</span>
             </span>
           </div>
           <br>
@@ -138,35 +124,6 @@
 
     </section>
 
-    <section id="block-consumos" class="row volume-summary text-center">
-      <div class="col-xs-3">
-        <div class="" style="display:inline-block; padding-right: 5px;">
-          <h3>
-            <span class="widget-number" id="c_licencia">-</span>
-          </h3>
-          <span>LICENCIADOS</span>
-        </div>
-        <div class="" style="display:inline-block; padding-left: 5px; color:grey; margin-left: -1px; border-left: 1px solid grey">
-          <h3>
-            <span class="widget-number" id="summary_pago_iva">-</span>
-          </h3>
-          <span>MZN/mês com IVA</span>
-        </div>
-
-      </div>
-      <div class="col-xs-3">
-        <h3><span class="widget-number" id="c_soli">-</span> </h3>
-        <span>SOLICITADOS</span>
-      </div>
-      <div class="col-xs-3">
-        <h3><span class="widget-number" id="c_real">-</span> </h3>
-        <span>REAIS</span>
-      </div>
-      <div class="col-xs-3">
-        <h3><span class="widget-number" id="c_estimado">-</span> </h3>
-        <span>ESTIMADOS</span>
-      </div>
-    </section>
 
     <section id="block-activity">
       <div class="row">
@@ -189,14 +146,22 @@
       <div class="col-xs-6">
         <div class="row">
           <h3 class="col-xs-1"><i class="fa fa-tint"></i></h3>
-          <h3 class="col-xs-11">Licenças e fontes</h3>
+          <h3 class="col-xs-11">Consumos e fontes</h3>
         </div>
       </div>
     </section>
 
-    <section class="row">
-      <div class="col-xs-6" id="block-superficial">-</div>
-      <div class="col-xs-6" id="block-subterranea">-</div>
+    <section id="block-consumos" class="row volume-summary">
+      <div class="col-xs-offset-1 col-xs-1">
+        <div class="row"><h4>Licenciados</h4></div>
+        <h3><span class="widget-number" id="c_licencia">-</span></h3>
+      </div>
+      <div class="col-xs-1" style="border-right: 1px solid grey">
+        <div class="row"><h4>Solicitados</h4></div>
+        <h3><span class="widget-number" id="c_soli">-</span> </h3>
+      </div>
+      <div class="col-xs-offset-1 col-xs-3" id="block-superficial">-</div>
+      <div class="col-xs-3" id="block-subterranea">-</div>
     </section>
 
     <br>
@@ -206,15 +171,14 @@
         <table class="table table-bordered" id="block-fontes">
           <thead>
             <tr>
-              <th width="8%">Tipo de água</th>
-              <th width="8%">Tipo de fonte</th>
-              <th width="12%">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></th>
-              <th width="11%">Consumo real <i class="units">(m<sup>3</sup>/mês)</i></th>
-              <th width="11%">Máximo caudal <i class="units">(m<sup>3</sup>/mês)</i></th>
+              <th width="9%">Tipo de água</th>
+              <th width="9%">Tipo de fonte</th>
+              <th width="13%">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></th>
+              <th width="12%">Máximo caudal <i class="units">(m<sup>3</sup>/mês)</i></th>
               <th width="9%">Sistema de medição</th>
-              <th width="9%">Método estimação</th>
-              <th width="8%">Toma de dados</th>
-              <th width="9%">Lat / Lon</th>
+              <th width="10%">Método estimação</th>
+              <th width="9%">Toma de dados</th>
+              <th width="10%">Lat / Lon</th>
               <th>Observações</th>
               <th width="2%"></th>
               <th width="2%"></th>
@@ -259,24 +223,12 @@
                           <input type="text" class="form-control widget" id="exp_name" required>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="form-group">
-                          <label for="d_soli">Data de solicitação</label>
-                          <input type="text" class="form-control widget-date" id="d_soli" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                          <label for="pagos">Pagamentos</label>
-                          <select class="form-control widget-boolean" id="pagos"></select>
-                        </div>
-                      </div>
                     </div>
                     <div class="col-xs-offset-1 col-xs-6">
                       <div class="row">
                         <div class="form-group">
                           <label for="observacio">Observaçoes sobre linha de água e localizaçao</label>
-                          <textarea class="form-control widget" id="observacio" rows="12"></textarea>
+                          <textarea class="form-control widget" id="observacio" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
@@ -365,14 +317,6 @@
                     <h3 class="panel-title"><strong>Localização hidrologica</strong></h3>
                   </div>
                   <div class="panel-body">
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="loc_unidad">Unidade</label>
-                            <select class="form-control widget" id="loc_unidad"></select>
-                        </div>
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
@@ -596,12 +540,6 @@
             <h4 class="modal-title" id="editActividadeModalLabel">Actividade</h4>
           </div>
           <div class="modal-body">
-            <div id="actividade-explotacion" class="row">
-              <div class="form-group col-xs-offset-1 col-xs-10">
-                <label for="actividade">Tipo de actividade</label>
-                <select id="tipo" class="form-control widget"></select>
-              </div>
-            </div>
             <div id="actividade-render-modal"></div>
           </div>
           <div class="modal-footer">
@@ -1101,9 +1039,6 @@
           <span class="col-xs-offset-1 col-xs-11">
             <div class="col-xs-3">
               <div class="row">
-                <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
-              </div>
-              <div class="row">
                 <span class="title">Área de exploraçaõ <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
               </div>
               <div class="row">
@@ -1197,7 +1132,7 @@
   <script type="text/template" id="Piscicultura_edit">
     <input type="hidden" id="id">
     <div class="row">
-      <div class="col-xs-offset-1 col-xs-8">
+      <div class="col-xs-offset-1 col-xs-10">
         <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title"><strong>Dados gerais</strong></h3>
@@ -1237,20 +1172,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xs-2">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong>Consumos</strong></h3>
-          </div>
-          <div class="panel-body" id="panel-body-piscicultura-consumos">
-            <div class="form-group">
-              <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/mês)</i></label>
-              <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -1509,95 +1430,17 @@
   <!-- block license modal tmpl -->
   <script type="text/template" id="block-license-modal-tmpl">
     <div class="modal fade" id="licenciaModal" tabindex="-1" role="dialog" aria-labelledby="licenciaModalLabel">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog" role="document" style="width:600px!important; margin:30px auto!important">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="licenciaModalLabel">Licencia <span id="lic_tipo"></span></h4>
+            <h4 class="modal-title" id="licenciaModalLabel">Consumo <span id="lic_tipo"></span></h4>
           </div>
           <div class="modal-body">
+            <input type="hidden" id="lic_tipo">
+            <input type="hidden" class="form-control widget" id="lic_nro">
             <div class="row">
-              <div class="col-xs-offset-1 col-xs-10">
-                <div class="panel panel-info">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Dados gerais</strong></h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="row">
-                      <input type="hidden" id="lic_tipo">
-                      <input type="hidden" class="form-control widget" id="lic_nro">
-                      <div class="form-group col-xs-4">
-                        <label for="estado">Estado</label> <span id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></span>
-                        <select type="text" class="form-control widget" id="estado" aria-describedby="info-estado-licencia"></select>
-                      </div>
-                      <div class="form-group col-xs-4">
-                        <label for="d_emissao">Data emissão</label>
-                        <input type="text" class="form-control widget-date" id="d_emissao" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
-                      </div>
-                      <div class="form-group col-xs-4">
-                        <label for="d_validade">Data validade</label>
-                        <input type="text" class="form-control widget-date" id="d_validade" placeholder="dd/mm/yyyy" pattern="^\d{1,2}[./-]\d{1,2}[./-]\d{4}$">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-xs-4">
-                        <label for="cadastro">Nro de cadastro</label>
-                        <input type="text" class="form-control widget" id="cadastro">
-                      </div>
-                      <div class="form-group col-xs-4">
-                        <label for="n_licen_a">Nro de licença histórico</label>
-                        <input type="text" class="form-control widget" id="n_licen_a" disabled>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-offset-1 col-xs-6">
-                <div class="panel panel-info">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Pago Mensual</strong></h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="form-group col-xs-6">
-                        <label for="taxa_fixa">Taxa fixa <i class="units">(MZN/mês)</i></label>
-                        <input type="text" class="form-control widget-number" id="taxa_fixa" pattern="[0-9]{1,8}([,][0-9]{1,2})?" required>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="taxa_uso">Taxa de uso <i class="units">(MZN/m<sup>3</sup>)</i></label>
-                        <input type="text" class="form-control widget-number" id="taxa_uso" pattern="[0-9]{1,8}([,][0-9]{1,2})?" required>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-xs-6">
-                        <label for="pago_mes">Valor pago mês <i class="units">(MZN/més)</i></label>
-                        <input type="text" class="form-control widget-number" id="pago_mes" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label for="iva">IVA <i class="units">(%)</i></label>
-                        <input type="text" class="form-control widget-number" id="iva" pattern="[0-9]{1,2}?" required>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-xs-6">
-                        <label for="pago_iva">Valor com IVA <i class="units">(MZN/mês)</i></label>
-                        <input type="text" class="form-control widget-number" id="pago_iva" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled>
-                      </div>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-4">
-                <div class="panel panel-info">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Consumos</strong></h3>
-                  </div>
-                  <div class="panel-body">
+              <div class="col-xs-offset-2 col-xs-8">
                     <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="c_licencia"><strong>Consumo licenciado <i class="units">(m<sup>3</sup>/mês)</i></strong></label>
@@ -1606,18 +1449,10 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label for="c_real_int">Consumo real intermedio <i class="units">(m<sup>3</sup>/mês)</i></label>
-                        <input type="text" class="form-control widget-number" id="c_real_int" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-xs-12">
                         <label for="c_soli_int">Consumo solicitado intermedio <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_soli_int" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                     </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1691,32 +1526,40 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xs-offset-1 col-xs-10">
-                <div class="panel panel-info">
+            </div> <!-- row -->
+              <div class="row">
+              <div class="col-xs-offset-1 col-xs-5">
+                <div class="panel panel-info" style="height:215px;">
                   <div class="panel-heading">
                     <h3 class="panel-title"><strong>Consumos</strong></h3>
                   </div>
                   <div class="panel-body">
                     <div class="row">
-                      <div class="form-group col-xs-6">
+                      <div class="form-group col-xs-12">
                         <label for="c_soli">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_soli" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
-                      <div class="form-group col-xs-6">
-                        <label for="c_real">Consumo real <i class="units">(m<sup>3</sup>/mês)</i></label>
-                        <input type="text" class="form-control widget-number" id="c_real" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-5">
+                <div class="panel panel-info" style="height:215px;">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Observaçôes</strong></h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="form-group col-xs-12">
+                        <textarea class="form-control widget" id="observacio" rows="6"></textarea>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="form-group col-xs-offset-1 col-xs-10">
-                <label for="observacio">Observaçôes</label>
-                <textarea class="form-control widget" id="observacio" rows="3"></textarea>
-              </div>
-            </div>
+
           </div>
           <div class="modal-footer">
             <div class="row">
@@ -1734,7 +1577,7 @@
   <!-- template licencia -->
   <script type="text/template" id="licencia-tmpl">
     <div class="row">
-      <h4 class="col-xs-offset-1 col-xs-11">Licença <%- lic_tipo + ': ' + (lic_nro || '-') %>
+      <h4 class="col-xs-offset-1 col-xs-11">Consumo <%- lic_tipo %>
         <button type="button" class="btn btn-default btn-xs hidden" id="addLicense">Adicionar</button>
         <button type="button" class="btn btn-default btn-xs" id="editLicense">Editar</button>
         <button type="button" class="btn btn-default btn-xs" id="addFonte">Nova fonte</button>
@@ -1743,33 +1586,15 @@
     </div>
 
     <div class="row">
-      <span class="col-xs-offset-1 col-xs-11">
-        <span class="title">Estado:</span> <%- estado || '-' %> <i id="info-estado-licencia" class="fa fa-question-circle" style="cursor:pointer"></i>
-      </span>
-    </div>
-    <div class="row">
-      <span class="col-xs-offset-1 col-xs-11">
-        <span class="title">Nro de cadastro:</span> <%- cadastro || '-' %>
-        <span class="title">Data emissão:</span> <%- formatter().formatDate(d_emissao) || '-' %>
-        <span class="title">Data validade:</span> <%- formatter().formatDate(d_validade) || '-' %>
-      </span>
-    </div>
-    <div class="row">
-      <span class="col-xs-offset-1 col-xs-2 text-right"><%- formatter().formatNumber(c_licencia) || '-' %> </span>
+      <span class="col-xs-2 text-right"><%- formatter().formatNumber(c_licencia) || '-' %> </span>
       <span class="col-xs-9">
-        <span class="title"><i class="units">m<sup>3</sup>/mês</i> consumo licenciado</span> <span class="title">(Valor com IVA: <%- formatter().formatNumber(pago_iva) || '-' %> MZN/més)</span>
+        <span class="title"><i class="units">m<sup>3</sup>/mês</i> licenciado</span>
       </span>
     </div>
     <div class="row">
-      <span class="col-xs-offset-1 col-xs-2 text-right"><%- formatter().formatNumber(c_soli_tot) || '-' %> </span>
+      <span class="col-xs-2 text-right"><%- formatter().formatNumber(c_soli_tot) || '-' %> </span>
       <span class="col-xs-9">
-        <span class="title"><i class="units">m<sup>3</sup>/mês</i> consumo solicitado</span> <span class="title">(<%- formatter().formatNumber(c_soli_int) || '-' %> intermedio / <%- formatter().formatNumber(c_soli_fon) || '-' %> fontes)</span>
-      </span>
-    </div>
-    <div class="row">
-      <span class="col-xs-offset-1 col-xs-2 text-right"><%- formatter().formatNumber(c_real_tot) || '-' %> </span>
-      <span class="col-xs-9">
-        <span class="title"><i class="units">m<sup>3</sup>/mês</i> consumo real</span> <span class="title">(<%- formatter().formatNumber(c_real_int) || '-' %> intermedio / <%- formatter().formatNumber(c_real_fon) || '-' %> fontes)</span>
+        <span class="title"><i class="units">m<sup>3</sup>/mês</i> solicitado</span> <span class="title">(<%- formatter().formatNumber(c_soli_int) || '-' %> intermedio / <%- formatter().formatNumber(c_soli_fon) || '-' %> fontes)</span>
       </span>
     </div>
   </script>

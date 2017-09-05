@@ -4,9 +4,9 @@ delete window.exports;
 delete window.module;
 
 SIXHIARA = window.SIXHIARA || {
-    center:[-13, 38.5050],
+    center:[-12.5, 39.0],
     southWest:[-23, 31],
-    northEast:[-9, 43],
+    northEast:[-9, 48],
     search: {
       zoom: 8,
     },
@@ -20,22 +20,32 @@ window.SIXHIARA.xlsFieldsToExport = [
     {'header': 'Registrado em', 'value': 'utente.reg_zona'},
     {'header': 'Provincia', 'value': 'utente.loc_provin'},
     {'header': 'Distrito', 'value': 'utente.loc_distri'},
-    {'header': 'Posto', 'value': 'utente.loc_posto'},
+    {'header': 'Posto administrativo', 'value': 'utente.loc_posto'},
     {'header': 'Bairro', 'value': 'utente.loc_nucleo'},
     {'header': 'Observações', 'value': 'utente.observacio'},
-    {'header': 'Id Exp', 'value': 'exp_id'},
-    {'header': 'Nome exploraçõe', 'value': 'exp_name'},
-    {'header': 'Actividade', 'value': 'actividade.tipo'},
-    {'header': 'Consumo licenciado', 'value': 'c_licencia'},
-    {'header': 'Consumo solicitado', 'value': 'c_soli'},
-    {'header': 'Consumo real', 'value': 'c_real'},
-    {'header': 'Consumo estimado', 'value': 'c_estimado'},
+    {'header': 'Nro da exploração', 'value': 'exp_id'},
+    {'header': 'Nome da exploração', 'value': 'exp_name'},
+    {'header': 'Consumo mensal licença Total', 'value': 'c_licencia'},
+    {'header': 'Consumo mensal solicitado Total', 'value': 'c_soli'},
+    {'header': 'Área de exploração (ha)', 'value': 'actividade.area_pisc'},
+    {'header': 'Ano inicio da atividade', 'value': 'actividade.ano_i_ati'},
+    {'header': 'Nro de tanques/gaiolas', 'value': 'actividade.n_tanques'},
+    {'header': 'Volume total tanques/gaiolas (reservas)', 'value': 'actividade.vol_tot_t'},
+    {'header': 'Nro de alevinos povoados', 'value': 'actividade.n_ale_pov'},
+    {'header': 'Produção Anual (kg)', 'value': 'actividade.produc_pi'},
+    {'header': 'Processamento do peixe', 'value': 'actividade.tipo_proc'},
+    {'header': 'Durante a abertura dos tanques/gaiolas', 'value': 'actividade.asis_aber'},
+    {'header': 'Na monitoria dos tanques/gaiolas', 'value': 'actividade.asis_moni'},
+    {'header': 'Tratamento da água que entra nos tanques', 'value': 'actividade.trat_t_en'},
+    {'header': 'Tratamento da água que sai dos tanques', 'value': 'actividade.trat_a_sa'},
+    {'header': 'As gaiolas estão submersas em', 'value': 'actividade.gaio_subm'},
+    {'header': 'A exploraçaõ tem problemas', 'value': 'actividade.problemas'},
+    {'header': 'Principais problemas', 'value': 'actividade.prob_prin'},
 ];
 
 window.SIXHIARA.shpFieldsToExport = [
     { 'header': 'exp_id', 'value': 'exp_id' },
     { 'header': 'exp_name', 'value': 'exp_name' },
-    { 'header': 'd_soli', 'value': 'd_soli' },
     { 'header': 'loc_provin', 'value': 'loc_provin' },
     { 'header': 'loc_distri', 'value': 'loc_distri' },
     { 'header': 'loc_posto', 'value': 'loc_posto' },
@@ -46,27 +56,6 @@ window.SIXHIARA.shpFieldsToExport = [
     { 'header': 'loc_rio', 'value': 'loc_rio' },
     { 'header': 'utente', 'value': 'utente.nome' },
     { 'header': 'uten_nuit', 'value': 'utente.nuit' },
-    { 'header': 'abastecem',
-    'value': function (exp) { return exp.actividade.tipo === 'Abastecimento'; }
-    },
-    { 'header': 'saneament',
-    'value': function (exp) { return exp.actividade.tipo === 'Saneamento'; }
-    },
-    { 'header': 'agricultu',
-    'value': function (exp) { return exp.actividade.tipo === 'Agricultura de Regadio'; }
-    },
-    { 'header': 'pecuaria',
-    'value': function (exp) { return exp.actividade.tipo === 'Pecuária'; }
-    },
-    { 'header': 'piscicult',
-    'value': function (exp) { return exp.actividade.tipo === 'Piscicultura'; }
-    },
-    { 'header': 'industria',
-    'value': function (exp) { return exp.actividade.tipo === 'Indústria'; }
-    },
-    { 'header': 'pro_energ',
-    'value': function (exp) { return exp.actividade.tipo === 'Producção de energia'; }
-    },
     { 'header': 'con_l_to', 'value': 'c_licencia' },
     { 'header': 'tipo_subt',
     'value': function (exp) {
@@ -78,12 +67,6 @@ window.SIXHIARA.shpFieldsToExport = [
     'value': function (exp) {
         var lic = exp.licencias.filter( lic => lic.lic_tipo == 'Subterrânea' );
         return (lic[0] && lic[0].c_licencia) || null;
-    }
-    },
-    { 'header': 'est_l_sb',
-    'value': function (exp) {
-        var lic = exp.licencias.filter( lic => lic.lic_tipo == 'Subterrânea' );
-        return (lic[0] && lic[0].estado) || null;
     }
     },
     { 'header': 'tipo_supe',
@@ -98,22 +81,19 @@ window.SIXHIARA.shpFieldsToExport = [
         return (lic[0] && lic[0].c_licencia) || null;
     }
     },
-    { 'header': 'est_l_su',
-    'value': function (exp) {
-        var lic = exp.licencias.filter( lic => lic.lic_tipo == 'Superficial' );
-        return (lic[0] && lic[0].estado) || null;
-    }
-    },
-    { 'header': 'pagamento',
-    'value': function (exp) {
-        var pagamento = 'No';
-        if (_.isNull(exp.pagos)){
-            pagamento = null;
-        } else if (exp.pagos === true) {
-            pagamento = 'Si';
-        }
-        return pagamento;
-    }
-    },
     { 'header': 'observacio', 'value': 'observacio' },
+    {'header': 'area_pisc', 'value': 'actividade.area_pisc'},
+    {'header': 'ano_i_ati', 'value': 'actividade.ano_i_ati'},
+    {'header': 'n_tanques', 'value': 'actividade.n_tanques'},
+    {'header': 'vol_tot_t', 'value': 'actividade.vol_tot_t'},
+    {'header': 'n_ale_pov', 'value': 'actividade.n_ale_pov'},
+    {'header': 'produc_pi', 'value': 'actividade.produc_pi'},
+    {'header': 'tipo_proc', 'value': 'actividade.tipo_proc'},
+    {'header': 'asis_aber', 'value': 'actividade.asis_aber'},
+    {'header': 'asis_moni', 'value': 'actividade.asis_moni'},
+    {'header': 'trat_t_en', 'value': 'actividade.trat_t_en'},
+    {'header': 'trat_a_sa', 'value': 'actividade.trat_a_sa'},
+    {'header': 'gaio_subm', 'value': 'actividade.gaio_subm'},
+    {'header': 'problemas', 'value': 'actividade.problemas'},
+    {'header': 'prob_prin', 'value': 'actividade.prob_prin'},
 ]
