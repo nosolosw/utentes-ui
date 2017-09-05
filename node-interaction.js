@@ -26,10 +26,10 @@ window.SIXHIARA.xlsFieldsToExport = [
     {'header': 'Id Exp', 'value': 'exp_id'},
     {'header': 'Nome exploraçõe', 'value': 'exp_name'},
     {'header': 'Actividade', 'value': 'actividade.tipo'},
-    {'header': 'C. licenciado', 'value': 'c_licencia'},
-    {'header': 'C. solicitado', 'value': 'c_soli'},
-    {'header': 'C. real', 'value': 'c_real'},
-    {'header': 'C. estimado', 'value': 'c_estimado'},
+    {'header': 'Consumo licenciado', 'value': 'c_licencia'},
+    {'header': 'Consumo solicitado', 'value': 'c_soli'},
+    {'header': 'Consumo real', 'value': 'c_real'},
+    {'header': 'Consumo estimado', 'value': 'c_estimado'},
 ];
 
 window.SIXHIARA.shpFieldsToExport = [

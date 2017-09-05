@@ -54,6 +54,9 @@ thead th {
     color: #bbb;
 }
 
+td.edit, td.delete {
+    text-align: center;
+}
 i.edit, i.delete,
 td.edit, td.delete {
     /* float: right; */
