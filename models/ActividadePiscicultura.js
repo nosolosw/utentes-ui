@@ -48,7 +48,7 @@ Backbone.SIXHIARA.ActividadePiscicultura = Backbone.SIXHIARA.ActividadeNull.exte
         this.set('v_reservas',v_reservas );
         this.set('n_ale_pov', n_ale_pov);
         this.set('produc_pi', produc_pi);
-        self.trigger('change', this.model);
+        this.trigger('change', this.model);
     },
 
     toJSON: function () {
