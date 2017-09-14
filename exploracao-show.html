@@ -150,7 +150,7 @@
           <h3>
             <span class="widget-number" id="summary_pago_iva">-</span>
           </h3>
-          <span>MZN/més com IVA</span>
+          <span>MZN/mês com IVA</span>
         </div>
 
       </div>
@@ -208,9 +208,9 @@
             <tr>
               <th width="8%">Tipo de água</th>
               <th width="8%">Tipo de fonte</th>
-              <th width="12%">Consumo solicitado <i class="units">(m<sup>3</sup>/més)</i></th>
-              <th width="11%">Consumo real <i class="units">(m<sup>3</sup>/més)</i></th>
-              <th width="11%">Máximo caudal <i class="units">(m<sup>3</sup>/més)</i></th>
+              <th width="12%">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></th>
+              <th width="11%">Consumo real <i class="units">(m<sup>3</sup>/mês)</i></th>
+              <th width="11%">Máximo caudal <i class="units">(m<sup>3</sup>/mês)</i></th>
               <th width="8%">Contador</th>
               <th width="9%">Método estimação</th>
               <th width="8%">Toma de dados</th>
@@ -624,7 +624,7 @@
       <span class="col-xs-6">
         <div class="row">
           <span class="col-xs-offset-1 col-xs-11">
-            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
             <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
             <span class="title">Dotaçâo <i class="units">(l/pessoa/dia)</i>:</span> <span><%- formatter().formatNumber(dotacao) || '-' %></span>
           </span>
@@ -678,7 +678,7 @@
             <thead>
               <tr>
                 <th width="14%">Id</th>
-                <th width="14%">Consumo Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+                <th width="14%">Consumo Estimado <i class="units">(m<sup>3</sup>/mês)</i></th>
                 <th width="14%">Tipo de cultivo / rega</th>
                 <th width="14%">Eficiencia del riego</th>
                 <th width="14%">Área <i class="units">(ha)</i></th>
@@ -767,7 +767,7 @@
       <div class="col-xs-6">
         <div class="row">
           <span class="col-xs-offset-1 col-xs-11">
-            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
             <span class="title">Tipo de indústria:</span> <span><%- tipo_indus || '-' %></span>
           </span>
         </div>
@@ -855,7 +855,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="form-group col-xs-6">
-                <label for="c_estimado">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i></label>
+                <label for="c_estimado">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i></label>
                 <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?" required>
               </div>
               <div class="form-group col-xs-6">
@@ -884,7 +884,7 @@
           <table class="table table-bordered" id="reses">
             <thead>
               <tr>
-                <th width="20%">Consumo Estimado <i class="units">(m<sup>3</sup>/més)</i></th>
+                <th width="20%">Consumo Estimado <i class="units">(m<sup>3</sup>/mês)</i></th>
                 <th width="20%">Tipo de reses</th>
                 <th width="20%">Nro de reses</th>
                 <th>Observações</th>
@@ -964,7 +964,7 @@
           <span class="col-xs-offset-1 col-xs-11">
             <div class="col-xs-3">
               <div class="row">
-                <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+                <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
               </div>
               <div class="row">
                 <span class="title">Área de exploraçaõ <i class="units">(ha)</i>:</span> <span><%- formatter().formatNumber(area) || '-' %></span>
@@ -1037,7 +1037,7 @@
                   <tr>
                     <th>Id</th>
                     <th>Tipo</th>
-                    <th>Volume <i class="units">(m<sup>3</sup>/més)</i></th>
+                    <th>Volume <i class="units">(m<sup>3</sup>/mês)</i></th>
                     <th>Estado</th>
                     <th>Espécie cultivada</th>
                     <th>Tipo de alimentação</th>
@@ -1108,7 +1108,7 @@
           </div>
           <div class="panel-body" id="panel-body-piscicultura-consumos">
             <div class="form-group">
-              <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/més)</i></label>
+              <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/mês)</i></label>
               <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
             </div>
           </div>
@@ -1221,7 +1221,7 @@
       <div class="col-xs-6">
         <div class="row">
           <span class="col-xs-offset-1 col-xs-11">
-            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
             <span class="title">Tipo de produção:</span> <span><%- energia_tipo || '-' %></span>
           </span>
         </div>
@@ -1307,7 +1307,7 @@
                 <div class="col-xs-4">
                   <div class="row">
                     <div class="form-group">
-                      <label for="c_estimado">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i></label>
+                      <label for="c_estimado">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i></label>
                       <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                     </div>
                   </div>
@@ -1324,7 +1324,7 @@
       <div class="col-xs-6">
         <div class="row">
           <span class="col-xs-offset-1 col-xs-11">
-            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
             <span class="title">Nro de habitantes:</span> <span><%- formatter().formatNumber(habitantes) || '-' %></span>
           </span>
         </div>
@@ -1359,7 +1359,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="form-group col-xs-12">
-                  <label for="c_estimado">Consumo estimado <i class="units">(m<sup>3</sup>/més)</i></label>
+                  <label for="c_estimado">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i></label>
                   <input type="text" class="form-control widget-number" id="c_estimado" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                 </div>
               </div>
@@ -1421,7 +1421,7 @@
                   <div class="panel-body">
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="taxa_fixa">Taxa fixa <i class="units">(MZN/més)</i></label>
+                        <label for="taxa_fixa">Taxa fixa <i class="units">(MZN/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="taxa_fixa" pattern="[0-9]{1,8}([,][0-9]{1,2})?" required>
                       </div>
                       <div class="form-group col-xs-6">
@@ -1431,7 +1431,7 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="pago_mes">Valor pago més <i class="units">(MZN/més)</i></label>
+                        <label for="pago_mes">Valor pago mês <i class="units">(MZN/més)</i></label>
                         <input type="text" class="form-control widget-number" id="pago_mes" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled>
                       </div>
                       <div class="form-group col-xs-6">
@@ -1441,7 +1441,7 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="pago_iva">Valor com IVA <i class="units">(MZN/més)</i></label>
+                        <label for="pago_iva">Valor com IVA <i class="units">(MZN/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="pago_iva" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled>
                       </div>
                     </div>
@@ -1459,19 +1459,19 @@
                   <div class="panel-body">
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label for="c_licencia"><strong>Consumo licenciado <i class="units">(m<sup>3</sup>/més)</i></strong></label>
+                        <label for="c_licencia"><strong>Consumo licenciado <i class="units">(m<sup>3</sup>/mês)</i></strong></label>
                         <input type="text" class="form-control widget-number" id="c_licencia" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label for="c_real_int">Consumo real intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
+                        <label for="c_real_int">Consumo real intermedio <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_real_int" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label for="c_soli_int">Consumo solicitado intermedio <i class="units">(m<sup>3</sup>/més)</i></label>
+                        <label for="c_soli_int">Consumo solicitado intermedio <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_soli_int" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                     </div>
@@ -1543,7 +1543,7 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="c_max">Máximo caudal extraíble <i class="units">(m<sup>3</sup>/més)</i></label>
+                        <label for="c_max">Máximo caudal extraíble <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_max" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                     </div>
@@ -1558,11 +1558,11 @@
                   <div class="panel-body">
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="c_soli">Consumo solicitado <i class="units">(m<sup>3</sup>/més)</i></label>
+                        <label for="c_soli">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_soli" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="c_real">Consumo real <i class="units">(m<sup>3</sup>/més)</i></label>
+                        <label for="c_real">Consumo real <i class="units">(m<sup>3</sup>/mês)</i></label>
                         <input type="text" class="form-control widget-number" id="c_real" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
                       </div>
                     </div>
@@ -1616,19 +1616,19 @@
     <div class="row">
       <span class="col-xs-offset-1 col-xs-2 text-right"><%- formatter().formatNumber(c_licencia) || '-' %> </span>
       <span class="col-xs-9">
-        <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo licenciado</span> <span class="title">(Valor com IVA: <%- formatter().formatNumber(pago_iva) || '-' %> MZN/més)</span>
+        <span class="title"><i class="units">m<sup>3</sup>/mês</i> consumo licenciado</span> <span class="title">(Valor com IVA: <%- formatter().formatNumber(pago_iva) || '-' %> MZN/més)</span>
       </span>
     </div>
     <div class="row">
       <span class="col-xs-offset-1 col-xs-2 text-right"><%- formatter().formatNumber(c_soli_tot) || '-' %> </span>
       <span class="col-xs-9">
-        <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo solicitado</span> <span class="title">(<%- formatter().formatNumber(c_soli_int) || '-' %> intermedio / <%- formatter().formatNumber(c_soli_fon) || '-' %> fontes)</span>
+        <span class="title"><i class="units">m<sup>3</sup>/mês</i> consumo solicitado</span> <span class="title">(<%- formatter().formatNumber(c_soli_int) || '-' %> intermedio / <%- formatter().formatNumber(c_soli_fon) || '-' %> fontes)</span>
       </span>
     </div>
     <div class="row">
       <span class="col-xs-offset-1 col-xs-2 text-right"><%- formatter().formatNumber(c_real_tot) || '-' %> </span>
       <span class="col-xs-9">
-        <span class="title"><i class="units">m<sup>3</sup>/més</i> consumo real</span> <span class="title">(<%- formatter().formatNumber(c_real_int) || '-' %> intermedio / <%- formatter().formatNumber(c_real_fon) || '-' %> fontes)</span>
+        <span class="title"><i class="units">m<sup>3</sup>/mês</i> consumo real</span> <span class="title">(<%- formatter().formatNumber(c_real_int) || '-' %> intermedio / <%- formatter().formatNumber(c_real_fon) || '-' %> fontes)</span>
       </span>
     </div>
   </script>

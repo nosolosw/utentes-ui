@@ -37,7 +37,7 @@ Backbone.SIXHIARA.TemplateEditTanque = Backbone.View.extend({
                 <div class="panel-body">
                     <div class="row">
                     <div class="form-group col-xs-4">
-                        <label for="cumprimen">Cumprimento<i class="units">(m)</i></label>
+                        <label for="cumprimen">Comprimento<i class="units">(m)</i></label>
                         <input type="text" class="form-control widget-number" id="cumprimen" pattern="[0-9]{1,8}([,][0-9]{1,2})?" />
                     </div>
                     <div class="form-group col-xs-4">
