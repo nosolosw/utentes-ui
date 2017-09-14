@@ -56,7 +56,8 @@ Backbone.SIXHIARA.Licencia = Backbone.Model.extend({
 
     parseDate: function(response, field) {
         if (response[field]) {
-            response[field] = new Date(response[field]);
+            var sTokens = response[field].split('-');
+            response[field] = new Date(sTokens[0], sTokens[1] - 1, sTokens[2])
         }
     },
 

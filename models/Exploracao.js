@@ -22,7 +22,7 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
         'c_licencia': null,
         'c_real':     null,
         'c_estimado': null,
-        'actividade': new Backbone.Model(),
+        'actividade': new Backbone.SIXHIARA.ActividadePiscicultura(),
         'area':       null,
         'geometry':   null,
         'utente':     new Backbone.SIXHIARA.Utente(),
@@ -348,7 +348,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
 
     parseDate: function(response, field) {
         if (response[field]) {
-            response[field] = new Date(response[field]);
+            var sTokens = response[field].split('-');
+            response[field] = new Date(sTokens[0], sTokens[1] - 1, sTokens[2])
         }
     },
 
