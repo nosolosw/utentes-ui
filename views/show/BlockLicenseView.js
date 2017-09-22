@@ -84,11 +84,11 @@ Backbone.SIXHIARA.BlockLicenseView = Backbone.View.extend({
         }).render();
         modalView.addAuxView(fonteTipoView);
 
-        var contadorView = new Backbone.UILib.SelectView({
-            el: modalView.$('#contador'),
-            collection: this.options.domains.byCategory('contador')
+        var sistMedView = new Backbone.UILib.SelectView({
+            el: modalView.$('#sist_med'),
+            collection: this.options.domains.byCategory('sistema_medicao')
         }).render();
-        modalView.addAuxView(contadorView);
+        modalView.addAuxView(sistMedView);
 
         modalView.render();
 

@@ -9,7 +9,7 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
         <td class="c_soli"><% print(formatter().formatNumber(c_soli)) %></td>
         <td class="c_real"><% print(formatter().formatNumber(c_real)) %></td>
         <td class="c_max"><% print(formatter().formatNumber(c_max)) %></td>
-        <td class="contador"><% print(formatter().formatBoolean(contador)) %></td>
+        <td class="sist_med"><%- sist_med %></td>
         <td class="metodo_est"><%- metodo_est %></td>
         <td class="d_dado"><% print(formatter().formatDate(d_dado)) %></td>
         <td class="lat_lon"><%- lat_lon %></td>
@@ -53,8 +53,7 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
         this.$('td.c_real').text(c_real || displayNull);
         var d_dado = formatter().formatDate(fonte.get('d_dado'));
         this.$('td.d_dado').text( d_dado || displayNull);
-        var contador = formatter().formatBoolean(fonte.get('contador'));
-        this.$('td.contador').text(contador || displayNull);
+        this.$('td.sist_med').text(fonte.get('sist_med') || displayNull);
         this.$('td.metodo_est').text(fonte.get('metodo_est') || displayNull);
         this.$('td.observacio').text(fonte.get('observacio') || displayNull);
     },
@@ -77,11 +76,11 @@ Backbone.SIXHIARA.TableRowShowView = Backbone.View.extend({
         }).render();
         modalView.addAuxView(fonteTipoView);
 
-        var contadorView = new Backbone.UILib.SelectView({
-            el: modalView.$('#contador'),
-            collection: this.options.domains.byCategory('contador')
+        var sistMedView = new Backbone.UILib.SelectView({
+            el: modalView.$('#sist_med'),
+            collection: this.options.domains.byCategory('sistema_medicao')
         }).render();
-        modalView.addAuxView(contadorView);
+        modalView.addAuxView(sistMedView);
 
         modalView.render();
     },

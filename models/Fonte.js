@@ -10,7 +10,7 @@ Backbone.SIXHIARA.Fonte = Backbone.Model.extend({
         'c_soli':     null,
         'c_max':      null,
         'c_real':     null,
-        'contador':   null,
+        'sist_med':   null,
         'metodo_est': null,
         'observacio': null,
     },
