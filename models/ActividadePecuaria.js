@@ -4,11 +4,13 @@ Backbone.SIXHIARA.ActividadePecuaria = Backbone.SIXHIARA.ActividadeNull.extend({
     defaults: {
         'id':         null,
         'tipo': 'Pecuária',
+        'c_estimado': null,
+        'n_res_tot': null,
         'reses': new Backbone.SIXHIARA.ResCollection()
     },
 
     initialize: function() {
-        this.get('reses').on('all', this.updateCEstimado, this);
+        this.get('reses').on('all', this.updateChildBasedComputations, this);
     },
 
     parse: function(response) {
@@ -16,12 +18,17 @@ Backbone.SIXHIARA.ActividadePecuaria = Backbone.SIXHIARA.ActividadeNull.extend({
         return response;
     },
 
-    updateCEstimado: function () {
-        var c_estimado = 0;
-        this.get('reses').forEach(function(res){
-            c_estimado = c_estimado + res.get('c_estimado');
-        });
+    updateChildBasedComputations: function () {
+        var c_estimado = this.get('reses').reduce(function(sum, res){
+            return sum + res.get('c_estimado');
+        }, 0);
         this.set('c_estimado', c_estimado);
+
+        var n_res_tot = this.get('reses').reduce(function(sum, res){
+            return sum + res.get('reses_nro');
+        }, 0);
+        this.set('n_res_tot', n_res_tot);
+
         this.trigger('change', this.model);
     },
 
