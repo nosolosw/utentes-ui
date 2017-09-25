@@ -19,6 +19,7 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
             template: template
         });
         this.subViews.push(this.actividadeView);
+        this.listenTo(this.model.get('actividade'), 'all', this.render);
     },
 
     render: function () {
@@ -40,13 +41,15 @@ Backbone.SIXHIARA.BlockActivityView = Backbone.View.extend({
                 if(tipoOld === tipoNew){
                     var atts = this.draftModel.pick(this.getAttsChanged());
                     self.model.get('actividade').set(atts);
-                    self.actividadeView.render();
                 } else {
                     var newModel = this.draftModel;
                     var newTemplate = _.template($("[id='" + tipoNew + "']").html());
-                    self.model.set('actividade', newModel);
                     self.actividadeView.template = newTemplate;
-                    self.actividadeView.render();
+                    self.stopListening(self.model.get('actividade'))
+                    self.model.set('actividade', newModel);
+                    self.listenTo(self.model.get('actividade'), 'all', self.render);
+                    self.model.get('actividade').trigger('change');
+
                 }
                 // close modal
                 this.$('.modal').modal('hide');
