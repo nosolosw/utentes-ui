@@ -5,12 +5,15 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.SIXHIARA.ActividadeNull.extend({
         'id':         null,
         'tipo':       'Agricultura de Regadio',
         'c_estimado': null,
+        'n_cul_tot': null,
+        'area_pot': null,
+        'area_irri': null,
+        'area_medi': null,
         'cultivos':   new Backbone.SIXHIARA.CultivoCollection(),
     },
 
     initialize: function () {
-        // on add, remove & update every cultivo
-        this.get('cultivos').on('all', this.updateCEstimado, this);
+        this.get('cultivos').on('all', this.updateChildBasedComputations, this);
     },
 
     parse: function(response) {
@@ -18,12 +21,19 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.SIXHIARA.ActividadeNull.extend({
         return response;
     },
 
-    updateCEstimado: function () {
-        var c_estimado = 0;
-        this.get('cultivos').forEach(function(cultivo){
-            c_estimado = c_estimado + cultivo.get('c_estimado');
-        });
+    updateChildBasedComputations: function () {
+       var c_estimado = this.get('cultivos').reduce(function(sum, cultivo){
+            return sum + cultivo.get('c_estimado');
+        }, 0);
         this.set('c_estimado', c_estimado);
+
+        this.set('n_cul_tot', this.get('cultivos').length);
+
+        var area_medi = this.get('cultivos').reduce(function(sum, cultivo){
+            return sum + cultivo.get('area');
+        }, 0);
+        this.set('area_medi', area_medi);
+
         this.trigger('change', this.model);
     },
 
@@ -31,6 +41,17 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.SIXHIARA.ActividadeNull.extend({
         var json      =  _.clone(this.attributes);
         json.cultivos = this.get('cultivos').toJSON();
         return json;
+    },
+
+    validateSubActivity: function() {
+        var messages = [];
+        this.get('cultivos').forEach(function(cultivo){
+            var msgs = cultivo.validate();
+            if (msgs) {
+                messages = messages.concat(msgs);
+            }
+        });
+        return messages;
     },
 
     getActividadeLayer: function(map) {
@@ -57,17 +78,6 @@ Backbone.SIXHIARA.ActividadeRegadia = Backbone.SIXHIARA.ActividadeNull.extend({
                 fillOpacity: 0.5,
             }
         });
-    },
-
-    validateSubActivity: function() {
-        var messages = [];
-        this.get('cultivos').forEach(function(cultivo){
-            var msgs = cultivo.validate();
-            if (msgs) {
-                messages = messages.concat(msgs);
-            }
-        });
-        return messages;
     },
 
 });

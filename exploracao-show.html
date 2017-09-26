@@ -673,6 +673,35 @@
   <!-- tmpl actividade agricultura -->
   <script type="text/template" id="Agricultura de Regadio">
     <div id="block-regadia">
+
+      <div class="row">
+        <span class="col-xs-offset-1 col-xs-11">
+          <div class="col-xs-3">
+            <div class="row">
+              <span class="title">Área potencial:</span> <span><%- formatter().formatNumber(area_pot) || '-' %></span>
+            </div>
+            <div class="row">
+              <span class="title">Consumo estimado <i class="units">(m<sup>3</sup>/mês)</i>:</span> <span><%- formatter().formatNumber(c_estimado) || '-' %></span>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="row">
+              <span class="title">Área Irrigada:</span> <span><%- formatter().formatNumber(area_irri) || '-' %></span>
+            </div>
+            <div class="row">
+              <span class="title">Número de cultivos:</span> <span><%- formatter().formatNumber(n_cul_tot) || '-' %></span>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="row">
+              <span class="title">Área medida:</span> <span><%- formatter().formatNumber(area_medi) || '-' %></span>
+            </div>
+          </div>
+          <div class="col-xs-3">
+          </div>
+        </span>
+      </div>
+
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -706,6 +735,54 @@
   <!-- tmpl actividade agricultura (inside modal)-->
   <script type="text/template" id="Agricultura de Regadio_edit">
     <input type="hidden" id="id">
+
+    <div class="row">
+      <div class="col-xs-offset-1 col-xs-8">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Datos gerais</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <label for="area_pot">Área potencial</label>
+                <input type="text" class="form-control widget-number" id="area_pot">
+              </div>
+              <div class="form-group col-xs-4">
+                <label for="area_irri">Área Irrigada</label>
+                <input type="text" class="form-control widget-number" id="area_irri">
+              </div>
+              <div class="form-group col-xs-4">
+                <label for="area_medi">Área medida</label>
+                <input type="text" class="form-control widget-number" id="area_medi">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <label for="n_cul_tot">Número de cultivos</label>
+                <input type="text" class="form-control widget-number" id="n_cul_tot" disabled>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Consumos</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="c_estimado">C. estimado <i class="units">(m<sup>3</sup>/mês)</i></label>
+              <input type="text" class="form-control widget-number" id="c_estimado" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </script>
 
   <!-- modal engadir cultivo -->
