@@ -1,0 +1,23 @@
+{
+  "name": "@icarto/utentes-ui",
+  "version": "1.0.0",
+  "description": "Cliente para la aplicación de Utentes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCarto/utentes-ui.git"
+  },
+  "keywords": [
+    "utentes",
+    "mozambique"
+  ],
+  "author": "iCarto",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iCarto/utentes-ui/issues"
+  },
+  "homepage": "https://github.com/iCarto/utentes-ui#readme"
+}
