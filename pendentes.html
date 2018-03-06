@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <title>Gestão de Utentes</title>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/leaflet/leaflet.css" />
+  <link rel="stylesheet" type="text/css" href="lib/leaflet/leaflet.label.css"/>
+  <link rel="stylesheet" type="text/css" href="offline/sixhiara-labels.css" />
+  <link rel="stylesheet" type="text/css" href="pendentes.css" />
+  <link rel="stylesheet" type="text/css" href="base.css" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+</head>
+<body class="container-fluid">
+
+  <menu class="row">
+  </menu>
+
+  <main class="main-content row">
+
+    <section id="filters" class="col-xs-2">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <h4 class="col-xs-12">Utentes</h4>
+          </div>
+          <div class="row">
+            <select class="form-control col-xs-6 widget" id="utente">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <h4 class="col-xs-12">Localização</h4>
+          </div>
+          <div class="row">
+            <label for="loc_provin" class="col-xs-4">Província</label>
+            <select class="form-control col-xs-6 widget" id="loc_provin">
+            </select>
+          </div>
+          <div class="row">
+            <label for="loc_distri" class="col-xs-4">Distrito</label>
+            <select class="col-xs-6 form-control widget" id="loc_distri">
+            </select>
+          </div>
+          <div class="row">
+            <label for="loc_posto" class="col-xs-12">Posto administrativo</label>
+            <select class="col-xs-6 form-control widget" id="loc_posto">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <h4 class="col-xs-12">Licença</h4>
+          </div>
+          <div class="row">
+            <label for="lic_tipo" class="col-xs-4">Tipo</label>
+            <select class="col-xs-6 form-control widget" id="lic_tipo">
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="estado" class="col-xs-4">Estado</label>
+            <select class="col-xs-6 form-control widget" id="estado">
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="pagos" class="col-xs-4">Pagamentos</label>
+            <select class="col-xs-6 form-control widget-boolean" id="pagos">
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <h4 class="col-xs-12">Actividade</h4>
+          </div>
+          <div class="row">
+            <select class="col-xs-6 form-control widget" id="actividade">
+            </select>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+  <section id="projects" class="col-xs-3">
+
+    <h1 class="text-center">Explorações <span id="counter" style="font-size: 50%; color:grey"></span></h1>
+    <br />
+
+    <ul id="project_list" class="list-unstyled">
+    </ul>
+
+  </section>
+
+  <section id="map-container" class="col-xs-7">
+    <div id="insert-data" class="row">
+      <h1>Gestión de estado / proceso</h1>
+    </div>
+    <div id="map" class="row"></div>
+  </section>
+
+</main>
+
+<!-- templates -->
+<script type="text/template" id="exploracao-li-tmpl">
+  <li class="row exploracao" id="exp_id-<%- exp_id %>">
+    <span class="col-xs-12 pull-left" >
+      <a href="#"><%- exp_id %> <%- exp_name %></a> <small style="color: grey; font-size: 75%"><%= '(' + (actividade && actividade.tipo || 'Non declarada') + ')' %></small>
+    </span>
+    <span class="col-xs-12">
+      <small class="label <%- summary_licencia_val ? 'label-success' : 'label-danger' %>" id="summary_licencia"><%- summary_licencia_msg.charAt(0) %></small>
+      <small class="label <%- summary_consumo_val ? 'label-success' : 'label-danger' %>" id="summary_consumo"><%- summary_consumo_msg.charAt(0) %></small>
+      <small class="label <%- summary_pagos_val === null ? 'label-default' : (summary_pagos_val ? 'label-success' : 'label-danger') %>" id="summary_pagos"><%- summary_pagos_msg.charAt(0) %></small>
+      <small style="color: grey; font-size: 75%"><%- utente['nome'] %></small>
+    </span>
+    <span class="col-xs-12">
+      <small><%- licencias && licencias[0] && licencias[0].lic_tipo %>: <%- licencias && licencias[0] && licencias[0].estado %></small>
+      <br>
+      <small><%- licencias && licencias[1] && licencias[1].lic_tipo %>: <%- licencias && licencias[1] && licencias[1].estado %></small>
+    </span>
+  </li>
+</script>
+
+<!-- javascript -->
+<script src="node-interaction.js"></script>
+<script src="lib/jquery/jquery-1.12.0.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/json2.js"></script>
+<script src="lib/underscore/underscore-min.js"></script>
+<script src="lib/backbone/backbone-min.js"></script>
+<script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/leaflet/leaflet.label-src.js"></script>
+
+<script src="lib/formatter/formatter.js"></script>
+
+<script src="lib/backbone-geojson/Feature.js"></script>
+<script src="lib/backbone-geojson/FeatureCollection.js"></script>
+
+<script src="lib/backbone-uilib/models/Domain.js"></script>
+<script src="lib/backbone-uilib/models/DomainCollection.js"></script>
+<script src="lib/backbone-uilib/views/OptionView.js"></script>
+<script src="lib/backbone-uilib/views/SelectView.js"></script>
+<script src="lib/backbone-uilib/views/WidgetsView.js"></script>
+<script src="lib/backbone-uilib/views/ItemView.js"></script>
+<script src="lib/backbone-uilib/views/ListView.js"></script>
+<script src="lib/backbone-uilib/views/BaseView.js"></script>
+
+<script src="views/common/NavBarView.js"></script>
+<script src="views/common/ConfigModalView.js"></script>
+<script src="Config.js"></script>
+
+<script src="models/TanquePiscicola.js"></script>
+<script src="models/TanquePiscicolaCollection.js"></script>
+<script src="models/ActividadeNull.js"></script>
+<script src="models/ActividadeCultivo.js"></script>
+<script src="models/CultivoCollection.js"></script>
+<script src="models/ActividadeRes.js"></script>
+<script src="models/ResCollection.js"></script>
+<script src="models/ActividadeAbastecimento.js"></script>
+<script src="models/ActividadeEnergia.js"></script>
+<script src="models/ActividadeIndustria.js"></script>
+<script src="models/ActividadePecuaria.js"></script>
+<script src="models/ActividadePiscicultura.js"></script>
+<script src="models/ActividadeRegadia.js"></script>
+<script src="models/ActividadeSaneamento.js"></script>
+<script src="models/ActividadesSchema.js"></script>
+
+<script src="models/Where.js"></script>
+<script src="models/Fonte.js"></script>
+<script src="models/FonteCollection.js"></script>
+<script src="models/Licencia.js"></script>
+<script src="models/LicenciaCollection.js"></script>
+<script src="models/Utente.js"></script>
+<script src="models/Exploracao.js"></script>
+<script src="models/ExploracaoCollection.js"></script>
+<script src="models/Setting.js"></script>
+
+<script src="views/common/SelectLocationView.js"></script>
+<script src="views/search/MapView.js"></script>
+<script src="views/search/FiltersView.js"></script>
+<script src="views/search/ButtonExportXLSView.js"></script>
+<script src="views/search/ButtonExportSHPView.js"></script>
+
+<script src="lib/excel-libs/xlsx.core.min.js"></script>
+<script src="lib/excel-libs/jszip.min.js"></script>
+<script src="lib/excel-libs/FileSaver.js"></script>
+
+<script src="offline/MapConfig.js"></script>
+<script src="offline/LayerStyle.js"></script>
+<script src="offline/config-layers.js"></script>
+<script src="offline/FitToBounds.js"></script>
+<script src="offline/offline.js"></script>
+<script src="offline/LayerConfig.js"></script>
+
+<script src="lib/shpwrite.js"></script>
+
+<script src="pendentes.js"></script>
+
+<script src="views/pendentes/View1.js"></script>
+<script src="MyWorkflow.js"></script>
+
+
+</body>
+</html>
