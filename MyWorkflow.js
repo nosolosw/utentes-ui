@@ -23,17 +23,33 @@ var MyWorkflow = {
     fixMenu: function() {
         var user = this.getUser();
 
-        if (['secretaria', 'admin'].indexOf(user) == -1) {
-            var adicionar = document.getElementById('new');
-            adicionar.remove();
+        var pendentes = this.createMenu('pendentes', 'pendentes.html', 'PENDENTES');
+        document.getElementById('new').parentNode.before(pendentes);
+
+        if (['admin', 'administrativo'].indexOf(user) !== -1) {
+            var pendentes = this.createMenu('proceso-new', 'proceso-new.html', 'CRIAR');
+            document.getElementById('utentes').parentNode.before(pendentes);
         }
 
-        var pendentes = document.createElement('a');
-        pendentes.classList.add('col-xs-1', 'pull-right', 'text-center');
-        pendentes.href = '/static/utentes-ui/licencias.html';
-        pendentes.innerHTML = '<strong id="licencias">LICENCIAS</strong>';
-        var search = document.getElementById('search').parentNode;
-        search.after(pendentes);
+        if (['admin'].indexOf(user) === -1) {
+            document.getElementById('new').parentNode.remove();
+            document.getElementById('gps').parentNode.remove();
+
+        }
+
+        var activeItem = document.querySelectorAll('menu a.active');
+        activeItem.length && activeItem[0].classList.remove('active');
+        var currentHREF = window.location.pathname.split("/").pop();
+        var activeItem = document.querySelectorAll(`menu a[href="${currentHREF}"]`)[0];
+        activeItem.classList.add('active');
+    },
+
+    createMenu: function(id, href, title) {
+        var menuItem = document.createElement('a');
+        menuItem.classList.add('col-xs-1', 'pull-right', 'text-center');
+        menuItem.href = href;
+        menuItem.innerHTML = `<strong id="${id}">${title}</strong>`;
+        return menuItem;
     },
 
     fixComboEstado: function(where, exploracaos, domains) {
@@ -64,6 +80,13 @@ var MyWorkflow = {
 
             exploracaos.reset(filtered);
             where.trigger('change', where);
+
+            if (this.activeView === undefined) {
+                console.log('und');
+                this.activeView = this.whichView(exploracaos.at(0));
+                document.getElementById('insert-data').appendChild(this.activeView.render().el);
+            }
+
         });
     },
 
@@ -77,16 +100,38 @@ var MyWorkflow = {
         document.getElementById('projects').addEventListener('click', (e) => {
             if (e.target.tagName.toLowerCase() === 'a') {
                 var exp_id = e.target.parentNode.parentNode.id.replace('exp_id-', '');
-                this.renderView(exp_id);
+                var exp = exploracaos.findWhere({'exp_id': exp_id});
+                this.renderView(exp);
             }
             return false;
         });
     },
 
-    renderView: function(exp_id) {
-        console.log(this);
-        document.getElementById('insert-data').innerHTML = exp_id;
+    renderView: function(exp) {
+        this.activeView.remove();
+        this.activeView = this.whichView(exp);
+        document.getElementById('insert-data').appendChild(this.activeView.render().el);
     },
+
+    whichView: function(exp) {
+        var lics = exp.get('licencias');
+        var state1 = lics.at(0) && lics.at(0).get('estado');
+        var state2 = lics.at(1) && lics.at(1).get('estado');
+        var user = this.getUser();
+        var view = null;
+
+        if ((user === 'administrativo') || (user === 'secretaria')) {
+            view = new Backbone.SIXHIARA.View1({
+                model: exp,
+            });
+        } else {
+            view = new Backbone.SIXHIARA.View1({
+                model: exp,
+            });
+        }
+
+        return view;
+    }
 };
 
 
@@ -257,3 +302,13 @@ var json_estados = [
         'roles': ['admin', 'administrativo', 'financieiro', 'secretaria', 'tecnico', 'juridico'],
     }
 ];
+
+var wf = Object.create(MyWorkflow);
+
+$(document).ready(function() {
+    wf.fixMenu();
+    if (window.location.pathname.split("/").pop() === 'pendentes.html') {
+        wf.fixComboEstado(where, exploracaos, domains);
+        wf.init();
+    }
+});
