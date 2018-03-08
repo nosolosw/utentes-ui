@@ -40,6 +40,9 @@ var MyWorkflow = {
         var activeItem = document.querySelectorAll('menu a.active');
         activeItem.length && activeItem[0].classList.remove('active');
         var currentHREF = window.location.pathname.split("/").pop();
+        if (currentHREF === 'exploracao-show.html') {
+            return;
+        }
         var activeItem = document.querySelectorAll(`menu a[href="${currentHREF}"]`)[0];
         activeItem.classList.add('active');
     },
@@ -82,8 +85,10 @@ var MyWorkflow = {
             where.trigger('change', where);
 
             if (this.activeView === undefined) {
-                console.log('und');
-                this.activeView = this.whichView(exploracaos.at(0));
+                var viewClass = this.whichView(exploracaos.at(0));
+                this.activeView = new viewClass({
+                    model: exploracaos.at(0),
+                });
                 document.getElementById('insert-data').appendChild(this.activeView.render().el);
             }
 
@@ -108,30 +113,95 @@ var MyWorkflow = {
     },
 
     renderView: function(exp) {
-        this.activeView.remove();
-        this.activeView = this.whichView(exp);
+        this.activeView && this.activeView.remove && this.activeView.remove();
+        var viewClass = this.whichView(exploracaos.at(0));
+        this.activeView = new viewClass({
+            model: exploracaos.at(0),
+        });
         document.getElementById('insert-data').appendChild(this.activeView.render().el);
     },
 
-    whichView: function(exp) {
+    whichView: function(exp, next) {
         var lics = exp.get('licencias');
-        var state1 = lics.at(0) && lics.at(0).get('estado');
-        var state2 = lics.at(1) && lics.at(1).get('estado');
-        var user = this.getUser();
-        var view = null;
+        var state1 = (lics.at(0) && lics.at(0).get('estado')) || 'No existe';
+        var state2 = (lics.at(1) && lics.at(1).get('estado')) || 'No existe';
 
-        if ((user === 'administrativo') || (user === 'secretaria')) {
-            view = new Backbone.SIXHIARA.View1({
-                model: exp,
-            });
-        } else {
-            view = new Backbone.SIXHIARA.View1({
-                model: exp,
-            });
+        state1 = state1 !== 'No existe' ? state1 : state2;
+
+        var user = this.getUser();
+
+
+
+        // if (state1 === 'No existe') {
+        //     // user == administrativo || admin
+        //     if (next == 'Bien') {
+        //         return 'Pendente de revisão da solicitação (Direcção)';
+        //     } else {
+        //         return 'Irregular' || 'Pendente de solicitação do utente';
+        //     }
+        // }
+
+        if (state1 === 'Pendente de revisão da solicitação (Direcção)') {
+            // user === secretaria || admin
+            return Backbone.SIXHIARA.ViewSecretaria1
         }
 
-        return view;
+        if (state1 === 'Pendente de revisão da solicitação (D. Jurídico)') {
+            if (user === 'juridico') {
+                return Backbone.SIXHIARA.ViewJuridico1;
+            };
+            if (user === 'tecnico') {
+                return Backbone.SIXHIARA.ViewJuridico1NotEditable;
+            };
+        }
+
+        if ((user === 'administrativo') || (user === 'secretaria')) {
+            return Backbone.SIXHIARA.View1;
+        }
+
+        return Backbone.SIXHIARA.UpsView;
+
+
+    },
+
+
+    /*
+    TODO: Esto debería ir en MyWorkflow
+    * Tiene sentido tener un estado para la licencia y otro estado para la explotación/workflow
+    * Podría haber una tabla workflow que mantuviera todos los cambios. Iría con fk sobre explotación y la explotación sólo tendría en cuenta el último
+
+    Si no en este punto tendría que crear la licencia(s), aunque fuera empty, setear
+    {
+    lic_tipo: 'Desconhecido',
+    lic_nro: Inventar,
+    estado: nextState,
+    exploracao: la nueva explotación
     }
+    Con una tabla de requerimento esto no es necesario, sigue un flujo distinto, y le podría poner el estado directamente al requerimento
+    */
+    whichNextState: function(currentState, data) {
+        // Igual en lugar de currentState se le puede pasar la explotación
+        if (currentState === 'Não existe') {
+            return this.nextStateAfterNoExiste(data)
+        }
+    },
+
+    nextStateAfterNoExiste: function(data) {
+        // is usar no es admin o administrativo error
+        var nextState = undefined;
+        if (data.target.id === 'bt-ok') {
+            nextState = 'Pendente de revisão da solicitação (Direcção)';
+        }
+        if (data.target.id === 'bt-falta') {
+            nextState = 'Pendente de solicitação do utente';
+        }
+        if (data.target.id === 'bt-no') {
+            // igual el administrativo no debería tener permiso para esta opción
+            nextState = 'Não aprovada';
+        }
+        return nextState;
+    },
+
 };
 
 

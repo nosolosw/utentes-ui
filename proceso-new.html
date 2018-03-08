@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <title>Gestão de Utentes</title>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="base.css" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+
+  <div class="container-fluid">
+
+    <menu class="row">
+    </menu>
+
+    <div class="row">
+
+      <div class="col-xs-offset-2 col-xs-8">
+
+        <div class="row text-center">
+          <h1 class="col-xs-12">Nova requirimento de licencia
+          </h1>
+        </div>
+
+        <div class="row">
+          <form class="col-xs-12">
+                    <div class="btn-group btn-group-justified" role="group" style="margin: 0px 5px 5px 5px">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default">Subir doc</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default">Ver doc</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group">
+                        <label for="exp_name">Nome</label>
+                        <input type="text" class="form-control widget" id="exp_name" required>
+                      </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="carta" type="checkbox" value="">
+                                Carta de requerimento
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="ficha" type="checkbox" value="">
+                                Ficha de pedido preenchida
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="certificado" type="checkbox" value="">
+                                Certificado de registro comercial
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="duat" type="checkbox" value="">
+                                DUAT
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="licencia_ambiental" type="checkbox" value="">
+                                Licença Ambiental (Se é preciso)
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="mapa" type="checkbox" value="">
+                                Mapa de localização
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input id="licencia_apertura" type="checkbox" value="">
+                                Licença de apertura de poço/furo (So para licenças subterrâneas)
+                            </label>
+                        </div>
+
+                    </div> <!-- div.row -->
+
+                    <div class="row">
+                      <div class="form-group">
+                        <label for="observacio">Observações <i class="fa fa-question-circle" data-toggle="tooltip" title="Debe escribir un comentario de al menos 10 caracteres"></i></label>
+                        <textarea class="form-control widget" id="observacio" rows="5">
+                          Pensar si con esto llega. O si hay que ponerlo en una modal al darle a los botones. O si estos comentarios son distintos a los asociados al cambio de estado.
+                        </textarea>
+                      </div>
+                    </div>
+                    <p>
+                      <a href="https://help.github.com/articles/merging-a-pull-request/#merging-a-pull-request-on-github">Inspiración</a>
+                      <ul>
+                        <li>Se podría tener un único botón que a la vez sea un combo. Seleccionas la operación 'Ok', 'Falta documentación', 'No aprobada' y click en el botón</li>
+                        <li>El botón podría tener preseleccionada la opción más común o estar en blanco y no dejarte clicar sin seleccionar algo antes</li>
+                        <li>Podría haber un botón de ok, y otro botón con un combo de porqué deniegas</li>
+                        <li>El fondo del botón Rojo / Verde podría dar una indicación visual de lo que va a pasar</li>
+                        <li>Un tooltip podría dar info de lo que va a pasar</li>
+                        <li>El comentario podría estar como un widget visible desde el principio o salir a posteri, tras hacer click en el botón, tienes que escribir el mensaje y darle a un botón confirmar. GitHub lo hace así.</li>
+                        <li>Pídeme que te enseñe la interfaz de github para aceptar/denegar PR</li>
+                      </ul>
+                    </p>
+                    <div id="js-btns-next" class="row" style="margin: 5px 5px 0px 5px">
+                        <button id="bt-ok" type="button" class="btn btn-default">Completa</button>
+                        <button id="bt-falta" type="button" class="btn btn-primary">Incompleta - Falta documentación</button>
+                        <button id="bt-no" type="button" class="btn btn-primary">Incompleta - No aprobada</button>
+                    </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- modals -->
+
+<script type="text/template" id="fonte-subterranea-modal">
+  <!-- modal fonte subterránea -->
+  <div class="modal fade" id="fonteSubModal" tabindex="-1" role="dialog" aria-labelledby="fonteSubModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fonteSubModalLabel">Fonte subterrânea</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <input type="hidden" id="tipo_agua" value="Subterrânea" class="col-xs-12 widget"/>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-5">
+                <label for="tipo_fonte">Tipo de fonte</label>
+                <select class="form-control widget" id="tipo_fonte"></select>
+              </div>
+              <div class="form-group col-xs-5">
+                <label for="c_requerid">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></label>
+                <input type="text" class="form-control widget-number" id="c_soli" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" id="okButton">Aceitar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="fonte-superficial-modal">
+  <!-- modal fonte superficial -->
+  <div class="modal fade" id="fonteSupModal" tabindex="-1" role="dialog" aria-labelledby="fonteSupModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="fonteSupModalLabel">Fonte superficial</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <input type="hidden" id="tipo_agua" value="Superficial" class="col-xs-1 widget"/>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-5">
+                <label for="tipo_fonte">Tipo de fonte</label>
+                <select class="form-control widget" id="tipo_fonte"></select>
+              </div>
+              <div class="form-group col-xs-5">
+                <label for="c_requerid">Consumo solicitado <i class="units">(m<sup>3</sup>/mês)</i></label>
+                <input type="text" class="form-control widget-number" id="c_soli" pattern="[0-9]{1,8}([,][0-9]{1,2})?">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10">
+                <label for="observacio">Observaçôes</label>
+                <textarea class="form-control widget" id="observacio" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" id="okButton">Aceitar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- javascript -->
+<script src="node-interaction.js"></script>
+<script src="lib/jquery/jquery-1.12.0.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="lib/json2.js"></script>
+<script src="lib/underscore/underscore-min.js"></script>
+<script src="lib/backbone/backbone-min.js"></script>
+
+<script src="lib/moment-2.11.2/moment-with-locales.js"></script>
+<script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
+<script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
+<script src="lib/formatter/formatter.js"></script>
+
+<script src="lib/schema-validator/validator.js"></script>
+
+<script src="lib/backbone-geojson/Feature.js"></script>
+<script src="lib/backbone-geojson/FeatureCollection.js"></script>
+
+<script src="lib/backbone-uilib/models/Domain.js"></script>
+<script src="lib/backbone-uilib/models/DomainCollection.js"></script>
+<script src="lib/backbone-uilib/views/OptionView.js"></script>
+<script src="lib/backbone-uilib/views/SelectView.js"></script>
+<script src="lib/backbone-uilib/views/WidgetsView.js"></script>
+<script src="lib/backbone-uilib/views/BaseView.js"></script>
+<script src="lib/backbone-uilib/views/ModalView.js"></script>
+
+<script src="views/common/NavBarView.js"></script>
+<script src="views/common/ConfigModalView.js"></script>
+<script src="Config.js"></script>
+
+<script src="models/Fonte.js"></script>
+<script src="models/FonteSchema.js"></script>
+<script src="models/FonteCollection.js"></script>
+<script src="models/TanquePiscicola.js"></script>
+<script src="models/TanquePiscicolaCollection.js"></script>
+<script src="models/Licencia.js"></script>
+<script src="models/LicenciaSchema.js"></script>
+<script src="models/LicenciaCollection.js"></script>
+<script src="models/Utente.js"></script>
+<script src="models/UtenteSchema.js"></script>
+<script src="models/UtenteCollection.js"></script>
+<script src="models/ActividadeRes.js"></script>
+<script src="models/ResCollection.js"></script>
+<script src="models/ActividadeNull.js"></script>
+<script src="models/ActividadeCultivo.js"></script>
+<script src="models/CultivoCollection.js"></script>
+<script src="models/ActividadeNull.js"></script>
+<script src="models/ActividadeAbastecimento.js"></script>
+<script src="models/ActividadeEnergia.js"></script>
+<script src="models/ActividadeIndustria.js"></script>
+<script src="models/ActividadePecuaria.js"></script>
+<script src="models/ActividadePiscicultura.js"></script>
+<script src="models/CultivoCollection.js"></script>
+<script src="models/ActividadeRegadia.js"></script>
+<script src="models/ActividadeSaneamento.js"></script>
+<script src="models/ActividadesSchema.js"></script>
+<script src="models/Exploracao.js"></script>
+<script src="models/ExploracaoSchema.js"></script>
+<script src="models/ExploracaoCollection.js"></script>
+
+<script src="views/common/ModalTooltipEstadoLicenciaView.js"></script>
+<script src="views/common/SelectLocationView.js"></script>
+<script src="views/common/SelectBaciaView.js"></script>
+<script src="views/common/ButtonSaveView.js"></script>
+<script src="views/common/SelectActividadeView.js"></script>
+<script src="views/common/SelectUtenteView.js"></script>
+<script src="views/common/RowDeleteButtonView.js"></script>
+<script src="views/new/RowFonteView.js"></script>
+<script src="views/common/TableView.js"></script>
+<script src="views/new/LicenseView.js"></script>
+
+<script src="models/Setting.js"></script>
+
+<script src="proceso-new.js"></script>
+
+<script src="MyWorkflow.js"></script>
+</body>
+</html>
