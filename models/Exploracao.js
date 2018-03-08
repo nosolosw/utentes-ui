@@ -340,7 +340,8 @@ Backbone.SIXHIARA.Exploracao = Backbone.GeoJson.Feature.extend({
             if (response.actividade) {
                 response.actividade = new Backbone.SIXHIARA.ActividadesFactory[response.actividade.tipo](response.actividade, {parse:true});
             } else {
-                response.actividade = new Backbone.Model();
+                // Debería ser una factoría de verdad para evitar este if
+                response.actividade = new Backbone.SIXHIARA.ActividadeNull();
             }
         }
 
