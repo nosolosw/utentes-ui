@@ -21,7 +21,7 @@ Backbone.SIXHIARA.ViewSecretaria1 = Backbone.View.extend({
                 <button type="button" class="btn btn-default">Subir doc</button>
             </div>
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default">Ver doc</button>
+                <button id="bt-ver-doc" type="button" class="btn btn-default">Ver doc</button>
             </div>
         </div>
 
@@ -88,7 +88,7 @@ Backbone.SIXHIARA.ViewSecretaria1 = Backbone.View.extend({
                       <div class="form-group">
                         <label for="observacio">Observações</label>
                         <textarea class="form-control widget" id="observacio" rows="5">
-                          <%- observacio %>
+                          <%- comments[0]['text'] %>
                         </textarea>
                       </div>
                     </div>

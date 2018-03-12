@@ -94,6 +94,7 @@ var MyWorkflow = {
                     model: exploracaos.at(0),
                 });
                 document.getElementById('insert-data').appendChild(this.activeView.render().el);
+                this.activeView.init && this.activeView.init();
             }
         });
     },
@@ -124,14 +125,15 @@ var MyWorkflow = {
             model: exp,
         });
         document.getElementById('insert-data').appendChild(this.activeView.render().el);
+        this.activeView.init && this.activeView.init();
     },
 
     getCurrentState: function(exp) {
         var lics = exp.get('licencias');
-        var state1 = (lics.at(0) && lics.at(0).get('estado')) || 'No existe';
-        var state2 = (lics.at(1) && lics.at(1).get('estado')) || 'No existe';
+        var state1 = (lics.at(0) && lics.at(0).get('estado')) || 'Não existe';
+        var state2 = (lics.at(1) && lics.at(1).get('estado')) || 'Não existe';
 
-        state1 = state1 !== 'No existe' ? state1 : state2;
+        state1 = state1 !== 'Não existe' ? state1 : state2;
 
         var json = JSON.parse(exp.get('observacio')) || {};
         state1 = json['state'] || state1;
@@ -162,8 +164,13 @@ var MyWorkflow = {
                 return Backbone.SIXHIARA.ViewJuridico1;
             };
             if (user === 'tecnico') {
-                return Backbone.SIXHIARA.ViewJuridico1NotEditable;
+                return Backbone.SIXHIARA.ViewJuridicoNotEditable1;
             };
+        }
+
+        if (state1 === 'Pendente de revisão da solicitação (Chefe DT)') {
+            // admin, tecnico
+            return Backbone.SIXHIARA.ViewTecnico1;
         }
 
         if ((user === 'administrativo') || (user === 'secretaria')) {
@@ -199,6 +206,10 @@ var MyWorkflow = {
         if (currentState === 'Pendente de revisão da solicitação (Direcção)') {
             return this.nextStateAfterPteRevDir(data)
         }
+
+        if (currentState === 'Pendente de revisão da solicitação (D. Jurídico)') {
+            return this.nextStateAfterPteRevJuri(data);
+        }
     },
 
     nextStateAfterNoExiste: function(data) {
@@ -222,6 +233,20 @@ var MyWorkflow = {
         var nextState = undefined;
         if (data.target.id === 'bt-ok') {
             nextState = 'Pendente de revisão da solicitação (D. Jurídico)';
+        }
+
+        if (data.target.id === 'bt-no') {
+            // igual secretaria no debería tener permiso para esta opción
+            nextState = 'Não aprovada';
+        }
+        return nextState;
+    },
+
+    nextStateAfterPteRevJuri: function(data) {
+        // si user no es admin o juridico error
+        var nextState = undefined;
+        if (data.target.id === 'bt-ok') {
+            nextState = 'Pendente de revisão da solicitação (Chefe DT)';
         }
 
         if (data.target.id === 'bt-no') {
@@ -333,7 +358,7 @@ var json_estados = [
             'Norte',
             'Sul'
         ],
-        'roles': ['admin', 'juridico'],
+        'roles': ['admin', 'tecnico', 'juridico'],
     },
     {
         'category': 'licencia_estado',
@@ -398,7 +423,7 @@ var json_estados = [
             'Norte',
             'Sul'
         ],
-        'roles': ['admin', 'administrativo', 'financieiro', 'secretaria', 'tecnico', 'juridico'],
+        'roles': [],
     }
 ];
 

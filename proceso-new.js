@@ -38,7 +38,11 @@ function fillExploracao(e) {
     var observacio = {};
     document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
         observacio[input.id] = input.checked;
+        observacio[input.id + '_valido'] = false;
     });
+
+    var nextState = wf.whichNextState('Não existe', e);
+
     observacio['comments'] = observacio['comments'] || [];
     observacio['comments'].push({
       'create_at': new Date(),
@@ -47,7 +51,7 @@ function fillExploracao(e) {
       'state': nextState,
     });
 
-    var nextState = wf.whichNextState('Não existe', e);
+
     observacio['state'] = nextState;
 
     var exploracao = new Backbone.SIXHIARA.Exploracao();
