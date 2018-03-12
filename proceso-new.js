@@ -1,6 +1,5 @@
 
 
-
 function init() {
     document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
         input.addEventListener('change', enableOkBt);
@@ -40,7 +39,13 @@ function fillExploracao(e) {
     document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
         observacio[input.id] = input.checked;
     });
-    observacio['observacio'] = document.getElementById('observacio').value;
+    observacio['comments'] = observacio['comments'] || [];
+    observacio['comments'].push({
+      'create_at': new Date(),
+      'author': wf.getUser(),
+      'text': document.getElementById('observacio').value,
+      'state': nextState,
+    });
 
     var nextState = wf.whichNextState('Não existe', e);
     observacio['state'] = nextState;

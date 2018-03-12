@@ -66,16 +66,20 @@ var MyWorkflow = {
                 }
             };
         });
+    },
 
+    fixVisibleProjects: function(where, exploracaos, domains) {
         exploracaos.on('sync', () => {
             var filtered = exploracaos.filter((e) => {
-                var lics = e.get('licencias');
-                var states = lics.pluck('estado');
-                for (s of states) {
-                    if (this.visibleState(s)) {
-                        return true;
-                    }
-                }
+                // var lics = e.get('licencias');
+                // var states = lics.pluck('estado');
+                // for (s of states) {
+                //     if (this.visibleState(s)) {
+                //         return true;
+                //     }
+                // }
+                var state = this.getCurrentState(e);
+                return this.visibleState(state);
             });
             var counter = document.getElementById('counter');
             // # exp que puede ver el utente / # total exp en la bd
@@ -91,7 +95,6 @@ var MyWorkflow = {
                 });
                 document.getElementById('insert-data').appendChild(this.activeView.render().el);
             }
-
         });
     },
 
@@ -102,6 +105,8 @@ var MyWorkflow = {
     },
 
     init: function() {
+        wf.fixComboEstado(where, exploracaos, domains);
+        wf.fixVisibleProjects(where, exploracaos, domains);
         document.getElementById('projects').addEventListener('click', (e) => {
             if (e.target.tagName.toLowerCase() === 'a') {
                 var exp_id = e.target.parentNode.parentNode.id.replace('exp_id-', '');
@@ -114,23 +119,29 @@ var MyWorkflow = {
 
     renderView: function(exp) {
         this.activeView && this.activeView.remove && this.activeView.remove();
-        var viewClass = this.whichView(exploracaos.at(0));
+        var viewClass = this.whichView(exp);
         this.activeView = new viewClass({
-            model: exploracaos.at(0),
+            model: exp,
         });
         document.getElementById('insert-data').appendChild(this.activeView.render().el);
     },
 
-    whichView: function(exp, next) {
+    getCurrentState: function(exp) {
         var lics = exp.get('licencias');
         var state1 = (lics.at(0) && lics.at(0).get('estado')) || 'No existe';
         var state2 = (lics.at(1) && lics.at(1).get('estado')) || 'No existe';
 
         state1 = state1 !== 'No existe' ? state1 : state2;
 
+        var json = JSON.parse(exp.get('observacio')) || {};
+        state1 = json['state'] || state1;
+        return state1;
+    },
+
+    whichView: function(exp, next) {
+
+        var state1 = this.getCurrentState(exp);
         var user = this.getUser();
-
-
 
         // if (state1 === 'No existe') {
         //     // user == administrativo || admin
@@ -184,10 +195,14 @@ var MyWorkflow = {
         if (currentState === 'Não existe') {
             return this.nextStateAfterNoExiste(data)
         }
+
+        if (currentState === 'Pendente de revisão da solicitação (Direcção)') {
+            return this.nextStateAfterPteRevDir(data)
+        }
     },
 
     nextStateAfterNoExiste: function(data) {
-        // is usar no es admin o administrativo error
+        // si user no es admin o administrativo error
         var nextState = undefined;
         if (data.target.id === 'bt-ok') {
             nextState = 'Pendente de revisão da solicitação (Direcção)';
@@ -196,11 +211,25 @@ var MyWorkflow = {
             nextState = 'Pendente de solicitação do utente';
         }
         if (data.target.id === 'bt-no') {
-            // igual el administrativo no debería tener permiso para esta opción
+            // igual administrativo no debería tener permiso para esta opción
             nextState = 'Não aprovada';
         }
         return nextState;
     },
+
+    nextStateAfterPteRevDir: function(data) {
+        // si user no es admin o secretaria error
+        var nextState = undefined;
+        if (data.target.id === 'bt-ok') {
+            nextState = 'Pendente de revisão da solicitação (D. Jurídico)';
+        }
+
+        if (data.target.id === 'bt-no') {
+            // igual secretaria no debería tener permiso para esta opción
+            nextState = 'Não aprovada';
+        }
+        return nextState;
+    }
 
 };
 
@@ -378,7 +407,6 @@ var wf = Object.create(MyWorkflow);
 $(document).ready(function() {
     wf.fixMenu();
     if (window.location.pathname.split("/").pop() === 'pendentes.html') {
-        wf.fixComboEstado(where, exploracaos, domains);
         wf.init();
     }
 });
