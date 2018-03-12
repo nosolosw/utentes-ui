@@ -29,64 +29,85 @@ utentes.fetch({
     }
 });
 
+
+
 // model to save
 var exploracao = new Backbone.SIXHIARA.Exploracao();
+var params = new URLSearchParams(document.location.search.substring(1));
+var exp_id = params.get('exp_id');
+if (exp_id) {
+    exploracao.set('id', exp_id, {silent: true});
+    exploracao.fetch({
+        parse: true,
+        success: function(){
+            doIt();
+        },
+        error: function(){
+            doIt();
+        }
+    });
+} else {
+    doIt();
+}
 
-// save action
-new Backbone.SIXHIARA.ButtonSaveView({
-    el: $('#save-button'),
-    model: exploracao
-}).render();
+function doIt() {
+    // save action
+    new Backbone.SIXHIARA.ButtonSaveView({
+        el: $('#save-button'),
+        model: exploracao
+    }).render();
 
-// page info
-new Backbone.UILib.WidgetsView({
-    el: $('#info'),
-    model: exploracao
-}).render();
+    // page info
+    new Backbone.UILib.WidgetsView({
+        el: $('#info'),
+        model: exploracao
+    }).render();
 
-// page utente
+    // page utente
+    new Backbone.UILib.WidgetsView({
+        el: $('#utente'),
+        model: exploracao.get('utente')
+    }).render();
+
+    // page licencias & fontes: superficial
+    var licenseSupView = new Backbone.SIXHIARA.LicenseView({
+        el: $('#licencia-superficial'),
+        model: exploracao,
+        domains: domains,
+        lic_tipo: 'Superficial',
+        selectorButtonAddFonte: '#fonte-superficial',
+        selectorModalFonte: '#fonte-superficial-modal',
+    }).render();
+
+    // page licencias & fontes: subterranea
+    var licenseSubView = new Backbone.SIXHIARA.LicenseView({
+        el: $('#licencia-subterranea'),
+        model: exploracao,
+        domains: domains,
+        lic_tipo: 'Subterrânea',
+        selectorButtonAddFonte: '#fonte-subterranea',
+        selectorModalFonte: '#fonte-subterranea-modal',
+    }).render();
+
+    // page licencias & fontes: fontes table
+    var tableFontesView = new Backbone.SIXHIARA.TableView({
+        el: $('#fontes'),
+        collection: exploracao.get('fontes'),
+        domains: domains,
+        rowViewModel: Backbone.SIXHIARA.RowFonteView,
+        noDataText: 'NON HAI FONTES',
+    }).render();
+    tableFontesView.listenTo(exploracao.get('fontes'), 'update', function(model, collection, options){
+        this.update(exploracao.get('fontes'));
+    });
+}
+
 function fillSelectUtente(){
     new Backbone.SIXHIARA.SelectUtenteView({
         el: $('#utente'),
         collection: utentes
     }).render();
 }
-new Backbone.UILib.WidgetsView({
-    el: $('#utente'),
-    model: exploracao.get('utente')
-}).render();
-
-// page licencias & fontes: superficial
-var licenseSupView = new Backbone.SIXHIARA.LicenseView({
-    el: $('#licencia-superficial'),
-    model: exploracao,
-    domains: domains,
-    lic_tipo: 'Superficial',
-    selectorButtonAddFonte: '#fonte-superficial',
-    selectorModalFonte: '#fonte-superficial-modal',
-}).render();
-
-// page licencias & fontes: subterranea
-var licenseSubView = new Backbone.SIXHIARA.LicenseView({
-    el: $('#licencia-subterranea'),
-    model: exploracao,
-    domains: domains,
-    lic_tipo: 'Subterrânea',
-    selectorButtonAddFonte: '#fonte-subterranea',
-    selectorModalFonte: '#fonte-subterranea-modal',
-}).render();
-
-// page licencias & fontes: fontes table
-var tableFontesView = new Backbone.SIXHIARA.TableView({
-    el: $('#fontes'),
-    collection: exploracao.get('fontes'),
-    domains: domains,
-    rowViewModel: Backbone.SIXHIARA.RowFonteView,
-    noDataText: 'NON HAI FONTES',
-}).render();
-tableFontesView.listenTo(exploracao.get('fontes'), 'update', function(model, collection, options){
-    this.update(exploracao.get('fontes'));
-});
 
 function fillComponentsWithDomains(){
 
