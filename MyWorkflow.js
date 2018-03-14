@@ -164,6 +164,11 @@ var MyWorkflow = {
             return Backbone.SIXHIARA.ViewTecnico1;
         }
 
+        if (state1 === 'Pendente da emisão (D. Jurídico)') {
+            // admin, juridico
+            return Backbone.SIXHIARA.ViewJuridico2;
+        }
+
         if ((user === 'administrativo') || (user === 'secretaria')) {
             return Backbone.SIXHIARA.View1;
         }
@@ -204,6 +209,10 @@ var MyWorkflow = {
 
         if (currentState === 'Pendente de revisão da solicitação (Chefe DT)') {
             return this.nextStateAfterPteRevDT(data);
+        }
+
+        if (state1 === 'Pendente da emisão (D. Jurídico)') {
+            return this.nextStatePteEmiJuri(data);
         }
     },
 
@@ -263,12 +272,37 @@ var MyWorkflow = {
             nextState = 'Não aprovada';
         }
         return nextState;
-    }
+    },
+
+    nextStatePteEmiJuri: function(data) {
+        // si user no es admin o tecnico error
+        var nextState = undefined;
+        if (data.target.id === 'bt-ok') {
+            nextState = 'Pendente da firma (Direcção)';
+        }
+
+        if (data.target.id === 'bt-no') {
+            // igual secretaria no debería tener permiso para esta opción
+            nextState = 'Não aprovada';
+        }
+        return nextState;
+    },
 
 };
 
 
 var json_estados = [
+    {
+        'category': 'licencia_estado',
+        'key': "Não existe",
+        'value': "BORRAR",
+        'ordering': 0,
+        'parent': 'precampo',
+        'tooltip': null,
+        'app': null,
+        'roles': [],
+    },
+
     {
         'category': 'licencia_estado',
         'key': "",

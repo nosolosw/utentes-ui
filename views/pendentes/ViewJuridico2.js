@@ -1,5 +1,5 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
-Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
+Backbone.SIXHIARA.ViewJuridico2 = Backbone.View.extend({
     tagName:  'div',
 
     // optional, you can assign multiple classes to
@@ -20,17 +20,12 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
                 <button id="bt-ver-doc" type="button" class="btn btn-default">Ver doc</button>
             </div>
             <div class="btn-group" role="group">
-                <a class="btn btn-default" role="button" href="/static/utentes-ui/exploracao-new.html?exp_id=<%- id %>">Adicionar</a>
-            </div>
-            <div class="btn-group" role="group">
                 <a id="bt-ficha" class="btn btn-default" role="button" href="/static/utentes-ui/exploracao-show.html?id=<%- id %>">Ficha</a>
             </div>
             <div class="btn-group" role="group">
-                <a class="btn btn-default" role="button" href="/static/utentes-ui/exploracao-gps.html">GPS</a>
+                <button id="bt-print-license" type="button" class="btn btn-default">Imprimir Licencia</button>
             </div>
         </div>
-
-
 
         <div class="row">
 
@@ -44,29 +39,22 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
 
           <div class="checkbox">
               <label>
-                  <input id="analisis_doc" type="checkbox" value="" <%- analisis_doc ? 'checked' : '' %>>
-                  Análisis da documentação
+                  <input id="juri2_doc_legal" type="checkbox" value="" <%- juri2_doc_legal ? 'checked' : '' %>>
+                  Documentação Legal
               </label>
           </div>
 
           <div class="checkbox">
               <label>
-                  <input id="sol_visita" type="checkbox" value="" <%- sol_visita ? 'checked' : '' %>>
-                  Solicitação da visitoria
-              </label>
-          </div>
-
-          <div class="checkbox">
-              <label>
-                  <input id="parecer_unidade" type="checkbox" value="" <%- parecer_unidade ? 'checked' : '' %>>
-                  Parecer da Unidade
-              </label>
-          </div>
-
-          <div class="checkbox">
-              <label>
-                  <input id="parecer_tecnico" type="checkbox" value="" <%- parecer_tecnico ? 'checked' : '' %>>
+                  <input id="juri2_parecer_tecnico" type="checkbox" value="" <%- juri2_parecer_tecnico ? 'checked' : '' %>>
                   Parecer Técnico
+              </label>
+          </div>
+
+          <div class="checkbox">
+              <label>
+                  <input id="juri2_parecer_relevantes" type="checkbox" value="" <%- juri2_parecer_relevantes ? 'checked' : '' %>>
+                  Parecer de Instituções Relevantes
               </label>
           </div>
 
@@ -100,6 +88,18 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
     render: function() {
         var json = this.model.toJSON();
         Object.assign(json, JSON.parse(this.model.get('observacio')));
+
+        Object.assign(json, {
+            analisis_doc: false,
+            sol_visita: false,
+            parecer_unidade: false,
+            parecer_tecnico: false,
+
+            juri2_doc_legal: false,
+            juri2_parecer_tecnico: false,
+            juri2_parecer_relevantes: false,
+        });
+
         this.$el.html(this.template(json));
         return this;
     },
