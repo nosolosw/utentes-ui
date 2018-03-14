@@ -41,6 +41,19 @@ function fillExploracao(e) {
         observacio[input.id + '_valido'] = false;
     });
 
+    // Para que estén presentes en VistaTecnico1 sin que se rompa nada
+    // y también en VistaJuridico2
+    Object.assign(observacio, {
+        analisis_doc: false,
+        sol_visita: false,
+        parecer_unidade: false,
+        parecer_tecnico: false,
+
+        juri2_doc_legal: false,
+        juri2_parecer_tecnico: false,
+        juri2_parecer_relevantes: false,
+    });
+
     var nextState = wf.whichNextState('Não existe', e);
 
     observacio['comments'] = observacio['comments'] || [];

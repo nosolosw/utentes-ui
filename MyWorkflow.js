@@ -145,15 +145,6 @@ var MyWorkflow = {
         var state1 = this.getCurrentState(exp);
         var user = this.getUser();
 
-        // if (state1 === 'No existe') {
-        //     // user == administrativo || admin
-        //     if (next == 'Bien') {
-        //         return 'Pendente de revisão da solicitação (Direcção)';
-        //     } else {
-        //         return 'Irregular' || 'Pendente de solicitação do utente';
-        //     }
-        // }
-
         if (state1 === 'Pendente de revisão da solicitação (Direcção)') {
             // user === secretaria || admin
             return Backbone.SIXHIARA.ViewSecretaria1
@@ -210,6 +201,10 @@ var MyWorkflow = {
         if (currentState === 'Pendente de revisão da solicitação (D. Jurídico)') {
             return this.nextStateAfterPteRevJuri(data);
         }
+
+        if (currentState === 'Pendente de revisão da solicitação (Chefe DT)') {
+            return this.nextStateAfterPteRevDT(data);
+        }
     },
 
     nextStateAfterNoExiste: function(data) {
@@ -247,6 +242,20 @@ var MyWorkflow = {
         var nextState = undefined;
         if (data.target.id === 'bt-ok') {
             nextState = 'Pendente de revisão da solicitação (Chefe DT)';
+        }
+
+        if (data.target.id === 'bt-no') {
+            // igual secretaria no debería tener permiso para esta opción
+            nextState = 'Não aprovada';
+        }
+        return nextState;
+    },
+
+    nextStateAfterPteRevDT: function(data) {
+        // si user no es admin o tecnico error
+        var nextState = undefined;
+        if (data.target.id === 'bt-ok') {
+            nextState = 'Pendente da emisão (D. Jurídico)';
         }
 
         if (data.target.id === 'bt-no') {

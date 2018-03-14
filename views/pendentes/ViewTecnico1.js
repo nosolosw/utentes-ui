@@ -34,61 +34,39 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
 
         <div class="row">
 
-
+        <form>
           <div class="form-group col-xs-10">
                 <label for="exp_name">Nome</label>
                 <input type="text" class="form-control widget" id="exp_name" value="<%- exp_name %>">
           </div>
 
-          <table class="table table-bordered col-xs-10">
-          <thead>
-          <tr><th>Documento</th><th>Presentado</th><th>Válido</th><th>Adjunto</th></tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Carta de requerimento</td>
-            <td><input id="carta" type="checkbox" value="" <%- carta ? 'checked' : '' %>></td>
-            <td><input id="carta_valido" type="checkbox" value="" <%- carta_valido ? 'checked' : '' %>></td>
-            <td><i class="fa fa-info"></i></td>
-          </tr>
-          <tr>
-            <td>Ficha de pedido preenchida</td>
-            <td><input id="ficha" type="checkbox" value="" <%- ficha ? 'checked' : '' %>></td>
-            <td><input id="ficha_valido" type="checkbox" value="" <%- ficha_valido ? 'checked' : '' %>></td>
-            <td><a href="#">ficha_juan.docx</a></td>
-          </tr>
-          <tr>
-            <td>Certificado de registro comercial</td>
-            <td><input id="certificado" type="checkbox" value="" <%- certificado ? 'checked' : '' %>></td>
-            <td><input id="certificado_valido" type="checkbox" value="" <%- certificado_valido ? 'checked' : '' %>></td>
-            <td><i class="fa fa-info"></i></td>
-          </tr>
-          <tr>
-            <td>DUAT</td>
-            <td><input id="duat" type="checkbox" value="" <%- duat ? 'checked' : '' %>></td>
-            <td><input id="duat_valido" type="checkbox" value="" <%- duat_valido ? 'checked' : '' %>></td>
-            <td><i class="fa fa-info"></i></td>
-          </tr>
-          <tr>
-            <td>Licença Ambiental (Se é preciso)</td>
-            <td><input id="licencia_ambiental" type="checkbox" value="" <%- licencia_ambiental ? 'checked' : '' %>></td>
-            <td><input id="licencia_ambiental_valido" type="checkbox" value="" <%- licencia_ambiental_valido ? 'checked' : '' %>></td>
-            <td><i class="fa fa-info"></i></td>
-          </tr>
-          <tr>
-            <td>Mapa de localização</td>
-            <td><input id="mapa" type="checkbox" value="" <%- mapa ? 'checked' : '' %>></td>
-            <td><input id="mapa_valido" type="checkbox" value="" <%- mapa_valido ? 'checked' : '' %>></td>
-            <td><i class="fa fa-info"></i></td>
-          </tr>
-          <tr>
-            <td>Licença de apertura de poço/furo (So para licenças subterrâneas)</td>
-            <td><input id="licencia_apertura" type="checkbox" value="" <%- licencia_apertura ? 'checked' : '' %>></td>
-            <td><input id="licencia_apertura_valido" type="checkbox" value="" <%- licencia_apertura_valido ? 'checked' : '' %>></td>
-            <td><i class="fa fa-info"></i></td>
-          </tr>
-          </tbody>
-          </table>
+          <div class="checkbox">
+              <label>
+                  <input id="analisis_doc" type="checkbox" value="" <%- analisis_doc ? 'checked' : '' %>>
+                  Análisis da documentação
+              </label>
+          </div>
+
+          <div class="checkbox">
+              <label>
+                  <input id="sol_visita" type="checkbox" value="" <%- sol_visita ? 'checked' : '' %>>
+                  Solicitação da visitoria
+              </label>
+          </div>
+
+          <div class="checkbox">
+              <label>
+                  <input id="parecer_unidade" type="checkbox" value="" <%- parecer_unidade ? 'checked' : '' %>>
+                  Parecer da Unidade
+              </label>
+          </div>
+
+          <div class="checkbox">
+              <label>
+                  <input id="parecer_tecnico" type="checkbox" value="" <%- parecer_tecnico ? 'checked' : '' %>>
+                  Parecer Técnico
+              </label>
+          </div>
 
         </div> <!-- div.row -->
 
@@ -96,11 +74,11 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
                       <div class="form-group">
                         <label for="observacio">Observações</label>
                         <textarea class="form-control widget" id="observacio" rows="5">
-                            <%- comments[0]['text'] %>
+                            <%- comments[comments.length - 1]['text'] %>
                         </textarea>
                       </div>
                     </div>
-
+</form>
                     <div id="js-btns-next" class="row" style="margin: 5px 5px 0px 5px">
                         <!-- TODO. Los "siguientes estados" disponibles no deberían estar harcodeados en el html
                         o bien, todos los botones deberían ser generados en otra parte, o de los dominios se deberían decidir que botones
@@ -119,18 +97,20 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
     // Re-render the title of the todo item.
     render: function() {
         var json = this.model.toJSON();
-        Object.assign(json, JSON.parse(this.model.get('observacio')))
+        Object.assign(json, JSON.parse(this.model.get('observacio')));
         this.$el.html(this.template(json));
-        this.$('table input[type="checkbox"]').filter( (x,i) => !i.id.endsWith('_valido') ).prop('disabled', () => true);
         return this;
     },
 
 
-
+    /*
+    Esto en realidad está por no  usar jquery. Si se hace en render todavía no están en el
+    DOM los elementos y no se puede usar document ¿?. Con jquery en cambio se quedan
+    binded para después al usar this.$
+    */
     init: function() {
-        console.log('foo');
         var self = this;
-        document.querySelectorAll('table input[type="checkbox"]').forEach(function(input){
+        document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
             input.addEventListener('change', self.enableOkBt);
         });
 
@@ -141,20 +121,15 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
             self.fillExploracao(e);
         });
 
-        this.enableOkBt();
+        self.enableOkBt();
 
         $('[data-toggle="tooltip"]').tooltip();
     },
 
     enableOkBt: function() {
         var enable = Array.from(
-            document.querySelectorAll('table input[type="checkbox"]')
-        ).every(input => {
-            if (!input.id.endsWith('_valido')) {
-                return true;
-            }
-            return ['licencia_ambiental_valido', 'licencia_apertura_valido'].indexOf(input.id) !== -1 || input.checked;
-        });
+            document.querySelectorAll('form input[type="checkbox"]')
+        ).every(input => input.checked);
         var observacio = document.getElementById('observacio');
         enable = enable && observacio && observacio.value && observacio.value.length >= 10;
 
@@ -166,6 +141,10 @@ Backbone.SIXHIARA.ViewTecnico1 = Backbone.View.extend({
 
     fillExploracao: function(e) {
         var observacio = JSON.parse(this.model.get('observacio'));
+
+        document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
+            observacio[input.id] = input.checked;
+        });
 
         var nextState = wf.whichNextState(observacio['state'], e);
         observacio['comments'] = observacio['comments'] || [];
