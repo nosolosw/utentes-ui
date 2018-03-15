@@ -88,14 +88,7 @@ var MyWorkflow = {
             exploracaos.reset(filtered);
             where.trigger('change', where);
 
-            if (this.activeView === undefined) {
-                var viewClass = this.whichView(exploracaos.at(0));
-                this.activeView = new viewClass({
-                    model: exploracaos.at(0),
-                });
-                document.getElementById('insert-data').appendChild(this.activeView.render().el);
-                this.activeView.init && this.activeView.init();
-            }
+            this.renderView(exploracaos.at(0));
         });
     },
 
@@ -160,7 +153,10 @@ var MyWorkflow = {
         }
 
         if (state1 === 'Pendente de revisão da solicitação (Chefe DT)') {
-            // admin, tecnico
+            /*
+             admin, tecnico. Hay que ponerlo. Si no, si por ejemplo jurídico
+             pudiera ver este estado se le estaría renderizando esto.
+            */
             return Backbone.SIXHIARA.ViewTecnico1;
         }
 
@@ -169,8 +165,9 @@ var MyWorkflow = {
             return Backbone.SIXHIARA.ViewJuridico2;
         }
 
-        if ((user === 'administrativo') || (user === 'secretaria')) {
-            return Backbone.SIXHIARA.View1;
+        if (state1 === 'Pendente da firma (Direcção)') {
+            // admin, secretaria
+            return Backbone.SIXHIARA.ViewSecretaria2;
         }
 
         return Backbone.SIXHIARA.UpsView;
@@ -195,6 +192,7 @@ var MyWorkflow = {
     */
     whichNextState: function(currentState, data) {
         // Igual en lugar de currentState se le puede pasar la explotación
+
         if (currentState === 'Não existe') {
             return this.nextStateAfterNoExiste(data)
         }
@@ -211,8 +209,12 @@ var MyWorkflow = {
             return this.nextStateAfterPteRevDT(data);
         }
 
-        if (state1 === 'Pendente da emisão (D. Jurídico)') {
+        if (currentState === 'Pendente da emisão (D. Jurídico)') {
             return this.nextStatePteEmiJuri(data);
+        }
+
+        if (currentState === 'Pendente da firma (Direcção)') {
+            return this.nextStatePteFirmaDir(data);
         }
     },
 
@@ -286,6 +288,46 @@ var MyWorkflow = {
             nextState = 'Não aprovada';
         }
         return nextState;
+    },
+
+    nextStatePteFirmaDir: function(data) {
+        // si user no es admin o tecnico error
+        var nextState = undefined;
+        if (data.target.id === 'bt-ok') {
+            nextState = 'Pendente da firma (Direcção)';
+        }
+
+        if (data.target.id === 'bt-no') {
+            nextState = 'Não aprovada';
+        }
+        return nextState;
+    },
+
+
+
+
+    _test_set_state(exp_id, nextState) {
+        var exploracao = exploracaos.findWhere({'exp_id': exp_id});
+        var observacio = JSON.parse(exploracao.get('observacio'));
+        observacio['state'] = nextState;
+
+        exploracao.urlRoot = '/api/requerimento';
+        exploracao.save(
+            {
+                'observacio': observacio,
+            },
+            {
+                'patch': true,
+                'validate': false,
+                'wait': true,
+                'success': function() {
+                    console.log('Los datos se han guardado correctamente');
+                },
+                'error': function() {
+                    console.log('Se ha producido un error. Informe al administrador');
+                },
+            }
+        );
     },
 
 };
@@ -388,7 +430,7 @@ var json_estados = [
             'Norte',
             'Sul'
         ],
-        'roles': ['admin', 'tecnico', 'juridico'],
+        'roles': ['admin', 'tecnico'],
     },
     {
         'category': 'licencia_estado',

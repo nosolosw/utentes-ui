@@ -35,15 +35,10 @@ function enableOkBt() {
 
 
 function fillExploracao(e) {
-    var observacio = {};
-    document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
-        observacio[input.id] = input.checked;
-        observacio[input.id + '_valido'] = false;
-    });
-
+    var exploracao = new Backbone.SIXHIARA.Exploracao();
     // Para que estén presentes en VistaTecnico1 sin que se rompa nada
     // y también en VistaJuridico2
-    Object.assign(observacio, {
+    exploracao.set('observacio', JSON.stringify({
         analisis_doc: false,
         sol_visita: false,
         parecer_unidade: false,
@@ -52,10 +47,11 @@ function fillExploracao(e) {
         juri2_doc_legal: false,
         juri2_parecer_tecnico: false,
         juri2_parecer_relevantes: false,
-    });
+    }), {'silent': true});
 
+
+    var observacio = JSON.parse(exploracao.get('observacio'));
     var nextState = wf.whichNextState('Não existe', e);
-
     observacio['comments'] = observacio['comments'] || [];
     observacio['comments'].push({
       'create_at': new Date(),
@@ -63,23 +59,37 @@ function fillExploracao(e) {
       'text': document.getElementById('observacio').value,
       'state': nextState,
     });
-
-
     observacio['state'] = nextState;
 
-    var exploracao = new Backbone.SIXHIARA.Exploracao();
-    exploracao.urlRoot = '/api/requerimento';
+    document.querySelectorAll('form input[type="checkbox"]').forEach(function(input){
+        observacio[input.id] = input.checked;
+        observacio[input.id + '_valido'] = false;
+    });
 
-    exploracao.save(
-        {
-            'observacio': observacio,
-            'exp_name': document.getElementById('exp_name').value,
-        },
-        {
-            'patch': true,
-            'validate': false
-        }
-    );
+
+
+    exploracao.urlRoot = '/api/requerimento';
+    if (window.confirm(`A explotación vai mudar o seu estado a: ${nextState}`)) {
+        exploracao.save(
+            {
+                'observacio': observacio,
+                'exp_name': document.getElementById('exp_name').value,
+            },
+            {
+                'patch': true,
+                'validate': false,
+                'wait': true,
+                'success': function() {
+                    window.alert('Los datos se han guardado correctamente');
+                    window.location = '/static/utentes-ui/pendentes.html'
+                },
+                'error': function() {
+                    window.alert('Se ha producido un error. Informe al administrador');
+                },
+            }
+        );
+    };
+
 };
 
 

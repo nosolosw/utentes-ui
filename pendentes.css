@@ -5,7 +5,7 @@ body,
 }
 
 .main-content{
-    height: 93%;
+    height: 94%;
 }
 
 #filters,
@@ -14,9 +14,14 @@ body,
     height: 100%;
 }
 
-#insert-data,
+#insert-data {
+    height: 65%;
+    overflow-y: auto;
+}
+
 #map {
-    height: 50%;
+    border-top: 2px solid black;
+    height: 34%;
 }
 
 #filters {
