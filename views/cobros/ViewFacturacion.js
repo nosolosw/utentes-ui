@@ -67,28 +67,28 @@ Backbone.SIXHIARA.ViewFacturacion = Backbone.View.extend({
     <div class="row">
       <div class="form-group col-xs-12">
         <label for="taxa_fixa">Taxa fixa <i class="units">(MZN/mês)</i></label>
-        <input type="text" class="form-control widget-number" id="taxa_fixa" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- taxa_fixa %>">
+        <input type="text" class="form-control widget-number" id="taxa_fixa" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- facturacion[facturacion.length - 1].taxa_fixa %>">
       </div>
       <div class="form-group col-xs-12">
         <label for="taxa_uso">Taxa de uso <i class="units">(MZN/m<sup>3</sup>)</i></label>
-        <input type="text" class="form-control widget-number" id="taxa_uso" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- taxa_uso %>">
+        <input type="text" class="form-control widget-number" id="taxa_uso" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- facturacion[facturacion.length - 1].taxa_uso %>">
       </div>
     </div>
     <div class="row">
     <div class="form-group col-xs-12">
       <label for="iva">IVA <i class="units">(%)</i></label>
-      <input type="number" class="form-control widget-number" id="iva" pattern="[0-9]{1,2}?" disabled value="<%- iva %>">
+      <input type="number" class="form-control widget-number" id="iva" pattern="[0-9]{1,2}?" disabled value="<%- facturacion[facturacion.length - 1].iva %>">
     </div>
       <div class="form-group col-xs-12">
         <label for="pago_mes">Valor pago mês <i class="units">(MZN/més)</i></label>
-        <input type="text" class="form-control widget-number" id="pago_mes" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- pago_mes %>">
+        <input type="text" class="form-control widget-number" id="pago_mes" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- facturacion[facturacion.length - 1].pago_mes %>">
       </div>
 
     </div>
     <div class="row">
       <div class="form-group col-xs-12">
         <label for="pago_iva">Valor com IVA <i class="units">(MZN/mês)</i></label>
-        <input type="text" class="form-control widget-number" id="pago_iva" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- pago_iva || 17 %>">
+        <input type="text" class="form-control widget-number" id="pago_iva" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- facturacion[facturacion.length - 1].pago_iva || 17 %>">
       </div>
     </div>
     <div class="row">
@@ -129,8 +129,8 @@ Backbone.SIXHIARA.ViewFacturacion = Backbone.View.extend({
         <div class="form-group">
             <label for="observacio_ant">Observações anteriores</label>
               <textarea class="form-control widget" id="observacio_ant" rows="5" required disabled>
-              <% for (var i=0; i<comments.length; i+=1) {
-print('El ' + comments[i]['create_at'] + ', ' + comments[i]['author'] + ', escribió: ' + comments[i]['text'] + '&#13;&#10;&#13;&#10;');
+              <% for (var i=0; i< facturacion[facturacion.length - 1].comments.length; i+=1) {
+print('El ' + facturacion[facturacion.length - 1].comments[i]['create_at'] + ', ' + facturacion[facturacion.length - 1].comments[i]['author'] + ', escribió: ' + facturacion[facturacion.length - 1].comments[i]['text'] + '&#13;&#10;&#13;&#10;');
               }
               %>
               </textarea>

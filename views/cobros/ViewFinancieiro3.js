@@ -40,23 +40,21 @@ Backbone.SIXHIARA.ViewFinancieiro3 = Backbone.SIXHIARA.ViewFacturacion.extend({
 
         var observacio = JSON.parse(exploracao.get('observacio'));
 
-        if (!observacio['facturacion']) {
-            observacio['facturacion'] = [];
-        }
+        var currentFact = observacio['facturacion'][observacio['facturacion'].length - 1];
 
         // var nextState = wf.whichNextState(observacio['state'], e);
         // pendiente_consumo debería setearse automaticamente al ppio del ciclo
-        var nextState = wf.whichNextStateFact(observacio['facturacion'][observacio['facturacion'].length - 1].estado_facturacion, e);
+        var nextState = wf.whichNextStateFact(currentFact.estado_facturacion, e);
 
-        var currentFact = {
+        Object.assign(currentFact, {
             'taxa_fixa':Number.parseFloat(document.getElementById('taxa_fixa').value),
             'taxa_uso':Number.parseFloat(document.getElementById('taxa_uso').value),
-            'taxa_iva':Number.parseFloat(document.getElementById('iva').value),
+            'iva':Number.parseFloat(document.getElementById('iva').value),
             'pago_mes':Number.parseFloat(document.getElementById('pago_mes').value),
             'pago_iva':Number.parseFloat(document.getElementById('pago_iva').value),
             'estado_facturacion': nextState,
             'date_taxa': new Date(),
-        };
+        });
 
         currentFact.comments = currentFact.comments || [];
         if (document.getElementById('observacio').value) {
@@ -67,7 +65,7 @@ Backbone.SIXHIARA.ViewFinancieiro3 = Backbone.SIXHIARA.ViewFacturacion.extend({
                 'state': nextState,
             });
         }
-        observacio['facturacion'].push(currentFact);
+        //observacio['facturacion'].push(currentFact);
 
         observacio['estado_facturacion'] = nextState;
 

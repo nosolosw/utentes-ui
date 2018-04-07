@@ -35,22 +35,18 @@ Backbone.SIXHIARA.ViewTecnico3 = Backbone.SIXHIARA.ViewFacturacion.extend({
     fillExploracao: function(e) {
         var exploracao = this.model;
 
-        // var nextState = wf.whichNextState(observacio['state'], e);
-
-        // pendiente_consumo debería setearse automaticamente al ppio del ciclo
-        var nextState = wf.whichNextStateFact('pendiente_consumo', e)
-
         var observacio = JSON.parse(exploracao.get('observacio'));
+        // var nextState = wf.whichNextState(observacio['state'], e);
+        var currentFact = observacio['facturacion'][observacio['facturacion'].length - 1];
 
-        if (!observacio['facturacion']) {
-            observacio['facturacion'] = [];
-        }
+        var nextState = wf.whichNextStateFact(currentFact.estado_facturacion, e);
 
-        var currentFact = {
+        Object.assign(currentFact, {
             'c_facturado': Number.parseFloat(document.getElementById('c_facturado').value),
             'estado_facturacion': nextState,
             'date_c_facturado': new Date(),
-        };
+        });
+
 
         currentFact.comments = currentFact.comments || [];
         if (document.getElementById('observacio').value) {
@@ -61,7 +57,7 @@ Backbone.SIXHIARA.ViewTecnico3 = Backbone.SIXHIARA.ViewFacturacion.extend({
                 'state': nextState,
             });
         }
-        observacio['facturacion'].push(currentFact);
+        // observacio['facturacion'].push(currentFact);
 
         observacio['estado_facturacion'] = nextState;
 

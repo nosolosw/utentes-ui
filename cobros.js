@@ -76,3 +76,7 @@ exploracaos.fetch({
         mapView.update(exploracaosFiltered);
     }
 });
+
+document.getElementById('nuevo-ciclo-facturacion').addEventListener('click', (e) => {
+    $.post('/api/nuevo_ciclo_facturacion');
+});
