@@ -31,6 +31,11 @@ var MyWorkflow = {
             document.getElementById('utentes').parentNode.before(pendentes);
         }
 
+        if (['admin', 'tecnico', 'financieiro'].indexOf(user) !== -1) {
+            var pendentes = this.createMenu('cobros', 'cobros.html', 'FACTURAÇÃO');
+            document.getElementById('pendentes').parentNode.before(pendentes);
+        }
+
         if (['admin'].indexOf(user) === -1) {
             document.getElementById('new').parentNode.remove();
             document.getElementById('gps').parentNode.remove();
@@ -56,7 +61,6 @@ var MyWorkflow = {
     },
 
     fixComboEstado: function(where, exploracaos, domains) {
-
         domains.on('sync', () => {
             // https://stackoverflow.com/a/23989142/930271
             var options = document.getElementById('estado').querySelectorAll('option');
@@ -68,8 +72,70 @@ var MyWorkflow = {
         });
     },
 
+    fixComboPagamento: function(where, exploracaos, domains) {
+        var user = this.getUser();
+        domains.on('sync', () => {
+            var pagos = document.getElementById('pagos');
+            while (pagos.firstChild) {
+                pagos.removeChild(pagos.firstChild);
+            }
+            json_pagos.forEach((e) => {
+                if (e.roles.indexOf(user) !== -1) {
+                    var option = document.createElement('option')
+                    option.text = e.key;
+                    pagos.appendChild(option);
+                }
+            });
+        });
+    },
+
     fixVisibleProjects: function(where, exploracaos, domains) {
         exploracaos.on('sync', () => {
+
+            // TODO. BORRAR
+            exploracaos.forEach((e) => {
+                var json;
+                try {
+                    json = JSON.parse(e.get('observacio') || '')
+                } catch (exc) {
+                    // console.log(exc);
+                    json = {
+                        analisis_doc: false,
+                        sol_visita: false,
+                        parecer_unidade: false,
+                        parecer_tecnico: false,
+
+                        juri2_doc_legal: false,
+                        juri2_parecer_tecnico: false,
+                        juri2_parecer_relevantes: false,
+                        comments: [],
+
+                        consumo_tipo: 'Variável',
+
+                        pago_lic: 'Si',
+                        mensualidade_pagada: 'Si',
+                        estado_facturacion: 'pendiente_consumo',
+                    };
+                    e.set('observacio', JSON.stringify(json), {'silent': true});
+                }
+
+                if ( e.get('licencias').at(0) && e.get('licencias').at(0).get('estado') === 'Licenciada' ) {
+                    e.set('pago_iva', e.get('licencias').at(0).get('pago_iva'), {'silent': true});
+                    e.set('pago_mes', e.get('licencias').at(0).get('pago_mes'), {'silent': true});
+                    e.set('taxa_fixa', e.get('licencias').at(0).get('taxa_fixa'), {'silent': true});
+                    e.set('taxa_uso', e.get('licencias').at(0).get('taxa_uso'), {'silent': true});
+                    e.set('iva', e.get('licencias').at(0).get('iva'), {'silent': true});
+                } else if (e.get('licencias').at(1) && e.get('licencias').at(1).get('estado') === 'Licenciada' ) {
+                    e.set('pago_iva', e.get('licencias').at(1).get('pago_iva'), {'silent': true});
+                    e.set('pago_mes', e.get('licencias').at(1).get('pago_mes'), {'silent': true});
+                    e.set('taxa_fixa', e.get('licencias').at(1).get('taxa_fixa'), {'silent': true});
+                    e.set('taxa_uso', e.get('licencias').at(1).get('taxa_uso'), {'silent': true});
+                    e.set('iva', e.get('licencias').at(1).get('iva'), {'silent': true});
+                }
+            });
+
+
+
             var filtered = exploracaos.filter((e) => {
                 // var lics = e.get('licencias');
                 // var states = lics.pluck('estado');
@@ -93,13 +159,36 @@ var MyWorkflow = {
     },
 
     visibleState: function(state) {
+        if (this.available_states_for_this_page.indexOf(state.state) === -1) {
+            return false;
+        }
+
         var user = this.getUser();
-        var foo = json_estados.find((e) => e['key'] === state);
-        return foo['roles'].indexOf(user) !== -1;
+        var foo = json_estados.find((e) => e['key'] === state.state);
+        if (foo['roles'].indexOf(user) === -1) {
+            return false;
+        }
+
+        if (state.state === 'Licenciada') {
+
+            var bar = json_pagos.find((e) => e['key'] === state.pagos);
+            if (bar['roles'].indexOf(user) === -1) {
+                return false;
+            }
+        }
+
+        // return foo['roles'].indexOf(user) !== -1;
+        return true;
     },
 
-    init: function() {
+    init: function(available_states_for_this_page) {
+        // se podrían intersecar con los del usuario
+        this.available_states_for_this_page = available_states_for_this_page;
+        // En realidad estoy metiendo que tecnico puede ver licenciadas, sólo para la vista de cobros
+        // se podría hacer que sólo técnico, admin, financieiro puedan acceder a esa vista y no controlar
+        // por estado. O no. Por el tema de pagado/no pagado
         wf.fixComboEstado(where, exploracaos, domains);
+        wf.fixComboPagamento(where, exploracaos, domains);
         wf.fixVisibleProjects(where, exploracaos, domains);
         document.getElementById('projects').addEventListener('click', (e) => {
             if (e.target.tagName.toLowerCase() === 'a') {
@@ -129,13 +218,20 @@ var MyWorkflow = {
         state1 = state1 !== 'Não existe' ? state1 : state2;
 
         var json = JSON.parse(exp.get('observacio')) || {};
+
         state1 = json['state'] || state1;
-        return state1;
+
+        var pagos = json['estado_facturacion'];
+        return {
+            state: state1,
+            pagos: pagos,
+        };
     },
 
     whichView: function(exp, next) {
 
-        var state1 = this.getCurrentState(exp);
+        var currentState = this.getCurrentState(exp);
+        var state1 = currentState.state;
         var user = this.getUser();
 
         if (state1 === 'Pendente de revisão da solicitação (Direcção)') {
@@ -170,8 +266,25 @@ var MyWorkflow = {
             return Backbone.SIXHIARA.ViewSecretaria2;
         }
 
-        return Backbone.SIXHIARA.UpsView;
+        if (state1 === 'Licenciada') {
+            if (currentState.pagos === 'pendiente_consumo') {
+                // admin, tecnico
+                return Backbone.SIXHIARA.ViewTecnico3
+            }
+            if (currentState.pagos === 'pendiente_factura') {
+                // admin, financieiro
+                return Backbone.SIXHIARA.ViewFinancieiro3
+            }
+            if (currentState.pagos === 'pendiente_pago') {
+                // admin, financieiro
+                return Backbone.SIXHIARA.ViewFinancieiro4
+            }
+            if (currentState.pagos === 'pagada') {
+                console.log('Esto no debería pasar')
+            }
+        }
 
+        return Backbone.SIXHIARA.UpsView;
 
     },
 
@@ -215,6 +328,10 @@ var MyWorkflow = {
 
         if (currentState === 'Pendente da firma (Direcção)') {
             return this.nextStatePteFirmaDir(data);
+        }
+
+        if (currentState === 'Licenciada') {
+            return 'Licenciada';
         }
     },
 
@@ -294,7 +411,7 @@ var MyWorkflow = {
         // si user no es admin o tecnico error
         var nextState = undefined;
         if (data.target.id === 'bt-ok') {
-            nextState = 'Pendente da firma (Direcção)';
+            nextState = 'Licenciada';
         }
 
         if (data.target.id === 'bt-no') {
@@ -303,7 +420,39 @@ var MyWorkflow = {
         return nextState;
     },
 
+    whichNextStateFact: function(currentState, data) {
+        // puede tener sentido agrupar en whichNextState
+        var nextState = undefined;
 
+        if (data.target.id === 'bt-no') {
+            throw "This should not happen";
+        }
+
+        // pendiente_consumo, pendiente_factura, pendiente_pago, pagada
+        if (currentState === '') {
+
+        } else if (currentState === 'pendiente_consumo') {
+            if (data.target.id === 'bt-ok') {
+                nextState = 'pendiente_factura';
+            }
+        } else if (currentState === 'pendiente_factura') {
+            if (data.target.id === 'bt-ok') {
+                nextState = 'pendiente_pago';
+            }
+        } else if (currentState === 'pendiente_pago') {
+            if (data.target.id === 'bt-ok') {
+                nextState = 'pagada';
+            }
+        } else if (currentState === 'pagada') {
+            if (data.target.id === 'bt-ok') {
+                throw "This should not happen";
+            }
+        } else {
+            throw "This should not happen";
+        }
+
+        return nextState;
+    },
 
 
     _test_set_state(exp_id, nextState) {
@@ -508,15 +657,87 @@ var json_estados = [
             'Norte',
             'Sul'
         ],
-        'roles': [],
+        'roles': ['admin', 'administrativo', 'financieiro', 'secretaria', 'tecnico', 'juridico'],
     }
 ];
+
+json_pagos = [
+    {
+        'category': 'pago_estado',
+        'key': 'pendiente_consumo',
+        'value': null,
+        'ordering': 0,
+        'parent': null,
+        'tooltip': 'El técnico debe introducir el valor de consumo de este mes',
+        'app': [
+            'Norte',
+            'Sul'
+        ],
+        'roles': ['admin', 'tecnico'],
+    },
+    {
+        'category': 'pago_estado',
+        'key': 'pendiente_factura',
+        'value': null,
+        'ordering': 1,
+        'parent': null,
+        'tooltip': 'El financieiro debe introducir las taxas del mes y emitir la factura',
+        'app': [
+            'Norte',
+            'Sul'
+        ],
+        'roles': ['admin', 'financieiro'],
+    },
+    {
+        'category': 'pago_estado',
+        'key': 'pendiente_pago',
+        'value': null,
+        'ordering': 2,
+        'parent': null,
+        'tooltip': 'El utente debe pagar la factura',
+        'app': [
+            'Norte',
+            'Sul'
+        ],
+        'roles': ['admin', 'financieiro'],
+    },
+    {
+        'category': 'pago_estado',
+        'key': 'pagada',
+        'value': null,
+        'ordering': 3,
+        'parent': null,
+        'tooltip': 'El utente ya ha pagado la factura de este mes',
+        'app': [
+            'Norte',
+            'Sul'
+        ],
+        'roles': [],
+    }
+]
 
 var wf = Object.create(MyWorkflow);
 
 $(document).ready(function() {
     wf.fixMenu();
-    if (window.location.pathname.split("/").pop() === 'pendentes.html') {
-        wf.init();
+    var page = window.location.pathname.split("/").pop();
+    // ["Não existe", 'Irregular', 'Desconhecido', 'Não aprovada',
+    //  'Pendente de solicitação do utente', 'Pendente de revisão da solicitação (Direcção)',
+    //  'Pendente de revisão da solicitação (Chefe DT)', 'Pendente de revisão da solicitação (Chefe DT)',
+    //  'Pendente de revisão da solicitação (D. Jurídico)', 'Pendente de aprovação técnica (R. Cadastro)',
+    //  'Pendente de aprovação técnica (Chefe DT)', 'Pendente da emisão (D. Jurídico)',
+    //  'Pendente da emisão (D. Jurídico)', 'Pendente da firma (Direcção)', 'Licenciada' ]
+    if (page === 'pendentes.html') {
+        var available_states_for_this_page = ["Não existe", 'Irregular', 'Desconhecido', 'Não aprovada',
+         'Pendente de solicitação do utente', 'Pendente de revisão da solicitação (Direcção)',
+         'Pendente de revisão da solicitação (Chefe DT)', 'Pendente de revisão da solicitação (Chefe DT)',
+         'Pendente de revisão da solicitação (D. Jurídico)', 'Pendente de aprovação técnica (R. Cadastro)',
+         'Pendente de aprovação técnica (Chefe DT)', 'Pendente da emisão (D. Jurídico)',
+         'Pendente da emisão (D. Jurídico)', 'Pendente da firma (Direcção)']
+        wf.init(available_states_for_this_page);
+    } else if (page === 'cobros.html') {
+        var available_states_for_this_page = ['Licenciada']
+        wf.init(available_states_for_this_page);
     }
+
 });

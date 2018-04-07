@@ -38,7 +38,7 @@ function fillExploracao(e) {
     var exploracao = new Backbone.SIXHIARA.Exploracao();
     // Para que estén presentes en VistaTecnico1 sin que se rompa nada
     // y también en VistaJuridico2
-    exploracao.set('observacio', JSON.stringify({
+    var json = {
         analisis_doc: false,
         sol_visita: false,
         parecer_unidade: false,
@@ -47,7 +47,19 @@ function fillExploracao(e) {
         juri2_doc_legal: false,
         juri2_parecer_tecnico: false,
         juri2_parecer_relevantes: false,
-    }), {'silent': true});
+        comments: [],
+
+        consumo_tipo: 'Variável',
+
+        pago_lic: 'Si',
+        mensualidade_pagada: 'Si',
+
+        estado_facturacion: 'pendiente_consumo',
+        facturacion: []
+    };
+    // pagada, pendiente_factura, pendiente_consumo, pendiente_pago
+
+    exploracao.set('observacio', JSON.stringify(json), {'silent': true});
 
 
     var observacio = JSON.parse(exploracao.get('observacio'));
