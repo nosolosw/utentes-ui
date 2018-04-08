@@ -23,6 +23,10 @@ Backbone.SIXHIARA.ViewFinancieiro3 = Backbone.SIXHIARA.ViewFacturacion.extend({
             self.fillExploracao(e);
         });
 
+        document.getElementById('taxa_fixa').addEventListener('input', this.updatePagoMes);
+        document.getElementById('taxa_uso').addEventListener('input', this.updatePagoMes);
+        document.getElementById('iva').addEventListener('input', this.updatePagoMes);
+
         self.enableOkBt();
 
         $('[data-toggle="tooltip"]').tooltip();
@@ -71,4 +75,17 @@ Backbone.SIXHIARA.ViewFinancieiro3 = Backbone.SIXHIARA.ViewFacturacion.extend({
 
         this.saveExploracao(observacio, nextState);
     },
+
+    updatePagoMes: function() {
+        var taxa_fixa = Number.parseFloat(document.getElementById('taxa_fixa').value);
+        var taxa_uso = Number.parseFloat(document.getElementById('taxa_uso').value);
+        var c_facturado = Number.parseFloat(document.getElementById('c_facturado').value);
+        var pago_mes = taxa_fixa + (taxa_uso * c_facturado);
+        document.getElementById('pago_mes').value = pago_mes;
+
+        var iva = Number.parseFloat(document.getElementById('iva').value);
+        var pago_iva = pago_mes * (1 + iva / 100);
+        document.getElementById('pago_iva').value = pago_iva;
+    },
+
 });
