@@ -1,5 +1,9 @@
 Backbone.SIXHIARA = Backbone.SIXHIARA || {};
 Backbone.SIXHIARA.ViewFinancieiro4 = Backbone.SIXHIARA.ViewFacturacion.extend({
+    init: function() {
+        Backbone.SIXHIARA.ViewFacturacion.prototype.init.call(this);
+        document.getElementById('pago_lic').disabled = false;
+    },
 
     fillExploracao: function(e) {
         var exploracao = this.model;
@@ -13,6 +17,8 @@ Backbone.SIXHIARA.ViewFinancieiro4 = Backbone.SIXHIARA.ViewFacturacion.extend({
         Object.assign(currentFact, {
             'estado_facturacion': nextState,
             'date_pagado': new Date(),
+            'pago_c_mes': 'Si',
+            'pago_lic': this.getSelectText('pago_lic'),
         });
 
         currentFact.comments = currentFact.comments || [];

@@ -138,6 +138,101 @@
   </li>
 </script>
 
+<script type="text/template" id="block-historic-modal-tmpl">
+
+  <div class="modal fade" id="editLocModal" tabindex="-1" role="dialog" aria-labelledby="editLocModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Pechar"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editLocModalLabel">Exploração</h4>
+        </div>
+        <div class="modal-body">
+
+  <div class="btn-group btn-group-justified" role="group" style="margin: 0px 5px 5px 5px">
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" disabled>Factura (consumo)</button>
+          </div>
+      </div>
+
+      <h3><%- exp_id %> <%- exp_name %></h3>
+      <h4><%- formatter().formatDate(date_reset) %></h4>
+
+      <div class="row">
+          <div class="col-xs-4">
+              <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <h3 class="panel-title"><strong>Pagamentos mensais</strong></h3>
+                  </div>
+                  <div class="panel-body">
+                      <div class="row">
+                          <div class="form-group col-xs-12">
+                              <label for="taxa_fixa">Taxa fixa <i class="units">(MZN/mês)</i></label>
+                              <input type="text" class="form-control widget-number" id="taxa_fixa" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- taxa_fixa %>">
+                          </div>
+                          <div class="form-group col-xs-12">
+                              <label for="taxa_uso">Taxa de uso <i class="units">(MZN/m<sup>3</sup>)</i></label>
+                              <input type="text" class="form-control widget-number" id="taxa_uso" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- taxa_uso %>">
+                          </div>
+                          <div class="form-group col-xs-12">
+                              <label for="iva">IVA <i class="units">(%)</i></label>
+                              <input type="number" class="form-control widget-number" id="iva" pattern="[0-9]{1,2}?" disabled value="<%- iva %>">
+                          </div>
+                          <div class="form-group col-xs-12">
+                              <label for="pago_mes">Valor pago mês <i class="units">(MZN/més)</i></label>
+                              <input type="text" class="form-control widget-number" id="pago_mes" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- pago_mes %>">
+                          </div>
+                          <div class="form-group col-xs-12">
+                              <label for="pago_iva">Valor com IVA <i class="units">(MZN/mês)</i></label>
+                              <input type="text" class="form-control widget-number" id="pago_iva" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- pago_iva %>">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xs-4">
+              <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <h3 class="panel-title"><strong>Consumos</strong></h3>
+                  </div>
+                  <div class="panel-body">
+                      <div class="row">
+                        <div class="form-group col-xs-12">
+                          <label for="consumo_tipo"><strong>Tipo de consumo</strong></label>
+                          <input type="text" class="form-control widget" id="consumo_tipo" value="<%- consumo_tipo %>" disabled>
+                        </div>
+                        <div class="form-group col-xs-12">
+                          <label for="c_licencia">Consumo licenciado <i class="units">(m<sup>3</sup>/mês)</i></label>
+                          <input type="text" class="form-control widget-number" id="c_licencia" pattern="[0-9]{1,8}([,][0-9]{1,2})?" disabled value="<%- c_licencia %>">
+                        </div>
+                        <div class="form-group col-xs-12">
+                          <label for="c_facturado">Consumo facturado <i class="units">(m<sup>3</sup>/mês)</i></label>
+                          <input type="text" class="form-control widget-number" id="c_facturado" pattern="[0-9]{1,8}([,][0-9]{1,2})?" value="<%- c_facturado %>" required disabled>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+      <div class="form-group row">
+          <label for="observacio_ant">Observações anteriores</label>
+            <textarea class="form-control widget" id="observacio_ant" rows="5" required disabled>
+            <% for (var i=0; i< comments.length; i+=1) {
+print('El ' + comments[i]['create_at'] + ', ' + comments[i]['author'] + ', escribió: ' + comments[i]['text'] + '&#13;&#10;&#13;&#10;');
+            }
+            %>
+            </textarea>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</script>
+
 <!-- javascript -->
 <script src="node-interaction.js"></script>
 <script src="lib/jquery/jquery-1.12.0.min.js"></script>
@@ -148,6 +243,9 @@
 <script src="lib/leaflet/leaflet.js"></script>
 <script src="lib/leaflet/leaflet.label-src.js"></script>
 
+<script src="lib/moment-2.11.2/moment-with-locales.js"></script>
+<script src="lib/numeral-js-1.5.3/min/languages.min.js"></script>
+<script src="lib/numeral-js-1.5.3/min/numeral.min.js"></script>
 <script src="lib/formatter/formatter.js"></script>
 
 <script src="lib/backbone-geojson/Feature.js"></script>
@@ -161,6 +259,7 @@
 <script src="lib/backbone-uilib/views/ItemView.js"></script>
 <script src="lib/backbone-uilib/views/ListView.js"></script>
 <script src="lib/backbone-uilib/views/BaseView.js"></script>
+<script src="lib/backbone-uilib/views/ModalView.js"></script>
 
 <script src="views/common/NavBarView.js"></script>
 <script src="views/common/ConfigModalView.js"></script>

@@ -51,8 +51,8 @@ function fillExploracao(e) {
 
         consumo_tipo: 'Variável',
 
-        pago_lic: 'Si',
-        mensualidade_pagada: 'Si',
+        pago_lic: 'Não',
+        pago_c_mes: 'Não',
 
         estado_facturacion: 'pendiente_consumo',
         facturacion: []

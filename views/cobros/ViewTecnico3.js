@@ -9,21 +9,16 @@ Backbone.SIXHIARA.ViewTecnico3 = Backbone.SIXHIARA.ViewFacturacion.extend({
     binded para después al usar this.$
     */
     init: function() {
+        Backbone.SIXHIARA.ViewFacturacion.prototype.init.call(this);
+
         var self = this;
         document.getElementById('c_facturado').disabled = false;
+        document.getElementById('c_facturado').addEventListener('input', this.enableOkBt.bind(self));
 
-        document.getElementById('c_facturado').addEventListener('input', self.enableOkBt);
-
-        document.getElementById('js-btns-next').addEventListener('click', function(e){
-            self.fillExploracao(e);
-        });
-
-        self.enableOkBt();
-
-        $('[data-toggle="tooltip"]').tooltip();
+        self.doEnableOkBt();
     },
 
-    enableOkBt: function() {
+    doEnableOkBt: function() {
         var enable;
         if (Number.parseFloat(document.getElementById('c_facturado').value)) {
             enable = true;
@@ -32,14 +27,25 @@ Backbone.SIXHIARA.ViewTecnico3 = Backbone.SIXHIARA.ViewFacturacion.extend({
         document.getElementById('bt-ok').disabled = !enable;
     },
 
+    enableOkBt: function() {
+        this.mustSave = true;
+        this.doEnableOkBt();
+    },
+
     fillExploracao: function(e) {
+        // if (this.alreadySaved) {
+        //     return;
+        // }
+        // if (!this.mustSave) {
+        //     return;
+        // }
         var exploracao = this.model;
 
         var observacio = JSON.parse(exploracao.get('observacio'));
         // var nextState = wf.whichNextState(observacio['state'], e);
         var currentFact = observacio['facturacion'][observacio['facturacion'].length - 1];
 
-        var nextState = wf.whichNextStateFact(currentFact.estado_facturacion, e);
+        var nextState = wf.whichNextStateFact(currentFact.estado_facturacion, e || {});
 
         Object.assign(currentFact, {
             'c_facturado': Number.parseFloat(document.getElementById('c_facturado').value),

@@ -8,38 +8,48 @@ Backbone.SIXHIARA.ViewFinancieiro3 = Backbone.SIXHIARA.ViewFacturacion.extend({
     binded para después al usar this.$
     */
     init: function() {
-        var self = this;
+        Backbone.SIXHIARA.ViewFacturacion.prototype.init.call(this);
 
         document.getElementById('taxa_fixa').disabled = false;
         document.getElementById('taxa_uso').disabled = false;
         document.getElementById('iva').disabled = false;
 
-        document.getElementById('taxa_fixa').addEventListener('input', self.enableOkBt);
-        document.getElementById('taxa_uso').addEventListener('input', self.enableOkBt);
-        document.getElementById('iva').addEventListener('input', self.enableOkBt);
+        document.getElementById('pago_lic').disabled = false;
+        // document.getElementById('pago_c_mes').disabled = false;
 
-
-        document.getElementById('js-btns-next').addEventListener('click', function(e){
-            self.fillExploracao(e);
-        });
+        document.getElementById('taxa_fixa').addEventListener('input', this.enableOkBt.bind(self));
+        document.getElementById('taxa_uso').addEventListener('input', this.enableOkBt.bind(self));
+        document.getElementById('iva').addEventListener('input', this.enableOkBt.bind(self));
+        // document.getElementById('pago_c_mes').addEventListener('input', this.enableOkBt.bind(self));
+        document.getElementById('pago_lic').addEventListener('input', this.enableOkBt.bind(self));
 
         document.getElementById('taxa_fixa').addEventListener('input', this.updatePagoMes);
         document.getElementById('taxa_uso').addEventListener('input', this.updatePagoMes);
         document.getElementById('iva').addEventListener('input', this.updatePagoMes);
 
-        self.enableOkBt();
 
-        $('[data-toggle="tooltip"]').tooltip();
+
+        this.enableOkBt();
     },
 
     enableOkBt: function() {
         var enable = Boolean(Number.parseFloat(document.getElementById('taxa_fixa').value));
         enable = enable && Boolean(Number.parseFloat(document.getElementById('taxa_uso').value));
         enable = enable && Boolean(Number.parseFloat(document.getElementById('iva').value));
+        // enable = enable && (this.getSelectText('pago_c_mes') === 'Si');
+        // enable = enable && (this.getSelectText('pago_lic') === 'Si');
+
         document.getElementById('bt-ok').disabled = !enable;
     },
 
+
+
     fillExploracao: function(e) {
+        // e será undefined si viene de saveData
+
+        if (this.alreadySaved) {
+            return;
+        }
         var exploracao = this.model;
 
         var observacio = JSON.parse(exploracao.get('observacio'));
@@ -56,6 +66,10 @@ Backbone.SIXHIARA.ViewFinancieiro3 = Backbone.SIXHIARA.ViewFacturacion.extend({
             'iva':Number.parseFloat(document.getElementById('iva').value),
             'pago_mes':Number.parseFloat(document.getElementById('pago_mes').value),
             'pago_iva':Number.parseFloat(document.getElementById('pago_iva').value),
+            // 'pago_c_mes': this.getSelectText('pago_c_mes'),
+            'factura_emitida': 'Si',
+            'pago_c_mes': 'Não',
+            'pago_lic': this.getSelectText('pago_lic'),
             'estado_facturacion': nextState,
             'date_taxa': new Date(),
         });

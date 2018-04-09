@@ -112,8 +112,8 @@ var MyWorkflow = {
 
                         consumo_tipo: 'Variável',
 
-                        pago_lic: 'Si',
-                        mensualidade_pagada: 'Si',
+                        pago_lic: 'Não',
+                        pago_c_mes: 'Não',
                         estado_facturacion: 'pendiente_consumo',
                     };
                     e.set('observacio', JSON.stringify(json), {'silent': true});
@@ -154,7 +154,9 @@ var MyWorkflow = {
             exploracaos.reset(filtered);
             where.trigger('change', where);
 
-            this.renderView(exploracaos.at(0));
+            if (exploracaos.length > 0) {
+                this.renderView(exploracaos.at(0));
+            }
         });
     },
 
@@ -200,8 +202,23 @@ var MyWorkflow = {
         });
     },
 
+    // initOnUnload: function() {
+    //     var self = this;
+    //     window.onbeforeunload = function() {
+    //         self.activeView && self.activeView.saveData && self.activeView.saveData();
+    //     };
+    // },
+
     renderView: function(exp) {
-        this.activeView && this.activeView.remove && this.activeView.remove();
+        if (this.activeView) {
+            // if (this.activeView.saveData) {
+            //     this.activeView.saveData();
+            // }
+            if (this.activeView.remove) {
+                this.activeView.remove();
+            }
+        }
+
         var viewClass = this.whichView(exp);
         this.activeView = new viewClass({
             model: exp,
@@ -423,6 +440,9 @@ var MyWorkflow = {
     whichNextStateFact: function(currentState, data) {
         // puede tener sentido agrupar en whichNextState
         var nextState = undefined;
+        if (!data.target) {
+            return currentState;
+        }
 
         if (data.target.id === 'bt-no') {
             throw "This should not happen";
@@ -738,6 +758,7 @@ $(document).ready(function() {
     } else if (page === 'cobros.html') {
         var available_states_for_this_page = ['Licenciada']
         wf.init(available_states_for_this_page);
+        // wf.initOnUnload();
     }
 
 });
